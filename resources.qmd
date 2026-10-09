@@ -1,0 +1,59 @@
+---
+title: "Resources"
+subtitle: "Videos, books and web pages linked by the instructor, by session"
+---
+
+Everything here is linked from the Canvas posts or the session slides. Optional material is marked as such; none of it is required reading unless the course says otherwise. Links open in a new tab.
+
+## Session 1 · Introduction to spatial epidemiology
+
+| Resource | What it is | Where in the app |
+|---|---|---|
+| [John Snow and the 1854 cholera outbreak](https://docs.google.com/presentation/d/e/2PACX-1vRFzOI-TRtjj_B792rNnqTSShBAEmRsXXl2S795acpcYGRAX1755m6oH0ntNYTX5mG3eObawPuF0p5k/pub?start=false&loop=false&delayms=3000&slide=id.g798c99946b_0_331){target="_blank"} | Story map used for the in-class activity (Center for Spatial Data Science, University of Chicago) | [1.5](session1.qmd#t1-5) |
+| [Download GeoDa](https://geodacenter.github.io/download/){target="_blank"} | Free software for exploratory spatial data analysis. Install before 13 October | [1.14](session1.qmd#t1-14) |
+| [*Geocomputation with R*](https://geocompr.robinlovelace.net/){target="_blank"} | Free online book: spatial data in R | [1.14](session1.qmd#t1-14) |
+| [*Spatial Data Science with R*](https://rspatial.org/){target="_blank"} | Free online tutorials | [1.14](session1.qmd#t1-14) |
+| [CSDS R spatial tutorials](https://spatialanalysis.github.io/tutorials/){target="_blank"} | Workshops from the Center for Spatial Data Science | [1.14](session1.qmd#t1-14) |
+
+## Session 2 · Disease mapping and spatial patterns
+
+| Resource | What it is | Where in the app |
+|---|---|---|
+| [Axis Maps: *Data classification*](https://www.axismaps.com/guide/data-classification){target="_blank"} | Short guide to quantile, equal-interval and natural-breaks maps (source of slide figures) | [2.1](session2.qmd#t2-1) |
+| [GeoDa workbook: *Distance-based spatial weights*](https://geodacenter.github.io/workbook/4b_dist_weights/lab4b.html){target="_blank"} | Connectivity histograms and graphs (source of slide figures) | [2.10](session2.qmd#t2-10) |
+| [GeoDa workbook: *Local spatial autocorrelation*](https://geodacenter.github.io/workbook/6a_local_auto/lab6a.html){target="_blank"} | LISA significance and cluster maps (source of slide figures) | [2.13](session2.qmd#t2-13) |
+
+## Session 3 · Introduction to spatial regression
+
+**Optional viewing (Canvas post):** Luc Anselin, *Applied Spatial Regression Analysis*, [the whole YouTube playlist](https://www.youtube.com/watch?v=yMwQ4MljEWc&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"}. *"These lectures provide a step-by-step introduction to spatial regression. They also cover more advanced topics that we will not have time to discuss in STA530."*
+
+| # | Lecture | Relevance for STA530 | Where in the app |
+|---|---|---|---|
+| 1 | [Spatial Regression Specifications](https://www.youtube.com/watch?v=yMwQ4MljEWc&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"} | **Core**: lag and error models | [3.4](session3.qmd#t3-4) |
+| 2 | [Spatial Process Models](https://www.youtube.com/watch?v=6F5u8GEPHzs&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"} | **Core**: what process each model assumes | [3.8](session3.qmd#t3-8) |
+| 3 | [2SLS](https://www.youtube.com/watch?v=wqsHFbJqpB0&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"} | Beyond the course | [3.12](session3.qmd#t3-12) |
+| 4 | [Spatial Durbin Model](https://www.youtube.com/watch?v=4zKe9owAu38&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"} | Beyond the course | [3.12](session3.qmd#t3-12) |
+| 5 | [Spatial Spillovers](https://www.youtube.com/watch?v=C-sBZ9XWC9g&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"} | **Core**: direct, indirect and total impacts | [3.5](session3.qmd#t3-5) |
+| 6 | [Specification Tests](https://www.youtube.com/watch?v=XyIokAi01Ko&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"} | **Core**: residual Moran's I, LM tests | [3.10](session3.qmd#t3-10) |
+| 7 | [Robust Tests](https://www.youtube.com/watch?v=nWk2eBPEsR4&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"} | **Core**: robust LM tests | [3.10](session3.qmd#t3-10) |
+| 8 | [Principles of Maximum Likelihood Estimation](https://www.youtube.com/watch?v=ZeHNaM0N7rc&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"} | Beyond the course | [3.12](session3.qmd#t3-12) |
+| 9 | [ML Estimation of Spatial Lag Model](https://www.youtube.com/watch?v=2YOlaEYhX8U&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"} | Beyond the course | [3.12](session3.qmd#t3-12) |
+| 10 | [GMM Estimation Principle](https://www.youtube.com/watch?v=X8MFLAs5d3w&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"} | Beyond the course | [3.12](session3.qmd#t3-12) |
+| 11 | [IV Estimation of Spatial Lag Model](https://www.youtube.com/watch?v=3xwYgtZIV4c&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"} | Beyond the course | [3.12](session3.qmd#t3-12) |
+| 12 | [ML Estimation Spatial Error Model](https://www.youtube.com/watch?v=tD4o2_TLOv0&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"} | Beyond the course | [3.12](session3.qmd#t3-12) |
+| 13 | [GMM Estimation of Spatial Error Model](https://www.youtube.com/watch?v=rBPncf4_sVg&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"} | Beyond the course | [3.12](session3.qmd#t3-12) |
+
+"Core" means the lecture covers something STA530 teaches; "beyond the course" lectures cover what the session explicitly leaves out (estimation, IV/GMM, the Durbin model).
+
+## Session 4 · Introduction to Bayesian disease mapping
+
+| Resource | What it is | Where in the app |
+|---|---|---|
+| [Gómez-Rubio, *Bayesian Inference with INLA*](https://becarioprecario.bitbucket.io/inla-gitbook/){target="_blank"} | Free online book: latent Gaussian models, spatial models and their implementation in R. **Optional, not required reading**; the computational details of INLA are not expected | [4.21](session4.qmd#t4-21) |
+
+## Course books
+
+From the literature list (not online):
+
+- Lawson, Banerjee, Haining & Ugarte (eds.) (2016). *Handbook of Spatial Epidemiology*. CRC Press. Main textbook.
+- Anselin (2024). *An Introduction to Spatial Data Science with GeoDa, Volume 1: Exploring Spatial Data*. Chapman & Hall/CRC. Chapters 1–7, 10, 13 and 16.

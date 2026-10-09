@@ -33,7 +33,7 @@ The session's emphasis is conceptual: what ρ and λ mean, why SAR coefficients 
 3. interpret what ρ and λ represent, without deriving estimators;
 4. diagnose residual spatial autocorrelation and think about model choice.
 
-**Optional viewing:** Luc Anselin's spatial regression video lectures (link on Canvas). They also cover topics beyond STA530.
+**Optional viewing:** [Luc Anselin, *Applied Spatial Regression Analysis* (YouTube playlist, 13 lectures)](https://www.youtube.com/watch?v=yMwQ4MljEWc&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"}. A step-by-step introduction to spatial regression; it also covers more advanced topics than STA530. The lectures that match a section are linked in a *Watch* box at the end of that section; the full list is on [Resources](resources.qmd).
 :::
 
 ::: {.callout-tip collapse="true"}
@@ -130,6 +130,13 @@ $$
 
 **Mechanisms that make SAR plausible:** interaction, diffusion, feedback, where the outcome itself spreads.
 
+::: {.callout-tip collapse="true"}
+## Watch: Luc Anselin's lecture on this
+- ▶ [Spatial Regression Specifications](https://www.youtube.com/watch?v=yMwQ4MljEWc&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"}: the lag and error models side by side
+
+Optional, from the Canvas post. Luc Anselin's lecture series *Applied Spatial Regression Analysis* goes beyond STA530 in places.
+:::
+
 ## 3.5 Why SAR creates feedback: direct, indirect and total impacts {#t3-5 .topic flag="objective"}
 
 Solve the SAR model for y:
@@ -222,6 +229,13 @@ round(c(direct = direct, indirect = indirect, total = total), 3)
 neumann <- diag(3) + rho * W + rho^2 * W %*% W + rho^3 * W %*% W %*% W
 round(neumann * beta, 3)
 ```
+
+::: {.callout-tip collapse="true"}
+## Watch: Luc Anselin's lecture on this
+- ▶ [Spatial Spillovers](https://www.youtube.com/watch?v=C-sBZ9XWC9g&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"}: direct, indirect and total impacts
+
+Optional, from the Canvas post. Luc Anselin's lecture series *Applied Spatial Regression Analysis* goes beyond STA530 in places.
+:::
 
 ## 3.6 Is a SAR story plausible in epidemiology? {#t3-6 .topic flag="keyq"}
 
@@ -330,6 +344,13 @@ In a SEM, λ is estimated at 0.6. What does this tell you?
 :::
 ::::
 
+::: {.callout-tip collapse="true"}
+## Watch: Luc Anselin's lecture on this
+- ▶ [Spatial Process Models](https://www.youtube.com/watch?v=6F5u8GEPHzs&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"}: what kind of spatial process each model assumes
+
+Optional, from the Canvas post. Luc Anselin's lecture series *Applied Spatial Regression Analysis* goes beyond STA530 in places.
+:::
+
 ## 3.9 A practical workflow and residual Moran's I {#t3-9 .topic flag="objective"}
 
 ```{mermaid}
@@ -364,6 +385,14 @@ LM tests start from the OLS fit and ask whether adding a spatial component is su
 A common reading: if only one simple test is significant, consider that model; if both are, look at the robust versions and see which remains clearly significant.
 
 **For this course** (slide 21): know **what the tests are asking**. Do not memorise formulas, and do not treat p-values as the scientific mechanism. **Model choice should combine theory, diagnostics and interpretability.** The tests are "useful, but not a magic decision tree".
+
+::: {.callout-tip collapse="true"}
+## Watch: Luc Anselin's lecture on this
+- ▶ [Specification Tests](https://www.youtube.com/watch?v=XyIokAi01Ko&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"}: Moran's I on residuals, LM-lag and LM-error
+- ▶ [Robust Tests](https://www.youtube.com/watch?v=nWk2eBPEsR4&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"}: the robust LM tests
+
+Optional, from the Canvas post. Luc Anselin's lecture series *Applied Spatial Regression Analysis* goes beyond STA530 in places.
+:::
 
 ## 3.11 Which model story fits better? {#t3-11 .topic flag="keyq"}
 
@@ -400,6 +429,20 @@ The slides list what the session leaves out:
 - geographically weighted regression (GWR) and other spatial heterogeneity models.
 
 The stated goal: *understand what spatial dependence means, recognize basic models, and interpret them responsibly — not become spatial econometricians in 90 minutes.*
+
+::: {.callout-tip collapse="true"}
+## Watch: Luc Anselin's lecture on this
+- ▶ [Spatial Durbin Model](https://www.youtube.com/watch?v=4zKe9owAu38&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"}
+- ▶ [Principles of Maximum Likelihood Estimation](https://www.youtube.com/watch?v=ZeHNaM0N7rc&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"}
+- ▶ [ML Estimation of Spatial Lag Model](https://www.youtube.com/watch?v=2YOlaEYhX8U&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"}
+- ▶ [ML Estimation Spatial Error Model](https://www.youtube.com/watch?v=tD4o2_TLOv0&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"}
+- ▶ [2SLS](https://www.youtube.com/watch?v=wqsHFbJqpB0&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"}
+- ▶ [IV Estimation of Spatial Lag Model](https://www.youtube.com/watch?v=3xwYgtZIV4c&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"}
+- ▶ [GMM Estimation Principle](https://www.youtube.com/watch?v=X8MFLAs5d3w&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"}
+- ▶ [GMM Estimation of Spatial Error Model](https://www.youtube.com/watch?v=rBPncf4_sVg&list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p){target="_blank"}
+
+These cover exactly what STA530 leaves out (estimation and the Durbin model). Not needed for the course.
+:::
 
 ## 3.13 Take-home messages and key questions {#t3-13 .topic}
 

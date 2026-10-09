@@ -1696,6 +1696,10 @@ window.Quarto = {
 <span class="menu-text">Glossary</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About the content</span></a>
   </li>  
@@ -1824,6 +1828,12 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./about.html" class="sidebar-item-text sidebar-link">
@@ -2182,7 +2192,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Slides:</strong> “session_2_v0.pdf” (Qinyun Lin, 6 October 2026, 15:15–17:00). Several figures on the slides come from the GeoDa workbook (geodacenter.github.io/workbook) and Anselin’s course material.</p>
+<p><strong>Slides:</strong> “session_2_v0.pdf” (Qinyun Lin, 6 October 2026, 15:15–17:00). Several figures on the slides come from the <a href="https://geodacenter.github.io/workbook/4b_dist_weights/lab4b.html" target="_blank">GeoDa workbook</a>, Anselin’s course material and the <a href="https://www.axismaps.com/guide/data-classification" target="_blank">Axis Maps guide to data classification</a>.</p>
 <p><strong>Learning objectives (Canvas post):</strong> after this session you should be able to</p>
 <ol type="1">
 <li>explain why mapping counts and crude rates can produce different spatial patterns;</li>
@@ -2280,6 +2290,7 @@ Figure&nbsp;1: The same skewed rates on a 10 × 10 grid with three classificatio
 </div>
 </div>
 <p><strong>There is no universally best method.</strong> It depends on the distribution of the data, the purpose of the map and the comparison you want the reader to make.</p>
+<p>Read more: <a href="https://www.axismaps.com/guide/data-classification" target="_blank">Axis Maps, <em>Data classification</em></a> (source of the classification figures on the slides).</p>
 <div class="sta530-quiz" data-question="Your variable is very skewed: most municipalities have low rates and a few have extreme values. With equal intervals and 5 classes, what will the map look like?">
   <div class="q-opt" data-correct="true">Almost every area in the lowest class, a few in the top ones</div>
   <div class="q-opt" data-correct="false">Each class holding the same number of areas, as in quintiles</div>
@@ -2905,6 +2916,7 @@ Figure&nbsp;4: The same 15 points with two distance-based definitions. Left: a 2
 <p><strong>The slides’ questions:</strong></p>
 <p><em>What does the histogram look like with KNN weights?</em> A <strong>single bar</strong> at k: every area has exactly k neighbours. (If you symmetrize the KNN matrix, some areas gain neighbours and the histogram spreads to the right of k.)</p>
 <p><em>Which graph suggests KNN and which suggests a distance band?</em> With a <strong>distance band</strong>, dense areas (cities) have <strong>very many</strong> links, sparse areas have few, and isolated points may have <strong>none</strong>. With <strong>KNN</strong>, every point has the same number of links, even remote points, which reach out with long lines to their nearest neighbours.</p>
+<p>Read more: <a href="https://geodacenter.github.io/workbook/4b_dist_weights/lab4b.html" target="_blank">GeoDa workbook, <em>Distance-based spatial weights</em></a> (source of the connectivity histogram and graph on the slides).</p>
 </section>
 <section id="t2-11" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t2-11">2.11 Global Moran’s I</h2>
@@ -3146,6 +3158,7 @@ Figure&nbsp;6: LISA, simulated. Left: the rate map. Middle: the significance map
 <p>Global Moran’s I first, to ask whether there is clustering at all. LISA when you need to locate clusters and outliers, for example for surveillance or to target resources. Choose and report W, and check robustness to another W.</p>
 </div>
 </div>
+<p>Read more: <a href="https://geodacenter.github.io/workbook/6a_local_auto/lab6a.html" target="_blank">GeoDa workbook, <em>Local spatial autocorrelation</em></a> (source of the significance and cluster maps on the slides).</p>
 </section>
 <section id="t2-14" class="level2 topic">
 <h2 class="topic anchored" data-anchor-id="t2-14">2.14 Session summary and key questions</h2>

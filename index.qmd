@@ -36,6 +36,7 @@ One idea runs through the course: **a map is the beginning of the epidemiologic 
 4. **Practise on [Exam practice](exam-practice.qmd)**: drills that generate new numbers every time (SMR, indirect standardization, Empirical Bayes weights, box-map fences, counting neighbours, Moran's I by hand, SAR impacts, exp(β), choosing the likelihood, reading exceedance probabilities) and written exam-style questions with model answers.
 5. **Check the [dashboard](dashboard.qmd)** to see what is left, in priority order.
 6. Look up terms in the [glossary](glossary.qmd), or use **search** (top right).
+7. **Go further** with [Resources](resources.qmd): the instructor's optional videos (Luc Anselin's spatial regression lectures), books and web pages, each linked to the section it supports.
 
 ## The exam
 

@@ -21,7 +21,7 @@ The second half formalises Tobler's law. To ask whether nearby areas are similar
 
 ::: {.callout-note collapse="true"}
 ## Sources and session
-**Slides:** "session_2_v0.pdf" (Qinyun Lin, 6 October 2026, 15:15–17:00). Several figures on the slides come from the GeoDa workbook (geodacenter.github.io/workbook) and Anselin's course material.
+**Slides:** "session_2_v0.pdf" (Qinyun Lin, 6 October 2026, 15:15–17:00). Several figures on the slides come from the [GeoDa workbook](https://geodacenter.github.io/workbook/4b_dist_weights/lab4b.html){target="_blank"}, Anselin's course material and the [Axis Maps guide to data classification](https://www.axismaps.com/guide/data-classification){target="_blank"}.
 
 **Learning objectives (Canvas post):** after this session you should be able to
 
@@ -84,6 +84,8 @@ for (m in list(list(quantile_br, "Quantile (quintiles)"), list(equal_br, "Equal 
 ```
 
 **There is no universally best method.** It depends on the distribution of the data, the purpose of the map and the comparison you want the reader to make.
+
+Read more: [Axis Maps, *Data classification*](https://www.axismaps.com/guide/data-classification){target="_blank"} (source of the classification figures on the slides).
 
 :::: {.quiz}
 Your variable is very skewed: most municipalities have low rates and a few have extreme values. With equal intervals and 5 classes, what will the map look like?
@@ -496,6 +498,8 @@ Two diagnostics show what a weights matrix looks like:
 
 *Which graph suggests KNN and which suggests a distance band?* With a **distance band**, dense areas (cities) have **very many** links, sparse areas have few, and isolated points may have **none**. With **KNN**, every point has the same number of links, even remote points, which reach out with long lines to their nearest neighbours.
 
+Read more: [GeoDa workbook, *Distance-based spatial weights*](https://geodacenter.github.io/workbook/4b_dist_weights/lab4b.html){target="_blank"} (source of the connectivity histogram and graph on the slides).
+
 ## 2.11 Global Moran's I {#t2-11 .topic flag="objective"}
 
 $$
@@ -704,6 +708,8 @@ The first word describes the area itself, the second its neighbours (spatial lag
 ## When to use global vs local statistics
 Global Moran's I first, to ask whether there is clustering at all. LISA when you need to locate clusters and outliers, for example for surveillance or to target resources. Choose and report W, and check robustness to another W.
 :::
+
+Read more: [GeoDa workbook, *Local spatial autocorrelation*](https://geodacenter.github.io/workbook/6a_local_auto/lab6a.html){target="_blank"} (source of the significance and cluster maps on the slides).
 
 ## 2.14 Session summary and key questions {#t2-14 .topic}
 

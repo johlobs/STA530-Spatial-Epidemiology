@@ -17,6 +17,8 @@ website:
         href: exam-practice.qmd
       - text: "Glossary"
         href: glossary.qmd
+      - text: "Resources"
+        href: resources.qmd
       - text: "About the content"
         href: about.qmd
       - text: "All courses"
@@ -43,6 +45,7 @@ website:
           - session4.qmd
       - section: "Reference"
         contents:
+          - resources.qmd
           - about.qmd
 
 format:

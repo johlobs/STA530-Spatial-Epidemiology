@@ -10,6 +10,7 @@ The app is built from the course's own material:
 - the **session slides** by Qinyun Lin (sessions 1–4, preliminary "v0" versions);
 - the instructor's **Canvas posts** for each session: topics, learning objectives and key questions;
 - the **course syllabus** (learning outcomes, examination) and the **literature list**;
+- the links in the Canvas posts and slides, collected on [Resources](resources.qmd) (videos, books, web pages);
 - **lecture notes** taken in class (topics marked ✏️; they also record that the exam tests concepts, not programming).
 
 Explanations, quizzes, drills, simulated figures, R cells, why-questions and written model answers were written for this app. Simulations use made-up data. The course books are cited, not reproduced:

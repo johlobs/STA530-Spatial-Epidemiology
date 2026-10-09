@@ -23,7 +23,7 @@ The second half introduces the methodological issues that come back in every lat
 ## Sources and session
 **Slides:** "session_1_v0-1.pdf" (Qinyun Lin, 6 October 2026, 13:15–15:00).
 
-**In-class activity:** the story map on John Snow and the 1854 cholera outbreak (Center for Spatial Data Science, University of Chicago), link on the Canvas page.
+**In-class activity:** [the story map on John Snow and the 1854 cholera outbreak](https://docs.google.com/presentation/d/e/2PACX-1vRFzOI-TRtjj_B792rNnqTSShBAEmRsXXl2S795acpcYGRAX1755m6oH0ntNYTX5mG3eObawPuF0p5k/pub?start=false&loop=false&delayms=3000&slide=id.g798c99946b_0_331){target="_blank"} (Center for Spatial Data Science, University of Chicago).
 
 **Lecture notes:** the topics marked ✏️ were written down in class as important. The notes also record that **the exam tests concepts, not programming**.
 :::
@@ -183,7 +183,7 @@ Why the choice of unit matters is the subject of [1.10 Scale and MAUP](#t1-10).
 
 ## 1.5 John Snow and the 1854 cholera outbreak {#t1-5 .topic flag="inferred"}
 
-The in-class activity: read the story map and answer three questions.
+The in-class activity: read [the story map](https://docs.google.com/presentation/d/e/2PACX-1vRFzOI-TRtjj_B792rNnqTSShBAEmRsXXl2S795acpcYGRAX1755m6oH0ntNYTX5mG3eObawPuF0p5k/pub?start=false&loop=false&delayms=3000&slide=id.g798c99946b_0_331){target="_blank"} (about 15 minutes) and answer three questions.
 
 | Question | Answer |
 |---|---|
@@ -478,8 +478,8 @@ The slides list four further problems. Each is a form of **bias** in spatial dat
 
 In STA530:
 
-- **R**: the main environment for spatial data analysis and modelling. Useful resources: *Geocomputation with R* (geocompr.robinlovelace.net), *Spatial Data Science with R* (rspatial.org) and the CSDS R spatial tutorials.
-- **GeoDa**: free software for exploratory spatial data analysis and visualisation (maps, weights, Moran's I, LISA). **Install before 13 October** (geodacenter.github.io/download).
+- **R**: the main environment for spatial data analysis and modelling. Useful resources: [*Geocomputation with R*](https://geocompr.robinlovelace.net/){target="_blank"}, [*Spatial Data Science with R*](https://rspatial.org/){target="_blank"} and the [CSDS R spatial tutorials](https://spatialanalysis.github.io/tutorials/){target="_blank"}.
+- **GeoDa**: free software for exploratory spatial data analysis and visualisation (maps, weights, Moran's I, LISA). **Install before 13 October** ([download GeoDa](https://geodacenter.github.io/download/){target="_blank"}).
 
 The exam tests concepts, not software.
 

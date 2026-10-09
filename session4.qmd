@@ -38,7 +38,7 @@ The answer is a **Bayesian hierarchical model** that lets areas **borrow strengt
 3. Why does the BYM2 model include both spatially structured and unstructured variation? → [4.11](#t4-11)
 4. Why might an area with a higher estimated relative risk have weaker evidence of elevated risk than another area? → [4.17](#t4-17)
 
-**Optional reading:** *Bayesian Inference with INLA* (Gómez-Rubio), free online. Not required; you are not expected to understand the computational details of INLA.
+**Optional reading:** [Gómez-Rubio, *Bayesian Inference with INLA*](https://becarioprecario.bitbucket.io/inla-gitbook/){target="_blank"}, a free online book on latent Gaussian models, spatial models and their implementation in R. Not required; you are not expected to understand the computational details of INLA.
 :::
 
 ::: {.callout-tip collapse="true"}
@@ -590,6 +590,8 @@ You are **not expected to understand the computational details** of INLA (Canvas
 | **Practical workflow** | R-INLA supports adjacency graphs, BYM2, priors, posterior summaries and predictions |
 
 INLA is a **computational approach**: it does not change the model, only how the posterior is approximated.
+
+Optional reading (Canvas post): [Gómez-Rubio, *Bayesian Inference with INLA*](https://becarioprecario.bitbucket.io/inla-gitbook/){target="_blank"}. Not required reading.
 
 ## 4.22 A high-risk area is not a causal explanation {#t4-22 .topic flag="inferred"}
 
