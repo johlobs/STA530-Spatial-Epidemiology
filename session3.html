@@ -1696,6 +1696,10 @@ window.Quarto = {
 <span class="menu-text">Glossary</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About the content</span></a>
   </li>  
@@ -1824,6 +1828,12 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./about.html" class="sidebar-item-text sidebar-link">
@@ -2193,7 +2203,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li>interpret what ρ and λ represent, without deriving estimators;</li>
 <li>diagnose residual spatial autocorrelation and think about model choice.</li>
 </ol>
-<p><strong>Optional viewing:</strong> Luc Anselin’s spatial regression video lectures (link on Canvas). They also cover topics beyond STA530.</p>
+<p><strong>Optional viewing:</strong> <a href="https://www.youtube.com/watch?v=yMwQ4MljEWc&amp;list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p" target="_blank">Luc Anselin, <em>Applied Spatial Regression Analysis</em> (YouTube playlist, 13 lectures)</a>. A step-by-step introduction to spatial regression; it also covers more advanced topics than STA530. The lectures that match a section are linked in a <em>Watch</em> box at the end of that section; the full list is on <a href="./resources.html">Resources</a>.</p>
 </div>
 </div>
 </div>
@@ -2368,6 +2378,25 @@ y = \rho W y + X\beta + \varepsilon
 </table>
 <p><strong>Key idea:</strong> y in one area is <strong>jointly determined</strong> with y in neighbouring areas. y appears on both sides: that is why OLS cannot simply be applied with Wy as an extra covariate (Wy is correlated with ε; the model is estimated by maximum likelihood or other methods outside the course).</p>
 <p><strong>Mechanisms that make SAR plausible:</strong> interaction, diffusion, feedback, where the outcome itself spreads.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Watch: Luc Anselin’s lecture on this
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>▶ <a href="https://www.youtube.com/watch?v=yMwQ4MljEWc&amp;list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p" target="_blank">Spatial Regression Specifications</a>: the lag and error models side by side</li>
+</ul>
+<p>Optional, from the Canvas post. Luc Anselin’s lecture series <em>Applied Spatial Regression Analysis</em> goes beyond STA530 in places.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="t3-5" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t3-5">3.5 Why SAR creates feedback: direct, indirect and total impacts</h2>
@@ -2495,6 +2524,25 @@ Figure&nbsp;2: Impacts of raising x by one unit in the centre area (black outlin
 <p><strong>Try it.</strong> Compute the impact matrix for the toy example, then change ρ.</p>
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Watch: Luc Anselin’s lecture on this
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>▶ <a href="https://www.youtube.com/watch?v=C-sBZ9XWC9g&amp;list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p" target="_blank">Spatial Spillovers</a>: direct, indirect and total impacts</li>
+</ul>
+<p>Optional, from the Canvas post. Luc Anselin’s lecture series <em>Applied Spatial Regression Analysis</em> goes beyond STA530 in places.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="t3-6" class="level2 topic" data-flag="keyq">
 <h2 class="topic anchored" data-flag="keyq" data-anchor-id="t3-6">3.6 Is a SAR story plausible in epidemiology?</h2>
@@ -2669,6 +2717,25 @@ Figure&nbsp;3: Causal diagram: an arrow means “directly affects”. Left: SAR,
   <div class="q-opt" data-correct="false">Sixty percent of the variation in the outcome is caused by geography</div>
   <div class="q-exp">λ describes dependence in the error process: the residual (unexplained) variation is spatially correlated. Outcome-to-outcome effects and impacts belong to SAR. λ is not a share of variance explained or caused by space.</div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Watch: Luc Anselin’s lecture on this
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>▶ <a href="https://www.youtube.com/watch?v=6F5u8GEPHzs&amp;list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p" target="_blank">Spatial Process Models</a>: what kind of spatial process each model assumes</li>
+</ul>
+<p>Optional, from the Canvas post. Luc Anselin’s lecture series <em>Applied Spatial Regression Analysis</em> goes beyond STA530 in places.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="t3-9" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t3-9">3.9 A practical workflow and residual Moran’s I</h2>
@@ -2728,6 +2795,26 @@ Figure&nbsp;3: Causal diagram: an arrow means “directly affects”. Left: SAR,
 </table>
 <p>A common reading: if only one simple test is significant, consider that model; if both are, look at the robust versions and see which remains clearly significant.</p>
 <p><strong>For this course</strong> (slide 21): know <strong>what the tests are asking</strong>. Do not memorise formulas, and do not treat p-values as the scientific mechanism. <strong>Model choice should combine theory, diagnostics and interpretability.</strong> The tests are “useful, but not a magic decision tree”.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Watch: Luc Anselin’s lecture on this
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>▶ <a href="https://www.youtube.com/watch?v=XyIokAi01Ko&amp;list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p" target="_blank">Specification Tests</a>: Moran’s I on residuals, LM-lag and LM-error</li>
+<li>▶ <a href="https://www.youtube.com/watch?v=nWk2eBPEsR4&amp;list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p" target="_blank">Robust Tests</a>: the robust LM tests</li>
+</ul>
+<p>Optional, from the Canvas post. Luc Anselin’s lecture series <em>Applied Spatial Regression Analysis</em> goes beyond STA530 in places.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="t3-11" class="level2 topic" data-flag="keyq">
 <h2 class="topic anchored" data-flag="keyq" data-anchor-id="t3-11">3.11 Which model story fits better?</h2>
@@ -2778,6 +2865,32 @@ Figure&nbsp;3: Causal diagram: an arrow means “directly affects”. Left: SAR,
 <li>geographically weighted regression (GWR) and other spatial heterogeneity models.</li>
 </ul>
 <p>The stated goal: <em>understand what spatial dependence means, recognize basic models, and interpret them responsibly — not become spatial econometricians in 90 minutes.</em></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Watch: Luc Anselin’s lecture on this
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>▶ <a href="https://www.youtube.com/watch?v=4zKe9owAu38&amp;list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p" target="_blank">Spatial Durbin Model</a></li>
+<li>▶ <a href="https://www.youtube.com/watch?v=ZeHNaM0N7rc&amp;list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p" target="_blank">Principles of Maximum Likelihood Estimation</a></li>
+<li>▶ <a href="https://www.youtube.com/watch?v=2YOlaEYhX8U&amp;list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p" target="_blank">ML Estimation of Spatial Lag Model</a></li>
+<li>▶ <a href="https://www.youtube.com/watch?v=tD4o2_TLOv0&amp;list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p" target="_blank">ML Estimation Spatial Error Model</a></li>
+<li>▶ <a href="https://www.youtube.com/watch?v=wqsHFbJqpB0&amp;list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p" target="_blank">2SLS</a></li>
+<li>▶ <a href="https://www.youtube.com/watch?v=3xwYgtZIV4c&amp;list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p" target="_blank">IV Estimation of Spatial Lag Model</a></li>
+<li>▶ <a href="https://www.youtube.com/watch?v=X8MFLAs5d3w&amp;list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p" target="_blank">GMM Estimation Principle</a></li>
+<li>▶ <a href="https://www.youtube.com/watch?v=rBPncf4_sVg&amp;list=PLzREt6r1NenlbfMWgHZ9aRpKgJQD1yE3p" target="_blank">GMM Estimation of Spatial Error Model</a></li>
+</ul>
+<p>These cover exactly what STA530 leaves out (estimation and the Durbin model). Not needed for the course.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="t3-13" class="level2 topic">
 <h2 class="topic anchored" data-anchor-id="t3-13">3.13 Take-home messages and key questions</h2>
@@ -2788,7 +2901,7 @@ Figure&nbsp;3: Causal diagram: an arrow means “directly affects”. Left: SAR,
 <li><strong>Diagnostics are evidence, not answers</strong>: use residual checks and tests together with scientific reasoning.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2797,14 +2910,14 @@ Figure&nbsp;3: Causal diagram: an arrow means “directly affects”. Left: SAR,
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Because y appears on both sides. A change in x in one area changes y there, which changes neighbours’ y through ρW, which feeds back. The total effect is captured by (I − ρW)⁻¹β; with row-standardized W the total impact is β/(1 − ρ), larger than β when ρ &gt; 0.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2813,14 +2926,14 @@ Figure&nbsp;3: Causal diagram: an arrow means “directly affects”. Left: SAR,
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Because both SAR (outcome dependence) and SEM (error dependence) produce autocorrelated OLS residuals, and so can misspecification or spatial heterogeneity. The diagnostic says something spatial is unexplained, not which mechanism. Theory, LM tests and interpretability have to be combined.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2829,14 +2942,14 @@ Figure&nbsp;3: Causal diagram: an arrow means “directly affects”. Left: SAR,
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>ρ is the strength of dependence between an area’s outcome and its neighbours’ outcomes (through Wy). λ is the strength of spatial dependence in the error process: how spatially structured the unexplained part is.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2845,7 +2958,7 @@ Figure&nbsp;3: Causal diagram: an arrow means “directly affects”. Left: SAR,
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>OLS treats every area as an independent piece of information. If neighbouring residuals are alike, the effective amount of information is smaller than n, so the true sampling variability of β̂ is larger than OLS reports: standard errors too small, confidence intervals too narrow, p-values too small.</p>
 </div>
