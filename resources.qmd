@@ -51,6 +51,37 @@ Everything here is linked from the Canvas posts or the session slides. Optional 
 |---|---|---|
 | [Gómez-Rubio, *Bayesian Inference with INLA*](https://becarioprecario.bitbucket.io/inla-gitbook/){target="_blank"} | Free online book: latent Gaussian models, spatial models and their implementation in R. **Optional, not required reading**; the computational details of INLA are not expected | [4.21](session4.qmd#t4-21) |
 
+## Articles cited on the slides
+
+Links go to the publisher via the DOI; some need university access (log in through the GU library). None of these is listed as required reading.
+
+| Reference | Cited for | Where in the app |
+|---|---|---|
+| [Morrison et al. (2024). Defining spatial epidemiology: a systematic review and re-orientation. *Epidemiology* 35(4):542–555](https://doi.org/10.1097/EDE.0000000000001738){target="_blank"} | Describe → analyze → intervene; 0 intervention studies; broader definition. **The most-used source in Session 1** | [1.6](session1.qmd#t1-6), [1.7](session1.qmd#t1-7) |
+| [Elliott & Wartenberg (2004). Spatial epidemiology: current approaches and future challenges. *Environmental Health Perspectives* 112(9):998–1006](https://doi.org/10.1289/ehp.6735){target="_blank"} | Definition of spatial epidemiology | [1.6](session1.qmd#t1-6) |
+| [Lawson (2018). *Bayesian Disease Mapping: Hierarchical Modeling in Spatial Epidemiology*. CRC Press](https://doi.org/10.1201/9781351271769){target="_blank"} (book) | Definition of spatial epidemiology | [1.6](session1.qmd#t1-6) |
+| [Nattinger et al. (2001). *JNCI* 93(17):1344–1346](https://doi.org/10.1093/jnci/93.17.1344){target="_blank"} | Distance to care and breast cancer. The slide says "mammography facilities"; the paper studies distance to a **radiotherapy** facility and the choice of surgery | [1.8](session1.qmd#t1-8) |
+| [Gordon-Larsen et al. (2006). Inequality in the built environment underlies key health disparities in physical activity and obesity. *Pediatrics* 117(2):417–424](https://doi.org/10.1542/peds.2005-0058){target="_blank"} | Built environment and obesity | [1.8](session1.qmd#t1-8) |
+| [McEntee & Ogneva-Himmelberger (2008). Diesel particulate matter, lung cancer, and asthma incidences along major traffic corridors. *Health & Place* 14(4):817–828](https://doi.org/10.1016/j.healthplace.2008.01.002){target="_blank"} | Traffic corridors and health. The slide says "cardiovascular disease"; the paper studies **lung cancer and asthma** | [1.8](session1.qmd#t1-8) |
+| [WHO (2010). *A Conceptual Framework for Action on the Social Determinants of Health*](https://www.who.int/publications/i/item/9789241500852){target="_blank"} | Social determinants of health | [1.8](session1.qmd#t1-8) |
+| [Schwartz, Susser & Susser (1999). A future for epidemiology? *Annual Review of Public Health* 20:15–33](https://doi.org/10.1146/annurev.publhealth.20.1.15){target="_blank"} | Eco-epidemiology | [1.8](session1.qmd#t1-8) |
+| [Buck Louis & Sundaram (2012). Exposome: time for transformative research. *Statistics in Medicine* 31(22):2569–2575](https://doi.org/10.1002/sim.5496){target="_blank"} | Multiple exposures over the life span | [1.8](session1.qmd#t1-8) |
+| [Dahlberg & Krug (2002). Violence: a global public health problem. In *World Report on Violence and Health*, WHO](https://www.who.int/publications/i/item/9241545615){target="_blank"} | Social-ecological model (with Bronfenbrenner 1994, no online version) | [1.9](session1.qmd#t1-9) |
+| [Diderichsen, Evans & Whitehead (2001). The social basis of disparities in health. In *Challenging Inequities in Health*, Oxford University Press](https://doi.org/10.1093/acprof:oso/9780195137408.003.0002){target="_blank"} | Life-course mechanisms behind social inequality in health | [1.9](session1.qmd#t1-9) |
+| [Robinson (1950). Ecological correlations and the behavior of individuals. *American Sociological Review* 15(3):351–357](https://doi.org/10.2307/2087176){target="_blank"} | The ecological fallacy | [1.11](session1.qmd#t1-11) |
+| [Anselin (1995). Local indicators of spatial association—LISA. *Geographical Analysis* 27(2):93–115](https://doi.org/10.1111/j.1538-4632.1995.tb00338.x){target="_blank"} | LISA and local Moran's I | [2.13](session2.qmd#t2-13) |
+
+Not linked: Openshaw (1984), *The Modifiable Areal Unit Problem* (CATMOG 38, no DOI); Bronfenbrenner (1994), encyclopedia chapter; O'Sullivan & Unwin (2002), *Geographic Information Analysis* (book).
+
+**Original papers behind the Session 4 models** (named on the slides, not cited; for the curious only):
+
+| Reference | Model |
+|---|---|
+| [Besag, York & Mollié (1991). *Annals of the Institute of Statistical Mathematics* 43:1–20](https://doi.org/10.1007/BF00116466){target="_blank"} | BYM ([4.11](session4.qmd#t4-11)) |
+| [Riebler et al. (2016). An intuitive Bayesian spatial model for disease mapping that accounts for scaling. *Statistical Methods in Medical Research* 25(4):1145–1165](https://doi.org/10.1177/0962280216660421){target="_blank"} | BYM2 ([4.12](session4.qmd#t4-12)) |
+| [Simpson et al. (2017). Penalising model component complexity. *Statistical Science* 32(1):1–28](https://doi.org/10.1214/16-STS576){target="_blank"} | PC priors ([4.14](session4.qmd#t4-14)) |
+| [Rue, Martino & Chopin (2009). *Journal of the Royal Statistical Society B* 71(2):319–392](https://doi.org/10.1111/j.1467-9868.2008.00700.x){target="_blank"} | INLA ([4.21](session4.qmd#t4-21)) |
+
 ## Course books
 
 From the literature list (not online):

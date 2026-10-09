@@ -349,7 +349,7 @@ $$
 | **uᵢ**, **structured** | Spatially correlated component (ICAR): neighbouring areas **borrow strength** |
 | **vᵢ**, **unstructured** | **Independent** area-specific heterogeneity |
 
-**Two kinds of residual variation: spatial pattern + local noise.** Not all between-area variation needs to be spatially structured.
+**Two kinds of residual variation: spatial pattern + local noise.** The model is named after [Besag, York & Mollié (1991)](https://doi.org/10.1007/BF00116466){target="_blank"} (original paper, not required). Not all between-area variation needs to be spatially structured.
 
 **Key question 3:** *why include both structured and unstructured variation?*
 
@@ -382,7 +382,7 @@ $$
 | **ρ**, spatial fraction (mixing parameter), 0 ≤ ρ ≤ 1 | ρ close to 1 → **mostly structured**; ρ close to 0 → **mostly unstructured** |
 | **uᵢ\***, scaled spatial effect | Scaled so its variance has a **stable interpretation across graphs** (marginal variance about 1, like vᵢ) |
 
-This is the parameterization commonly used in modern Bayesian disease mapping.
+This is the parameterization commonly used in modern Bayesian disease mapping. Original paper (not required): [Riebler et al. (2016)](https://doi.org/10.1177/0962280216660421){target="_blank"}.
 
 **Interpreting ρ:**
 
@@ -449,7 +449,7 @@ For an introductory course, the key point is that **priors regularize complexity
 
 Marked **optional depth** on the slide.
 
-**Idea:** start from a simpler **base model** (for BYM2: no residual variation, or no spatial structure) and **penalise departures** from it, so complexity is only used when the data support it.
+**Idea:** start from a simpler **base model** (for BYM2: no residual variation, or no spatial structure) and **penalise departures** from it, so complexity is only used when the data support it. Original paper (not required): [Simpson et al. (2017)](https://doi.org/10.1214/16-STS576){target="_blank"}.
 
 **Why useful:** hyperpriors can be stated as **interpretable probability statements** about plausible effect sizes, for example "P(residual SD > 1) = 0.01" or "P(ρ < 0.5) = 2/3", rather than arbitrary values for a precision parameter. This is a common strategy with INLA and BYM2.
 
@@ -589,7 +589,7 @@ You are **not expected to understand the computational details** of INLA (Canvas
 | **Fast approximation** | INLA (integrated nested Laplace approximation) approximates posterior marginals **without running conventional MCMC** |
 | **Practical workflow** | R-INLA supports adjacency graphs, BYM2, priors, posterior summaries and predictions |
 
-INLA is a **computational approach**: it does not change the model, only how the posterior is approximated.
+INLA is a **computational approach**: it does not change the model, only how the posterior is approximated. Original paper (not required): [Rue, Martino & Chopin (2009)](https://doi.org/10.1111/j.1467-9868.2008.00700.x){target="_blank"}.
 
 Optional reading (Canvas post): [Gómez-Rubio, *Bayesian Inference with INLA*](https://becarioprecario.bitbucket.io/inla-gitbook/){target="_blank"}. Not required reading.
 

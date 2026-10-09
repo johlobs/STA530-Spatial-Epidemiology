@@ -629,7 +629,7 @@ legend("bottom", c("HH", "LL", "HL", "LH"), fill = qcols, horiz = TRUE, bty = "n
 | Measures | Moran's I (Geary's C) | **LISA**, for example local Moran's I; local Geary |
 | Finds | Overall clustering | Hot spots, cold spots and **spatial outliers** |
 
-**LISA** (local indicator of spatial association, Anselin 1995) must:
+**LISA** (local indicator of spatial association, [Anselin 1995](https://doi.org/10.1111/j.1538-4632.1995.tb00338.x){target="_blank"}) must:
 
 1. give a statistic for **each location** with an assessment of significance;
 2. be such that the **sum of the local statistics is proportional to the global statistic**.

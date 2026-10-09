@@ -205,15 +205,15 @@ Three definitions from the slides, from narrow to broad:
 
 | Source | Definition (key words) |
 |---|---|
-| **Elliott & Wartenberg (2004)** | "the description and analysis of **geographic variations in disease** with respect to **demographic, environmental, behavioral, socioeconomic, genetic, and infectious risk factors**" |
-| **Lawson (2018)** | uses geographic location to understand the **distribution of health outcomes and their determinants**, considering how **location influences the interaction** of risk factors |
-| **Morrison et al. (2024)**, broader | applies theory and methods from **epidemiology, geography and statistics** to **describe** spatial distributions, **analyze** possible causes, **inform intervention**, and **improve health** |
+| **[Elliott & Wartenberg (2004)](https://doi.org/10.1289/ehp.6735){target="_blank"}** | "the description and analysis of **geographic variations in disease** with respect to **demographic, environmental, behavioral, socioeconomic, genetic, and infectious risk factors**" |
+| **[Lawson (2018)](https://doi.org/10.1201/9781351271769){target="_blank"}** | uses geographic location to understand the **distribution of health outcomes and their determinants**, considering how **location influences the interaction** of risk factors |
+| **[Morrison et al. (2024)](https://doi.org/10.1097/EDE.0000000000001738){target="_blank"}**, broader | applies theory and methods from **epidemiology, geography and statistics** to **describe** spatial distributions, **analyze** possible causes, **inform intervention**, and **improve health** |
 
 The lecture notes record the first definition: *geographic variations in disease* with respect to demographic and other risk factors. Be able to reproduce one definition in your own words and say what the broader one adds: an explicit aim to explain and to intervene, not just to map.
 
 ## 1.7 Describe → analyze → intervene (Morrison et al. 2024) {#t1-7 .topic flag="inferred"}
 
-Morrison et al. (2024, *Epidemiology* 35(4):542–555) reviewed the spatial epidemiology literature and asked whether the field is aligned with the broader goals of epidemiology.
+[Morrison et al. (2024, *Epidemiology* 35(4):542–555)](https://doi.org/10.1097/EDE.0000000000001738){target="_blank"} reviewed the spatial epidemiology literature and asked whether the field is aligned with the broader goals of epidemiology.
 
 ```{mermaid}
 %%| fig-cap: "Workflow: each arrow means \"then\", the next goal a study can move on to. Not causal. The three goals of epidemiology as used in Morrison et al. (2024)."
@@ -240,17 +240,17 @@ From *where* to *why* requires more than a map: **pattern → theory → analysi
 
 Physical and social environments produce **health disparities**. Examples from the slides:
 
-- longer distance to mammography facilities → later breast cancer diagnosis (Nattinger 2001);
-- pedestrian-friendly environments → lower obesity (Gordon-Larsen 2006);
-- living along major traffic corridors → cardiovascular disease (McEntee 2008).
+- longer distance to mammography facilities → later breast cancer diagnosis ([Nattinger 2001](https://doi.org/10.1093/jnci/93.17.1344){target="_blank"}; note: the paper itself studies distance to a **radiotherapy** facility and the choice of breast cancer surgery);
+- pedestrian-friendly environments → lower obesity ([Gordon-Larsen 2006](https://doi.org/10.1542/peds.2005-0058){target="_blank"});
+- living along major traffic corridors → cardiovascular disease ([McEntee 2008](https://doi.org/10.1016/j.healthplace.2008.01.002){target="_blank"}; note: the paper itself studies diesel particulate matter, **lung cancer and asthma** along traffic corridors).
 
 Three frameworks that put place inside epidemiology:
 
 | Framework | Core idea |
 |---|---|
-| **Social determinants of health** (WHO 2010) | The conditions in which people are born, grow, live, work and age, including **neighbourhood and physical environment** and **access to healthcare**, shape health |
-| **Eco-epidemiology** (Schwartz et al. 1999) | Individuals are interdependent and connected to the biological, physical, social and historical **contexts** they live in |
-| **Multiple exposures over the life span** (Buck Louis & Sundaram 2012) | Measure many environmental exposures at different times in life, not one exposure at one time |
+| **Social determinants of health** ([WHO 2010](https://www.who.int/publications/i/item/9789241500852){target="_blank"}) | The conditions in which people are born, grow, live, work and age, including **neighbourhood and physical environment** and **access to healthcare**, shape health |
+| **Eco-epidemiology** ([Schwartz et al. 1999](https://doi.org/10.1146/annurev.publhealth.20.1.15){target="_blank"}) | Individuals are interdependent and connected to the biological, physical, social and historical **contexts** they live in |
+| **Multiple exposures over the life span** ([Buck Louis & Sundaram 2012](https://doi.org/10.1002/sim.5496){target="_blank"}) | Measure many environmental exposures at different times in life, not one exposure at one time |
 
 The common message: place stands for **context**: access to food, care, education, green space and clean air.
 
@@ -258,7 +258,7 @@ The common message: place stands for **context**: access to food, care, educatio
 
 Both frameworks were written down in class.
 
-**Social-ecological model** (Bronfenbrenner 1994; Dahlberg & Krug 2002). Health is shaped by nested levels:
+**Social-ecological model** (Bronfenbrenner 1994; [Dahlberg & Krug 2002](https://www.who.int/publications/i/item/9241545615){target="_blank"}). Health is shaped by nested levels:
 
 | Level | Example from the slide (stigma around opioid use disorder) |
 |---|---|
@@ -269,7 +269,7 @@ Both frameworks were written down in class.
 
 Spatial data enter at the outer level: the neighbourhood and what is reachable from it.
 
-**Life-course perspective: five mechanisms behind social inequality in health** (Diderichsen et al. 2001):
+**Life-course perspective: five mechanisms behind social inequality in health** ([Diderichsen et al. 2001](https://doi.org/10.1093/acprof:oso/9780195137408.003.0002){target="_blank"}):
 
 | | Mechanism | Where spatial data can help |
 |---|---|---|
@@ -366,7 +366,7 @@ Whenever results come from aggregated data: say which unit was used, ask whether
 
 ## 1.11 The ecological fallacy {#t1-11 .topic flag="objective"}
 
-**Ecological fallacy** (Robinson 1950): drawing **incorrect inferences about individuals from group-level data**.
+**Ecological fallacy** ([Robinson 1950](https://doi.org/10.2307/2087176){target="_blank"}): drawing **incorrect inferences about individuals from group-level data**.
 
 Example from the slides: a region has a high crime rate, so one concludes that an individual from that region is likely to commit a crime. The aggregate does not describe individual characteristics or behaviour.
 
