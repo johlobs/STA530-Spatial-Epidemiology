@@ -8,6 +8,11 @@ engine: knitr
 <script>document.body.classList.add("block-esda");</script>
 ```
 
+```{r}
+#| include: false
+source("_helpers.R")
+```
+
 Session 2 moves from **making maps** to **evaluating spatial patterns**. It has two halves.
 
 The first half is about maps of disease. How you classify a variable into colours changes what the reader sees, and **crude rates from small populations are unstable**: an area with 50 inhabitants can show a very high or very low rate purely by chance. The standardized mortality ratio (SMR) and Empirical Bayes smoothing are the first tools for this.
@@ -50,6 +55,33 @@ A **thematic** or **choropleth map** shows values with colours or patterns insid
 | **Equal intervals** | The range is cut into classes of equal width | Easy to read | One extreme value can push most areas into one class |
 | **Manual intervals** | You choose meaningful cut-offs (for example clinical thresholds) | Interpretable | Needs justification |
 | **Standard deviation** | Values are expressed in SD units from the mean | Shows how far from average; spots outliers | Assumes a roughly symmetric distribution |
+
+```{r}
+#| label: fig-classification
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.6
+#| fig-cap: "The same skewed rates on a 10 × 10 grid with three classification methods and five classes. Quantiles fill every class equally and make the map look busy; equal intervals put most areas in the lowest class; natural breaks follow gaps in the values. Same data, three impressions. (Natural breaks approximated here with one-dimensional k-means.)"
+side <- 10
+set.seed(21)
+# skewed rates: most areas low, a few very high
+rate <- round(exp(1.2 + 0.9 * smooth_surface(side, 4, seed = 5) * 0.6 + rnorm(side^2, 0, 0.35)), 1)
+cols <- seq_cols(5)
+quantile_br <- quantile(rate, seq(0, 1, 0.2))
+equal_br <- seq(min(rate), max(rate), length.out = 6)
+# natural breaks approximated by 1-D k-means on the values
+km <- kmeans(rate, centers = quantile(rate, c(0.1, 0.3, 0.5, 0.7, 0.95)), iter.max = 50)
+ord <- order(km$centers)
+natural_br <- c(min(rate), sort(tapply(rate, km$cluster, max))[1:4], max(rate))
+par(mfrow = c(1, 3), mar = c(4.5, 0.5, 2.5, 0.5))
+for (m in list(list(quantile_br, "Quantile (quintiles)"), list(equal_br, "Equal intervals"),
+               list(natural_br, "Natural breaks"))) {
+  draw_grid(rate, side, cols, m[[1]], main = m[[2]])
+  counts <- table(cut(rate, m[[1]], include.lowest = TRUE))
+  mtext(paste("areas per class:", paste(counts, collapse = " · ")), side = 1, line = 0.3, cex = 0.7)
+  mtext(paste("breaks:", paste(round(m[[1]], 1), collapse = ", ")), side = 1, line = 1.4, cex = 0.62)
+}
+```
 
 **There is no universally best method.** It depends on the distribution of the data, the purpose of the map and the comparison you want the reader to make.
 
@@ -212,6 +244,39 @@ $$
 - **large, informative area**: μ/Pᵢ is tiny, wᵢ ≈ 1 → **little shrinkage**, the area keeps its own rate;
 - **small, uninformative area**: μ/Pᵢ is large, wᵢ is small → **strong shrinkage** toward the reference rate.
 
+```{r}
+#| label: fig-eb-dumbbell
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.8
+#| fig-cap: "Empirical Bayes smoothing, simulated: 40 areas whose true risks vary moderately around 1%. Left: each grey line shows how far a crude rate (orange) moves to its EB estimate (blue). Small areas are pulled almost all the way to the reference rate; large areas barely move. Right: the weight w on the area's own rate grows with population."
+set.seed(8)
+n_areas <- 40
+true_risk <- 0.01 * exp(rnorm(n_areas, 0, 0.2))        # real differences between areas
+population <- round(exp(seq(log(150), log(40000), length.out = n_areas)))
+cases <- rbinom(n_areas, population, true_risk)
+crude <- cases / population
+mu <- sum(cases) / sum(population)
+# Marshall's moment estimate of the between-area variance sigma^2
+weighted_var <- sum(population * (crude - mu)^2) / sum(population)
+between_var <- max(weighted_var - mu / mean(population), 1e-7)
+w <- between_var / (between_var + mu / population)
+eb <- w * crude + (1 - w) * mu
+par(mfrow = c(1, 2), mar = c(4.2, 4.2, 2.5, 1))
+plot(population, 1000 * crude, log = "x", pch = 19, col = col_orange, ylim = range(1000 * c(crude, eb)),
+     xlab = "population (log scale)", ylab = "rate per 1,000", main = "Crude rate → EB estimate")
+arrows(population, 1000 * crude, population, 1000 * eb, length = 0.05, col = col_grey)
+points(population, 1000 * eb, pch = 19, col = col_blue)
+abline(h = 1000 * mu, lty = 2)
+legend("topright", c("crude rate", "EB smoothed", "reference rate"), pch = c(19, 19, NA), lty = c(NA, NA, 2),
+       col = c(col_orange, col_blue, "black"), bty = "n", cex = 0.8)
+plot(population, w, log = "x", pch = 19, col = col_blue, ylim = c(0, 1),
+     xlab = "population (log scale)", ylab = "weight on own crude rate, w", main = "The weight grows with population")
+abline(h = c(0, 1), col = "#dee2e6")
+text(min(population), 0.2, "strong shrinkage", pos = 4, cex = 0.8)
+text(max(population), 0.92, "little shrinkage", pos = 2, cex = 0.8)
+```
+
 EB smoothing reduces the influence of unstable extreme estimates from small populations.
 
 ::: {.misconception}
@@ -315,6 +380,34 @@ The matrix is symmetric, the diagonal is 0, the centre (5) has 4 neighbours and 
 | Higher orders | Yes | Yes |
 | Islands / unconnected areas | Not connected | Not connected |
 
+```{r}
+#| label: fig-neighbour-types
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.4
+#| fig-cap: "Neighbour definitions on a regular grid. The blue area is the target; red cells are its neighbours. An edge or corner area has fewer neighbours than an interior one."
+side <- 7
+target <- 25           # row 4, col 4 (interior)
+rc <- grid_rc(side)
+dr <- abs(rc$row - rc$row[target]); dc <- abs(rc$col - rc$col[target])
+cols <- c("white", "#f4a582", "#d6604d", "#2f5d8a")   # none, 2nd order, 1st order, target
+show <- function(cls, main, sub) {
+  draw_grid(cls, side, cols, border = "#ced4da", main = main)
+  mtext(sub, side = 1, line = 0.3, cex = 0.72)
+}
+par(mfrow = c(1, 4), mar = c(2, 0.5, 2.5, 0.5))
+rook <- ifelse(dr + dc == 1, 3, 1); rook[target] <- 4
+show(rook, "Rook, 1st order", "4 neighbours: shared edges")
+queen <- ifelse(pmax(dr, dc) == 1, 3, 1); queen[target] <- 4
+show(queen, "Queen, 1st order", "8 neighbours: edges and corners")
+queen2 <- ifelse(pmax(dr, dc) == 1, 3, ifelse(pmax(dr, dc) == 2, 2, 1)); queen2[target] <- 4
+show(queen2, "Queen, 2nd order", "dark: 1st order · light: 2nd order ring")
+corner <- 1
+dr <- abs(rc$row - rc$row[corner]); dc <- abs(rc$col - rc$col[corner])
+cq <- ifelse(pmax(dr, dc) == 1, 3, 1); cq[corner] <- 4
+show(cq, "Queen, corner area", "only 3 neighbours at the edge")
+```
+
 **The slide's question:** if both are first order, which has more neighbours? **Queen**, because it adds the corner (diagonal) neighbours. On a regular grid, an interior cell has 4 rook and 8 queen neighbours.
 
 **Higher order.** Second-order neighbours are **neighbours of neighbours** (the next ring out). Software may or may not include the first order as well; the slide's figure shows the target county, its first-order queen ring and the second-order ring. Same area, different W, different results.
@@ -349,6 +442,33 @@ Distance-based weights use the distance between points (or area centroids).
 | Symmetric? | Yes | Yes | **No** (unless symmetrized) |
 | Isolates possible? | Yes (islands) | Yes, unless threshold ≥ max nearest-neighbour distance | **No** |
 | Number of neighbours | Varies | Varies a lot (dense vs sparse areas) | **Exactly k** for every area |
+
+```{r}
+#| label: fig-knn-asym
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.6
+#| fig-cap: "The same 15 points with two distance-based definitions. Left: a 2-unit distance band links the dense town heavily and leaves a remote point as an isolate. Right: with k = 3 nearest neighbours every point has exactly three links (arrows), even remote villages, and the links are not symmetric: a village points into town, but the town points do not point back."
+set.seed(4)
+pts <- rbind(cbind(rnorm(12, 3, 0.6), rnorm(12, 3, 0.6)),    # dense town
+             cbind(c(8, 8.9, 9.6), c(7.8, 6.6, 3.2)))         # three remote villages
+n <- nrow(pts)
+d <- as.matrix(dist(pts))
+par(mfrow = c(1, 2), mar = c(1, 1, 2.5, 1))
+plot(pts, asp = 1, pch = 19, col = col_blue, axes = FALSE, xlab = "", ylab = "", main = "Distance band (2 units)")
+for (i in 1:n) for (j in 1:n) if (i < j && d[i, j] <= 2) segments(pts[i, 1], pts[i, 2], pts[j, 1], pts[j, 2], col = "#2f5d8a66")
+points(pts, pch = 19, col = col_blue)
+deg <- rowSums(d <= 2) - 1
+if (any(deg == 0)) text(pts[deg == 0, 1], pts[deg == 0, 2], "isolate", pos = 2, cex = 0.75, col = col_orange)
+mtext("dense town: many links · remote point: none", side = 1, line = -0.5, cex = 0.75)
+plot(pts, asp = 1, pch = 19, col = col_blue, axes = FALSE, xlab = "", ylab = "", main = "k-nearest neighbours (k = 3)")
+for (i in 1:n) {
+  nn <- order(d[i, ])[2:4]
+  arrows(pts[i, 1], pts[i, 2], pts[nn, 1], pts[nn, 2], length = 0.06, col = "#d9480f88")
+}
+points(pts, pch = 19, col = col_blue)
+mtext("everyone has 3 links; remote villages reach into town", side = 1, line = -0.5, cex = 0.75)
+```
 
 :::: {.quiz}
 You study Swedish municipalities, including island municipalities such as Gotland. You need every area to have neighbours for a LISA analysis. Which weights guarantee that?
@@ -464,6 +584,34 @@ The four quadrants classify areas:
 | Lower right | High | Low | **High-Low**: spatial outlier |
 | Upper left | Low | High | **Low-High**: spatial outlier |
 
+```{r}
+#| label: fig-moran-scatter
+#| echo: false
+#| fig-width: 9
+#| fig-height: 4
+#| fig-cap: "Moran scatter plot for a simulated 10 × 10 map (row-standardized queen weights). Each point is one area: its own standardized value against the average of its neighbours. The slope of the line is Moran's I. Right: the quadrant of each area drawn back on the map. This is not yet a significance test; LISA (2.13) adds that."
+side <- 10
+x <- smooth_surface(side, 5, seed = 12) + rnorm(side^2, 0, 0.5)
+W <- row_standardize(grid_weights(side, "queen"))
+z <- as.vector(scale(x))
+lag_z <- as.vector(W %*% z)
+quad <- ifelse(z >= 0 & lag_z >= 0, 1, ifelse(z < 0 & lag_z < 0, 2, ifelse(z >= 0, 3, 4)))
+qcols <- c("#d6604d", "#4393c3", "#f4a582", "#92c5de")   # HH, LL, HL, LH
+par(mfrow = c(1, 2), mar = c(4.2, 4.2, 2.5, 1))
+plot(z, lag_z, pch = 19, col = qcols[quad], xlab = "own value z (standardized)", ylab = "spatial lag: mean of neighbours' z",
+     main = sprintf("Moran scatter plot: slope = I = %.2f", morans_i(x, W)))
+abline(h = 0, v = 0, col = col_grey)
+abline(lm(lag_z ~ z), lwd = 2)
+usr <- par("usr")
+text(usr[2], usr[4], "High-High", adj = c(1.05, 1.5), cex = 0.85, col = qcols[1], font = 2)
+text(usr[1], usr[3], "Low-Low", adj = c(-0.1, -0.6), cex = 0.85, col = qcols[2], font = 2)
+text(usr[2], usr[3], "High-Low", adj = c(1.05, -0.6), cex = 0.85, col = qcols[3], font = 2)
+text(usr[1], usr[4], "Low-High", adj = c(-0.1, 1.5), cex = 0.85, col = qcols[4], font = 2)
+par(mar = c(4.2, 1, 2.5, 1))
+draw_grid(quad, side, qcols, main = "The same areas on the map")
+legend("bottom", c("HH", "LL", "HL", "LH"), fill = qcols, horiz = TRUE, bty = "n", cex = 0.8, inset = -0.12, xpd = TRUE, border = NA)
+```
+
 "High" and "low" are **relative to the mean**.
 
 **The slides' questions.** *Spatial clusters* (HH, LL): **positive** autocorrelation. *Spatial outliers* (HL, LH): **negative** autocorrelation (the area is unlike its neighbours).
@@ -498,6 +646,41 @@ the area's own deviation times the weighted sum of its neighbours' deviations. G
 
 - a **significance map**: areas coloured by pseudo p-value (0.05, 0.01, 0.001);
 - a **cluster map**: the significant areas coloured by type: **High-High** and **Low-Low** clusters, **High-Low** and **Low-High** outliers.
+
+```{r}
+#| label: fig-lisa
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.6
+#| fig-cap: "LISA, simulated. Left: the rate map. Middle: the significance map, pseudo p-values from conditional permutation. Right: the cluster map, the significant areas coloured by type. The one HL area is an odd high value placed inside a low region: a spatial outlier."
+side <- 10
+set.seed(31)
+x <- smooth_surface(side, 5, seed = 12) + rnorm(side^2, 0, 0.5)
+x[16] <- x[16] + 4                                        # one odd area inside a low region
+W <- row_standardize(grid_weights(side, "queen"))
+z <- as.vector(scale(x))
+lag_z <- as.vector(W %*% z)
+local_i <- z * lag_z
+# conditional permutation: keep z_i fixed, reshuffle the other values over i's neighbours
+n_perm <- 499
+pseudo_p <- sapply(seq_along(z), function(i) {
+  k <- sum(W[i, ] > 0)
+  others <- z[-i]
+  sims <- replicate(n_perm, z[i] * mean(sample(others, k)))
+  (sum(abs(sims) >= abs(local_i[i])) + 1) / (n_perm + 1)
+})
+quad <- ifelse(z >= 0 & lag_z >= 0, 2, ifelse(z < 0 & lag_z < 0, 3, ifelse(z >= 0, 4, 5)))
+cluster <- ifelse(pseudo_p <= 0.05, quad, 1)
+sig_class <- ifelse(pseudo_p <= 0.001, 4, ifelse(pseudo_p <= 0.01, 3, ifelse(pseudo_p <= 0.05, 2, 1)))
+par(mfrow = c(1, 3), mar = c(3.5, 0.5, 2.5, 0.5))
+draw_grid(cut(x, quantile(x, 0:5 / 5), include.lowest = TRUE, labels = FALSE), side, seq_cols(5), main = "Rate (quintiles)")
+draw_grid(sig_class, side, c("#f1f3f5", "#c7e9c0", "#74c476", "#238b45"), main = "Significance map")
+legend("bottom", c("n.s.", "p ≤ 0.05", "p ≤ 0.01", "p ≤ 0.001"), fill = c("#f1f3f5", "#c7e9c0", "#74c476", "#238b45"),
+       horiz = TRUE, bty = "n", cex = 1, inset = -0.1, xpd = TRUE, border = NA)
+draw_grid(cluster, side, c("#f1f3f5", "#d6604d", "#4393c3", "#f4a582", "#92c5de"), main = "Cluster map")
+legend("bottom", c("n.s.", "HH", "LL", "HL", "LH"), fill = c("#f1f3f5", "#d6604d", "#4393c3", "#f4a582", "#92c5de"),
+       horiz = TRUE, bty = "n", cex = 1, inset = -0.1, xpd = TRUE, border = NA)
+```
 
 ::: {.callout-warning}
 ## Interpreting a cluster map

@@ -29,6 +29,10 @@ Adding a session: create `sessionN.qmd`, add it to `_quarto.yml` sidebar and `in
 - `_quiz.html` + `_quiz-filter.lua` quizzes (`:::: {.quiz}`, bold = correct, `::: {.exp}` explanation)
 - `_drills.html` randomised drills: `<div class="drill" data-drill="NAME"></div>`, names: `smr, smrstd, eb, boxmap, neighbours, moran, sarimpact, logrr, likelihood, exceed`
 
+## Figures
+- Static figures are base-R chunks (`echo: false`, label `fig-NAME`) that simulate made-up data. Shared helpers (grid weights, Moran's I, `draw_grid`, `box_node`, `bottom_legend`, colours) live in `_helpers.R`, sourced by a hidden setup chunk at the top of each session page.
+- Prefer side-by-side panels for comparisons. Avoid Mermaid subgraphs: they render with a dark fill; draw such diagrams in R instead.
+
 ## Writing rules
 - English content; define abbreviations on first use per page.
 - Each session starts with intro, "Sources and session" and "Before you start" callouts. Misconceptions go in `::: {.misconception}` boxes. Method sections get "When to use" / "Limitations" callouts where useful.

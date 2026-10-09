@@ -8,6 +8,11 @@ engine: knitr
 <script>document.body.classList.add("block-reg");</script>
 ```
 
+```{r}
+#| include: false
+source("_helpers.R")
+```
+
 Session 2 asked whether nearby values resemble one another. Session 3 asks the regression question: **how should a regression model change when observations are spatially dependent?**
 
 The starting point is ordinary least squares (OLS). If, after adjusting for covariates, the **residuals** of neighbouring areas still resemble each other, the model has left something spatial unexplained. There are two classic ways to put spatial dependence into the model, and they tell **different scientific stories**:
@@ -49,6 +54,24 @@ y = X\beta + \varepsilon .
 $$
 
 **Key assumption here:** after accounting for X, there is **no remaining spatial dependence in the errors**. Spatial data give a reason to doubt that: the slide shows the same regression equation with two very different residual maps, one that looks random and one with clear clusters of positive and negative residuals.
+
+```{r}
+#| label: fig-residual-maps
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.6
+#| fig-cap: "Two residual maps from the same kind of regression, simulated. Left: residuals scattered at random, residual Moran's I near 0, the OLS assumption looks fine. Right: positive residuals cluster in some regions and negative in others, residual Moran's I is high, so something spatial was left out of the model."
+side <- 10
+W <- grid_weights(side, "rook")
+set.seed(5)
+resid_random <- rnorm(side^2)
+resid_clustered <- smooth_surface(side, 6, seed = 9)
+br <- c(-Inf, -1, -0.3, 0.3, 1, Inf); cols <- div_cols(5)
+par(mfrow = c(1, 2), mar = c(0.5, 0.5, 3, 0.5), oma = c(2.5, 0, 0, 0))
+draw_grid(resid_random, side, cols, br, main = sprintf("Residuals look independent\nresidual Moran's I = %.2f", morans_i(resid_random, W)))
+draw_grid(resid_clustered, side, cols, br, main = sprintf("Residuals are clustered\nresidual Moran's I = %.2f", morans_i(resid_clustered, W)))
+bottom_legend(c("much lower", "lower", "as predicted", "higher", "much higher"), cols)
+```
 
 Why it matters:
 
@@ -154,6 +177,25 @@ The slide shows 1.019 and 0.116; the exact inverse gives 1.023 and 0.114. The to
 | **Indirect** (spillover) | Change transmitted to **other** areas through the spatial network |
 | **Total** | Direct + indirect. With row-standardized W, total = β/(1 − ρ) |
 
+```{r}
+#| label: fig-sar-ripple
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.6
+#| fig-cap: "Impacts of raising x by one unit in the centre area (black outline) of a 9 × 9 grid, SAR with β = 1 and row-standardized queen weights. With ρ = 0 only the centre changes (this is OLS). As ρ grows, the change spreads to neighbours and beyond, and feedback raises the centre's own change (direct impact > 1). The sum of the spillovers can exceed the direct impact."
+side <- 9
+centre <- (side^2 + 1) / 2
+W <- row_standardize(grid_weights(side, "queen"))
+beta <- 1
+br <- c(-0.001, 0.005, 0.02, 0.05, 0.1, 0.5, 5); cols <- c("white", seq_cols(5))
+par(mfrow = c(1, 3), mar = c(3.5, 0.5, 3, 0.5))
+for (rho in c(0, 0.4, 0.8)) {
+  impact <- solve(diag(side^2) - rho * W)[, centre] * beta   # effect on every area of +1 x in the centre
+  draw_grid(impact, side, cols, br, main = sprintf("rho = %.1f", rho), border = "#dee2e6", highlight = centre)
+  mtext(sprintf("direct %.2f · spillover total %.2f", impact[centre], sum(impact) - impact[centre]), side = 1, line = 0.5, cex = 0.75)
+}
+```
+
 **For SAR, reporting only the raw regression coefficient β can be misleading.** Report direct, indirect and total impacts (usually averaged over areas).
 
 <div class="drill" data-drill="sarimpact"></div>
@@ -234,22 +276,45 @@ SEM can be viewed as **modelling residual spatial structure that X did not expla
 | Reading β | **Not** the full effect: report direct, indirect, total impacts | As in OLS, conditional on X |
 | Epidemiological example | Infectious disease spreading between municipalities | Air quality shared but poorly measured |
 
-```{mermaid}
-%%| fig-cap: "Causal diagram: an arrow means \"directly affects\". Left: SAR, where outcomes affect neighbouring outcomes. Right: SEM, where an unmeasured spatially smooth factor U affects the outcome in both areas, so their errors are correlated."
-flowchart LR
-  subgraph SAR["Spatial lag (SAR)"]
-    direction LR
-    xa["x in area A"] --> ya["y in area A"]
-    xb["x in area B"] --> yb["y in area B"]
-    ya <--> yb
-  end
-  subgraph SEM["Spatial error (SEM)"]
-    direction LR
-    xa2["x in area A"] --> ya2["y in area A"]
-    xb2["x in area B"] --> yb2["y in area B"]
-    U["unmeasured U<br/>(shared, spatially smooth)"] --> ya2
-    U --> yb2
-  end
+```{r}
+#| label: fig-sar-sem-diagram
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.8
+#| fig-cap: "Causal diagram: an arrow means \"directly affects\". Left: SAR, where the outcomes of neighbouring areas affect each other (ρ·Wy). Right: SEM, where there is no arrow between the outcomes; an unmeasured, spatially smooth factor U affects both, so their errors are correlated (λ)."
+par(mfrow = c(1, 2), mar = c(0.5, 0.5, 3.2, 0.5))
+arrow_c <- "#343a40"
+draw_panel <- function(main) {
+  plot(NA, xlim = c(0, 10), ylim = c(0, 7), axes = FALSE, xlab = "", ylab = "", main = main)
+  rect(0.2, 0.2, 9.8, 6.8, border = "#dee2e6")
+}
+# SAR
+draw_panel("Spatial lag (SAR)
+outcomes affect neighbouring outcomes")
+box_node(2.3, 5.4, "x in area A", w = 2.8, fill = "#e8eef4")
+box_node(7.7, 5.4, "x in area B", w = 2.8, fill = "#e8eef4")
+box_node(2.3, 2.4, "y in area A", w = 2.8, fill = "#fde3d3", font = 2)
+box_node(7.7, 2.4, "y in area B", w = 2.8, fill = "#fde3d3", font = 2)
+arrows(2.3, 5.1, 2.3, 2.7, length = 0.1, lwd = 2, col = arrow_c)
+arrows(7.7, 5.1, 7.7, 2.7, length = 0.1, lwd = 2, col = arrow_c)
+arrows(3.75, 2.55, 6.25, 2.55, length = 0.1, lwd = 2.5, col = col_orange)
+arrows(6.25, 2.2, 3.75, 2.2, length = 0.1, lwd = 2.5, col = col_orange)
+text(5, 2.95, "ρ · Wy", col = col_orange, font = 2)
+text(5, 1.0, "outcomes feed into each other:\nspillover and feedback", cex = 0.8)
+# SEM
+draw_panel("Spatial error (SEM)
+errors share an unmeasured cause")
+box_node(2.3, 5.4, "x in area A", w = 2.8, fill = "#e8eef4")
+box_node(7.7, 5.4, "x in area B", w = 2.8, fill = "#e8eef4")
+box_node(2.3, 2.4, "y in area A", w = 2.8, fill = "#fde3d3", font = 2)
+box_node(7.7, 2.4, "y in area B", w = 2.8, fill = "#fde3d3", font = 2)
+box_node(5, 0.85, "unmeasured U\n(e.g. air quality)", w = 3.4, h = 1.0, fill = "#f1f3f5", border = col_grey)
+arrows(2.3, 5.1, 2.3, 2.7, length = 0.1, lwd = 2, col = arrow_c)
+arrows(7.7, 5.1, 7.7, 2.7, length = 0.1, lwd = 2, col = arrow_c)
+arrows(3.4, 1.15, 2.4, 2.1, length = 0.1, lwd = 2, col = col_blue, lty = 2)
+arrows(6.6, 1.15, 7.6, 2.1, length = 0.1, lwd = 2, col = col_blue, lty = 2)
+text(5, 3.3, "no arrow between the y's", cex = 0.8, col = "#6c757d")
+text(5, 1.85, "λ: correlated errors", cex = 0.85, col = col_blue, font = 2)
 ```
 
 :::: {.quiz}

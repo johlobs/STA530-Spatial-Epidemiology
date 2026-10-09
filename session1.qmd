@@ -8,6 +8,11 @@ engine: knitr
 <script>document.body.classList.add("block-intro");</script>
 ```
 
+```{r}
+#| include: false
+source("_helpers.R")
+```
+
 This first session sets up the vocabulary for the whole course. It answers three questions: **what makes data spatial**, **what spatial epidemiology is trying to achieve**, and **which problems are special to analysing health data by place**.
 
 The thread running through the session, and the rest of the course, is a sentence from the last slide: *a map is often the beginning of the epidemiologic question, not the end.* Seeing **where** disease is high leads to asking **why** it is high there, and then **what can be done**.
@@ -47,6 +52,43 @@ A spatial data file has two parts that belong together:
 |---|---|---|---|
 | **Vector** | Exact coordinates of points and the vertices that join them | **Point** (one coordinate pair), **line** (connected points), **polygon / area** (closed line) | Case addresses (points), roads (lines), municipalities or DeSO areas (polygons) |
 | **Raster** | A grid of equal cells; every cell holds a value | The same shapes, approximated by filled cells | Air-pollution surfaces, land cover, satellite temperature |
+
+```{r}
+#| label: fig-vector-raster
+#| echo: false
+#| fig-width: 9
+#| fig-height: 4.6
+#| fig-cap: "The three feature types in the two data models (after slide 5). Vector data store exact coordinates; raster data approximate the same shapes with filled grid cells."
+par(mfrow = c(2, 3), mar = c(1, 1, 2.2, 1))
+blank <- function(main) plot(NA, xlim = c(0, 10), ylim = c(0, 10), asp = 1, axes = FALSE, xlab = "", ylab = "", main = main)
+# vector
+blank("Vector: point"); box(col = col_grey)
+points(c(2, 5, 7.5, 3.5), c(7, 4, 6.5, 2.5), pch = 19, col = col_orange, cex = 1.6)
+text(5, 4, "case address", pos = 4, cex = 0.8)
+blank("Vector: line"); box(col = col_grey)
+road <- cbind(c(1, 3, 5, 6, 9), c(2, 4, 4.5, 7, 8.5))
+lines(road, lwd = 3, col = col_blue); points(road, pch = 21, bg = "white", cex = 1.2)
+text(6, 7, "road", pos = 4, cex = 0.8)
+blank("Vector: polygon (area)"); box(col = col_grey)
+poly <- cbind(c(1.5, 4, 8, 8.8, 6, 2), c(2, 1.2, 2.5, 7, 8.5, 6.5))
+polygon(poly, col = "#2f5d8a33", border = col_blue, lwd = 2); points(poly, pch = 21, bg = "white")
+text(5, 5, "municipality", cex = 0.8)
+# raster
+cells <- function(on, main) {
+  blank(main)
+  for (i in 0:9) for (j in 0:9) rect(i, j, i + 1, j + 1, col = if (on[i + 1, j + 1]) "#2f5d8aaa" else "white", border = "#dee2e6")
+}
+m <- matrix(FALSE, 10, 10); m[cbind(c(3, 6, 8, 4), c(8, 5, 7, 3))] <- TRUE; cells(m, "Raster: point")
+m <- matrix(FALSE, 10, 10); m[cbind(c(2, 3, 4, 5, 6, 6, 7, 8, 9), c(3, 4, 5, 5, 6, 7, 8, 8, 9))] <- TRUE; cells(m, "Raster: line")
+gx <- outer(1:10 - 0.5, rep(1, 10)); gy <- outer(rep(1, 10), 1:10 - 0.5)
+inside <- matrix(sp_in <- mapply(function(x, y) {
+  # point-in-polygon by ray casting
+  n <- nrow(poly); j <- n; c <- FALSE
+  for (i in 1:n) { if (((poly[i, 2] > y) != (poly[j, 2] > y)) &&
+       (x < (poly[j, 1] - poly[i, 1]) * (y - poly[i, 2]) / (poly[j, 2] - poly[i, 2]) + poly[i, 1])) c <- !c; j <- i }
+  c }, gx, gy), 10, 10)
+cells(inside, "Raster: area")
+```
 
 In the lecture notes, *area = polygon*. Most of this course works with **areal (polygon) data**: counts or rates aggregated to administrative areas.
 
@@ -255,6 +297,35 @@ MAUP has two parts:
 | **Scale effect** | The size of the units (DeSO → municipality → county) | A correlation between deprivation and mortality gets stronger as units get larger, because aggregation averages out individual noise |
 | **Zoning effect** | Where the boundaries are drawn, at the same size | Two ways of drawing 20 equal-sized districts give different cluster maps |
 
+```{r}
+#| label: fig-maup-zoning
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.3
+#| fig-cap: "Zoning effect, simulated. The same 64 small units, with high values along a diagonal band, aggregated into four zones in three different ways. Vertical or horizontal strips hide the band almost completely; squares turn it into two 'hot' and two 'cold' quarters. Same data, three different maps."
+side <- 8
+rc <- grid_rc(side)
+set.seed(3)
+# 64 small units: high values along the diagonal band
+unit_rate <- round(10 + 8 * exp(-((rc$row - rc$col)^2) / 6) + rnorm(64, 0, 1), 1)
+zone_a <- (rc$col - 1) %/% 2                    # 4 vertical strips
+zone_b <- (rc$row - 1) %/% 2                    # 4 horizontal strips
+zone_c <- ((rc$row - 1) %/% 4) * 2 + (rc$col - 1) %/% 4   # 4 squares
+br <- seq(9, 19, length.out = 6); cols <- seq_cols(5)
+par(mfrow = c(1, 4), mar = c(1, 0.5, 3, 0.5))
+draw_grid(unit_rate, side, cols, br, main = "64 small units")
+for (z in list(list(zone_a, "Zoning 1: 4 vertical strips"), list(zone_b, "Zoning 2: 4 horizontal strips"),
+               list(zone_c, "Zoning 3: 4 squares"))) {
+  zone_mean <- ave(unit_rate, z[[1]])
+  draw_grid(zone_mean, side, cols, br, main = z[[2]], border = NA)
+  zr <- grid_rc(side)
+  for (k in unique(z[[1]])) {
+    cells <- which(z[[1]] == k)
+    rect(min(zr$col[cells]) - 1, side - max(zr$row[cells]), max(zr$col[cells]), side - min(zr$row[cells]) + 1, border = "black", lwd = 1.5)
+  }
+}
+```
+
 A partial remedy from the slides: a **regular hexagon grid** (all units the same size and shape), but health data are rarely available on such grids.
 
 ```{r}
@@ -298,6 +369,38 @@ Whenever results come from aggregated data: say which unit was used, ask whether
 **Ecological fallacy** (Robinson 1950): drawing **incorrect inferences about individuals from group-level data**.
 
 Example from the slides: a region has a high crime rate, so one concludes that an individual from that region is likely to commit a crime. The aggregate does not describe individual characteristics or behaviour.
+
+```{r}
+#| label: fig-eco-fallacy
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.6
+#| fig-cap: "Ecological fallacy, simulated. Left: across three areas, higher average exposure goes with a higher average outcome. Right: within every area, individuals with higher exposure have a lower outcome. The area-level association says nothing reliable about individuals."
+set.seed(7)
+area_names <- c("Area A", "Area B", "Area C")
+area_cols <- c(col_blue, col_green, col_orange)
+area_x_mean <- c(3, 5, 7)            # average exposure in each area
+area_y_mean <- c(4, 6, 8)            # average outcome in each area
+x <- y <- g <- NULL
+for (k in 1:3) {
+  xi <- rnorm(40, area_x_mean[k], 0.8)
+  yi <- area_y_mean[k] - 0.8 * (xi - area_x_mean[k]) + rnorm(40, 0, 0.35)  # negative within each area
+  x <- c(x, xi); y <- c(y, yi); g <- c(g, rep(k, 40))
+}
+par(mfrow = c(1, 2), mar = c(4, 4, 3, 1))
+plot(area_x_mean, area_y_mean, pch = 15, cex = 2.2, col = area_cols, xlim = c(1, 9), ylim = c(2, 10),
+     xlab = "mean exposure in area", ylab = "mean outcome in area", main = "What the area data show")
+abline(lm(area_y_mean ~ area_x_mean), lty = 2)
+text(area_x_mean, area_y_mean, area_names, pos = 3, cex = 0.8)
+mtext("positive association between areas", side = 3, line = 0.2, cex = 0.75)
+plot(x, y, pch = 19, col = paste0(area_cols[g], "99"), xlim = c(1, 9), ylim = c(2, 10),
+     xlab = "individual exposure", ylab = "individual outcome", main = "What happens to individuals")
+for (k in 1:3) {
+  xs <- seq(area_x_mean[k] - 1.6, area_x_mean[k] + 1.6, length.out = 2)
+  lines(xs, area_y_mean[k] - 0.8 * (xs - area_x_mean[k]), col = area_cols[k], lwd = 2.5)
+}
+mtext("negative association within every area", side = 3, line = 0.2, cex = 0.75)
+```
 
 **MAUP vs ecological fallacy.** Both come from aggregation, but they ask different things:
 

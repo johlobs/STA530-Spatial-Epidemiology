@@ -8,6 +8,11 @@ engine: knitr
 <script>document.body.classList.add("block-bayes");</script>
 ```
 
+```{r}
+#| include: false
+source("_helpers.R")
+```
+
 Sessions 2 and 3 described and modelled spatial **dependence**. Session 4 shifts the focus to **estimating the underlying disease risk in each area**, especially when counts are small and crude rates are unstable.
 
 The key question on slide 3: *when does a map reflect risk, and when does it reflect noise?* Two areas with the same SMR of 3.0 can carry very different amounts of information (3 observed vs 1 expected, or 300 vs 100).
@@ -178,6 +183,28 @@ Extreme, noisy estimates move toward the common pattern.
 *Illustrative numbers from slide 15.*
 :::
 
+```{r}
+#| label: fig-shrink-arrows
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.2
+#| fig-cap: "Shrinkage with the illustrative numbers from slide 15. Areas A and B have the same crude SMR of 3.0, but A has little data and is pulled far toward the overall level, while data-rich B keeps most of its signal. Area C's very low crude value is pulled up."
+crude <- c(A = 3.00, B = 3.00, C = 0.25)
+smoothed <- c(A = 1.45, B = 2.75, C = 0.75)
+info <- c(A = "little data", B = "much data", C = "little data")
+par(mar = c(4, 7, 2, 2))
+plot(NA, xlim = c(0, 3.3), ylim = c(0.5, 3.5), yaxt = "n", xlab = "relative risk", ylab = "", main = "Crude → smoothed (slide 15, illustrative)")
+axis(2, at = 3:1, labels = paste0("Area ", names(crude), "\n(", info, ")"), las = 1, cex.axis = 0.85, tick = FALSE)
+abline(v = 1, lty = 2, col = col_grey)
+for (k in 1:3) {
+  y <- 4 - k
+  arrows(crude[k], y, smoothed[k], y, length = 0.12, lwd = 2.5, col = if (info[k] == "much data") col_green else col_orange)
+  points(crude[k], y, pch = 21, bg = "white", cex = 1.6)
+  points(smoothed[k], y, pch = 19, col = col_blue, cex = 1.6)
+}
+legend("bottomright", c("crude SMR", "smoothed estimate"), pch = c(21, 19), pt.bg = "white", col = c("black", col_blue), bty = "n", cex = 0.8)
+```
+
 - **Less information → more shrinkage.**
 - **More information → less shrinkage.**
 
@@ -269,6 +296,36 @@ For this course: understand the mechanism; you do not need to derive the joint d
 | Captures | Area-specific, non-spatial heterogeneity | Smooth, clustered geographic patterns |
 | Model | Hierarchical model with exchangeable effects | CAR / ICAR prior |
 
+```{r}
+#| label: fig-smoothing-maps
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.4
+#| fig-cap: "Simulated map of 100 small areas (expected counts 0.5 to 15). The raw SMR map is speckled with noise. Unstructured pooling shrinks every area toward the global mean, so noise is reduced but the map ignores geography. Spatial smoothing pulls each area toward its neighbours and recovers the true pattern best. Illustrative Poisson–gamma estimates, not a fitted BYM2 model."
+side <- 10
+W <- grid_weights(side, "queen")
+set.seed(14)
+true_log_rr <- 0.5 * smooth_surface(side, 6, seed = 14)
+expected <- round(exp(runif(side^2, log(0.5), log(15))), 1)     # many small areas
+observed <- rpois(side^2, expected * exp(true_log_rr))
+smr <- observed / expected
+# unstructured partial pooling: Poisson-gamma toward the global mean
+global_mean <- sum(observed) / sum(expected)
+between_var <- max(var(smr) - mean(global_mean / expected), 0.02)
+b <- global_mean / between_var; a <- global_mean * b
+pooled <- (a + observed) / (b + expected)
+# spatial smoothing (illustrative): the same, but each area's prior mean is its neighbourhood's pooled rate
+local_mean <- as.vector((W %*% observed) / (W %*% expected))
+spatial <- (local_mean * b + observed) / (b + expected)
+br <- c(0, 0.6, 0.8, 0.95, 1.05, 1.25, 1.6, Inf); cols <- div_cols(7)
+par(mfrow = c(1, 4), mar = c(0.5, 0.5, 3, 0.5), oma = c(2.5, 0, 0, 0))
+draw_grid(exp(true_log_rr), side, cols, br, main = "True relative risk\n(unknown in practice)")
+draw_grid(smr, side, cols, br, main = "Raw SMR\nno pooling")
+draw_grid(pooled, side, cols, br, main = "Unstructured\nshrink to global mean")
+draw_grid(spatial, side, cols, br, main = "Spatial\nshrink to neighbours")
+bottom_legend(c("< 0.6", "0.6–0.8", "0.8–0.95", "≈ 1", "1.05–1.25", "1.25–1.6", "> 1.6"), cols)
+```
+
 Both shrink noisy small-area estimates. **Spatial smoothing is a particular kind of partial pooling** where the "group" an area borrows from is its neighbourhood.
 
 ## 4.10 The neighbourhood graph returns, in a different role {#t4-10 .topic flag="inferred"}
@@ -332,6 +389,31 @@ This is the parameterization commonly used in modern Bayesian disease mapping.
 | ρ ≈ 0 | ρ ≈ 0.5 | ρ ≈ 1 |
 |---|---|---|
 | Residual heterogeneity is predominantly **unstructured** | **Both** components matter | Residual heterogeneity is dominated by **geographic structure** |
+
+```{r}
+#| label: fig-bym2-rho
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.4
+#| fig-cap: "What the BYM2 mixing parameter ρ does, simulated on a 12 × 12 grid. The same structured component u* (an ICAR draw) and unstructured component v, mixed as √ρ·u* + √(1−ρ)·v. With ρ = 0 the residual pattern is pure speckle; with ρ = 1 it is a smooth surface where neighbours resemble each other."
+side <- 12
+W <- grid_weights(side, "rook")
+Q <- diag(rowSums(W)) - W                       # ICAR precision
+eig <- eigen(Q, symmetric = TRUE)
+keep <- eig$values > 1e-8                       # drop the constant direction
+set.seed(2)
+z <- rnorm(sum(keep))
+u <- as.vector(eig$vectors[, keep] %*% (z / sqrt(eig$values[keep])))
+u_star <- u / sqrt(exp(mean(log(diag(MASS::ginv(Q))))))  # scale to geometric-mean variance 1
+u_star <- as.vector(scale(u_star))
+v <- rnorm(side^2)
+br <- c(-Inf, -1.2, -0.6, -0.2, 0.2, 0.6, 1.2, Inf); cols <- div_cols(7)
+par(mfrow = c(1, 3), mar = c(1, 0.5, 3, 0.5))
+for (rho in c(0, 0.5, 1)) {
+  effect <- sqrt(rho) * u_star + sqrt(1 - rho) * v
+  draw_grid(effect, side, cols, br, main = sprintf("ρ = %s: %s", rho, c("all unstructured", "half and half", "all spatial")[match(rho, c(0, 0.5, 1))]))
+}
+```
 
 ::: {.misconception}
 **The slide's question:** if ρ is estimated as 0.9, does it mean 90% of disease cases are caused by spatial factors? **No.** ρ describes the **residual latent variation** (what remains after α and any covariates) on the BYM2 mixing scale: about 90% of the *unexplained between-area variance* is spatially structured. It says nothing about causes, nothing about cases, and nothing about variation that the covariates already explain. Also, BYM2's ρ is not SAR's ρ ([3.4](session3.qmd#t3-4)).
@@ -422,6 +504,28 @@ The choice of c should be tied to the **scientific or decision context**, not ch
 | Posterior mean RR | **1.30** | 1.20 |
 | 95% CrI | 0.75–2.00 | 1.10–1.31 |
 | P(RR > 1) | 0.72 | **0.995** |
+
+```{r}
+#| label: fig-posterior-ab
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.4
+#| fig-cap: "Posterior distributions for the two areas on slide 32, approximated by log-normal curves matching the slide's 95% credible intervals. Area A's distribution is wide, so a large share lies below 1. Area B's is narrow and almost entirely above 1. The shaded area is the exceedance probability P(θ > 1); with this approximation A's is 0.79 rather than the slide's 0.72."
+# lognormal approximations with the slide's means and intervals
+area_a <- c(meanlog = log(1.22), sdlog = (log(2.00) - log(0.75)) / (2 * 1.96))
+area_b <- c(meanlog = log(1.20), sdlog = (log(1.31) - log(1.10)) / (2 * 1.96))
+rr <- seq(0.3, 3, length.out = 600)
+da <- dlnorm(rr, area_a[1], area_a[2]); db <- dlnorm(rr, area_b[1], area_b[2])
+par(mfrow = c(1, 2), mar = c(4.2, 3, 3, 1))
+for (k in 1:2) {
+  d <- list(da, db)[[k]]; prm <- list(area_a, area_b)[[k]]
+  plot(rr, d, type = "l", lwd = 2, col = col_blue, yaxt = "n", ylab = "", xlab = "relative risk θ",
+       main = c("Area A: high mean, wide", "Area B: lower mean, narrow")[k], ylim = c(0, max(db)))
+  polygon(c(rr[rr > 1], rev(rr[rr > 1])), c(d[rr > 1], rep(0, sum(rr > 1))), col = "#d9480f55", border = NA)
+  abline(v = 1, lty = 2)
+  mtext(sprintf("shaded area = P(θ > 1) ≈ %.2f", 1 - plnorm(1, prm[1], prm[2])), side = 3, line = 0.1, cex = 0.8)
+}
+```
 
 **Which area gives stronger evidence of elevated risk?** **Area B.** A has the higher point estimate, but its interval includes 1 and P(RR > 1) is only 0.72. B's estimate is lower but precise, entirely above 1.
 
