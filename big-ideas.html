@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Session 1 — Introduction to Spatial Epidemiology – STA530 — Spatial Epidemiology</title>
+<title>The big ideas – STA530 — Spatial Epidemiology</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,8 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./session2.html" rel="next">
-<link href="./glossary.html" rel="prev">
+<link href="./dashboard.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -80,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="custom.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-sidebar docked nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -140,7 +140,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./session1.html">Week 1: Foundations and ESDA</a></li><li class="breadcrumb-item"><a href="./session1.html">Session 1 — Introduction to Spatial Epidemiology</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./big-ideas.html">Exam prep</a></li><li class="breadcrumb-item"><a href="./big-ideas.html">The big ideas</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -177,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./big-ideas.html" class="sidebar-item-text sidebar-link">
+  <a href="./big-ideas.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">The big ideas</span></a>
   </div>
 </li>
@@ -212,7 +212,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./session1.html" class="sidebar-item-text sidebar-link active">
+  <a href="./session1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Session 1 — Introduction to Spatial Epidemiology</span></a>
   </div>
 </li>
@@ -275,36 +275,14 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul class="collapse">
-  <li><a href="#t1-1" id="toc-t1-1" class="nav-link active" data-scroll-target="#t1-1">1.1 What is spatial data?</a></li>
-  <li><a href="#t1-2" id="toc-t1-2" class="nav-link" data-scroll-target="#t1-2">1.2 Spatial file formats: CSV, shapefile, GeoJSON</a></li>
-  <li><a href="#t1-3" id="toc-t1-3" class="nav-link" data-scroll-target="#t1-3">1.3 Coordinate reference systems and EPSG codes</a></li>
-  <li><a href="#t1-4" id="toc-t1-4" class="nav-link" data-scroll-target="#t1-4">1.4 Geocoding and Swedish small areas (DeSO)</a></li>
-  <li><a href="#t1-5" id="toc-t1-5" class="nav-link" data-scroll-target="#t1-5">1.5 John Snow and the 1854 cholera outbreak</a></li>
-  <li><a href="#t1-6" id="toc-t1-6" class="nav-link" data-scroll-target="#t1-6">1.6 Definitions of spatial epidemiology</a></li>
-  <li><a href="#t1-7" id="toc-t1-7" class="nav-link" data-scroll-target="#t1-7">1.7 Describe → analyze → intervene (Morrison et al.&nbsp;2024)</a></li>
-  <li><a href="#t1-8" id="toc-t1-8" class="nav-link" data-scroll-target="#t1-8">1.8 Why place matters for health</a></li>
-  <li><a href="#t1-9" id="toc-t1-9" class="nav-link" data-scroll-target="#t1-9">1.9 Theoretical frameworks: social-ecological model and life course</a></li>
-  <li><a href="#t1-10" id="toc-t1-10" class="nav-link" data-scroll-target="#t1-10">1.10 Scale and the modifiable areal unit problem (MAUP)</a></li>
-  <li><a href="#t1-11" id="toc-t1-11" class="nav-link" data-scroll-target="#t1-11">1.11 The ecological fallacy</a></li>
-  <li><a href="#t1-12" id="toc-t1-12" class="nav-link" data-scroll-target="#t1-12">1.12 Spatial dependence and spatial heterogeneity</a></li>
-  <li><a href="#t1-13" id="toc-t1-13" class="nav-link" data-scroll-target="#t1-13">1.13 Other issues: reporting, geocoding, boundaries, sparse counts</a></li>
-  <li><a href="#t1-14" id="toc-t1-14" class="nav-link" data-scroll-target="#t1-14">1.14 Tools: GIS, R and GeoDa</a></li>
-  <li><a href="#t1-15" id="toc-t1-15" class="nav-link" data-scroll-target="#t1-15">1.15 Session summary and key questions</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./session1.html">Week 1: Foundations and ESDA</a></li><li class="breadcrumb-item"><a href="./session1.html">Session 1 — Introduction to Spatial Epidemiology</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./big-ideas.html">Exam prep</a></li><li class="breadcrumb-item"><a href="./big-ideas.html">The big ideas</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Session 1 — Introduction to Spatial Epidemiology</h1>
-<p class="subtitle lead">Spatial data · file formats · coordinate reference systems · John Snow · what spatial epidemiology is for · theory · MAUP, ecological fallacy, dependence and heterogeneity</p>
+<h1 class="title">The big ideas</h1>
+<p class="subtitle lead">The whole course so far on one page: 18 ideas, one sentence each</p>
 </div>
 
 
@@ -321,890 +299,182 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<script>document.body.classList.add("block-intro");</script>
-<p>This first session sets up the vocabulary for the whole course. It answers three questions: <strong>what makes data spatial</strong>, <strong>what spatial epidemiology is trying to achieve</strong>, and <strong>which problems are special to analysing health data by place</strong>.</p>
-<p>The thread running through the session, and the rest of the course, is a sentence from the last slide: <em>a map is often the beginning of the epidemiologic question, not the end.</em> Seeing <strong>where</strong> disease is high leads to asking <strong>why</strong> it is high there, and then <strong>what can be done</strong>.</p>
-<p>The second half introduces the methodological issues that come back in every later session: the modifiable areal unit problem (MAUP), the ecological fallacy, spatial dependence and spatial heterogeneity.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Sources and session
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Slides:</strong> “session_1_v0-1.pdf” (Qinyun Lin, 6 October 2026, 13:15–15:00).</p>
-<p><strong>In-class activity:</strong> <a href="https://docs.google.com/presentation/d/e/2PACX-1vRFzOI-TRtjj_B792rNnqTSShBAEmRsXXl2S795acpcYGRAX1755m6oH0ntNYTX5mG3eObawPuF0p5k/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.g798c99946b_0_331" target="_blank">the story map on John Snow and the 1854 cholera outbreak</a> (Center for Spatial Data Science, University of Chicago).</p>
-<p><strong>Lecture notes:</strong> the topics marked ✏️ were written down in class as important. The notes also record that <strong>the exam tests concepts, not programming</strong>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Before you start: three ideas from earlier courses
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Rate vs count.</strong> A count (20 cases) depends on how many people there are. A rate or risk (20 cases per 1,000) divides by the population at risk, so areas of different size can be compared.</p>
-<p><strong>Confounding.</strong> An association between an exposure and an outcome can be produced by a third factor related to both. Place is often a stand-in for many such factors at once (income, pollution, access to care).</p>
-<p><strong>Independence in regression.</strong> Ordinary least squares (OLS) and the usual standard errors assume that, after accounting for the covariates, observations are independent. Session 1 introduces the reason why spatial data often break this assumption: nearby places resemble each other.</p>
-</div>
-</div>
-</div>
-<section id="t1-1" class="level2 topic" data-flag="notes">
-<h2 class="topic anchored" data-flag="notes" data-anchor-id="t1-1">1.1 What is spatial data?</h2>
-<div class="core">
-<p><strong>In short.</strong> Spatial data are ordinary data with a location attached. The location is stored either as exact shapes (<strong>vector</strong>: points, lines, polygons) or as a grid of cells (<strong>raster</strong>). Most of this course uses polygons: areas such as municipalities, each with a count or a rate.</p>
-</div>
-<p><strong>Spatial data = information + location.</strong> The information (an attribute: a disease rate, an income, a pollution level) is tied to a place. The information may change with location; that is the point of studying it spatially. Very occasionally spatial data contain only location (a list of clinic coordinates), but <strong>without location the data are no longer spatial</strong>.</p>
-<p>A spatial data file has two parts that belong together:</p>
-<ul>
-<li>the <strong>geometry</strong>: where each feature is (coordinates, or the outline of an area);</li>
-<li>the <strong>attribute table</strong>: one row per feature with its variables, like an ordinary data frame.</li>
-</ul>
-<p><strong>Two ways of representing space</strong></p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Model</th>
-<th>How space is stored</th>
-<th>Feature types</th>
-<th>Typical health example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Vector</strong></td>
-<td>Exact coordinates of points and the vertices that join them</td>
-<td><strong>Point</strong> (one coordinate pair), <strong>line</strong> (connected points), <strong>polygon / area</strong> (closed line)</td>
-<td>Case addresses (points), roads (lines), municipalities or DeSO areas (polygons)</td>
-</tr>
-<tr class="even">
-<td><strong>Raster</strong></td>
-<td>A grid of equal cells; every cell holds a value</td>
-<td>The same shapes, approximated by filled cells</td>
-<td>Air-pollution surfaces, land cover, satellite temperature</td>
-</tr>
-</tbody>
-</table>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-vector-raster" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-vector-raster-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="session1_files/figure-html/fig-vector-raster-1.png" class="img-fluid figure-img" width="864">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vector-raster-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: The three feature types in the two data models (after slide 5). Vector data store exact coordinates; raster data approximate the same shapes with filled grid cells.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>In the lecture notes, <em>area = polygon</em>. Most of this course works with <strong>areal (polygon) data</strong>: counts or rates aggregated to administrative areas.</p>
-<div class="sta530-quiz" data-question="A study links each child’s home address to the PM2.5 concentration of the 1 × 1 km cell it falls in. Which two data models are combined?">
-  <div class="q-opt" data-correct="true">Vector points for homes and a raster grid for pollution</div>
-  <div class="q-opt" data-correct="false">Vector polygons for homes and vector lines for pollution</div>
-  <div class="q-opt" data-correct="false">A raster grid for homes and vector points for pollution</div>
-  <div class="q-opt" data-correct="false">Two raster grids at different cell sizes for both layers</div>
-  <div class="q-exp">A home address is a single coordinate pair, a vector point. A pollution surface measured on 1 km cells is a raster. Joining them means looking up the cell value at each point.</div>
-</div>
-<div class="exam-say">
-<p><strong>On the exam, be able to say:</strong> Spatial data = information + location. Vector data store points, lines and polygons as coordinates; raster data store values in a regular grid of cells.</p>
-</div>
-</section>
-<section id="t1-2" class="level2 topic" data-flag="notes">
-<h2 class="topic anchored" data-flag="notes" data-anchor-id="t1-2">1.2 Spatial file formats: CSV, shapefile, GeoJSON</h2>
-<div class="core">
-<p><strong>In short.</strong> A spatial file has to carry three things: the shapes, the data table and the coordinate system. A shapefile splits them over at least four files that must stay together; GeoJSON keeps everything in one file; a CSV works only for points with coordinate columns.</p>
-</div>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Format</th>
-<th>What it is</th>
-<th>Watch out for</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>CSV</strong> (or other text file)</td>
-<td>An ordinary table. It is spatial only if it has coordinate columns (longitude, latitude)</td>
-<td>Cannot store polygons in a practical way; the CRS is not recorded in the file</td>
-</tr>
-<tr class="even">
-<td><strong>Shapefile</strong></td>
-<td>ESRI’s format. <strong>At least four files</strong> with the same name and different extensions</td>
-<td>All files must sit <strong>in the same folder</strong>; if one is missing the layer breaks</td>
-</tr>
-<tr class="odd">
-<td><strong>GeoJSON</strong></td>
-<td>Open standard text format for points, lines and polygons with attributes</td>
-<td>Can be large for detailed boundaries</td>
-</tr>
-</tbody>
-</table>
-<p>The four shapefile parts (as written down in class):</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Extension</th>
-<th>Holds</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>.shp</code></td>
-<td>The geometry: the shapes themselves</td>
-</tr>
-<tr class="even">
-<td><code>.shx</code></td>
-<td>The index that lets software find each shape quickly</td>
-</tr>
-<tr class="odd">
-<td><code>.dbf</code></td>
-<td>The attribute table (one row per shape)</td>
-</tr>
-<tr class="even">
-<td><code>.prj</code></td>
-<td>The projection: which coordinate reference system the coordinates are in</td>
-</tr>
-</tbody>
-</table>
-<div class="misconception">
-<p>“The <code>.shp</code> file <em>is</em> the shapefile, so I only need to send that.” The <code>.shp</code> holds the shapes but no attributes and no CRS. Without <code>.dbf</code> you lose the data columns, and without <code>.prj</code> the software does not know where on Earth the coordinates belong. Keep all parts together.</p>
-</div>
-<div class="sta530-quiz" data-question="A colleague emails you kommuner.shp, kommuner.shx and kommuner.dbf. The map opens, but distances come out strange and it will not line up with other layers. What is most likely missing?">
-  <div class="q-opt" data-correct="true">The .prj file, so the coordinate reference system is unknown</div>
-  <div class="q-opt" data-correct="false">The .dbf file, so the attribute columns cannot be read</div>
-  <div class="q-opt" data-correct="false">The .shx file, so the shapes cannot be indexed at all</div>
-  <div class="q-opt" data-correct="false">A GeoJSON copy, which shapefiles need for their geometry</div>
-  <div class="q-exp">Shapes and attributes load fine (.shp, .shx, .dbf are there). What is missing is the projection information in .prj: without it, software cannot place or transform the coordinates correctly.</div>
-</div>
-<div class="exam-say">
-<p><strong>On the exam, be able to say:</strong> A shapefile has at least four parts in the same folder: .shp (geometry), .shx (index), .dbf (attribute table) and .prj (projection/CRS).</p>
-</div>
-</section>
-<section id="t1-3" class="level2 topic" data-flag="inferred">
-<h2 class="topic anchored" data-flag="inferred" data-anchor-id="t1-3">1.3 Coordinate reference systems and EPSG codes</h2>
-<div class="core">
-<p><strong>In short.</strong> Coordinates mean nothing without a <strong>coordinate reference system</strong> (CRS): it says where on Earth the numbers point and how the round Earth was flattened. Put all layers in the same CRS before combining them, and use a CRS in metres for distances.</p>
-<p><strong>Think of it as:</strong> Currencies. “100” means nothing until you know whether it is kronor or euros, and you must convert before you add two amounts.</p>
-</div>
-<p>The Earth is round; a map is flat. A <strong>coordinate reference system (CRS)</strong> says how coordinates relate to places on the Earth’s surface, and for a projected CRS, which method was used to <strong>flatten (project)</strong> the surface onto two dimensions. Different projections give visibly different world maps: every projection distorts area, shape, distance or direction somehow.</p>
-<p>CRSs are identified by <strong>EPSG codes</strong> (from the European Petroleum Survey Group): a standard number that pins down the datum, the coordinate system and the projection.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>EPSG:4326 (WGS 84)</th>
-<th>EPSG:3006 (SWEREF 99 TM)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Kind</td>
-<td><strong>Geographic</strong> (unprojected)</td>
-<td><strong>Projected</strong></td>
-</tr>
-<tr class="even">
-<td>Coordinates</td>
-<td>Longitude and latitude</td>
-<td>Easting and northing</td>
-</tr>
-<tr class="odd">
-<td>Units</td>
-<td><strong>Degrees</strong></td>
-<td><strong>Metres</strong></td>
-</tr>
-<tr class="even">
-<td>Typical use</td>
-<td>GPS, web maps, data downloaded online</td>
-<td>Swedish national spatial data</td>
-</tr>
-<tr class="odd">
-<td>Distances and areas</td>
-<td>Not directly: a degree of longitude shrinks towards the poles</td>
-<td>Yes, Euclidean distance in metres is meaningful</td>
-</tr>
-</tbody>
-</table>
-<p>Two practical rules from the slides:</p>
-<ol type="1">
-<li><strong>Recognise 4326.</strong> Coordinates like <code>41.784766, -87.609299</code> (small numbers with many decimals, within ±90 and ±180) are almost certainly longitude/latitude in EPSG:4326. Try that first.</li>
-<li><strong>Transform before you join.</strong> When you combine layers, put everything in the <strong>same CRS</strong> first. Layers in different CRSs will not line up, and spatial joins or distances will be wrong.</li>
-</ol>
-<p>For distance or area calculations, transform to a suitable projected CRS (in Sweden, SWEREF 99 TM). This returns in Session 2: Euclidean distance between points is only meaningful for projected coordinates.</p>
-<div class="sta530-quiz" data-question="You want to define neighbours as all health centres within 5 km of each other. Your coordinates are in EPSG:4326. What should you do first?">
-  <div class="q-opt" data-correct="true">Transform the points to a projected CRS in metres, such as SWEREF 99 TM</div>
-  <div class="q-opt" data-correct="false">Use a 5-degree distance band, because the coordinates are in degrees</div>
-  <div class="q-opt" data-correct="false">Nothing, since Euclidean distance works the same in any CRS</div>
-  <div class="q-opt" data-correct="false">Convert the shapefile to GeoJSON, which stores distances in metres</div>
-  <div class="q-exp">In EPSG:4326, coordinates are in degrees, and one degree is not a fixed number of metres. A 5 km threshold needs projected coordinates in metres (or great-circle distances). File format does not change the CRS.</div>
-</div>
-<div class="exam-say">
-<p><strong>On the exam, be able to say:</strong> A CRS defines how coordinates relate to the Earth’s surface; EPSG codes identify it. EPSG:4326 (WGS 84) is in degrees; projected systems such as SWEREF 99 TM (EPSG:3006) are in metres and are needed for distances and areas. Layers must share a CRS before they are joined.</p>
-</div>
-</section>
-<section id="t1-4" class="level2 topic" data-flag="notes">
-<h2 class="topic anchored" data-flag="notes" data-anchor-id="t1-4">1.4 Geocoding and Swedish small areas (DeSO)</h2>
-<div class="core">
-<p><strong>In short.</strong> <strong>Geocoding</strong> turns an address into coordinates. Health data are usually reported for administrative areas; in Sweden the smallest standard unit is <strong>DeSO</strong>.</p>
-</div>
-<p><strong>Geocoding</strong> turns an address into coordinates (longitude and latitude), so that individuals can be placed on a map or linked to the area they live in. Geocoding can <strong>fail or be wrong</strong> (missing or misspelled addresses, rural addresses placed at a postcode centroid). Such errors are rarely random: they are more common in some kinds of areas, which can bias a spatial analysis (see <a href="#t1-13">1.13</a>).</p>
-<p>Most health data are reported for <strong>administrative areas</strong>: province, county, postcode, census tract. In Sweden the smallest standard statistical unit is <strong>DeSO</strong> (<em>demografiska statistikområden</em>, demographic statistical areas), designed by Statistics Sweden to have roughly 700 to 2,700 inhabitants each, so that statistics can be published at fine scale without identifying people. The lecture notes record DeSO as <em>the smallest area in Sweden</em> used in practice.</p>
-<p>Why the choice of unit matters is the subject of <a href="#t1-10">1.10 Scale and MAUP</a>.</p>
-<div class="exam-say">
-<p><strong>On the exam, be able to say:</strong> Geocoding converts addresses to longitude/latitude; failures are often concentrated in some areas, so they are not random. DeSO are Sweden’s small statistical areas of roughly 700–2,700 inhabitants.</p>
-</div>
-</section>
-<section id="t1-5" class="level2 topic" data-flag="inferred">
-<h2 class="topic anchored" data-flag="inferred" data-anchor-id="t1-5">1.5 John Snow and the 1854 cholera outbreak</h2>
-<div class="core">
-<p><strong>In short.</strong> In London in 1854, John Snow mapped cholera deaths and water pumps. Deaths clustered around one pump, and comparing households with different water supplies supported his idea that cholera spreads through water, not “bad air”.</p>
-</div>
-<p>The in-class activity: read <a href="https://docs.google.com/presentation/d/e/2PACX-1vRFzOI-TRtjj_B792rNnqTSShBAEmRsXXl2S795acpcYGRAX1755m6oH0ntNYTX5mG3eObawPuF0p5k/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.g798c99946b_0_331" target="_blank">the story map</a> (about 15 minutes) and answer three questions.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Question</th>
-<th>Answer</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Research question</strong></td>
-<td>What causes cholera, and why did so many people in one part of Soho, London, die in a few days in 1854?</td>
-</tr>
-<tr class="even">
-<td><strong>Competing hypotheses</strong></td>
-<td><strong>Miasma</strong>: disease spreads through “bad air” from rotting matter (the dominant view). <strong>Waterborne</strong>: cholera is transmitted through contaminated water (Snow’s hypothesis)</td>
-</tr>
-<tr class="odd">
-<td><strong>Spatial data used</strong></td>
-<td>The <strong>locations of cholera deaths</strong> (point data, stacked as bars at each house) and the <strong>locations of public water pumps</strong> on a street map. Snow also compared deaths by <strong>which water company</strong> supplied a household</td>
-</tr>
-</tbody>
-</table>
-<p>The map showed deaths clustered around the <strong>Broad Street pump</strong>. Exceptions were informative: workers at a brewery with its own water supply were largely spared, while some deaths far away were in people who preferred to fetch water from Broad Street. The pump handle was removed.</p>
-<p><strong>Classifying Snow’s work</strong> with the describe–analyze–intervene framework (<a href="#t1-7">1.7</a>): mapping the deaths <strong>describes</strong>; testing the water hypothesis against miasma (including the comparison of water companies) <strong>analyzes</strong>; removing the pump handle is an <strong>intervention</strong>. One study can move across all three goals, which is exactly what modern spatial epidemiology rarely does.</p>
-<div class="misconception">
-<p>“Snow’s map proved the cause.” The map alone shows clustering around a pump, which miasma could also explain (bad air near the pump). What made the argument strong was <strong>theory</strong> (a waterborne mechanism), <strong>informative exceptions</strong>, and a <strong>comparison</strong> between households with different water supply. A map starts the question; the comparison answers it.</p>
-</div>
-<div class="exam-say">
-<p><strong>On the exam, be able to say:</strong> Research question: what caused the outbreak and how cholera spreads. Competing hypotheses: miasma (bad air) vs contaminated water. Data: death locations (points), pump locations and water supply by household. Snow described, analysed and intervened (the pump handle).</p>
-</div>
-</section>
-<section id="t1-6" class="level2 topic" data-flag="objective">
-<h2 class="topic anchored" data-flag="objective" data-anchor-id="t1-6">1.6 Definitions of spatial epidemiology</h2>
-<div class="core">
-<p><strong>In short.</strong> Spatial epidemiology studies <strong>how disease varies between places, and why</strong>. The newer, broader definition adds that the aim is also to <strong>act</strong>: to inform interventions that improve health.</p>
-</div>
-<p>Three definitions from the slides, from narrow to broad:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Source</th>
-<th>Definition (key words)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong><a href="https://doi.org/10.1289/ehp.6735" target="_blank">Elliott &amp; Wartenberg (2004)</a></strong></td>
-<td>“the description and analysis of <strong>geographic variations in disease</strong> with respect to <strong>demographic, environmental, behavioral, socioeconomic, genetic, and infectious risk factors</strong>”</td>
-</tr>
-<tr class="even">
-<td><strong><a href="https://doi.org/10.1201/9781351271769" target="_blank">Lawson (2018)</a></strong></td>
-<td>uses geographic location to understand the <strong>distribution of health outcomes and their determinants</strong>, considering how <strong>location influences the interaction</strong> of risk factors</td>
-</tr>
-<tr class="odd">
-<td><strong><a href="https://doi.org/10.1097/EDE.0000000000001738" target="_blank">Morrison et al.&nbsp;(2024)</a></strong>, broader</td>
-<td>applies theory and methods from <strong>epidemiology, geography and statistics</strong> to <strong>describe</strong> spatial distributions, <strong>analyze</strong> possible causes, <strong>inform intervention</strong>, and <strong>improve health</strong></td>
-</tr>
-</tbody>
-</table>
-<p>The lecture notes record the first definition: <em>geographic variations in disease</em> with respect to demographic and other risk factors. Be able to reproduce one definition in your own words and say what the broader one adds: an explicit aim to explain and to intervene, not just to map.</p>
-<div class="exam-say">
-<p><strong>On the exam, be able to say:</strong> Spatial epidemiology is the description and analysis of geographic variation in disease with respect to demographic, environmental, behavioural, socioeconomic, genetic and infectious risk factors. Morrison et al.&nbsp;broaden it to describe, analyse and intervene.</p>
-</div>
-</section>
-<section id="t1-7" class="level2 topic" data-flag="inferred">
-<h2 class="topic anchored" data-flag="inferred" data-anchor-id="t1-7">1.7 Describe → analyze → intervene (Morrison et al.&nbsp;2024)</h2>
-<div class="core">
-<p><strong>In short.</strong> A study can <strong>describe</strong> (where is disease?), <strong>analyse</strong> (why there?) or <strong>intervene</strong> (what can we change?). A large review found many descriptive and analytic studies but <strong>no</strong> intervention studies.</p>
-<p><strong>Think of it as:</strong> A doctor who is excellent at diagnosis and at explaining the illness, but never tests a treatment.</p>
-</div>
-<p><a href="https://doi.org/10.1097/EDE.0000000000001738" target="_blank">Morrison et al.&nbsp;(2024, <em>Epidemiology</em> 35(4):542–555)</a> reviewed the spatial epidemiology literature and asked whether the field is aligned with the broader goals of epidemiology.</p>
+<p>Start here, or come back here before the exam. Each idea is one sentence in plain language; the link takes you to the section that explains it. If you can say all 18 in your own words, you have the core of Sessions 1–4.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
-  D["DESCRIBE&lt;br/&gt;Where is health distributed?&lt;br/&gt;(disease mapping, cluster detection,&lt;br/&gt;surveillance, resource allocation)"] --&gt; A["ANALYZE&lt;br/&gt;Why might the pattern occur?&lt;br/&gt;(place-based determinants,&lt;br/&gt;exposure–outcome relationships,&lt;br/&gt;mechanisms, inequalities)"]
-  A --&gt; I["INTERVENE&lt;br/&gt;What can we change?&lt;br/&gt;(target interventions, evaluate&lt;br/&gt;place-based policies,&lt;br/&gt;change environments)"]
+  A["Spatial data&lt;br/&gt;information + location&lt;br/&gt;(S1)"] --&gt; B["Map rates,&lt;br/&gt;not counts&lt;br/&gt;(S2)"]
+  B --&gt; C["Small areas give&lt;br/&gt;unstable rates&lt;br/&gt;(S2)"]
+  C --&gt; D["Smooth: borrow&lt;br/&gt;from other areas&lt;br/&gt;EB (S2)"]
+  D --&gt; E["Bayesian disease mapping&lt;br/&gt;BYM / BYM2&lt;br/&gt;(S4)"]
+  B --&gt; F["Are neighbours alike?&lt;br/&gt;define W, Moran's I, LISA&lt;br/&gt;(S2)"]
+  F --&gt; G["Regression with&lt;br/&gt;spatial dependence&lt;br/&gt;SAR / SEM (S3)"]
+  F --&gt; E
 </pre>
 </div>
-<p></p><figcaption> Workflow: each arrow means “then”, the next goal a study can move on to. Not causal. The three goals of epidemiology as used in Morrison et al.&nbsp;(2024).</figcaption> </figure><p></p>
+<p></p><figcaption> Lecture map: each arrow means “this leads to the next question”. Not causal. How the four sessions connect.</figcaption> </figure><p></p>
 </div>
 </div>
 </div>
-<p><strong>What the review found</strong> among 482 papers:</p>
+<section id="session-1-what-spatial-epidemiology-is" class="level2">
+<h2 class="anchored" data-anchor-id="session-1-what-spatial-epidemiology-is">Session 1 · What spatial epidemiology is</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Type</th>
-<th>Number</th>
+<th>#</th>
+<th>Idea</th>
+<th>Section</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Descriptive</td>
-<td>122</td>
+<td>1</td>
+<td><strong>Spatial data = information + location</strong>, stored as shapes (vector) or grid cells (raster).</td>
+<td><a href="./session1.html#t1-1">1.1</a></td>
 </tr>
 <tr class="even">
-<td>Analytic</td>
-<td>167</td>
+<td>2</td>
+<td>Coordinates only make sense with a <strong>coordinate reference system</strong>; layers must share one before they are combined.</td>
+<td><a href="./session1.html#t1-3">1.3</a></td>
 </tr>
 <tr class="odd">
-<td><strong>Intervention</strong></td>
-<td><strong>0</strong></td>
+<td>3</td>
+<td>Studies can <strong>describe, analyse or intervene</strong>; the field mostly does the first two, and a map should start the question, not end it.</td>
+<td><a href="./session1.html#t1-7">1.7</a></td>
 </tr>
 <tr class="even">
-<td>Reviews</td>
-<td>76</td>
+<td>4</td>
+<td><strong>MAUP:</strong> change the areas (size or borders) and the results can change, even with the same people.</td>
+<td><a href="./session1.html#t1-10">1.10</a></td>
 </tr>
 <tr class="odd">
-<td>Demonstrations of methods</td>
-<td>117</td>
+<td>5</td>
+<td><strong>Ecological fallacy:</strong> a pattern between areas need not hold for the individuals in them.</td>
+<td><a href="./session1.html#t1-11">1.11</a></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td><strong>Dependence</strong> = neighbours are alike; <strong>heterogeneity</strong> = the relationships themselves differ by place.</td>
+<td><a href="./session1.html#t1-12">1.12</a></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Zero intervention studies.</strong> The field is good at mapping patterns and developing methods, but mainly describes and explains; it rarely evaluates what works. The slides’ re-orientation: spatial statistical methods are <strong>tools, not the endpoint</strong>. The question is not only “Where are the clusters?” but “Why are they there, and what can we do about them?”</p>
-<p>From <em>where</em> to <em>why</em> requires more than a map: <strong>pattern → theory → analysis</strong>. Theory tells you which spatial units, exposures, pathways, confounders and mechanisms are meaningful.</p>
-<div class="exam-say">
-<p><strong>On the exam, be able to say:</strong> Morrison et al.&nbsp;(2024) classified 482 papers: 122 descriptive, 167 analytic, 0 intervention. Spatial methods are tools, not the endpoint: the field should move from where to why to what can be done.</p>
-</div>
 </section>
-<section id="t1-8" class="level2 topic" data-flag="objective">
-<h2 class="topic anchored" data-flag="objective" data-anchor-id="t1-8">1.8 Why place matters for health</h2>
-<div class="core">
-<p><strong>In short.</strong> Where people live shapes what they are exposed to (air, noise, food) and what they can reach (care, parks, schools). That is why <strong>place itself</strong> is studied as a determinant of health.</p>
-</div>
-<p>Physical and social environments produce <strong>health disparities</strong>. Examples from the slides:</p>
-<ul>
-<li>longer distance to mammography facilities → later breast cancer diagnosis (<a href="https://doi.org/10.1093/jnci/93.17.1344" target="_blank">Nattinger 2001</a>; note: the paper itself studies distance to a <strong>radiotherapy</strong> facility and the choice of breast cancer surgery);</li>
-<li>pedestrian-friendly environments → lower obesity (<a href="https://doi.org/10.1542/peds.2005-0058" target="_blank">Gordon-Larsen 2006</a>);</li>
-<li>living along major traffic corridors → cardiovascular disease (<a href="https://doi.org/10.1016/j.healthplace.2008.01.002" target="_blank">McEntee 2008</a>; note: the paper itself studies diesel particulate matter, <strong>lung cancer and asthma</strong> along traffic corridors).</li>
-</ul>
-<p>Three frameworks that put place inside epidemiology:</p>
+<section id="session-2-maps-and-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="session-2-maps-and-patterns">Session 2 · Maps and patterns</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Framework</th>
-<th>Core idea</th>
+<th>#</th>
+<th>Idea</th>
+<th>Section</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Social determinants of health</strong> (<a href="https://www.who.int/publications/i/item/9789241500852" target="_blank">WHO 2010</a>)</td>
-<td>The conditions in which people are born, grow, live, work and age, including <strong>neighbourhood and physical environment</strong> and <strong>access to healthcare</strong>, shape health</td>
+<td>7</td>
+<td>Counts show where people live, rates show risk, and <strong>rates from small populations are unstable</strong>.</td>
+<td><a href="./session2.html#t2-4">2.4</a></td>
 </tr>
 <tr class="even">
-<td><strong>Eco-epidemiology</strong> (<a href="https://doi.org/10.1146/annurev.publhealth.20.1.15" target="_blank">Schwartz et al.&nbsp;1999</a>)</td>
-<td>Individuals are interdependent and connected to the biological, physical, social and historical <strong>contexts</strong> they live in</td>
+<td>8</td>
+<td><strong>SMR = observed ÷ expected</strong>: above 1 means more cases than the reference risk predicts.</td>
+<td><a href="./session2.html#t2-5">2.5</a></td>
 </tr>
 <tr class="odd">
-<td><strong>Multiple exposures over the life span</strong> (<a href="https://doi.org/10.1002/sim.5496" target="_blank">Buck Louis &amp; Sundaram 2012</a>)</td>
-<td>Measure many environmental exposures at different times in life, not one exposure at one time</td>
+<td>9</td>
+<td><strong>Smoothing</strong> pulls noisy small-area rates toward a reference; the less data, the stronger the pull.</td>
+<td><a href="./session2.html#t2-6">2.6</a></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Before measuring similarity you must <strong>define neighbours</strong> (rook, queen, distance, k-nearest) in a weights matrix W.</td>
+<td><a href="./session2.html#t2-8">2.8</a></td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td><strong>Moran’s I</strong> says whether neighbours are more alike than chance, for the whole map, tested by shuffling the values.</td>
+<td><a href="./session2.html#t2-11">2.11</a></td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td><strong>LISA</strong> says where: hot spots (HH), cold spots (LL) and outliers (HL, LH).</td>
+<td><a href="./session2.html#t2-13">2.13</a></td>
 </tr>
 </tbody>
 </table>
-<p>The common message: place stands for <strong>context</strong>: access to food, care, education, green space and clean air.</p>
-<div class="exam-say">
-<p><strong>On the exam, be able to say:</strong> Physical and social environments produce health disparities (for example distance to care, walkability, traffic exposure). Frameworks: social determinants of health, eco-epidemiology, multiple exposures across the life span.</p>
-</div>
 </section>
-<section id="t1-9" class="level2 topic" data-flag="notes">
-<h2 class="topic anchored" data-flag="notes" data-anchor-id="t1-9">1.9 Theoretical frameworks: social-ecological model and life course</h2>
-<div class="core">
-<p><strong>In short.</strong> Two ways to organise the causes of health. The <strong>social-ecological model</strong> places the individual inside nested levels (relationships, organisations, community). The <strong>life-course model</strong> describes five steps through which social position becomes unequal health. Spatial data fit at the neighbourhood level.</p>
-</div>
-<p>Both frameworks were written down in class.</p>
-<p><strong>Social-ecological model</strong> (Bronfenbrenner 1994; <a href="https://www.who.int/publications/i/item/9241545615" target="_blank">Dahlberg &amp; Krug 2002</a>). Health is shaped by nested levels:</p>
+<section id="session-3-regression-with-spatial-data" class="level2">
+<h2 class="anchored" data-anchor-id="session-3-regression-with-spatial-data">Session 3 · Regression with spatial data</h2>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Level</th>
-<th>Example from the slide (stigma around opioid use disorder)</th>
+<th>#</th>
+<th>Idea</th>
+<th>Section</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Individual</td>
-<td>Age, race/ethnicity, education</td>
+<td>13</td>
+<td>If <strong>residuals cluster</strong> on the map, ordinary regression has missed something spatial and its standard errors are too small.</td>
+<td><a href="./session3.html#t3-1">3.1</a></td>
 </tr>
 <tr class="even">
-<td>Interpersonal</td>
-<td>Friends’ or family members’ experience with the disorder</td>
+<td>14</td>
+<td><strong>SAR</strong> = outcomes spread between neighbours (contagion); <strong>SEM</strong> = errors share a hidden cause (shared weather). Choose by mechanism.</td>
+<td><a href="./session3.html#t3-8">3.8</a></td>
 </tr>
 <tr class="odd">
-<td>Organizational</td>
-<td>Workplaces, clinics, schools</td>
-</tr>
-<tr class="even">
-<td><strong>Community / neighbourhood</strong></td>
-<td><strong>Spatial access</strong> to treatment (medication for opioid use disorder)</td>
+<td>15</td>
+<td>In SAR a change <strong>spreads and feeds back</strong>, so report direct, indirect and total impacts, not just β.</td>
+<td><a href="./session3.html#t3-5">3.5</a></td>
 </tr>
 </tbody>
 </table>
-<p>Spatial data enter at the outer level: the neighbourhood and what is reachable from it.</p>
-<p><strong>Life-course perspective: five mechanisms behind social inequality in health</strong> (<a href="https://doi.org/10.1093/acprof:oso/9780195137408.003.0002" target="_blank">Diderichsen et al.&nbsp;2001</a>):</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Mechanism</th>
-<th>Where spatial data can help</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>I</td>
-<td><strong>Social stratification</strong>: people end up in different social positions</td>
-<td>Residential segregation by income</td>
-</tr>
-<tr class="even">
-<td>II</td>
-<td><strong>Differential exposure</strong>: lower positions meet more causes of illness</td>
-<td>Pollution, noise, unhealthy food environments by area</td>
-</tr>
-<tr class="odd">
-<td>III</td>
-<td><strong>Differential vulnerability</strong>: the same exposure harms some groups more</td>
-<td>Area deprivation modifying the effect of heat</td>
-</tr>
-<tr class="even">
-<td>IV</td>
-<td><strong>Differential disease consequences</strong>: illness leads to worse outcomes for some</td>
-<td>Distance to care, late diagnosis</td>
-</tr>
-<tr class="odd">
-<td>V</td>
-<td><strong>Consequences for the individual and society</strong>: illness feeds back into social position</td>
-<td>Job loss concentrated in some areas</td>
-</tr>
-</tbody>
-</table>
-<p>The in-class discussion question was <em>where spatial data and spatial epidemiology may be useful, and how</em>. A good answer links one mechanism to one spatial measure, as in the right-hand column.</p>
-<div class="exam-say">
-<p><strong>On the exam, be able to say:</strong> Social-ecological model: individual, interpersonal, organisational and community levels. Diderichsen’s five mechanisms: social stratification, differential exposure, differential vulnerability, differential consequences, and consequences for the individual and society.</p>
-</div>
 </section>
-<section id="t1-10" class="level2 topic" data-flag="objective">
-<h2 class="topic anchored" data-flag="objective" data-anchor-id="t1-10">1.10 Scale and the modifiable areal unit problem (MAUP)</h2>
-<div class="core">
-<p><strong>In short.</strong> Results from area data depend on <strong>which areas you use</strong>. Make the areas bigger, or draw the borders differently, and the map and the statistics can change, even though the people are the same.</p>
-<p><strong>Think of it as:</strong> Average grades by class, by school or by municipality: each level tells a different story about the same pupils.</p>
-</div>
-<p>Health data are usually aggregated to <strong>administrative zones</strong> (province, county, postcode, census tract, DeSO). These units:</p>
-<ul>
-<li>are often <strong>irregular and arbitrary</strong>, drawn for administration, not for health;</li>
-<li>can <strong>change over time</strong> (inconsistent geography), which makes trends hard to follow.</li>
-</ul>
-<p><strong>The modifiable areal unit problem (MAUP)</strong> (Openshaw 1984): changing the spatial units can lead to <strong>different statistical results and interpretations</strong>, even when the underlying individual data are the same. The lecture notes put it as: <em>if we change scale (new areas are under investigation), the interpretation will change.</em></p>
-<p>MAUP has two parts:</p>
+<section id="session-4-bayesian-disease-mapping" class="level2">
+<h2 class="anchored" data-anchor-id="session-4-bayesian-disease-mapping">Session 4 · Bayesian disease mapping</h2>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Effect</th>
-<th>What changes</th>
-<th>Example</th>
+<th>#</th>
+<th>Idea</th>
+<th>Section</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Scale effect</strong></td>
-<td>The size of the units (DeSO → municipality → county)</td>
-<td>A correlation between deprivation and mortality gets stronger as units get larger, because aggregation averages out individual noise</td>
+<td>16</td>
+<td>Pick the <strong>likelihood from the outcome and denominator</strong>: Binomial for prevalence, Poisson for incidence or observed vs expected.</td>
+<td><a href="./session4.html#t4-2">4.2</a></td>
 </tr>
 <tr class="even">
-<td><strong>Zoning effect</strong></td>
-<td>Where the boundaries are drawn, at the same size</td>
-<td>Two ways of drawing 20 equal-sized districts give different cluster maps</td>
+<td>17</td>
+<td><strong>BYM2</strong> = a spatial part (borrow from neighbours) + a non-spatial part (area’s own), with ρ as the spatial share and τ for the total amount.</td>
+<td><a href="./session4.html#t4-12">4.12</a></td>
+</tr>
+<tr class="odd">
+<td>18</td>
+<td>Report <strong>risk and its uncertainty</strong>: a higher estimate is not stronger evidence; look at credible intervals and exceedance probabilities, and remember that a high-risk area is not a cause.</td>
+<td><a href="./session4.html#t4-17">4.17</a></td>
 </tr>
 </tbody>
 </table>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-maup-zoning" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-maup-zoning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="session1_files/figure-html/fig-maup-zoning-1.png" class="img-fluid figure-img" width="864">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-maup-zoning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Zoning effect, simulated. The same 64 small units, with high values along a diagonal band, aggregated into four zones in three different ways. Vertical or horizontal strips hide the band almost completely; squares turn it into two ‘hot’ and two ‘cold’ quarters. Same data, three different maps.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>A partial remedy from the slides: a <strong>regular hexagon grid</strong> (all units the same size and shape), but health data are rarely available on such grids.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="session1_files/figure-html/maup-demo-1.png" class="img-fluid figure-img" width="864"></p>
-<figcaption>Scale effect, simulated. The same 3,600 individuals (exposure x and outcome y with a weak individual-level association, plus a smooth spatial trend in both) are aggregated to 900, 36 and 9 areas. The correlation of the area means grows as the areas get larger.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>The individual-level correlation in this simulation is about 0.25. None of the area-level correlations is “the” answer: each describes associations <strong>between areas at that scale</strong>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>When to use this idea
+<span class="screen-reader-only">Tip</span>How to use this page
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Whenever results come from aggregated data: say which unit was used, ask whether conclusions hold at another scale, and prefer units that make sense for the mechanism (a health-care catchment for access to care, a smaller unit for air pollution).</p>
-</div>
-</div>
-<div class="exam-say">
-<p><strong>On the exam, be able to say:</strong> MAUP: changing the spatial units (scale effect: their size; zoning effect: where the borders go) can change results and interpretations even though the underlying data are the same.</p>
-</div>
-</section>
-<section id="t1-11" class="level2 topic" data-flag="objective">
-<h2 class="topic anchored" data-flag="objective" data-anchor-id="t1-11">1.11 The ecological fallacy</h2>
-<div class="core">
-<p><strong>In short.</strong> A pattern <strong>between areas</strong> does not have to hold for the <strong>individuals</strong> in them.</p>
-<p><strong>Think of it as:</strong> A neighbourhood with high income and many votes for one party does not prove that the rich residents voted for that party.</p>
-</div>
-<p><strong>Ecological fallacy</strong> (<a href="https://doi.org/10.2307/2087176" target="_blank">Robinson 1950</a>): drawing <strong>incorrect inferences about individuals from group-level data</strong>.</p>
-<p>Example from the slides: a region has a high crime rate, so one concludes that an individual from that region is likely to commit a crime. The aggregate does not describe individual characteristics or behaviour.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-eco-fallacy" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-eco-fallacy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="session1_files/figure-html/fig-eco-fallacy-1.png" class="img-fluid figure-img" width="864">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-eco-fallacy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Ecological fallacy, simulated. Left: across three areas, higher average exposure goes with a higher average outcome. Right: within every area, individuals with higher exposure have a lower outcome. The area-level association says nothing reliable about individuals.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>MAUP vs ecological fallacy.</strong> Both come from aggregation, but they ask different things:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>MAUP</th>
-<th>Ecological fallacy</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>The problem</td>
-<td>Area-level results depend on <strong>how the areas are drawn</strong></td>
-<td>Area-level results are <strong>wrongly applied to individuals</strong></td>
-</tr>
-<tr class="even">
-<td>Level of the conclusion</td>
-<td>Stays at area level</td>
-<td>Jumps from area to individual level</td>
-</tr>
-<tr class="odd">
-<td>Question it raises</td>
-<td>Would I see the same pattern with other units?</td>
-<td>Does this association hold for people?</td>
-</tr>
-</tbody>
-</table>
-<div class="sta530-quiz" data-question="Municipalities with more fast-food outlets per capita have higher diabetes prevalence. A newspaper writes: “People who eat fast food get diabetes.” Which problem does this illustrate?">
-  <div class="q-opt" data-correct="true">The ecological fallacy: an area association is applied to individuals</div>
-  <div class="q-opt" data-correct="false">The modifiable areal unit problem: the boundaries were drawn badly</div>
-  <div class="q-opt" data-correct="false">Spatial heterogeneity: the association differs between regions</div>
-  <div class="q-opt" data-correct="false">Geocoding error: outlets were placed in the wrong municipality</div>
-  <div class="q-exp">The data are at municipality level. Whether the individuals with diabetes ate fast food is not observed; inferring it is the ecological fallacy. MAUP would be the issue if the conclusion were about municipalities but changed with other boundaries.</div>
-</div>
-<div class="exam-say">
-<p><strong>On the exam, be able to say:</strong> The ecological fallacy is drawing conclusions about individuals from group-level data. It differs from the MAUP, which is about area-level results changing with the choice of areas.</p>
-</div>
-</section>
-<section id="t1-12" class="level2 topic" data-flag="objective">
-<h2 class="topic anchored" data-flag="objective" data-anchor-id="t1-12">1.12 Spatial dependence and spatial heterogeneity</h2>
-<div class="core">
-<p><strong>In short.</strong> <strong>Dependence:</strong> neighbours tend to be alike. <strong>Heterogeneity:</strong> the rules themselves change from place to place.</p>
-<p><strong>Think of it as:</strong> Dependence: houses on the same street have similar prices. Heterogeneity: an extra room adds more to the price in Stockholm than in a small town.</p>
-</div>
-<p>These are the two properties that make spatial data special, and they motivate every method in the rest of the course.</p>
-<p><strong>Spatial dependence.</strong> <em>Tobler’s first law of geography:</em> “things closer together are more similar than things further apart”. Observations near one another may be more similar (or otherwise related) than observations far apart. Example: expensive and cheap neighbourhoods cluster because of socio-spatial processes. Dependence usually holds <strong>within some distance</strong>; beyond it, observations behave as independent.</p>
-<p>Global measures summarise dependence in <strong>one number</strong>:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Measure</th>
-<th>Reading</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Moran’s I</strong> ≈ 0</td>
-<td>Little or no global spatial autocorrelation</td>
-</tr>
-<tr class="even">
-<td><strong>Moran’s I</strong> &gt; 0</td>
-<td>Similar values tend to occur near one another (clustering)</td>
-</tr>
-<tr class="odd">
-<td><strong>Moran’s I</strong> &lt; 0</td>
-<td>Dissimilar values tend to occur near one another (checkerboard)</td>
-</tr>
-<tr class="even">
-<td><strong>Geary’s C</strong></td>
-<td>An alternative global measure (built on squared differences between neighbours)</td>
-</tr>
-</tbody>
-</table>
-<p>Both can be tested for statistical significance; Session 2 shows how.</p>
-<p><strong>Spatial heterogeneity.</strong> Processes and relationships <strong>differ by location</strong>, so one model applied everywhere can miss local patterns. Example: the relationship between income and housing prices differs between urban and rural areas. It shows up as regression coefficients that vary across regions, or as spatially structured random effects (Session 4).</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Spatial dependence</th>
-<th>Spatial heterogeneity</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>About</td>
-<td><strong>Similarity between nearby values</strong></td>
-<td><strong>Differences in processes or relationships across space</strong></td>
-</tr>
-<tr class="even">
-<td>Question</td>
-<td>Are neighbours alike?</td>
-<td>Is the same model valid everywhere?</td>
-</tr>
-<tr class="odd">
-<td>Methods in this course</td>
-<td>Moran’s I, LISA (S2); spatial lag and error models (S3); structured random effects (S4)</td>
-<td>Mentioned; GWR and similar models are outside the course (S3)</td>
-</tr>
-</tbody>
-</table>
-<div class="sta530-quiz" data-question="The effect of temperature on hospital admissions is strong in the south of a country and weak in the north. Which concept is this?">
-  <div class="q-opt" data-correct="true">Spatial heterogeneity: the relationship differs by location</div>
-  <div class="q-opt" data-correct="false">Spatial dependence: neighbouring admission counts are similar</div>
-  <div class="q-opt" data-correct="false">The ecological fallacy: area data are applied to individuals</div>
-  <div class="q-opt" data-correct="false">The MAUP: the result depends on the boundaries used</div>
-  <div class="q-exp">A relationship (temperature → admissions) that changes across space is heterogeneity. Dependence would be about values in neighbouring areas resembling each other, which can be present at the same time but is a different property.</div>
-</div>
-<div class="exam-say">
-<p><strong>On the exam, be able to say:</strong> Spatial dependence (Tobler’s first law): nearby observations are more similar than distant ones; measured by Moran’s I. Spatial heterogeneity: processes or relationships differ by location, so one global model can miss local patterns.</p>
-</div>
-</section>
-<section id="t1-13" class="level2 topic" data-flag="objective">
-<h2 class="topic anchored" data-flag="objective" data-anchor-id="t1-13">1.13 Other issues: reporting, geocoding, boundaries, sparse counts</h2>
-<div class="core">
-<p><strong>In short.</strong> A map can show the <strong>data system</strong> instead of the disease: missed reports, failed geocoding, changing borders and tiny populations all create patterns that are not real.</p>
-</div>
-<p>The slides list four further problems. Each is a form of <strong>bias</strong> in spatial data (the course syllabus asks you to reflect on bias from <strong>aggregation, measurement and missing data</strong>):</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Issue</th>
-<th>Why it can bias a map or model</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Incomplete or geographically varying reporting</strong></td>
-<td>If some regions report less completely, they look healthier than they are. The map shows the reporting system, not the disease</td>
-</tr>
-<tr class="even">
-<td><strong>Geocoding failure or error</strong></td>
-<td>Failed addresses are dropped or misplaced; failures are often concentrated in rural or new areas (missing data that are not missing at random)</td>
-</tr>
-<tr class="odd">
-<td><strong>Boundary changes over time</strong></td>
-<td>Areas merge or split, so rates before and after are not comparable (inconsistent geography)</td>
-</tr>
-<tr class="even">
-<td><strong>Differences in population size / sparse counts</strong></td>
-<td>Small areas give unstable rates: extreme values may be chance, not risk. Session 2 (smoothing) and Session 4 (Bayesian disease mapping) deal with this</td>
-</tr>
-</tbody>
-</table>
-<div class="exam-say">
-<p><strong>On the exam, be able to say:</strong> Sources of bias: geographically varying reporting, geocoding failures (missing not at random), boundary changes over time, and unstable rates from small populations.</p>
-</div>
-</section>
-<section id="t1-14" class="level2 topic" data-flag="notes">
-<h2 class="topic anchored" data-flag="notes" data-anchor-id="t1-14">1.14 Tools: GIS, R and GeoDa</h2>
-<div class="core">
-<p><strong>In short.</strong> <strong>GIS</strong> is the toolbox for storing, linking, mapping and analysing data by location. The course uses R and GeoDa.</p>
-</div>
-<p><strong>GIS (geographic information systems)</strong> and related geospatial methods made spatial epidemiology practical: storing, linking, mapping and analysing data by location. Researchers use R, Stata, ArcGIS, GeoDa, Python and others.</p>
-<p>In STA530:</p>
-<ul>
-<li><strong>R</strong>: the main environment for spatial data analysis and modelling. Useful resources: <a href="https://geocompr.robinlovelace.net/" target="_blank"><em>Geocomputation with R</em></a>, <a href="https://rspatial.org/" target="_blank"><em>Spatial Data Science with R</em></a> and the <a href="https://spatialanalysis.github.io/tutorials/" target="_blank">CSDS R spatial tutorials</a>.</li>
-<li><strong>GeoDa</strong>: free software for exploratory spatial data analysis and visualisation (maps, weights, Moran’s I, LISA). <strong>Install before 13 October</strong> (<a href="https://geodacenter.github.io/download/" target="_blank">download GeoDa</a>).</li>
-</ul>
-<p>The exam tests concepts, not software.</p>
-</section>
-<section id="t1-15" class="level2 topic">
-<h2 class="topic anchored" data-anchor-id="t1-15">1.15 Session summary and key questions</h2>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  W["WHERE?&lt;br/&gt;pattern"] --&gt; Y["WHY?&lt;br/&gt;explanation / cause"] --&gt; N["WHAT NEXT?&lt;br/&gt;intervention / action"]
-</pre>
-</div>
-<p></p><figcaption> Lecture map: how the course questions lead into each other. Not causal.</figcaption> </figure><p></p>
-</div>
-</div>
-</div>
-<p><strong>Why-questions</strong> (answer in two or three sentences, then open the model answer):</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Why do you need the <code>.prj</code> file and a known CRS before joining two layers?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Because coordinates are only meaningful relative to a CRS. Two layers in different CRSs describe the same place with different numbers, so they will not overlay, and spatial joins or distance-based neighbours will be wrong. Transform both to the same CRS first, and use a projected CRS in metres for distances.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>How do the MAUP and the ecological fallacy differ, given that both come from aggregation?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The MAUP is about area-level results changing when the areas are redrawn (different size or zoning), even with the same individuals. The ecological fallacy is about wrongly transferring an area-level association to individuals. A result can be robust to the MAUP and still be an ecological fallacy if applied to people.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>What does “0 intervention studies” in Morrison et al.&nbsp;(2024) say about the field?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Spatial epidemiology has mainly described where disease is and analysed why, and has produced many methods, but has hardly ever evaluated whether place-based actions work. The re-orientation asks studies to go from map (describe) to mechanism (analyze) to action (intervene), as Snow’s work did.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Why does spatial dependence matter for statistical analysis?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Most standard methods assume independent observations. If nearby areas resemble each other, there is less independent information than the number of areas suggests, and standard errors can be wrong. Dependence can also signal a spatially patterned omitted variable. Sessions 2–4 measure and model it.</p>
-</div>
+<p>Cover the “Idea” column and try to say each one from its number and section title. Then open the <a href="./dashboard.html">dashboard</a> to see which sections you have not yet marked as confident.</p>
 </div>
 </div>
 
@@ -4438,13 +3708,13 @@ window.STA530_TOPICS = [
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./glossary.html" class="pagination-link" aria-label="Glossary">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Glossary</span>
+      <a href="./index.html" class="pagination-link" aria-label="Home">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Home</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./session2.html" class="pagination-link" aria-label="Session 2 — Disease Mapping and Spatial Patterns">
-        <span class="nav-page-text">Session 2 — Disease Mapping and Spatial Patterns</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./dashboard.html" class="pagination-link" aria-label="Exam-prep dashboard">
+        <span class="nav-page-text">Exam-prep dashboard</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

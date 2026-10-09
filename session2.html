@@ -1684,6 +1684,10 @@ window.Quarto = {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./big-ideas.html"> 
+<span class="menu-text">Big ideas</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./dashboard.html"> 
 <span class="menu-text">Dashboard</span></a>
   </li>  
@@ -1753,6 +1757,12 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./big-ideas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The big ideas</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dashboard.html" class="sidebar-item-text sidebar-link">
@@ -2226,6 +2236,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <section id="t2-1" class="level2 topic" data-flag="inferred">
 <h2 class="topic anchored" data-flag="inferred" data-anchor-id="t2-1">2.1 Thematic (choropleth) maps and classification methods</h2>
+<div class="core">
+<p><strong>In short.</strong> A choropleth map colours areas by their value. <strong>Where you put the colour boundaries</strong> decides whether the same data look calm or alarming.</p>
+</div>
 <p>A <strong>thematic</strong> or <strong>choropleth map</strong> shows values with colours or patterns inside geographic areas. Two choices change the picture: the <strong>classification method</strong> (where the class boundaries go) and the <strong>number of classes</strong>.</p>
 <table class="caption-top table">
 <colgroup>
@@ -2298,9 +2311,15 @@ Figure&nbsp;1: The same skewed rates on a 10 × 10 grid with three classificatio
   <div class="q-opt" data-correct="false">All areas coloured by how many SDs they lie from the mean</div>
   <div class="q-exp">Equal intervals split the range evenly. A few extreme values stretch the range, so most areas fall in the bottom interval. A quantile map would instead force equal counts per class.</div>
 </div>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Classification methods: quantile (equal number of areas per class), equal interval, natural breaks (minimise within-class variation), standard deviation, manual. No method is best in general; it depends on the data and the purpose.</p>
+</div>
 </section>
 <section id="t2-2" class="level2 topic" data-flag="keyq">
 <h2 class="topic anchored" data-flag="keyq" data-anchor-id="t2-2">2.2 Extreme value maps: percentile, box and standard deviation maps</h2>
+<div class="core">
+<p><strong>In short.</strong> Extreme-value maps are built to make <strong>outliers stand out</strong>. A box map flags areas outside the box-plot fences; a percentile map always shows the top and bottom 1%.</p>
+</div>
 <p>Extreme value maps are designed to <strong>highlight outliers</strong> rather than show the whole distribution evenly.</p>
 <table class="caption-top table">
 <colgroup>
@@ -2371,14 +2390,24 @@ Figure&nbsp;1: The same skewed rates on a 10 × 10 grid with three classificatio
 <div class="drill" data-drill="boxmap">
 
 </div>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Box map fences: Q1 − hinge·IQR and Q3 + hinge·IQR; hinge 3 flags fewer, more extreme outliers than hinge 1.5.</p>
+</div>
 </section>
 <section id="t2-3" class="level2 topic">
 <h2 class="topic anchored" data-anchor-id="t2-3">2.3 Mapping categorical variables and co-location</h2>
+<div class="core">
+<p><strong>In short.</strong> Each category gets its own colour. A <strong>co-location map</strong> shows where two characteristics occur in the same place.</p>
+</div>
 <p>A <strong>unique value map</strong> gives each category its own colour (for example urban / suburban / rural).</p>
 <p>A <strong>co-location map</strong> extends it to show where <strong>several characteristics overlap</strong>. The slide’s example marked US counties with both <strong>persistently high COVID-19 mortality</strong> and a <strong>high population share of a particular racial/ethnic group</strong>, so you can see where the two coincide. Co-location shows overlap, not cause.</p>
 </section>
 <section id="t2-4" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t2-4">2.4 Counts vs rates, and the problem of variance instability</h2>
+<div class="core">
+<p><strong>In short.</strong> Counts mostly show <strong>where people live</strong>; rates show <strong>risk</strong>. But rates from small populations jump around by chance, so the most extreme rates are often just the smallest areas.</p>
+<p><strong>Think of it as:</strong> A basketball player who scores 2 of 2 shots has 100%, yet you would trust 450 of 500 (90%) much more.</p>
+</div>
 <p>Two kinds of variables behave differently on a map:</p>
 <table class="caption-top table">
 <colgroup>
@@ -2416,6 +2445,9 @@ Figure&nbsp;1: The same skewed rates on a 10 × 10 grid with three classificatio
 <p><span class="math display">\[
 \operatorname{Var}(r_i) = \frac{\pi_i (1 - \pi_i)}{P_i}.
 \]</span></p>
+<div class="in-words">
+<p><strong>In words:</strong> the uncertainty of a crude rate is the true risk times one minus it, <strong>divided by the population</strong>: the fewer people, the noisier the rate.</p>
+</div>
 <p>Small Pᵢ → large variance → unstable crude estimates. <strong>Areas with small populations show very high or very low crude rates simply because of sampling variability.</strong> This motivates smoothing.</p>
 <p><strong>The slide’s question:</strong> with the same underlying πᵢ, which area has the more variable observed risk, Pᵢ = 100 or Pᵢ = 10,000? <strong>Pᵢ = 100</strong>: its variance is 100 times larger (its standard deviation 10 times larger).</p>
 <div class="cell">
@@ -2435,9 +2467,15 @@ Figure&nbsp;1: The same skewed rates on a 10 × 10 grid with three classificatio
   <div class="q-opt" data-correct="false">The classification method put rural areas in the extreme classes</div>
   <div class="q-exp">Extremes in both directions in small areas is the signature of variance instability. A real rural risk factor would push rates one way, not both ways.</div>
 </div>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Counts are spatially extensive (depend on population size); rates are intensive. Var(rᵢ) = πᵢ(1 − πᵢ)/Pᵢ, so small populations give unstable crude rates: variance instability. This motivates smoothing.</p>
+</div>
 </section>
 <section id="t2-5" class="level2 topic" data-flag="keyq">
 <h2 class="topic anchored" data-flag="keyq" data-anchor-id="t2-5">2.5 Comparing areas with the SMR (excess risk)</h2>
+<div class="core">
+<p><strong>In short.</strong> The SMR compares <strong>what happened</strong> with <strong>what would have happened</strong> if the area had the reference risk: SMR = observed ÷ expected.</p>
+</div>
 <p>An <strong>excess risk map</strong> compares each area’s rate with a <strong>reference risk</strong> (national or regional). The reference risk is estimated from <strong>all observations pooled</strong>:</p>
 <p><span class="math display">\[
 \hat\pi = \frac{\sum_{i=1}^{n} O_i}{\sum_{i=1}^{n} P_i} = \frac{\text{total events}}{\text{total population at risk}}.
@@ -2446,6 +2484,9 @@ Figure&nbsp;1: The same skewed rates on a 10 × 10 grid with three classificatio
 <p><span class="math display">\[
 E_i = \hat\pi \times P_i, \qquad \text{SMR}_i = \frac{O_i}{E_i} = \frac{O_i}{\hat\pi P_i} = \frac{r_i}{\hat\pi}.
 \]</span></p>
+<div class="in-words">
+<p><strong>In words:</strong> expected cases = the reference risk times the area’s population; the SMR is <strong>observed divided by expected</strong>.</p>
+</div>
 <p><strong>The slide’s two questions:</strong></p>
 <ol type="1">
 <li><em>Is π̂ equal to the average of all rates?</em> <strong>No.</strong> π̂ is a <strong>population-weighted</strong> average: total events over total population. The simple mean of the area rates gives every area the same weight, so a few small areas with extreme rates can pull it far away. They coincide only if all areas have the same population.</li>
@@ -2485,13 +2526,23 @@ E_i = \hat\pi \times P_i, \qquad \text{SMR}_i = \frac{O_i}{E_i} = \frac{O_i}{\ha
 <div class="drill" data-drill="smr">
 
 </div>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Eᵢ = π̂ × Pᵢ with π̂ = total events / total population (a population-weighted average, not the mean of the rates). SMR = O/E; SMR &gt; 1 means more events than expected.</p>
+</div>
 </section>
 <section id="t2-6" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t2-6">2.6 Empirical Bayes smoothing</h2>
+<div class="core">
+<p><strong>In short.</strong> EB smoothing <strong>pulls each crude rate toward the overall rate</strong>, more strongly the smaller the population. Reliable areas keep their own rate; noisy ones borrow from the average.</p>
+<p><strong>Think of it as:</strong> Restaurant ratings. A 5.0 from 3 reviews is less convincing than a 4.6 from 3,000, so a sensible guess for the first restaurant moves toward the typical rating.</p>
+</div>
 <p><strong>Idea:</strong> replace each crude rate by a <strong>weighted average</strong> of the area’s own crude rate and the overall (reference) rate:</p>
 <p><span class="math display">\[
 \hat\pi_i^{EB} = w_i\, r_i + (1 - w_i)\, \theta, \qquad w_i = \frac{\sigma^2}{\sigma^2 + \mu / P_i}.
 \]</span></p>
+<div class="in-words">
+<p><strong>In words:</strong> the smoothed rate is a <strong>weighted average</strong> of the area’s own rate and the reference rate. The weight compares real differences between areas (σ²) with noise (μ/Pᵢ): little noise → trust the area, much noise → trust the reference.</p>
+</div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -2579,9 +2630,16 @@ Figure&nbsp;2: Empirical Bayes smoothing, simulated: 40 areas whose true risks v
 <p>It ignores geography: every area is shrunk toward the same global mean, not toward its neighbours (spatial EB versions exist). It gives no full uncertainty for each area. A genuinely high-risk small area is pulled toward the mean too, so real local excesses can be hidden.</p>
 </div>
 </div>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> EB estimate = wᵢ·rᵢ + (1 − wᵢ)·θ with wᵢ = σ²/(σ² + μ/Pᵢ). Small areas get small weights (strong shrinkage), large areas keep their own rate. The prior is estimated from the data, so it is not fully Bayesian.</p>
+</div>
 </section>
 <section id="t2-7" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t2-7">2.7 Spatial autocorrelation and the null of spatial randomness</h2>
+<div class="core">
+<p><strong>In short.</strong> Spatial autocorrelation asks: are nearby areas <strong>more alike</strong> than they would be if the values had been scattered at random over the map?</p>
+<p><strong>Think of it as:</strong> Shuffle the map like a deck of cards many times. If the real map is more clustered than almost all shuffled maps, the pattern is not chance.</p>
+</div>
 <p><strong>Spatial autocorrelation</strong> formalises Tobler’s law: the correlation of a variable <strong>with itself across space</strong>.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -2600,9 +2658,15 @@ Figure&nbsp;2: Empirical Bayes smoothing, simulated: 40 areas whose true risks v
 <li><strong>attribute similarity</strong>: are two values alike? (for Moran’s I, the product of deviations from the mean, zᵢzⱼ);</li>
 <li><strong>locational similarity</strong>: are the two areas neighbours? (the spatial weight wᵢⱼ).</li>
 </ul>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Positive autocorrelation: similar values cluster; negative: neighbours differ (checkerboard). The null hypothesis is spatial randomness, tested by comparing with random permutations.</p>
+</div>
 </section>
 <section id="t2-8" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t2-8">2.8 Spatial weights: contiguity (rook and queen)</h2>
+<div class="core">
+<p><strong>In short.</strong> Before you can say “neighbours are alike”, you must decide <strong>who counts as a neighbour</strong>. Rook: a shared border; queen: a shared border or corner. The weights matrix W records the choice.</p>
+</div>
 <p>Before testing for autocorrelation you must define <strong>neighbours</strong>. A <strong>spatial weights matrix W</strong> records, for every pair of areas, whether (or how strongly) they are neighbours: wᵢⱼ = 1 if i and j are neighbours, 0 otherwise, and wᵢᵢ = 0. Choosing W means thinking about <strong>how far an influence can reach</strong>.</p>
 <div class="worked">
 <p><strong>3 × 3 grid, rook contiguity</strong> (from the slide). Areas are numbered row by row:</p>
@@ -2809,9 +2873,16 @@ Figure&nbsp;3: Neighbour definitions on a regular grid. The blue area is the tar
 <div class="drill" data-drill="neighbours">
 
 </div>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> W has wᵢⱼ = 1 if i and j are neighbours, else 0, with zeros on the diagonal. Queen contiguity gives at least as many neighbours as rook. Higher orders are neighbours of neighbours. Row standardization makes Wy the neighbour average.</p>
+</div>
 </section>
 <section id="t2-9" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t2-9">2.9 Spatial weights: distance bands and k-nearest neighbours</h2>
+<div class="core">
+<p><strong>In short.</strong> Neighbours can also be defined by <strong>distance</strong>: everyone within a set distance (distance band), or each area’s <strong>k nearest</strong>. KNN guarantees that everyone has neighbours, but the relation is not symmetric.</p>
+<p><strong>Think of it as:</strong> KNN is like “your four closest friends”: you may be on their list, or not.</p>
+</div>
 <p>Distance-based weights use the distance between points (or area centroids).</p>
 <p><strong>Distance metrics</strong></p>
 <table class="caption-top table">
@@ -2905,9 +2976,15 @@ Figure&nbsp;4: The same 15 points with two distance-based definitions. Left: a 2
   <div class="q-opt" data-correct="false">A distance band shorter than the largest nearest-neighbour gap</div>
   <div class="q-exp">Contiguity weights leave islands without neighbours, and a distance band only connects everyone if its threshold is at least the largest nearest-neighbour distance. KNN always gives each area exactly k neighbours.</div>
 </div>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Distance band: symmetric, but dense areas get many neighbours and isolates are possible. KNN: exactly k neighbours each, no isolates, not symmetric, ties possible. Use Euclidean distance only for projected coordinates.</p>
+</div>
 </section>
 <section id="t2-10" class="level2 topic" data-flag="keyq">
 <h2 class="topic anchored" data-flag="keyq" data-anchor-id="t2-10">2.10 Describing a weights matrix: connectivity histogram and graph</h2>
+<div class="core">
+<p><strong>In short.</strong> Two quick checks of a weights matrix: <strong>how many neighbours</strong> each area has (histogram) and a <strong>picture of the links</strong> (graph).</p>
+</div>
 <p>Two diagnostics show what a weights matrix looks like:</p>
 <ul>
 <li><strong>Connectivity histogram</strong>: how many areas have 1, 2, 3, … neighbours.</li>
@@ -2917,13 +2994,22 @@ Figure&nbsp;4: The same 15 points with two distance-based definitions. Left: a 2
 <p><em>What does the histogram look like with KNN weights?</em> A <strong>single bar</strong> at k: every area has exactly k neighbours. (If you symmetrize the KNN matrix, some areas gain neighbours and the histogram spreads to the right of k.)</p>
 <p><em>Which graph suggests KNN and which suggests a distance band?</em> With a <strong>distance band</strong>, dense areas (cities) have <strong>very many</strong> links, sparse areas have few, and isolated points may have <strong>none</strong>. With <strong>KNN</strong>, every point has the same number of links, even remote points, which reach out with long lines to their nearest neighbours.</p>
 <p>Read more: <a href="https://geodacenter.github.io/workbook/4b_dist_weights/lab4b.html" target="_blank">GeoDa workbook, <em>Distance-based spatial weights</em></a> (source of the connectivity histogram and graph on the slides).</p>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> With KNN the connectivity histogram is a single bar at k. With a distance band, dense areas have many links and remote points may have none.</p>
+</div>
 </section>
 <section id="t2-11" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t2-11">2.11 Global Moran’s I</h2>
+<div class="core">
+<p><strong>In short.</strong> Moran’s I is <strong>one number for the whole map</strong>: positive when neighbours are alike, negative when they differ, close to zero when there is no pattern. Whether it is unusual is judged against shuffled maps.</p>
+</div>
 <p><span class="math display">\[
 I = \frac{\sum_{i=1}^{n}\sum_{j=1}^{n} w_{ij}\, z_i z_j \,/\, S_0}{\sum_{i=1}^{n} z_i^2 \,/\, n},
 \qquad z_i = x_i - \bar x, \qquad S_0 = \sum_i\sum_j w_{ij}.
 \]</span></p>
+<div class="in-words">
+<p><strong>In words:</strong> for every pair of neighbours, multiply how far each is from the mean; <strong>average these products</strong> over all neighbour pairs and divide by the overall variance. Mostly positive products (high next to high, low next to low) → I &gt; 0.</p>
+</div>
 <p><strong>Reading it.</strong> The numerator is a <strong>cross-product</strong> between each value and its neighbours (attribute similarity × locational similarity), averaged over all neighbour pairs. The denominator is the variance. So Moran’s I is like a correlation between a variable and its <strong>spatial lag</strong>.</p>
 <table class="caption-top table">
 <thead>
@@ -2989,9 +3075,15 @@ I = \frac{\sum_{i=1}^{n}\sum_{j=1}^{n} w_{ij}\, z_i z_j \,/\, S_0}{\sum_{i=1}^{n
 <p><strong>Try it: the permutation test in your browser.</strong> The code builds an 8 × 8 grid with a smooth gradient plus noise, computes Moran’s I with rook weights, and compares it with 999 random reshuffles. Change <code>trend_strength</code> to 0 and run again.</p>
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Moran’s I is a cross-product of deviations between neighbours, scaled by the variance. It is tested against spatial randomness, analytically or by permutation (pseudo p-value). It depends on W. E[I] = −1/(n − 1) under the null.</p>
+</div>
 </section>
 <section id="t2-12" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t2-12">2.12 The Moran scatter plot</h2>
+<div class="core">
+<p><strong>In short.</strong> Plot each area’s value against the <strong>average of its neighbours</strong>. The slope of the line is Moran’s I, and the four quadrants show clusters (HH, LL) and outliers (HL, LH).</p>
+</div>
 <p>With <strong>row-standardized</strong> weights (S₀ = n), Moran’s I simplifies to</p>
 <p><span class="math display">\[
 I = \frac{\sum_i z_i \cdot \left(\sum_j w_{ij} z_j\right)}{\sum_i z_i^2},
@@ -3055,9 +3147,15 @@ Figure&nbsp;5: Moran scatter plot for a simulated 10 × 10 map (row-standardized
 </div>
 <p>“High” and “low” are <strong>relative to the mean</strong>.</p>
 <p><strong>The slides’ questions.</strong> <em>Spatial clusters</em> (HH, LL): <strong>positive</strong> autocorrelation. <em>Spatial outliers</em> (HL, LH): <strong>negative</strong> autocorrelation (the area is unlike its neighbours).</p>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Moran scatter plot: x = own value, y = spatial lag. Slope = Moran’s I (row-standardized W). HH/LL are positive association (clusters), HL/LH negative (outliers), relative to the mean.</p>
+</div>
 </section>
 <section id="t2-13" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t2-13">2.13 Local spatial autocorrelation: LISA and local Moran’s I</h2>
+<div class="core">
+<p><strong>In short.</strong> Global Moran’s I says <strong>whether</strong> there is clustering; LISA says <strong>where</strong>. Each area gets its own statistic and p-value, and significant areas are labelled HH, LL, HL or LH.</p>
+</div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -3094,16 +3192,34 @@ Figure&nbsp;5: Moran scatter plot for a simulated 10 × 10 map (row-standardized
 </tr>
 </tbody>
 </table>
-<p><strong>LISA</strong> (local indicator of spatial association, Anselin 1995) must:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Deeper: the formal definition of a LISA
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>LISA</strong> (local indicator of spatial association, <a href="https://doi.org/10.1111/j.1538-4632.1995.tb00338.x" target="_blank">Anselin 1995</a>) must:</p>
 <ol type="1">
 <li>give a statistic for <strong>each location</strong> with an assessment of significance;</li>
 <li>be such that the <strong>sum of the local statistics is proportional to the global statistic</strong>.</li>
 </ol>
 <p>Generic local form Σⱼ wᵢⱼ f(xᵢ, xⱼ); generic global form Σᵢ Σⱼ wᵢⱼ f(xᵢ, xⱼ).</p>
+</div>
+</div>
+</div>
 <p><strong>Local Moran’s I:</strong></p>
 <p><span class="math display">\[
 I_i = \frac{z_i \sum_j w_{ij} z_j}{\sum_i z_i^2 } ,
 \]</span></p>
+<div class="in-words">
+<p><strong>In words:</strong> an area’s own deviation from the mean <strong>times</strong> its neighbours’ deviations. Large and positive = the area and its neighbours are on the same side of the mean (a cluster); negative = opposite sides (an outlier).</p>
+</div>
 <p>the area’s own deviation times the weighted sum of its neighbours’ deviations. Global Moran’s I corresponds to the <strong>average</strong> of the local statistics (their sum is proportional to the global I).</p>
 <p><strong>Significance by conditional permutation.</strong> As for the global test, except that <strong>zᵢ is held fixed at location i</strong> and only the <em>other</em> values are reshuffled over its neighbours. This gives a pseudo p-value for each area.</p>
 <p><strong>Two maps</strong> come out of a LISA analysis:</p>
@@ -3159,6 +3275,9 @@ Figure&nbsp;6: LISA, simulated. Left: the rate map. Middle: the significance map
 </div>
 </div>
 <p>Read more: <a href="https://geodacenter.github.io/workbook/6a_local_auto/lab6a.html" target="_blank">GeoDa workbook, <em>Local spatial autocorrelation</em></a> (source of the significance and cluster maps on the slides).</p>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> LISA gives a local statistic with significance for each location, and the local statistics sum (proportionally) to the global one. Local Moran’s I is tested by conditional permutation; results are shown in significance and cluster maps.</p>
+</div>
 </section>
 <section id="t2-14" class="level2 topic">
 <h2 class="topic anchored" data-anchor-id="t2-14">2.14 Session summary and key questions</h2>
@@ -3179,7 +3298,7 @@ Figure&nbsp;6: LISA, simulated. Left: the rate map. Middle: the significance map
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -3188,25 +3307,9 @@ Figure&nbsp;6: LISA, simulated. Left: the rate map. Middle: the significance map
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Counts are spatially extensive: they grow with population, so the count map mostly shows where people live. Crude rates are intensive: they divide by population and show risk. A big city can have the most cases but an average rate; a small municipality can have few cases but a high rate.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Why does EB smoothing shrink small areas more than large ones?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The weight wᵢ = σ²/(σ² + μ/Pᵢ) compares true between-area variance with sampling noise μ/Pᵢ. In small areas the noise term is large, so wᵢ is small and the estimate is pulled toward the reference rate. In large areas the crude rate is already precise and keeps most of its weight.</p>
+<p>Counts are spatially extensive: they grow with population, so the count map mostly shows where people live. Crude rates are intensive: they divide by population and show risk. A big city can have the most cases but an average rate; a small municipality can have few cases but a high rate.</p>
 </div>
 </div>
 </div>
@@ -3216,13 +3319,13 @@ Figure&nbsp;6: LISA, simulated. Left: the rate map. Middle: the significance map
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>What is the null hypothesis for Moran’s I, and how does a permutation test use it?
+<span class="screen-reader-only">Note</span>Why does EB smoothing shrink small areas more than large ones?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Spatial randomness: values are unrelated to location, so any reshuffling of the values over the areas is equally likely. Reshuffling many times and computing I each time gives the distribution of I under H₀; the share of permuted values at least as large as the observed I is the pseudo p-value.</p>
+<p>The weight wᵢ = σ²/(σ² + μ/Pᵢ) compares true between-area variance with sampling noise μ/Pᵢ. In small areas the noise term is large, so wᵢ is small and the estimate is pulled toward the reference rate. In large areas the crude rate is already precise and keeps most of its weight.</p>
 </div>
 </div>
 </div>
@@ -3232,11 +3335,27 @@ Figure&nbsp;6: LISA, simulated. Left: the rate map. Middle: the significance map
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Can global Moran’s I be close to zero even though there are local clusters?
+<span class="screen-reader-only">Note</span>What is the null hypothesis for Moran’s I, and how does a permutation test use it?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Spatial randomness: values are unrelated to location, so any reshuffling of the values over the areas is equally likely. Reshuffling many times and computing I each time gives the distribution of I under H₀; the share of permuted values at least as large as the observed I is the pseudo p-value.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Can global Moran’s I be close to zero even though there are local clusters?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Yes. Local positive (clusters) and negative (outliers) associations can cancel out, or a few strong clusters may be diluted by many random areas. That is why LISA is used to look locally.</p>
 </div>
