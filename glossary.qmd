@@ -1,0 +1,232 @@
+---
+title: "Glossary"
+subtitle: "Defined terms in the course, with links to where they are taught"
+toc: false
+---
+
+Type in the box to filter. Each entry links back to the session section where the term is defined or used. Quarto's search (top right) also searches the full text of every session.
+
+```{=html}
+<input id="gl-filter" type="search" class="form-control" placeholder="Filter terms, e.g. MAUP, LISA, BYM2 …" style="max-width:420px;margin:0.5rem 0 1.5rem;">
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var input = document.getElementById('gl-filter');
+  input.addEventListener('input', function () {
+    var q = input.value.toLowerCase().trim();
+    document.querySelectorAll('.glossary dt').forEach(function (dt) {
+      var dd = dt.nextElementSibling;
+      var text = (dt.textContent + ' ' + (dd ? dd.textContent : '')).toLowerCase();
+      var show = !q || text.indexOf(q) !== -1;
+      dt.style.display = show ? '' : 'none';
+      if (dd) dd.style.display = show ? '' : 'none';
+    });
+    document.querySelectorAll('.glossary h2').forEach(function (h) {
+      var dl = h.parentNode.querySelector('dl');
+      if (!dl) return;
+      var any = Array.from(dl.querySelectorAll('dt')).some(function (dt) { return dt.style.display !== 'none'; });
+      h.style.display = any ? '' : 'none';
+    });
+  });
+});
+</script>
+```
+
+::: {.glossary}
+
+## A–C
+
+BYM model (Besag–York–Mollié)
+: Disease-mapping model log θᵢ = α + uᵢ + vᵢ with a spatially structured effect uᵢ (ICAR) and an unstructured effect vᵢ. [S4 §4.11](session4.qmd#t4-11)
+
+BYM2
+: Reparameterization of BYM: log θᵢ = α + (1/√τ)(√ρ·uᵢ* + √(1−ρ)·vᵢ). τ is the overall precision, ρ the spatial fraction, uᵢ* the scaled spatial effect. [S4 §4.12](session4.qmd#t4-12)
+
+Box map
+: Extreme value map using box-plot categories: lower outlier, < 25%, 25–50%, 50–75%, > 75%, upper outlier, with fences Q1 − hinge·IQR and Q3 + hinge·IQR (hinge 1.5 or 3). [S2 §2.2](session2.qmd#t2-2)
+
+CAR / ICAR prior
+: (Intrinsic) conditional autoregressive prior: each area's latent effect is normal around the mean of its neighbours' effects, with variance σ²/nᵢ. More neighbours, more conditional precision. [S4 §4.8](session4.qmd#t4-8)
+
+Choropleth (thematic) map
+: Map that shows values with colours or patterns inside areas. [S2 §2.1](session2.qmd#t2-1)
+
+Co-location map
+: Extension of the unique value map that shows where several characteristics overlap. [S2 §2.3](session2.qmd#t2-3)
+
+Connectivity histogram / graph
+: Diagnostics of a weights matrix: the distribution of the number of neighbours, and lines between neighbouring centroids. [S2 §2.10](session2.qmd#t2-10)
+
+Contiguity weights (rook, queen)
+: Neighbours share a boundary (rook) or a boundary or corner (queen). Queen gives at least as many neighbours. Can be higher order. [S2 §2.8](session2.qmd#t2-8)
+
+Coordinate reference system (CRS)
+: Specifies how coordinates relate to places on Earth and, if projected, how the surface is flattened. Identified by EPSG codes. [S1 §1.3](session1.qmd#t1-3)
+
+Credible interval (CrI)
+: Interval containing a given posterior probability (e.g. 95%) for a parameter, conditional on model, data and prior. Not the repeated-sampling statement of a confidence interval. [S4 §4.16](session4.qmd#t4-16)
+
+## D–I
+
+DeSO (demographic statistical areas)
+: Sweden's small statistical areas, designed to hold roughly 700–2,700 inhabitants. [S1 §1.4](session1.qmd#t1-4)
+
+Direct, indirect and total impacts
+: In SAR: the effect of x on the own area including feedback (direct), on other areas through the network (indirect, spillover), and their sum (total = β/(1−ρ) with row-standardized W). [S3 §3.5](session3.qmd#t3-5)
+
+Distance-band weights
+: i and j are neighbours if within a critical distance. Symmetric; dense areas get many neighbours. [S2 §2.9](session2.qmd#t2-9)
+
+Ecological fallacy
+: Incorrect inference about individuals from group-level data (Robinson 1950). [S1 §1.11](session1.qmd#t1-11)
+
+Empirical Bayes (EB) smoothing
+: π̂ᵢ = wᵢrᵢ + (1 − wᵢ)θ with wᵢ = σ²/(σ² + μ/Pᵢ): crude rates shrunk toward a reference rate, more for small populations. The prior is estimated from the data. [S2 §2.6](session2.qmd#t2-6)
+
+EPSG code
+: Standard number for a CRS. EPSG:4326 = WGS 84 (degrees); EPSG:3006 = SWEREF 99 TM (metres, Sweden). [S1 §1.3](session1.qmd#t1-3)
+
+Exceedance probability
+: Posterior probability that a relative risk exceeds a threshold c, P(θᵢ > c ∣ data). [S4 §4.16](session4.qmd#t4-16)
+
+Expected count Eᵢ
+: Cases expected in area i at reference rates: Eᵢ = π̂·Pᵢ, or Σₐ nᵢₐ r*ₐ with strata (indirect standardization). [S2 §2.5](session2.qmd#t2-5), [S4 §4.3](session4.qmd#t4-3)
+
+Extensive vs intensive variable
+: Extensive depends on population size (counts); intensive is standardized by population (rates). [S2 §2.4](session2.qmd#t2-4)
+
+Geary's C
+: Alternative measure of spatial autocorrelation based on squared differences between neighbours. [S1 §1.12](session1.qmd#t1-12)
+
+Geocoding
+: Converting addresses to coordinates (longitude, latitude). Can fail or be wrong. [S1 §1.4](session1.qmd#t1-4)
+
+GeoDa
+: Free software for exploratory spatial data analysis. [S1 §1.14](session1.qmd#t1-14)
+
+GeoJSON
+: Open standard text format for points, lines and polygons. [S1 §1.2](session1.qmd#t1-2)
+
+GIS
+: Geographic information systems: tools for storing, linking, mapping and analysing data by location. [S1 §1.14](session1.qmd#t1-14)
+
+INLA
+: Integrated nested Laplace approximation: fast approximation of posterior marginals for latent Gaussian models such as BYM2, without MCMC. [S4 §4.21](session4.qmd#t4-21)
+
+Isolate
+: Area with no neighbours in a weights matrix; it drops out of spatial analyses. [S2 §2.9](session2.qmd#t2-9), [S4 §4.19](session4.qmd#t4-19)
+
+## K–M
+
+k-nearest-neighbour (KNN) weights
+: Each area's k nearest centroids are its neighbours. No isolates; not symmetric; ties possible. [S2 §2.9](session2.qmd#t2-9)
+
+LISA (local indicator of spatial association)
+: Local statistic for each location with a significance assessment, whose sum is proportional to the global statistic. Local Moran's I is one. [S2 §2.13](session2.qmd#t2-13)
+
+LM tests (LM-lag, LM-error, robust)
+: Tests on an OLS fit of whether a spatial lag or spatial error term is supported. Robust versions help when both are significant. [S3 §3.10](session3.qmd#t3-10)
+
+Local Moran's I
+: Iᵢ = zᵢ Σⱼ wᵢⱼ zⱼ / Σ zᵢ². Tested by conditional permutation; classifies significant areas as High-High, Low-Low, High-Low, Low-High. [S2 §2.13](session2.qmd#t2-13)
+
+MAUP (modifiable areal unit problem)
+: Results change when the spatial units change (scale or zoning), even with the same underlying data. [S1 §1.10](session1.qmd#t1-10)
+
+Moran scatter plot
+: Each area's value (x) against its spatial lag (y); the slope is Moran's I with row-standardized weights. [S2 §2.12](session2.qmd#t2-12)
+
+Moran's I (global)
+: I = (n/S₀) ΣᵢΣⱼ wᵢⱼ zᵢzⱼ / Σ zᵢ². Positive: clustering; negative: dispersion; E[I] = −1/(n−1) under spatial randomness. [S2 §2.11](session2.qmd#t2-11)
+
+## N–R
+
+Neumann series
+: (I − ρW)⁻¹ = I + ρW + ρ²W² + …: how an effect propagates through the spatial network in SAR. [S3 §3.5](session3.qmd#t3-5)
+
+Offset
+: A term with coefficient fixed at 1 in a Poisson model (log Eᵢ or log person-time), so the model describes a rate or relative risk. [S4 §4.2](session4.qmd#t4-2)
+
+Partial pooling
+: Area estimates drawn from a shared distribution, so each is a compromise between its own data and the common pattern. [S4 §4.6](session4.qmd#t4-6)
+
+Penalized-complexity (PC) prior
+: Prior that penalises departures from a simpler base model; hyperpriors stated as probabilities about interpretable quantities. [S4 §4.14](session4.qmd#t4-14)
+
+Percentile map
+: Extreme value map with fixed classes < 1%, 1–10%, 10–50%, 50–90%, 90–99%, > 99%. [S2 §2.2](session2.qmd#t2-2)
+
+Permutation test (pseudo p-value)
+: Reshuffle values over locations many times to get the distribution of a statistic under spatial randomness; pseudo p = (count ≥ observed + 1)/(R + 1). [S2 §2.11](session2.qmd#t2-11)
+
+Projected vs geographic CRS
+: Geographic: longitude/latitude in degrees. Projected: flat coordinates, usually metres, needed for distances and areas. [S1 §1.3](session1.qmd#t1-3)
+
+Raster vs vector data
+: Raster: a grid of cells with values. Vector: points, lines and polygons stored as coordinates. [S1 §1.1](session1.qmd#t1-1)
+
+Relative risk θᵢ
+: Ratio of an area's underlying risk to the reference: θᵢ = 1 as expected, > 1 elevated. [S4 §4.3](session4.qmd#t4-3)
+
+Residual Moran's I
+: Moran's I of regression residuals; detects remaining spatial structure but does not distinguish SAR from SEM. [S3 §3.9](session3.qmd#t3-9)
+
+Row standardization
+: Dividing each row of W by its sum, so (Wy)ᵢ is the average of i's neighbours. [S2 §2.8](session2.qmd#t2-8)
+
+## S–Z
+
+Shapefile
+: ESRI format of at least four files in the same folder: .shp (geometry), .shx (index), .dbf (attributes), .prj (projection). [S1 §1.2](session1.qmd#t1-2)
+
+Shrinkage
+: Noisy area estimates moving toward a common pattern; more for less informative areas. [S4 §4.6](session4.qmd#t4-6)
+
+SMR (standardized mortality ratio)
+: Observed / expected count. SMR > 1: more events than expected. The crude (unsmoothed) estimate of θᵢ. [S2 §2.5](session2.qmd#t2-5), [S4 §4.4](session4.qmd#t4-4)
+
+Spatial autocorrelation
+: Correlation of a variable with itself across space; tested against the null of spatial randomness. [S2 §2.7](session2.qmd#t2-7)
+
+Spatial confounding
+: Covariates and latent spatial effects sharing similar geographic patterns, so their effects are hard to separate. [S4 §4.15](session4.qmd#t4-15)
+
+Spatial data
+: Information + location. [S1 §1.1](session1.qmd#t1-1)
+
+Spatial dependence
+: Nearby observations are more similar (or related) than distant ones; Tobler's first law. [S1 §1.12](session1.qmd#t1-12)
+
+Spatial epidemiology
+: Description and analysis of geographic variation in disease with respect to demographic, environmental, behavioural, socioeconomic, genetic and infectious risk factors; more broadly, describing, analysing and intervening on spatial patterns of health. [S1 §1.6](session1.qmd#t1-6)
+
+Spatial error model (SEM)
+: y = Xβ + u, u = λWu + ε: spatial dependence in the errors; λ measures it. [S3 §3.7](session3.qmd#t3-7)
+
+Spatial heterogeneity
+: Processes or relationships that differ across locations. [S1 §1.12](session1.qmd#t1-12)
+
+Spatial lag Wy
+: Weighted summary of the neighbours' values; with row-standardized W, the neighbour average. [S3 §3.3](session3.qmd#t3-3)
+
+Spatial lag model (SAR)
+: y = ρWy + Xβ + ε: an area's outcome depends on neighbours' outcomes; ρ measures it. [S3 §3.4](session3.qmd#t3-4)
+
+Spatial randomness
+: The null hypothesis that values are not systematically associated with their locations. [S2 §2.7](session2.qmd#t2-7)
+
+Spatial smoothing
+: Borrowing strength from neighbouring areas so each estimate is pulled toward its neighbours. [S4 §4.8](session4.qmd#t4-8)
+
+Spatial weights matrix W
+: Matrix recording whether (or how strongly) each pair of areas are neighbours; wᵢᵢ = 0. [S2 §2.8](session2.qmd#t2-8)
+
+Tobler's first law of geography
+: "Things closer together are more similar than things further apart." [S1 §1.12](session1.qmd#t1-12)
+
+Unstructured random effect vᵢ
+: Independent area effect vᵢ ~ N(0, σ²): partial pooling toward the global mean without using geography. [S4 §4.7](session4.qmd#t4-7)
+
+Variance instability
+: Crude rates from small populations have large variance, π(1−π)/P, and produce spurious extremes. [S2 §2.4](session2.qmd#t2-4)
+
+:::

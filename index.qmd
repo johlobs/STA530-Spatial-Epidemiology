@@ -1,0 +1,67 @@
+---
+title: "STA530 — Spatial Epidemiology"
+subtitle: "Interactive study reference and exam-prep tracker"
+toc: false
+---
+
+## Welcome
+
+This app follows the sessions of STA530 Spatial Epidemiology (University of Gothenburg, autumn 2026): from what makes data spatial, through disease maps and spatial autocorrelation, to spatial regression and Bayesian disease mapping. New sessions are added as the course goes on.
+
+One idea runs through the course: **a map is the beginning of the epidemiologic question, not the end**. *Where* is disease high → *why* is it high there → *what* can be done?
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-6}
+### Foundations and exploratory analysis
+- [S1 · Introduction to spatial epidemiology](session1.qmd)
+- [S2 · Disease mapping and spatial patterns](session2.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6}
+### Spatial models
+- [S3 · Introduction to spatial regression](session3.qmd)
+- [S4 · Introduction to Bayesian disease mapping](session4.qmd)
+:::
+
+:::
+
+---
+
+## How to study with it
+
+1. **Read a session.** Every topic has a status control under its heading: **Not reviewed / Reviewed / Confident**. Click as you go.
+2. **Open "Before you start"** at the top of each session if a prerequisite feels rusty, and watch for the red **Common confusion** boxes.
+3. **Answer the quizzes** in each session and the **why-questions** at the bottom.
+4. **Practise on [Exam practice](exam-practice.qmd)**: drills that generate new numbers every time (SMR, indirect standardization, Empirical Bayes weights, box-map fences, counting neighbours, Moran's I by hand, SAR impacts, exp(β), choosing the likelihood, reading exceedance probabilities) and written exam-style questions with model answers.
+5. **Check the [dashboard](dashboard.qmd)** to see what is left, in priority order.
+6. Look up terms in the [glossary](glossary.qmd), or use **search** (top right).
+
+## The exam
+
+STA530 is examined by an **individual written exam** (2.5 credits, grades U/G/VG) and **active participation in a seminar** (1 credit, U/G). According to the lecture notes, **the exam tests concepts, not programming**. So the app focuses on explaining, interpreting and comparing; the R cells are there to build intuition, not as exam material.
+
+## What the badges mean
+
+No exam questions have been released yet. The badges show *why* a topic is likely to matter:
+
+| Badge | Meaning |
+|---|---|
+| <span class="flag-badge flag-objective">🎯 Instructor learning objective</span> | Matches a stated learning objective: the **course syllabus**, the instructor's **Canvas post** for the session, or a **"Learning goals"** slide. Highest priority. |
+| <span class="flag-badge flag-keyq">❓ Instructor's key question</span> | Answers a **key question** the instructor posted, or a question asked on a slide. |
+| <span class="flag-badge flag-notes">✏️ Emphasised in class</span> | Written down as important in the **lecture notes** taken in class. |
+| <span class="flag-badge flag-inferred">📌 Likely exam-relevant (AI-inferred)</span> | Inferred from definitions, formulas and worked examples on the slides. **Not confirmed by the instructor.** |
+| <span class="flag-badge flag-optional">📎 Optional depth (beyond course scope)</span> | The instructor marked it as optional, or said it is not expected in STA530. |
+| (no badge) | Background, examples or summaries. Still course content. |
+
+## How to read the diagrams
+
+Arrows mean different things in different diagrams, so every flow diagram's caption starts with its kind:
+
+| Caption starts with | An arrow means | Example |
+|---|---|---|
+| **Causal diagram** | "Directly affects" | SAR vs SEM ([3.8](session3.qmd#t3-8)) |
+| **Workflow** | "Then": the next step of an analysis. Not causal | From OLS to spatial regression ([3.9](session3.qmd#t3-9)) |
+| **Lecture map** | How the session's ideas lead into each other. Not causal | The disease-mapping logic chain ([4.23](session4.qmd#t4-23)) |
+
+Code blocks marked *Run Code* are interactive: R runs in your browser, no installation needed. The first run on a page takes a few seconds while R loads.

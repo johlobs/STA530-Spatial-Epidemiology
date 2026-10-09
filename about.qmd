@@ -1,0 +1,67 @@
+---
+title: "About the content"
+subtitle: "Sources, schedule, badges, and what is still to come"
+---
+
+## Where the content comes from
+
+The app is built from the course's own material:
+
+- the **session slides** by Qinyun Lin (sessions 1–4, preliminary "v0" versions);
+- the instructor's **Canvas posts** for each session: topics, learning objectives and key questions;
+- the **course syllabus** (learning outcomes, examination) and the **literature list**;
+- **lecture notes** taken in class (topics marked ✏️; they also record that the exam tests concepts, not programming).
+
+Explanations, quizzes, drills, simulated figures, R cells, why-questions and written model answers were written for this app. Simulations use made-up data. The course books are cited, not reproduced:
+
+- Lawson, Banerjee, Haining & Ugarte (eds.) (2016). *Handbook of Spatial Epidemiology*. CRC Press. Main textbook.
+- Anselin (2024). *An Introduction to Spatial Data Science with GeoDa, Volume 1: Exploring Spatial Data*. Chapman & Hall/CRC. Chapters 1–7, 10, 13, 16.
+
+Neither book has been used for this version of the app yet.
+
+## How the badges were assigned
+
+| Badge | Rule |
+|---|---|
+| <span class="flag-badge flag-objective">🎯 Instructor learning objective</span> | The section teaches something stated as a learning objective: in the **course syllabus** (Session 1: role of place, spatial dependence and heterogeneity, bias from aggregation, measurement and missing data), the **Canvas post** (Sessions 2 and 4) or the **"Learning goals" slide** (Session 3) |
+| <span class="flag-badge flag-keyq">❓ Instructor's key question</span> | The section answers one of the **key questions** in the Session 4 Canvas post, or a question the instructor asked on a slide (for example "which is the box map?", "is π̂ the average of all rates?", the SAR plausibility and scenario slides) |
+| <span class="flag-badge flag-notes">✏️ Emphasised in class</span> | Written down in the lecture notes: spatial file types, DeSO, geocoding, polygon/area, GIS and GeoDa, the social-ecological and life-course models. Where a noted topic also matches an objective (MAUP, the definition), 🎯 is used |
+| <span class="flag-badge flag-inferred">📌 Likely exam-relevant (AI-inferred)</span> | Inferred from definitions, formulas and worked examples on the slides. **Not confirmed** |
+| <span class="flag-badge flag-optional">📎 Optional depth</span> | Marked "optional depth" on the slide (PC priors), listed as not covered (Session 3 scope slide), or stated as not expected (INLA's computational details) |
+
+## Course facts
+
+STA530 Spatial Epidemiology, 3.5 credits, Sahlgrenska Academy, University of Gothenburg. Autumn 2026, 1 October – 3 November, 50% pace, taught in English.
+
+| Examination | Credits | Grades |
+|---|---|---|
+| Individual written exam | 2.5 | U / G / VG |
+| Active participation in a seminar | 1.0 | U / G |
+
+To pass the course you need G on both; VG on the course needs VG on the written exam.
+
+Software: R (with RStudio or Positron) and **GeoDa**, to be installed before 13 October.
+
+## Sessions so far
+
+| Session | Date | Slide file | App page |
+|---|---|---|---|
+| 1 · Introduction to spatial epidemiology | 6 Oct, 13:15–15:00 | session_1_v0-1.pdf | [Session 1](session1.qmd) |
+| 2 · Disease mapping and spatial patterns | 6 Oct, 15:15–17:00 | session_2_v0.pdf | [Session 2](session2.qmd) |
+| 3 · Introduction to spatial regression | 9 Oct, 10:15–12:00 | session_3_v0-1.pdf | [Session 3](session3.qmd) |
+| 4 · Introduction to Bayesian disease mapping | 9 Oct, 13:15–15:00 | session_4_v0.pdf | [Session 4](session4.qmd) |
+
+## Notes on the slides
+
+- Session 3, slide 12 (toy SAR example): the slide shows a direct impact of about 1.019 and indirect impacts of about 0.116. The exact inverse of (I − 0.2W) gives 1.023 and 0.114. The total, 1.25 = β/(1 − ρ), agrees. The app uses the exact values.
+- The slides are preliminary ("v0") versions. If updated slides are posted, sections may be revised.
+
+## Still to come
+
+- Later sessions, computer labs (GeoDa, R) and the seminar. Labs will be covered as concepts on made-up data, not as solutions.
+- Readings from the two course books, if specific chapters are assigned per session.
+- Any example exam questions from the instructor.
+
+## Your progress data
+
+Your review status (Not reviewed / Reviewed / Confident) is stored in this browser's localStorage under the key `sta530_topic_status`. It stays between visits on the same browser and device, but not across devices or after clearing site data. Use **Export progress** on the [dashboard](dashboard.qmd) to keep a backup.

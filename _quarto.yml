@@ -1,0 +1,66 @@
+project:
+  type: website
+  output-dir: _site
+  pre-render: build_topics.py
+
+website:
+  title: "STA530 — Spatial Epidemiology"
+  page-footer: "STA530 · University of Gothenburg · Built with Quarto + WebR"
+  page-navigation: true
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Dashboard"
+        href: dashboard.qmd
+      - text: "Exam practice"
+        href: exam-practice.qmd
+      - text: "Glossary"
+        href: glossary.qmd
+      - text: "About the content"
+        href: about.qmd
+      - text: "All courses"
+        href: "https://johlobs.github.io/"
+        target: "_blank"
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - text: "Home"
+        href: index.qmd
+      - section: "Exam prep"
+        contents:
+          - dashboard.qmd
+          - exam-practice.qmd
+          - glossary.qmd
+      - section: "Week 1: Foundations and ESDA"
+        contents:
+          - session1.qmd
+          - session2.qmd
+      - section: "Week 1: Spatial models"
+        contents:
+          - session3.qmd
+          - session4.qmd
+      - section: "Reference"
+        contents:
+          - about.qmd
+
+format:
+  html:
+    theme: flatly
+    css: custom.css
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    self-contained: false
+    include-after-body:
+      - _topics-data.html
+      - _topics.html
+      - _quiz.html
+      - _drills.html
+
+engine: knitr
+
+filters:
+  - webr
+  - _quiz-filter.lua

@@ -1,0 +1,194 @@
+---
+title: "Exam practice"
+subtitle: "Randomised calculation drills and written exam-style questions with model answers"
+---
+
+The written exam tests **concepts, not programming** (lecture notes). This page has two parts:
+
+1. **Drills**: short calculations and judgement calls that draw new numbers every time you press *New problem*. Type your answer, press *Check*, then read the worked solution.
+2. **Written questions**: the kind of "explain", "compare" and "interpret" questions a concept exam asks. Write your answer first (a few sentences), then open the model answer.
+
+::: {.callout-important}
+## No official exam questions yet
+No example exam has been released for STA530. The written questions below are **written for this app** from the slides, the learning objectives and the instructor's key questions. Questions taken directly from the instructor (Canvas key questions or questions on slides) are marked **[instructor]**. The model answers are the app's, not an official key.
+:::
+
+## Drills
+
+### Disease rates (Sessions 2 and 4)
+
+<div class="drill" data-drill="smr"></div>
+
+<div class="drill" data-drill="smrstd"></div>
+
+<div class="drill" data-drill="eb"></div>
+
+<div class="drill" data-drill="boxmap"></div>
+
+### Spatial weights and autocorrelation (Session 2)
+
+<div class="drill" data-drill="neighbours"></div>
+
+<div class="drill" data-drill="moran"></div>
+
+### Spatial regression (Session 3)
+
+<div class="drill" data-drill="sarimpact"></div>
+
+### Bayesian disease mapping (Session 4)
+
+<div class="drill" data-drill="likelihood"></div>
+
+<div class="drill" data-drill="logrr"></div>
+
+<div class="drill" data-drill="exceed"></div>
+
+## Written questions
+
+### Session 1: spatial data and key issues
+
+::: {.callout-note collapse="true"}
+## W1. Define spatial epidemiology and explain what Morrison et al. (2024) add to the classical definition.
+Spatial epidemiology is the description and analysis of geographic variation in disease with respect to demographic, environmental, behavioural, socioeconomic, genetic and infectious risk factors (Elliott & Wartenberg 2004). Morrison et al. broaden it: the field applies theory and methods from epidemiology, geography and statistics to **describe** spatial distributions, **analyze** causes, **inform intervention** and improve health. Their review found 0 intervention studies among 482 papers, so the broader definition is a call to move from maps to mechanisms to action.
+:::
+
+::: {.callout-note collapse="true"}
+## W2. What is the modifiable areal unit problem (MAUP)? Give an example and one way to reduce it.
+Changing the spatial units (their size: scale effect; or their boundaries: zoning effect) can change statistical results and interpretations, even though the underlying individual data are the same. Example: the correlation between deprivation and mortality is stronger across counties than across DeSO areas. Ways to deal with it: report the unit, repeat the analysis at several scales, choose units that match the mechanism, or use regular grids (hexagons) where data allow.
+:::
+
+::: {.callout-note collapse="true"}
+## W3. Distinguish the ecological fallacy from the MAUP.
+Both arise from aggregation. The ecological fallacy is drawing conclusions about **individuals** from group-level data (a high-crime region does not mean its residents are criminals). The MAUP is about **area-level** results depending on how areas are drawn. An area-level association can be stable across zonings and still be an ecological fallacy if applied to people.
+:::
+
+::: {.callout-note collapse="true"}
+## W4. Explain spatial dependence and spatial heterogeneity, with one health example each.
+Spatial dependence: nearby observations are more similar than distant ones (Tobler's first law), for example neighbouring municipalities have similar obesity prevalence. Spatial heterogeneity: processes or relationships differ by location, so one global model can miss local patterns, for example the effect of temperature on admissions differs between north and south. Dependence is about similarity of values; heterogeneity is about differences in relationships.
+:::
+
+::: {.callout-note collapse="true"}
+## W5. Why must layers be in the same coordinate reference system before they are joined, and when do you need a projected CRS?
+Coordinates are only meaningful relative to a CRS; two layers in different CRSs describe the same place with different numbers and will not overlay, so joins and overlays fail or are wrong. A projected CRS (for example SWEREF 99 TM, EPSG:3006, in metres) is needed for distances and areas, because in a geographic CRS (EPSG:4326, degrees) a degree is not a fixed distance.
+:::
+
+::: {.callout-note collapse="true"}
+## W6. [instructor] In the John Snow activity: what was the research question, what were the competing hypotheses, and what spatial data were used?
+Question: what caused the 1854 cholera outbreak in Soho, and how is cholera transmitted? Hypotheses: miasma (bad air) versus waterborne transmission. Data: locations of cholera deaths (points by household) and of public water pumps on a street map, plus water-company supply by household. Using Morrison's framework, Snow described (map), analyzed (comparison of water sources, informative exceptions) and intervened (removing the Broad Street pump handle).
+:::
+
+::: {.callout-note collapse="true"}
+## W7. Name three sources of bias in spatial health data and how each could distort a map.
+Geographically varying reporting (under-reporting regions look healthy); geocoding failure (dropped or misplaced cases, often more common in rural areas, so missing not at random); boundary changes (rates before and after are not comparable); small populations (unstable rates that produce spurious extremes). Any of these can create apparent patterns that reflect data collection, not risk.
+:::
+
+### Session 2: maps, smoothing and autocorrelation
+
+::: {.callout-note collapse="true"}
+## W8. [instructor] Why can mapping counts and mapping crude rates produce different spatial patterns?
+Counts are spatially extensive: they depend on population size, so a count map largely shows where people live. Crude rates are intensive: dividing by the population at risk shows risk. A city can have the most cases but an average rate; a small rural area can have few cases but a high rate.
+:::
+
+::: {.callout-note collapse="true"}
+## W9. [instructor] Why are estimates from areas with small populations unstable, and how does Empirical Bayes smoothing respond?
+The variance of a crude risk is π(1 − π)/P, so small P gives large variance: rates far from the truth in both directions by chance. EB smoothing replaces each rate with a weighted average of the area's crude rate and the reference rate, with weight w = σ²/(σ² + μ/P). Small areas get small w (strong shrinkage toward the reference), large areas keep their own rate.
+:::
+
+::: {.callout-note collapse="true"}
+## W10. [instructor] Is the reference rate π̂ the average of all area rates? What does SMR > 1 mean?
+No: π̂ = total events / total population, a population-weighted average. The simple mean of area rates weights every area equally and can be pulled by small areas with extreme rates. SMR > 1 means more events than expected if the reference rate applied in that area (SMR = 1.4: 40% more than expected), but on its own it is not evidence of real excess risk.
+:::
+
+::: {.callout-note collapse="true"}
+## W11. [instructor] Describe three ways of defining spatial neighbours and one weakness of each.
+Contiguity (rook: shared edge; queen: edge or corner): islands get no neighbours, and neighbour counts vary. Distance band (all within a critical distance): dense areas get very many neighbours, sparse areas few or none unless the threshold is large. k-nearest neighbours: everyone has exactly k neighbours and no isolates, but the matrix is asymmetric and ties must be handled.
+:::
+
+::: {.callout-note collapse="true"}
+## W12. [instructor] Explain the basic idea of Moran's I and how its significance is assessed.
+Moran's I is a cross-product statistic: it sums zᵢzⱼ (deviations from the mean) over neighbouring pairs, scaled by the variance, so it behaves like a correlation between a variable and its spatial lag. Positive: similar values cluster; negative: dissimilar values are neighbours; near 0 (exactly −1/(n−1)): spatial randomness. Significance: compare the observed I with a reference distribution under spatial randomness, either analytically (normal approximation) or by random permutations of the values over the areas (pseudo p-value).
+:::
+
+::: {.callout-note collapse="true"}
+## W13. [instructor] Distinguish global from local spatial autocorrelation. What does a LISA cluster map show?
+Global (Moran's I) gives one number: is there clustering in the whole map? Local (LISA, local Moran's I) gives a statistic and pseudo p-value per area: where are the clusters and outliers? The cluster map shows significant areas as High-High and Low-Low clusters (positive local autocorrelation) and High-Low and Low-High spatial outliers (negative), relative to the mean. The sum of local Moran's I values is proportional to the global I.
+:::
+
+::: {.callout-note collapse="true"}
+## W14. Interpret positive and negative spatial autocorrelation, with a map description of each.
+Positive: neighbouring areas have similar values; on the map, blocks of high values and blocks of low values (like the half-black, half-white grid). Negative: neighbours tend to differ; on the map, a checkerboard. Positive autocorrelation is far more common in health data.
+:::
+
+### Session 3: spatial regression
+
+::: {.callout-note collapse="true"}
+## W15. Why can spatial dependence be a problem in an OLS regression of area-level data?
+OLS assumes no remaining dependence in the errors after accounting for X. If residuals are spatially autocorrelated, neighbouring areas carry overlapping information, so OLS standard errors are typically too small (p-values too small), and if the dependence comes from a spatial process in the outcome or a spatially patterned omitted variable, the coefficients can also be biased.
+:::
+
+::: {.callout-note collapse="true"}
+## W16. Compare the spatial lag (SAR) and spatial error (SEM) models: equation, mechanism, interpretation of the spatial parameter.
+SAR: y = ρWy + Xβ + ε. Dependence enters through the outcome; ρ is how strongly an area's outcome is linked to its neighbours' outcomes; mechanisms are interaction, diffusion, feedback (infectious disease). SEM: y = Xβ + u, u = λWu + ε. Dependence is in the error; λ is how spatially structured the unexplained part is; mechanisms are omitted spatially patterned determinants (poorly measured air quality). Same symptom (autocorrelated OLS residuals), different story.
+:::
+
+::: {.callout-note collapse="true"}
+## W17. In a SAR model, why should you report direct, indirect and total impacts instead of β?
+Because y appears on both sides, a change in x in one area changes its y, which spreads to neighbours and feeds back: y = (I − ρW)⁻¹(Xβ + ε). The direct impact (own area, including feedback) is larger than β when ρ > 0, the indirect impact is the spillover to other areas, and with row-standardized W the total is β/(1 − ρ). Reporting only β understates the effect.
+:::
+
+::: {.callout-note collapse="true"}
+## W18. [instructor] After adjusting for covariates, neighbouring areas still have similar residuals. What could that mean, and how would you proceed?
+A spatial process linking outcomes (SAR), an omitted spatially patterned determinant (SEM), or something else: misspecification or spatial heterogeneity. Proceed: map residuals and test residual Moran's I; ask which mechanism is plausible for this outcome; compare SAR and SEM with LM tests (robust versions if both simple tests are significant) and check residuals again; interpret carefully (impacts for SAR, no causal language without a causal design). Diagnostics support reasoning, they do not replace it.
+:::
+
+::: {.callout-note collapse="true"}
+## W19. [instructor] Scenario: neighbouring municipalities share an incompletely measured air-quality environment. Which model is the natural starting point, and why? What about an infectious outcome diffusing between connected municipalities?
+Air quality: SEM, because the dependence comes from an unmeasured, spatially smooth exposure, so the errors are correlated. Infectious diffusion: SAR may be plausible, because outcomes in one area directly affect outcomes in connected areas. The point is to articulate the assumed process.
+:::
+
+### Session 4: Bayesian disease mapping
+
+::: {.callout-note collapse="true"}
+## W20. [instructor] Why might two areas with the same SMR provide very different amounts of information about their underlying risk?
+The SMR is a ratio and hides the size of the counts. Area A with 3 observed and 1 expected and area B with 300 and 100 both have SMR = 3, but the standard error is roughly SMR/√Y: about 1.7 for A and 0.17 for B. A few chance cases change A's SMR enormously, so A's data are compatible with a wide range of true risks.
+:::
+
+::: {.callout-note collapse="true"}
+## W21. [instructor] How do the epidemiological outcome and denominator determine the likelihood?
+Incidence or mortality (events over person-time): Poisson with log person-time as offset, target the rate. Prevalence (cases among N examined, each yes/no): Binomial(N, p), target the probability. Observed versus expected counts: Poisson(Eθ), target the relative risk. A count is not automatically Poisson; BYM2 can be added to either likelihood.
+:::
+
+::: {.callout-note collapse="true"}
+## W22. [instructor] Explain shrinkage, partial pooling and spatial smoothing.
+Partial pooling: area estimates are drawn from a shared distribution, so each is a compromise between its own data and the common pattern. Shrinkage is the result: noisy estimates move toward the common pattern, more for data-poor areas, less for data-rich ones. Spatial smoothing is partial pooling where the common pattern is local: a CAR/ICAR prior centres each area's effect on its neighbours' effects.
+:::
+
+::: {.callout-note collapse="true"}
+## W23. [instructor] What is the difference between partial pooling and spatial smoothing?
+Unstructured partial pooling shrinks every area toward the same global mean and ignores the map (shuffling the areas changes nothing). Spatial smoothing shrinks each area toward the mean of its neighbours, using the adjacency graph. Spatial smoothing is a geographic form of partial pooling.
+:::
+
+::: {.callout-note collapse="true"}
+## W24. [instructor] Why does the BYM2 model include both spatially structured and unstructured variation?
+Because not all residual variation is spatial. The structured component uᵢ captures smooth, clustered patterns; the unstructured vᵢ allows area-specific departures that need not resemble neighbours. Without vᵢ, all residual differences are forced into the spatial surface (over-smoothing); without uᵢ, geography is ignored. The mixing parameter ρ lets the data decide the balance, and τ controls the overall amount.
+:::
+
+::: {.callout-note collapse="true"}
+## W25. [instructor] If ρ in BYM2 is estimated at 0.9, does that mean 90% of disease cases are caused by spatial factors?
+No. ρ is the fraction of the residual (unexplained) latent between-area variation that is spatially structured, on the BYM2 mixing scale. It says nothing about causes or cases, and nothing about the variation explained by covariates.
+:::
+
+::: {.callout-note collapse="true"}
+## W26. [instructor] Interpret a posterior 95% credible interval for a relative risk of [1.08, 1.42], and contrast it with a confidence interval.
+Under the fitted model and priors, there is 95% posterior probability that the area's latent relative risk lies between 1.08 and 1.42: a probability statement about the parameter, conditional on model, data and priors. A 95% confidence interval instead means that 95% of intervals constructed this way in repeated samples would contain the fixed true value.
+:::
+
+::: {.callout-note collapse="true"}
+## W27. [instructor] Why might an area with a higher estimated relative risk have weaker evidence of elevated risk than another area?
+Magnitude and certainty differ. An area with few expected cases has a wide posterior: its mean can be high (1.30) while its credible interval includes 1 and P(RR > 1) is only 0.72. A large area can have a smaller but precise excess (1.20, CrI 1.10–1.31, P(RR > 1) = 0.995), which is stronger evidence. Exceedance probabilities make this visible.
+:::
+
+::: {.callout-note collapse="true"}
+## W28. Give two reasons to be cautious when interpreting a smoothed disease map.
+Smoothing can hide real boundaries (a river, catchment or policy border) and attenuate sharp local signals, so the adjacency definition is a substantive choice. And a high posterior risk is not a causal explanation: ecological inference, spatial confounding between covariates and the spatial effect, and the MAUP all limit what can be concluded.
+:::

@@ -1,0 +1,27 @@
+---
+title: "Exam-prep dashboard"
+subtitle: "Your review status across all sessions"
+toc: false
+---
+
+Every topic section has a status control under its heading: **Not reviewed**, **Reviewed** or **Confident**. This page adds them up. The status is stored in this browser (localStorage), so it stays when you close the tab but not if you switch device or clear site data. Use *Export progress* below to keep a backup.
+
+::: {.callout-note collapse="true"}
+## How the badges differ
+<span class="flag-badge flag-objective">🎯 Instructor learning objective</span> Matches a stated objective: the course syllabus, the Canvas session post, or a "Learning goals" slide.
+
+<span class="flag-badge flag-keyq">❓ Instructor's key question</span> Answers a key question the instructor posted or a question asked on a slide.
+
+<span class="flag-badge flag-notes">✏️ Emphasised in class</span> Written down as important in the lecture notes.
+
+<span class="flag-badge flag-inferred">📌 Likely exam-relevant (AI-inferred)</span> An inference from definitions, formulas and worked examples. **Not confirmed by the instructor.**
+
+<span class="flag-badge flag-optional">📎 Optional depth</span> Marked optional or out of scope by the instructor; left out of the to-do list.
+:::
+
+::: {#sta530-dashboard}
+:::
+
+```{=html}
+<noscript>The dashboard needs JavaScript.</noscript>
+```

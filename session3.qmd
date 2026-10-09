@@ -1,0 +1,364 @@
+---
+title: "Session 3 — Introduction to Spatial Regression"
+subtitle: "OLS with spatial data · residual autocorrelation · the spatial lag Wy · spatial lag model (SAR) and its impacts · spatial error model (SEM) · diagnostics and model choice"
+engine: knitr
+---
+
+```{=html}
+<script>document.body.classList.add("block-reg");</script>
+```
+
+Session 2 asked whether nearby values resemble one another. Session 3 asks the regression question: **how should a regression model change when observations are spatially dependent?**
+
+The starting point is ordinary least squares (OLS). If, after adjusting for covariates, the **residuals** of neighbouring areas still resemble each other, the model has left something spatial unexplained. There are two classic ways to put spatial dependence into the model, and they tell **different scientific stories**:
+
+- the **spatial lag model (SAR)**: an area's **outcome** depends on its neighbours' outcomes (interaction, diffusion, feedback);
+- the **spatial error model (SEM)**: the **errors** are spatially correlated (unmeasured, spatially patterned determinants).
+
+The session's emphasis is conceptual: what ρ and λ mean, why SAR coefficients cannot be read like OLS coefficients, and how to reason about model choice. No estimator derivations.
+
+::: {.callout-note collapse="true"}
+## Sources and session
+**Slides:** "session_3_v0-1.pdf" (Qinyun Lin, 9 October 2026, 10:15–12:00).
+
+**Learning goals (slide 4):** by the end of the session you should be able to
+
+1. recognize why spatial dependence can matter in regression;
+2. distinguish spatial lag (SAR) from spatial error (SEM) conceptually;
+3. interpret what ρ and λ represent, without deriving estimators;
+4. diagnose residual spatial autocorrelation and think about model choice.
+
+**Optional viewing:** Luc Anselin's spatial regression video lectures (link on Canvas). They also cover topics beyond STA530.
+:::
+
+::: {.callout-tip collapse="true"}
+## Before you start: three ideas you need
+**Residuals.** eᵢ = yᵢ − ŷᵢ, the part of the outcome the covariates did not explain. OLS assumes the errors are independent of each other.
+
+**The spatial lag from Session 2.** With a row-standardized weights matrix W, (Wy)ᵢ = Σⱼ wᵢⱼ yⱼ is the **average of area i's neighbours**. See [2.8](session2.qmd#t2-8).
+
+**Geometric series.** 1 + ρ + ρ² + ρ³ + … = 1/(1 − ρ) when |ρ| < 1. The matrix version explains SAR feedback.
+:::
+
+## 3.1 OLS with spatial data: the assumption that can fail {#t3-1 .topic flag="objective"}
+
+The familiar model:
+
+$$
+y = X\beta + \varepsilon .
+$$
+
+**Key assumption here:** after accounting for X, there is **no remaining spatial dependence in the errors**. Spatial data give a reason to doubt that: the slide shows the same regression equation with two very different residual maps, one that looks random and one with clear clusters of positive and negative residuals.
+
+Why it matters:
+
+- **Standard errors.** With positively autocorrelated residuals, neighbouring areas carry overlapping information. OLS treats them as independent, so it typically **understates the uncertainty**: standard errors too small, p-values too small.
+- **Bias.** If the spatial pattern comes from a spatial process in the outcome (SAR) or from an omitted spatially patterned confounder, the coefficients themselves can be biased.
+- **Science.** Clustered residuals say the model has missed something that is organised in space.
+
+::: {.misconception}
+"If I include enough covariates, spatial dependence goes away." Sometimes, if the covariates capture the spatial process. But clustered residuals can remain after adjustment, and the next step is to ask **why** ([3.2](#t3-2)), not to add variables blindly.
+:::
+
+## 3.2 After adjustment, neighbouring residuals are similar: what could it mean? {#t3-2 .topic flag="keyq"}
+
+The slide's example: area-level **cardiovascular mortality** modelled with age structure, income, smoking prevalence and urbanicity. After adjustment, neighbouring areas still have similar residuals. Possible explanations:
+
+| | Explanation | Model it points to |
+|---|---|---|
+| **A** | A **spatial process links outcomes** across areas (one area's outcome affects its neighbours') | Spatial lag (SAR) |
+| **B** | An **omitted determinant is spatially patterned** (pollution, access to care, deprivation not fully measured) | Spatial error (SEM) |
+| **C** | **Something else**: misspecification (wrong functional form, a missing nonlinear term), **spatial heterogeneity** (the relationship differs across regions), wrong scale | Fix the model; heterogeneity models (outside the course) |
+
+For cardiovascular mortality, A is hard to defend (deaths in one area do not cause deaths next door). B and C are more plausible.
+
+## 3.3 The new ingredient: the spatially lagged outcome Wy {#t3-3 .topic flag="objective"}
+
+- **W** defines who is a neighbour and how much each counts (Session 2).
+- **y** is the outcome in every area.
+- **Wy** is the **spatially lagged outcome**: for each area, a weighted summary of its neighbours' y.
+
+If W is **row-standardized**, (Wy)ᵢ is roughly **the average outcome among area i's neighbours**.
+
+::: {.worked}
+Four areas in a row A – B – C – D, rook neighbours, row-standardized:
+
+| Area | Neighbours | wᵢⱼ | y | (Wy)ᵢ |
+|---|---|---|---|---|
+| A | B | 1 | 10 | 14 |
+| B | A, C | ½, ½ | 14 | (10 + 18)/2 = 14 |
+| C | B, D | ½, ½ | 18 | (14 + 30)/2 = 22 |
+| D | C | 1 | 30 | 18 |
+:::
+
+## 3.4 The spatial lag model (SAR) and ρ {#t3-4 .topic flag="objective"}
+
+$$
+y = \rho W y + X\beta + \varepsilon
+$$
+
+| Parameter | Meaning |
+|---|---|
+| **ρ (rho)**, spatial dependence | **How strongly outcomes are linked through W.** ρ = 0 gives back OLS; ρ > 0 means an area's outcome rises with its neighbours' outcomes |
+| **β**, covariates | Association with X, **conditional on the spatial process** |
+| **ε**, remaining noise | Assumed **independent** |
+
+**Key idea:** y in one area is **jointly determined** with y in neighbouring areas. y appears on both sides: that is why OLS cannot simply be applied with Wy as an extra covariate (Wy is correlated with ε; the model is estimated by maximum likelihood or other methods outside the course).
+
+**Mechanisms that make SAR plausible:** interaction, diffusion, feedback, where the outcome itself spreads.
+
+## 3.5 Why SAR creates feedback: direct, indirect and total impacts {#t3-5 .topic flag="objective"}
+
+Solve the SAR model for y:
+
+$$
+y = (I - \rho W)^{-1} X\beta + (I - \rho W)^{-1}\varepsilon,
+\qquad
+(I - \rho W)^{-1} = I + \rho W + \rho^2 W^2 + \rho^3 W^3 + \dots
+$$
+
+The expansion (the **Neumann series**, the matrix version of a geometric series) shows how a change spreads:
+
+| Term | Path |
+|---|---|
+| I | The area's own effect |
+| ρW | One step: to the neighbours |
+| ρ²W² | Two steps: neighbours of neighbours, **including feedback** back to the starting area |
+| ρ³W³, … | Continued propagation through the network |
+
+**Intuition.** Raise x in area B. That changes y in B, which (through ρW) changes y in A and C, which feeds back to B, and so on. So **β is not the complete impact of x**.
+
+::: {.worked}
+**Toy example (slide 12).** Three areas, everyone neighbours with everyone, ρ = 0.2, β = 1, row-standardized
+
+$$
+W = \begin{pmatrix} 0 & 0.5 & 0.5\\ 0.5 & 0 & 0.5 \\ 0.5 & 0.5 & 0\end{pmatrix}.
+$$
+
+Impact matrix (I − ρW)⁻¹β (rows: y in A, B, C; columns: x in A, B, C):
+
+| | x in A | x in B | x in C |
+|---|---|---|---|
+| y in A | 1.023 | 0.114 | 0.114 |
+| y in B | 0.114 | **1.023** | 0.114 |
+| y in C | 0.114 | 0.114 | 1.023 |
+
+If x is 1 unit higher in B: B changes by about **+1.02** (direct, including feedback), A and C by about **+0.11 each** (indirect), **total = 1.25**.
+
+The slide shows 1.019 and 0.116; the exact inverse gives 1.023 and 0.114. The total, β/(1 − ρ) = 1/0.8 = **1.25**, is the same either way and is the number to remember.
+:::
+
+| Impact | Definition |
+|---|---|
+| **Direct** | Change in the area where x changes, **including feedback** that returns through neighbours |
+| **Indirect** (spillover) | Change transmitted to **other** areas through the spatial network |
+| **Total** | Direct + indirect. With row-standardized W, total = β/(1 − ρ) |
+
+**For SAR, reporting only the raw regression coefficient β can be misleading.** Report direct, indirect and total impacts (usually averaged over areas).
+
+<div class="drill" data-drill="sarimpact"></div>
+
+**Try it.** Compute the impact matrix for the toy example, then change ρ.
+
+```{webr-r}
+#| label: sar-impacts
+rho  <- 0.2
+beta <- 1
+W <- matrix(c(0,   0.5, 0.5,
+              0.5, 0,   0.5,
+              0.5, 0.5, 0), nrow = 3, byrow = TRUE)   # row-standardized
+
+impact_matrix <- solve(diag(3) - rho * W) * beta
+round(impact_matrix, 3)
+
+direct   <- mean(diag(impact_matrix))                 # average own-area effect
+total    <- mean(rowSums(impact_matrix))              # = beta / (1 - rho)
+indirect <- total - direct
+round(c(direct = direct, indirect = indirect, total = total), 3)
+
+# The Neumann series converges to the same matrix
+neumann <- diag(3) + rho * W + rho^2 * W %*% W + rho^3 * W %*% W %*% W
+round(neumann * beta, 3)
+```
+
+## 3.6 Is a SAR story plausible in epidemiology? {#t3-6 .topic flag="keyq"}
+
+The equation may fit the data; the **scientific mechanism still needs to make sense**.
+
+| Outcome | Genuine cross-area outcome process? |
+|---|---|
+| **Infectious disease** | **Plausible**: cases in one area contribute to transmission into connected areas |
+| **Health behaviours** | **Plausible**: social interaction or diffusion can cross administrative boundaries |
+| **Cancer mortality** | **Hard to defend**: neighbouring mortality rates do not "cause" one another. Similar rates nearby more likely reflect shared, partly unmeasured exposures → SEM |
+
+## 3.7 The spatial error model (SEM) and λ {#t3-7 .topic flag="objective"}
+
+$$
+y = X\beta + u, \qquad u = \lambda W u + \varepsilon
+$$
+
+| Parameter | Meaning |
+|---|---|
+| **λ (lambda)**, error dependence | **How strongly the unobserved error process is spatially structured** |
+| **β**, covariates | Regression associations **after accounting for correlated errors**. Interpreted as in OLS: no spillover impacts |
+| **ε**, innovation | The remaining **independent** error |
+
+Here neighbouring y values are **not** on the right-hand side. The dependence sits in the error u.
+
+**What creates spatially correlated errors?** Unmeasured influences that are similar in nearby areas:
+
+| Source | Why it is spatial |
+|---|---|
+| **Air pollution** | Varies smoothly across neighbouring areas but is incompletely measured |
+| **Healthcare access** | Catchment areas and service environments cross administrative boundaries |
+| **Built environment** | Unmeasured features of nearby areas resemble one another |
+| **SES / context** | Area-level social conditions are rarely captured by one covariate |
+
+SEM can be viewed as **modelling residual spatial structure that X did not explain**.
+
+::: {.misconception}
+"ρ and λ are the same thing in different models." Both measure spatial dependence, but in different places. ρ links **outcomes** (and so changes how β is interpreted, through feedback). λ links **errors** (β keeps its usual meaning; the dependence mainly affects efficiency and standard errors). Also note: ρ in SAR is unrelated to the ρ mixing parameter in BYM2 ([Session 4](session4.qmd#t4-12)), which shares only the letter.
+:::
+
+## 3.8 SAR vs SEM: same symptom, different story {#t3-8 .topic flag="objective"}
+
+**Observed symptom:** OLS residuals are spatially autocorrelated. Residual autocorrelation **alone does not tell you which story is true.**
+
+| | Spatial lag (SAR) | Spatial error (SEM) |
+|---|---|---|
+| Equation | y = ρWy + Xβ + ε | y = Xβ + u, u = λWu + ε |
+| Dependence enters through | The **outcome** | The **error** process |
+| Link | yᵢ ↔ neighbouring y | uᵢ ↔ neighbouring u |
+| Mechanism | Interaction, diffusion, **feedback / spillovers** | **Spatially patterned omitted** processes |
+| Spatial parameter | ρ | λ |
+| Reading β | **Not** the full effect: report direct, indirect, total impacts | As in OLS, conditional on X |
+| Epidemiological example | Infectious disease spreading between municipalities | Air quality shared but poorly measured |
+
+```{mermaid}
+%%| fig-cap: "Causal diagram: an arrow means \"directly affects\". Left: SAR, where outcomes affect neighbouring outcomes. Right: SEM, where an unmeasured spatially smooth factor U affects the outcome in both areas, so their errors are correlated."
+flowchart LR
+  subgraph SAR["Spatial lag (SAR)"]
+    direction LR
+    xa["x in area A"] --> ya["y in area A"]
+    xb["x in area B"] --> yb["y in area B"]
+    ya <--> yb
+  end
+  subgraph SEM["Spatial error (SEM)"]
+    direction LR
+    xa2["x in area A"] --> ya2["y in area A"]
+    xb2["x in area B"] --> yb2["y in area B"]
+    U["unmeasured U<br/>(shared, spatially smooth)"] --> ya2
+    U --> yb2
+  end
+```
+
+:::: {.quiz}
+In a SEM, λ is estimated at 0.6. What does this tell you?
+
+- **The unexplained part of the outcome is strongly spatially structured**
+- An increase in an area's outcome raises its neighbours' outcomes
+- The covariate effect β has to be split into direct and indirect parts
+- Sixty percent of the variation in the outcome is caused by geography
+
+::: {.exp}
+λ describes dependence in the error process: the residual (unexplained) variation is spatially correlated. Outcome-to-outcome effects and impacts belong to SAR. λ is not a share of variance explained or caused by space.
+:::
+::::
+
+## 3.9 A practical workflow and residual Moran's I {#t3-9 .topic flag="objective"}
+
+```{mermaid}
+%%| fig-cap: "Workflow: each arrow means \"then\". Not causal. From OLS to spatial regression (slide 19)."
+flowchart LR
+  A["1 · Fit OLS<br/>scientific model<br/>and covariates"] --> B["2 · Check residuals<br/>map them; test residual<br/>Moran's I"]
+  B --> C["3 · Ask why<br/>what mechanism could<br/>create the dependence?"]
+  C --> D["4 · Compare models<br/>SAR / SEM + diagnostics;<br/>check residuals again"]
+  D --> E["5 · Interpret carefully<br/>impacts for SAR; no causal<br/>language without causal design"]
+```
+
+**Diagnostics support reasoning; they do not replace it.**
+
+**Residual Moran's I** asks: after fitting the model, is there evidence of remaining spatial autocorrelation? If it is significant:
+
+- something spatial **remains unexplained**;
+- it does **not** tell SAR from SEM by itself;
+- it can also reflect **other misspecification or heterogeneity**.
+
+An important diagnostic goal for the spatial model: **substantially reduce unexplained spatial structure** (residual Moran's I near zero after fitting SAR or SEM).
+
+## 3.10 Lagrange multiplier (LM) tests {#t3-10 .topic flag="objective"}
+
+LM tests start from the OLS fit and ask whether adding a spatial component is supported:
+
+| Test | Question |
+|---|---|
+| **LM-lag** | Is adding a **spatially lagged outcome** (ρWy) supported? |
+| **LM-error** | Is spatial dependence **in the errors** (λ) supported? |
+| **Robust LM-lag / robust LM-error** | Each test made robust to the presence of the other kind of dependence. Useful **when both simple LM tests are significant** |
+
+A common reading: if only one simple test is significant, consider that model; if both are, look at the robust versions and see which remains clearly significant.
+
+**For this course** (slide 21): know **what the tests are asking**. Do not memorise formulas, and do not treat p-values as the scientific mechanism. **Model choice should combine theory, diagnostics and interpretability.** The tests are "useful, but not a magic decision tree".
+
+## 3.11 Which model story fits better? {#t3-11 .topic flag="keyq"}
+
+The slide's two scenarios:
+
+| Scenario | Natural starting model | Why |
+|---|---|---|
+| **A.** Neighbouring municipalities share an **incompletely measured air-quality environment** | **SEM** | The dependence comes from an omitted, spatially smooth exposure: correlated errors |
+| **B.** An **infectious outcome diffuses** through movement between connected municipalities | **SAR** may be plausible | Outcomes in one area directly affect outcomes in connected areas |
+
+Real analyses can be less clean. The point is to **articulate the assumed process**.
+
+:::: {.quiz}
+You model municipal rates of a new vaccination uptake. People talk to friends and colleagues across municipal borders, and uptake in one place seems to encourage uptake next door. Which model is the natural starting point?
+
+- **Spatial lag (SAR), because uptake itself spreads between areas**
+- Spatial error (SEM), because uptake is shaped by unmeasured factors
+- OLS, because spatial dependence never affects the estimated β
+- A model with no W, since diffusion is not a geographic process
+
+::: {.exp}
+Social diffusion of behaviour is an outcome-to-outcome process, which is what ρWy represents. With SAR, remember to report direct and indirect (spillover) impacts instead of β alone.
+:::
+::::
+
+## 3.12 Deliberately not covered in STA530 {#t3-12 .topic flag="optional"}
+
+The slides list what the session leaves out:
+
+- maximum-likelihood derivations;
+- instrumental variables / generalized method of moments (GMM) estimation;
+- higher-order spatial models;
+- spatial Durbin and SLX models (which add WX, the neighbours' covariates);
+- geographically weighted regression (GWR) and other spatial heterogeneity models.
+
+The stated goal: *understand what spatial dependence means, recognize basic models, and interpret them responsibly — not become spatial econometricians in 90 minutes.*
+
+## 3.13 Take-home messages and key questions {#t3-13 .topic}
+
+1. **Check geography after regression.** Spatial structure can remain after covariate adjustment.
+2. **SAR and SEM encode different mechanisms**: outcome feedback versus spatially correlated errors.
+3. **SAR changes interpretation**: direct and indirect impacts matter because of feedback.
+4. **Diagnostics are evidence, not answers**: use residual checks and tests together with scientific reasoning.
+
+::: {.callout-note collapse="true"}
+## Why is β in a SAR model not the full effect of x?
+Because y appears on both sides. A change in x in one area changes y there, which changes neighbours' y through ρW, which feeds back. The total effect is captured by (I − ρW)⁻¹β; with row-standardized W the total impact is β/(1 − ρ), larger than β when ρ > 0.
+:::
+
+::: {.callout-note collapse="true"}
+## Residual Moran's I is significant. Why can you not conclude that SAR is the right model?
+Because both SAR (outcome dependence) and SEM (error dependence) produce autocorrelated OLS residuals, and so can misspecification or spatial heterogeneity. The diagnostic says something spatial is unexplained, not which mechanism. Theory, LM tests and interpretability have to be combined.
+:::
+
+::: {.callout-note collapse="true"}
+## What does ρ represent in SAR, and λ in SEM?
+ρ is the strength of dependence between an area's outcome and its neighbours' outcomes (through Wy). λ is the strength of spatial dependence in the error process: how spatially structured the unexplained part is.
+:::
+
+::: {.callout-note collapse="true"}
+## Why might OLS standard errors be wrong with positively autocorrelated residuals?
+OLS treats every area as an independent piece of information. If neighbouring residuals are alike, the effective amount of information is smaller than n, so the true sampling variability of β̂ is larger than OLS reports: standard errors too small, confidence intervals too narrow, p-values too small.
+:::
