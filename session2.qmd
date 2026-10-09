@@ -46,6 +46,10 @@ Topics that match an objective carry 🎯.
 
 ## 2.1 Thematic (choropleth) maps and classification methods {#t2-1 .topic flag="inferred"}
 
+::: {.core}
+**In short.** A choropleth map colours areas by their value. **Where you put the colour boundaries** decides whether the same data look calm or alarming.
+:::
+
 A **thematic** or **choropleth map** shows values with colours or patterns inside geographic areas. Two choices change the picture: the **classification method** (where the class boundaries go) and the **number of classes**.
 
 | Method | How the class breaks are chosen | Strength | Weakness |
@@ -100,7 +104,15 @@ Equal intervals split the *range* evenly. A few extreme values stretch the range
 :::
 ::::
 
+::: {.exam-say}
+**On the exam, be able to say:** Classification methods: quantile (equal number of areas per class), equal interval, natural breaks (minimise within-class variation), standard deviation, manual. No method is best in general; it depends on the data and the purpose.
+:::
+
 ## 2.2 Extreme value maps: percentile, box and standard deviation maps {#t2-2 .topic flag="keyq"}
+
+::: {.core}
+**In short.** Extreme-value maps are built to make **outliers stand out**. A box map flags areas outside the box-plot fences; a percentile map always shows the top and bottom 1%.
+:::
 
 Extreme value maps are designed to **highlight outliers** rather than show the whole distribution evenly.
 
@@ -125,13 +137,27 @@ Extreme value maps are designed to **highlight outliers** rather than show the w
 
 <div class="drill" data-drill="boxmap"></div>
 
+::: {.exam-say}
+**On the exam, be able to say:** Box map fences: Q1 − hinge·IQR and Q3 + hinge·IQR; hinge 3 flags fewer, more extreme outliers than hinge 1.5.
+:::
+
 ## 2.3 Mapping categorical variables and co-location {#t2-3 .topic}
+
+::: {.core}
+**In short.** Each category gets its own colour. A **co-location map** shows where two characteristics occur in the same place.
+:::
 
 A **unique value map** gives each category its own colour (for example urban / suburban / rural).
 
 A **co-location map** extends it to show where **several characteristics overlap**. The slide's example marked US counties with both **persistently high COVID-19 mortality** and a **high population share of a particular racial/ethnic group**, so you can see where the two coincide. Co-location shows overlap, not cause.
 
 ## 2.4 Counts vs rates, and the problem of variance instability {#t2-4 .topic flag="objective"}
+
+::: {.core}
+**In short.** Counts mostly show **where people live**; rates show **risk**. But rates from small populations jump around by chance, so the most extreme rates are often just the smallest areas.
+
+**Think of it as:** A basketball player who scores 2 of 2 shots has 100%, yet you would trust 450 of 500 (90%) much more.
+:::
 
 Two kinds of variables behave differently on a map:
 
@@ -148,6 +174,10 @@ Mapping **counts** therefore mostly reproduces a population map: big cities have
 $$
 \operatorname{Var}(r_i) = \frac{\pi_i (1 - \pi_i)}{P_i}.
 $$
+
+::: {.in-words}
+**In words:** the uncertainty of a crude rate is the true risk times one minus it, **divided by the population**: the fewer people, the noisier the rate.
+:::
 
 Small Pᵢ → large variance → unstable crude estimates. **Areas with small populations show very high or very low crude rates simply because of sampling variability.** This motivates smoothing.
 
@@ -191,7 +221,15 @@ Extremes in both directions in small areas is the signature of variance instabil
 :::
 ::::
 
+::: {.exam-say}
+**On the exam, be able to say:** Counts are spatially extensive (depend on population size); rates are intensive. Var(rᵢ) = πᵢ(1 − πᵢ)/Pᵢ, so small populations give unstable crude rates: variance instability. This motivates smoothing.
+:::
+
 ## 2.5 Comparing areas with the SMR (excess risk) {#t2-5 .topic flag="keyq"}
+
+::: {.core}
+**In short.** The SMR compares **what happened** with **what would have happened** if the area had the reference risk: SMR = observed ÷ expected.
+:::
 
 An **excess risk map** compares each area's rate with a **reference risk** (national or regional). The reference risk is estimated from **all observations pooled**:
 
@@ -204,6 +242,10 @@ Expected count and standardized mortality ratio (SMR):
 $$
 E_i = \hat\pi \times P_i, \qquad \text{SMR}_i = \frac{O_i}{E_i} = \frac{O_i}{\hat\pi P_i} = \frac{r_i}{\hat\pi}.
 $$
+
+::: {.in-words}
+**In words:** expected cases = the reference risk times the area's population; the SMR is **observed divided by expected**.
+:::
 
 **The slide's two questions:**
 
@@ -225,13 +267,27 @@ Expected counts can also use **stratum-specific** reference risks (by age and se
 
 <div class="drill" data-drill="smr"></div>
 
+::: {.exam-say}
+**On the exam, be able to say:** Eᵢ = π̂ × Pᵢ with π̂ = total events / total population (a population-weighted average, not the mean of the rates). SMR = O/E; SMR > 1 means more events than expected.
+:::
+
 ## 2.6 Empirical Bayes smoothing {#t2-6 .topic flag="objective"}
+
+::: {.core}
+**In short.** EB smoothing **pulls each crude rate toward the overall rate**, more strongly the smaller the population. Reliable areas keep their own rate; noisy ones borrow from the average.
+
+**Think of it as:** Restaurant ratings. A 5.0 from 3 reviews is less convincing than a 4.6 from 3,000, so a sensible guess for the first restaurant moves toward the typical rating.
+:::
 
 **Idea:** replace each crude rate by a **weighted average** of the area's own crude rate and the overall (reference) rate:
 
 $$
 \hat\pi_i^{EB} = w_i\, r_i + (1 - w_i)\, \theta, \qquad w_i = \frac{\sigma^2}{\sigma^2 + \mu / P_i}.
 $$
+
+::: {.in-words}
+**In words:** the smoothed rate is a **weighted average** of the area's own rate and the reference rate. The weight compares real differences between areas (σ²) with noise (μ/Pᵢ): little noise → trust the area, much noise → trust the reference.
+:::
 
 | Symbol | Meaning |
 |---|---|
@@ -299,7 +355,17 @@ When areas differ a lot in population size and the goal is a map of risk that is
 It ignores geography: every area is shrunk toward the same global mean, not toward its neighbours (spatial EB versions exist). It gives no full uncertainty for each area. A genuinely high-risk small area is pulled toward the mean too, so real local excesses can be hidden.
 :::
 
+::: {.exam-say}
+**On the exam, be able to say:** EB estimate = wᵢ·rᵢ + (1 − wᵢ)·θ with wᵢ = σ²/(σ² + μ/Pᵢ). Small areas get small weights (strong shrinkage), large areas keep their own rate. The prior is estimated from the data, so it is not fully Bayesian.
+:::
+
 ## 2.7 Spatial autocorrelation and the null of spatial randomness {#t2-7 .topic flag="objective"}
+
+::: {.core}
+**In short.** Spatial autocorrelation asks: are nearby areas **more alike** than they would be if the values had been scattered at random over the map?
+
+**Think of it as:** Shuffle the map like a deck of cards many times. If the real map is more clustered than almost all shuffled maps, the pattern is not chance.
+:::
 
 **Spatial autocorrelation** formalises Tobler's law: the correlation of a variable **with itself across space**.
 
@@ -347,7 +413,15 @@ To measure autocorrelation you need two kinds of similarity at once:
 - **attribute similarity**: are two values alike? (for Moran's I, the product of deviations from the mean, zᵢzⱼ);
 - **locational similarity**: are the two areas neighbours? (the spatial weight wᵢⱼ).
 
+::: {.exam-say}
+**On the exam, be able to say:** Positive autocorrelation: similar values cluster; negative: neighbours differ (checkerboard). The null hypothesis is spatial randomness, tested by comparing with random permutations.
+:::
+
 ## 2.8 Spatial weights: contiguity (rook and queen) {#t2-8 .topic flag="objective"}
+
+::: {.core}
+**In short.** Before you can say "neighbours are alike", you must decide **who counts as a neighbour**. Rook: a shared border; queen: a shared border or corner. The weights matrix W records the choice.
+:::
 
 Before testing for autocorrelation you must define **neighbours**. A **spatial weights matrix W** records, for every pair of areas, whether (or how strongly) they are neighbours: wᵢⱼ = 1 if i and j are neighbours, 0 otherwise, and wᵢᵢ = 0. Choosing W means thinking about **how far an influence can reach**.
 
@@ -418,7 +492,17 @@ show(cq, "Queen, corner area", "only 3 neighbours at the edge")
 
 <div class="drill" data-drill="neighbours"></div>
 
+::: {.exam-say}
+**On the exam, be able to say:** W has wᵢⱼ = 1 if i and j are neighbours, else 0, with zeros on the diagonal. Queen contiguity gives at least as many neighbours as rook. Higher orders are neighbours of neighbours. Row standardization makes Wy the neighbour average.
+:::
+
 ## 2.9 Spatial weights: distance bands and k-nearest neighbours {#t2-9 .topic flag="objective"}
+
+::: {.core}
+**In short.** Neighbours can also be defined by **distance**: everyone within a set distance (distance band), or each area's **k nearest**. KNN guarantees that everyone has neighbours, but the relation is not symmetric.
+
+**Think of it as:** KNN is like "your four closest friends": you may be on their list, or not.
+:::
 
 Distance-based weights use the distance between points (or area centroids).
 
@@ -485,7 +569,15 @@ Contiguity weights leave islands without neighbours, and a distance band only co
 :::
 ::::
 
+::: {.exam-say}
+**On the exam, be able to say:** Distance band: symmetric, but dense areas get many neighbours and isolates are possible. KNN: exactly k neighbours each, no isolates, not symmetric, ties possible. Use Euclidean distance only for projected coordinates.
+:::
+
 ## 2.10 Describing a weights matrix: connectivity histogram and graph {#t2-10 .topic flag="keyq"}
+
+::: {.core}
+**In short.** Two quick checks of a weights matrix: **how many neighbours** each area has (histogram) and a **picture of the links** (graph).
+:::
 
 Two diagnostics show what a weights matrix looks like:
 
@@ -500,12 +592,24 @@ Two diagnostics show what a weights matrix looks like:
 
 Read more: [GeoDa workbook, *Distance-based spatial weights*](https://geodacenter.github.io/workbook/4b_dist_weights/lab4b.html){target="_blank"} (source of the connectivity histogram and graph on the slides).
 
+::: {.exam-say}
+**On the exam, be able to say:** With KNN the connectivity histogram is a single bar at k. With a distance band, dense areas have many links and remote points may have none.
+:::
+
 ## 2.11 Global Moran's I {#t2-11 .topic flag="objective"}
+
+::: {.core}
+**In short.** Moran's I is **one number for the whole map**: positive when neighbours are alike, negative when they differ, close to zero when there is no pattern. Whether it is unusual is judged against shuffled maps.
+:::
 
 $$
 I = \frac{\sum_{i=1}^{n}\sum_{j=1}^{n} w_{ij}\, z_i z_j \,/\, S_0}{\sum_{i=1}^{n} z_i^2 \,/\, n},
 \qquad z_i = x_i - \bar x, \qquad S_0 = \sum_i\sum_j w_{ij}.
 $$
+
+::: {.in-words}
+**In words:** for every pair of neighbours, multiply how far each is from the mean; **average these products** over all neighbour pairs and divide by the overall variance. Mostly positive products (high next to high, low next to low) → I > 0.
+:::
 
 **Reading it.** The numerator is a **cross-product** between each value and its neighbours (attribute similarity × locational similarity), averaged over all neighbour pairs. The denominator is the variance. So Moran's I is like a correlation between a variable and its **spatial lag**.
 
@@ -565,7 +669,15 @@ c(observed_I = round(observed_I, 3), expected_under_H0 = round(-1 / (n_areas - 1
   pseudo_p = pseudo_p)
 ```
 
+::: {.exam-say}
+**On the exam, be able to say:** Moran's I is a cross-product of deviations between neighbours, scaled by the variance. It is tested against spatial randomness, analytically or by permutation (pseudo p-value). It depends on W. E[I] = −1/(n − 1) under the null.
+:::
+
 ## 2.12 The Moran scatter plot {#t2-12 .topic flag="objective"}
+
+::: {.core}
+**In short.** Plot each area's value against the **average of its neighbours**. The slope of the line is Moran's I, and the four quadrants show clusters (HH, LL) and outliers (HL, LH).
+:::
 
 With **row-standardized** weights (S₀ = n), Moran's I simplifies to
 
@@ -620,7 +732,15 @@ legend("bottom", c("HH", "LL", "HL", "LH"), fill = qcols, horiz = TRUE, bty = "n
 
 **The slides' questions.** *Spatial clusters* (HH, LL): **positive** autocorrelation. *Spatial outliers* (HL, LH): **negative** autocorrelation (the area is unlike its neighbours).
 
+::: {.exam-say}
+**On the exam, be able to say:** Moran scatter plot: x = own value, y = spatial lag. Slope = Moran's I (row-standardized W). HH/LL are positive association (clusters), HL/LH negative (outliers), relative to the mean.
+:::
+
 ## 2.13 Local spatial autocorrelation: LISA and local Moran's I {#t2-13 .topic flag="objective"}
+
+::: {.core}
+**In short.** Global Moran's I says **whether** there is clustering; LISA says **where**. Each area gets its own statistic and p-value, and significant areas are labelled HH, LL, HL or LH.
+:::
 
 | | Global | Local |
 |---|---|---|
@@ -629,18 +749,25 @@ legend("bottom", c("HH", "LL", "HL", "LH"), fill = qcols, horiz = TRUE, bty = "n
 | Measures | Moran's I (Geary's C) | **LISA**, for example local Moran's I; local Geary |
 | Finds | Overall clustering | Hot spots, cold spots and **spatial outliers** |
 
+::: {.callout-note collapse="true"}
+## Deeper: the formal definition of a LISA
 **LISA** (local indicator of spatial association, [Anselin 1995](https://doi.org/10.1111/j.1538-4632.1995.tb00338.x){target="_blank"}) must:
 
 1. give a statistic for **each location** with an assessment of significance;
 2. be such that the **sum of the local statistics is proportional to the global statistic**.
 
 Generic local form Σⱼ wᵢⱼ f(xᵢ, xⱼ); generic global form Σᵢ Σⱼ wᵢⱼ f(xᵢ, xⱼ).
+:::
 
 **Local Moran's I:**
 
 $$
 I_i = \frac{z_i \sum_j w_{ij} z_j}{\sum_i z_i^2 } ,
 $$
+
+::: {.in-words}
+**In words:** an area's own deviation from the mean **times** its neighbours' deviations. Large and positive = the area and its neighbours are on the same side of the mean (a cluster); negative = opposite sides (an outlier).
+:::
 
 the area's own deviation times the weighted sum of its neighbours' deviations. Global Moran's I corresponds to the **average** of the local statistics (their sum is proportional to the global I).
 
@@ -710,6 +837,10 @@ Global Moran's I first, to ask whether there is clustering at all. LISA when you
 :::
 
 Read more: [GeoDa workbook, *Local spatial autocorrelation*](https://geodacenter.github.io/workbook/6a_local_auto/lab6a.html){target="_blank"} (source of the significance and cluster maps on the slides).
+
+::: {.exam-say}
+**On the exam, be able to say:** LISA gives a local statistic with significance for each location, and the local statistics sum (proportionally) to the global one. Local Moran's I is tested by conditional permutation; results are shown in significance and cluster maps.
+:::
 
 ## 2.14 Session summary and key questions {#t2-14 .topic}
 

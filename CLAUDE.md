@@ -10,7 +10,7 @@ Quarto + WebR study reference and exam-prep tracker for STA530 Spatial Epidemiol
 
 ## Pages
 - `session1.qmd` … `session4.qmd`: one page per session (scanned by `build_topics.py`)
-- `dashboard.qmd`, `exam-practice.qmd` (drills + written questions W1…, instructor questions marked [instructor]), `glossary.qmd`, `about.qmd`, `index.qmd`
+- `big-ideas.qmd`, `resources.qmd`, `dashboard.qmd`, `exam-practice.qmd` (drills + written questions W1…, instructor questions marked [instructor]), `glossary.qmd`, `about.qmd`, `index.qmd`
 
 ## Topic sections (drive the checklist and dashboard)
 Every checklist item is a level-2 heading in a session file:
@@ -34,6 +34,9 @@ Adding a session: create `sessionN.qmd`, add it to `_quarto.yml` sidebar and `in
 - Prefer side-by-side panels for comparisons. Avoid Mermaid subgraphs: they render with a dark fill; draw such diagrams in R instead.
 
 ## Writing rules
+- Every topic: `::: {.core}` box right after the heading (**In short.** plain language, optional **Think of it as:** analogy) and `::: {.exam-say}` box at the end (**On the exam, be able to say:** 1–3 sentences; skip for optional/summary topics). Key formulas get a `::: {.in-words}` line; long derivations go in a collapsed "Deeper: …" callout.
+- `big-ideas.qmd` = one sentence per core idea with section links; extend it when sessions are added.
+- Cite articles with DOI links (verify via Crossref) and add them to `resources.qmd`.
 - English content; define abbreviations on first use per page.
 - Each session starts with intro, "Sources and session" and "Before you start" callouts. Misconceptions go in `::: {.misconception}` boxes. Method sections get "When to use" / "Limitations" callouts where useful.
 - Quiz options roughly equal length; the correct one must not stand out.

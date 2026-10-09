@@ -39,6 +39,10 @@ The second half introduces the methodological issues that come back in every lat
 
 ## 1.1 What is spatial data? {#t1-1 .topic flag="notes"}
 
+::: {.core}
+**In short.** Spatial data are ordinary data with a location attached. The location is stored either as exact shapes (**vector**: points, lines, polygons) or as a grid of cells (**raster**). Most of this course uses polygons: areas such as municipalities, each with a count or a rate.
+:::
+
 **Spatial data = information + location.** The information (an attribute: a disease rate, an income, a pollution level) is tied to a place. The information may change with location; that is the point of studying it spatially. Very occasionally spatial data contain only location (a list of clinic coordinates), but **without location the data are no longer spatial**.
 
 A spatial data file has two parts that belong together:
@@ -105,7 +109,15 @@ A home address is a single coordinate pair, a vector point. A pollution surface 
 :::
 ::::
 
+::: {.exam-say}
+**On the exam, be able to say:** Spatial data = information + location. Vector data store points, lines and polygons as coordinates; raster data store values in a regular grid of cells.
+:::
+
 ## 1.2 Spatial file formats: CSV, shapefile, GeoJSON {#t1-2 .topic flag="notes"}
+
+::: {.core}
+**In short.** A spatial file has to carry three things: the shapes, the data table and the coordinate system. A shapefile splits them over at least four files that must stay together; GeoJSON keeps everything in one file; a CSV works only for points with coordinate columns.
+:::
 
 | Format | What it is | Watch out for |
 |---|---|---|
@@ -139,7 +151,17 @@ Shapes and attributes load fine (`.shp`, `.shx`, `.dbf` are there). What is miss
 :::
 ::::
 
+::: {.exam-say}
+**On the exam, be able to say:** A shapefile has at least four parts in the same folder: .shp (geometry), .shx (index), .dbf (attribute table) and .prj (projection/CRS).
+:::
+
 ## 1.3 Coordinate reference systems and EPSG codes {#t1-3 .topic flag="inferred"}
+
+::: {.core}
+**In short.** Coordinates mean nothing without a **coordinate reference system** (CRS): it says where on Earth the numbers point and how the round Earth was flattened. Put all layers in the same CRS before combining them, and use a CRS in metres for distances.
+
+**Think of it as:** Currencies. "100" means nothing until you know whether it is kronor or euros, and you must convert before you add two amounts.
+:::
 
 The Earth is round; a map is flat. A **coordinate reference system (CRS)** says how coordinates relate to places on the Earth's surface, and for a projected CRS, which method was used to **flatten (project)** the surface onto two dimensions. Different projections give visibly different world maps: every projection distorts area, shape, distance or direction somehow.
 
@@ -173,7 +195,15 @@ In EPSG:4326, coordinates are in degrees, and one degree is not a fixed number o
 :::
 ::::
 
+::: {.exam-say}
+**On the exam, be able to say:** A CRS defines how coordinates relate to the Earth's surface; EPSG codes identify it. EPSG:4326 (WGS 84) is in degrees; projected systems such as SWEREF 99 TM (EPSG:3006) are in metres and are needed for distances and areas. Layers must share a CRS before they are joined.
+:::
+
 ## 1.4 Geocoding and Swedish small areas (DeSO) {#t1-4 .topic flag="notes"}
+
+::: {.core}
+**In short.** **Geocoding** turns an address into coordinates. Health data are usually reported for administrative areas; in Sweden the smallest standard unit is **DeSO**.
+:::
 
 **Geocoding** turns an address into coordinates (longitude and latitude), so that individuals can be placed on a map or linked to the area they live in. Geocoding can **fail or be wrong** (missing or misspelled addresses, rural addresses placed at a postcode centroid). Such errors are rarely random: they are more common in some kinds of areas, which can bias a spatial analysis (see [1.13](#t1-13)).
 
@@ -181,7 +211,15 @@ Most health data are reported for **administrative areas**: province, county, po
 
 Why the choice of unit matters is the subject of [1.10 Scale and MAUP](#t1-10).
 
+::: {.exam-say}
+**On the exam, be able to say:** Geocoding converts addresses to longitude/latitude; failures are often concentrated in some areas, so they are not random. DeSO are Sweden's small statistical areas of roughly 700–2,700 inhabitants.
+:::
+
 ## 1.5 John Snow and the 1854 cholera outbreak {#t1-5 .topic flag="inferred"}
+
+::: {.core}
+**In short.** In London in 1854, John Snow mapped cholera deaths and water pumps. Deaths clustered around one pump, and comparing households with different water supplies supported his idea that cholera spreads through water, not "bad air".
+:::
 
 The in-class activity: read [the story map](https://docs.google.com/presentation/d/e/2PACX-1vRFzOI-TRtjj_B792rNnqTSShBAEmRsXXl2S795acpcYGRAX1755m6oH0ntNYTX5mG3eObawPuF0p5k/pub?start=false&loop=false&delayms=3000&slide=id.g798c99946b_0_331){target="_blank"} (about 15 minutes) and answer three questions.
 
@@ -199,7 +237,15 @@ The map showed deaths clustered around the **Broad Street pump**. Exceptions wer
 "Snow's map proved the cause." The map alone shows clustering around a pump, which miasma could also explain (bad air near the pump). What made the argument strong was **theory** (a waterborne mechanism), **informative exceptions**, and a **comparison** between households with different water supply. A map starts the question; the comparison answers it.
 :::
 
+::: {.exam-say}
+**On the exam, be able to say:** Research question: what caused the outbreak and how cholera spreads. Competing hypotheses: miasma (bad air) vs contaminated water. Data: death locations (points), pump locations and water supply by household. Snow described, analysed and intervened (the pump handle).
+:::
+
 ## 1.6 Definitions of spatial epidemiology {#t1-6 .topic flag="objective"}
+
+::: {.core}
+**In short.** Spatial epidemiology studies **how disease varies between places, and why**. The newer, broader definition adds that the aim is also to **act**: to inform interventions that improve health.
+:::
 
 Three definitions from the slides, from narrow to broad:
 
@@ -211,7 +257,17 @@ Three definitions from the slides, from narrow to broad:
 
 The lecture notes record the first definition: *geographic variations in disease* with respect to demographic and other risk factors. Be able to reproduce one definition in your own words and say what the broader one adds: an explicit aim to explain and to intervene, not just to map.
 
+::: {.exam-say}
+**On the exam, be able to say:** Spatial epidemiology is the description and analysis of geographic variation in disease with respect to demographic, environmental, behavioural, socioeconomic, genetic and infectious risk factors. Morrison et al. broaden it to describe, analyse and intervene.
+:::
+
 ## 1.7 Describe → analyze → intervene (Morrison et al. 2024) {#t1-7 .topic flag="inferred"}
+
+::: {.core}
+**In short.** A study can **describe** (where is disease?), **analyse** (why there?) or **intervene** (what can we change?). A large review found many descriptive and analytic studies but **no** intervention studies.
+
+**Think of it as:** A doctor who is excellent at diagnosis and at explaining the illness, but never tests a treatment.
+:::
 
 [Morrison et al. (2024, *Epidemiology* 35(4):542–555)](https://doi.org/10.1097/EDE.0000000000001738){target="_blank"} reviewed the spatial epidemiology literature and asked whether the field is aligned with the broader goals of epidemiology.
 
@@ -236,7 +292,15 @@ flowchart LR
 
 From *where* to *why* requires more than a map: **pattern → theory → analysis**. Theory tells you which spatial units, exposures, pathways, confounders and mechanisms are meaningful.
 
+::: {.exam-say}
+**On the exam, be able to say:** Morrison et al. (2024) classified 482 papers: 122 descriptive, 167 analytic, 0 intervention. Spatial methods are tools, not the endpoint: the field should move from where to why to what can be done.
+:::
+
 ## 1.8 Why place matters for health {#t1-8 .topic flag="objective"}
+
+::: {.core}
+**In short.** Where people live shapes what they are exposed to (air, noise, food) and what they can reach (care, parks, schools). That is why **place itself** is studied as a determinant of health.
+:::
 
 Physical and social environments produce **health disparities**. Examples from the slides:
 
@@ -254,7 +318,15 @@ Three frameworks that put place inside epidemiology:
 
 The common message: place stands for **context**: access to food, care, education, green space and clean air.
 
+::: {.exam-say}
+**On the exam, be able to say:** Physical and social environments produce health disparities (for example distance to care, walkability, traffic exposure). Frameworks: social determinants of health, eco-epidemiology, multiple exposures across the life span.
+:::
+
 ## 1.9 Theoretical frameworks: social-ecological model and life course {#t1-9 .topic flag="notes"}
+
+::: {.core}
+**In short.** Two ways to organise the causes of health. The **social-ecological model** places the individual inside nested levels (relationships, organisations, community). The **life-course model** describes five steps through which social position becomes unequal health. Spatial data fit at the neighbourhood level.
+:::
 
 Both frameworks were written down in class.
 
@@ -281,7 +353,17 @@ Spatial data enter at the outer level: the neighbourhood and what is reachable f
 
 The in-class discussion question was *where spatial data and spatial epidemiology may be useful, and how*. A good answer links one mechanism to one spatial measure, as in the right-hand column.
 
+::: {.exam-say}
+**On the exam, be able to say:** Social-ecological model: individual, interpersonal, organisational and community levels. Diderichsen's five mechanisms: social stratification, differential exposure, differential vulnerability, differential consequences, and consequences for the individual and society.
+:::
+
 ## 1.10 Scale and the modifiable areal unit problem (MAUP) {#t1-10 .topic flag="objective"}
+
+::: {.core}
+**In short.** Results from area data depend on **which areas you use**. Make the areas bigger, or draw the borders differently, and the map and the statistics can change, even though the people are the same.
+
+**Think of it as:** Average grades by class, by school or by municipality: each level tells a different story about the same pupils.
+:::
 
 Health data are usually aggregated to **administrative zones** (province, county, postcode, census tract, DeSO). These units:
 
@@ -364,7 +446,17 @@ The individual-level correlation in this simulation is about `r round(cor(exposu
 Whenever results come from aggregated data: say which unit was used, ask whether conclusions hold at another scale, and prefer units that make sense for the mechanism (a health-care catchment for access to care, a smaller unit for air pollution).
 :::
 
+::: {.exam-say}
+**On the exam, be able to say:** MAUP: changing the spatial units (scale effect: their size; zoning effect: where the borders go) can change results and interpretations even though the underlying data are the same.
+:::
+
 ## 1.11 The ecological fallacy {#t1-11 .topic flag="objective"}
+
+::: {.core}
+**In short.** A pattern **between areas** does not have to hold for the **individuals** in them.
+
+**Think of it as:** A neighbourhood with high income and many votes for one party does not prove that the rich residents voted for that party.
+:::
 
 **Ecological fallacy** ([Robinson 1950](https://doi.org/10.2307/2087176){target="_blank"}): drawing **incorrect inferences about individuals from group-level data**.
 
@@ -423,7 +515,17 @@ The data are at municipality level. Whether the individuals with diabetes ate fa
 :::
 ::::
 
+::: {.exam-say}
+**On the exam, be able to say:** The ecological fallacy is drawing conclusions about individuals from group-level data. It differs from the MAUP, which is about area-level results changing with the choice of areas.
+:::
+
 ## 1.12 Spatial dependence and spatial heterogeneity {#t1-12 .topic flag="objective"}
+
+::: {.core}
+**In short.** **Dependence:** neighbours tend to be alike. **Heterogeneity:** the rules themselves change from place to place.
+
+**Think of it as:** Dependence: houses on the same street have similar prices. Heterogeneity: an extra room adds more to the price in Stockholm than in a small town.
+:::
 
 These are the two properties that make spatial data special, and they motivate every method in the rest of the course.
 
@@ -461,7 +563,15 @@ A relationship (temperature → admissions) that changes across space is heterog
 :::
 ::::
 
+::: {.exam-say}
+**On the exam, be able to say:** Spatial dependence (Tobler's first law): nearby observations are more similar than distant ones; measured by Moran's I. Spatial heterogeneity: processes or relationships differ by location, so one global model can miss local patterns.
+:::
+
 ## 1.13 Other issues: reporting, geocoding, boundaries, sparse counts {#t1-13 .topic flag="objective"}
+
+::: {.core}
+**In short.** A map can show the **data system** instead of the disease: missed reports, failed geocoding, changing borders and tiny populations all create patterns that are not real.
+:::
 
 The slides list four further problems. Each is a form of **bias** in spatial data (the course syllabus asks you to reflect on bias from **aggregation, measurement and missing data**):
 
@@ -472,7 +582,15 @@ The slides list four further problems. Each is a form of **bias** in spatial dat
 | **Boundary changes over time** | Areas merge or split, so rates before and after are not comparable (inconsistent geography) |
 | **Differences in population size / sparse counts** | Small areas give unstable rates: extreme values may be chance, not risk. Session 2 (smoothing) and Session 4 (Bayesian disease mapping) deal with this |
 
+::: {.exam-say}
+**On the exam, be able to say:** Sources of bias: geographically varying reporting, geocoding failures (missing not at random), boundary changes over time, and unstable rates from small populations.
+:::
+
 ## 1.14 Tools: GIS, R and GeoDa {#t1-14 .topic flag="notes"}
+
+::: {.core}
+**In short.** **GIS** is the toolbox for storing, linking, mapping and analysing data by location. The course uses R and GeoDa.
+:::
 
 **GIS (geographic information systems)** and related geospatial methods made spatial epidemiology practical: storing, linking, mapping and analysing data by location. Researchers use R, Stata, ArcGIS, GeoDa, Python and others.
 

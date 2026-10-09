@@ -1684,6 +1684,10 @@ window.Quarto = {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./big-ideas.html"> 
+<span class="menu-text">Big ideas</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./dashboard.html"> 
 <span class="menu-text">Dashboard</span></a>
   </li>  
@@ -1753,6 +1757,12 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./big-ideas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The big ideas</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dashboard.html" class="sidebar-item-text sidebar-link">
@@ -2242,6 +2252,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <section id="t4-1" class="level2 topic" data-flag="keyq">
 <h2 class="topic anchored" data-flag="keyq" data-anchor-id="t4-1">4.1 Same SMR, very different information</h2>
+<div class="core">
+<p><strong>In short.</strong> An SMR of 3 based on 3 cases is mostly noise; based on 300 cases it is solid. <strong>The ratio hides how much data lies behind it.</strong></p>
+<p><strong>Think of it as:</strong> Three heads in three coin flips says little about the coin; 300 heads in 400 flips says a lot.</p>
+</div>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -2285,9 +2299,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Same SMR, different information: the uncertainty depends on the size of the counts (SE ≈ SMR/√Y). Area A (3/1) is compatible with a wide range of risks; area B (300/100) is not.</p>
+</div>
 </section>
 <section id="t4-2" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t4-2">4.2 Start with the estimand: which likelihood?</h2>
+<div class="core">
+<p><strong>In short.</strong> Choose the model from the data: <strong>people with or without a condition out of N examined</strong> → Binomial; <strong>new events over time</strong> → Poisson with person-time; <strong>observed vs expected</strong> → Poisson with E.</p>
+</div>
 <p>First ask <strong>what is observed, what the denominator or reference is, and what quantity you want to estimate</strong>.</p>
 <table class="caption-top table">
 <colgroup>
@@ -2363,13 +2383,22 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div class="drill" data-drill="likelihood">
 
 </div>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Incidence: Poisson(PTᵢλᵢ), target rate. Prevalence: Binomial(Nᵢ, pᵢ), target probability. Disease mapping: Poisson(Eᵢθᵢ), target relative risk. A count is not automatically Poisson; BYM2 can be used with either.</p>
+</div>
 </section>
 <section id="t4-3" class="level2 topic" data-flag="inferred">
 <h2 class="topic anchored" data-flag="inferred" data-anchor-id="t4-3">4.3 Observed and expected counts; indirect standardization</h2>
+<div class="core">
+<p><strong>In short.</strong> The expected count is the number of cases the area <strong>would have if its people had the reference rates</strong> (by age and sex). Comparing observed with expected removes differences in age structure.</p>
+</div>
 <p>The classical disease-mapping model:</p>
 <p><span class="math display">\[
 Y_i \sim \text{Poisson}(E_i\,\theta_i)
 \]</span></p>
+<div class="in-words">
+<p><strong>In words:</strong> the observed count is random around <strong>expected count × relative risk</strong>; θᵢ is what we want to know.</p>
+</div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -2425,9 +2454,15 @@ E_i = \sum_a n_{ia}\, r^*_a
 <div class="drill" data-drill="smrstd">
 
 </div>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Eᵢ = Σₐ nᵢₐ r*ₐ (indirect standardization). Yᵢ ~ Poisson(Eᵢθᵢ) is a Poisson regression with offset log Eᵢ and log θᵢ as linear predictor.</p>
+</div>
 </section>
 <section id="t4-4" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t4-4">4.4 The SMR as the crude estimate</h2>
+<div class="core">
+<p><strong>In short.</strong> The SMR is the <strong>crude, unsmoothed</strong> estimate of the relative risk: simple, but unstable when E is small.</p>
+</div>
 <p><span class="math display">\[
 \text{SMR}_i = Y_i / E_i
 \]</span></p>
@@ -2451,9 +2486,15 @@ E_i = \sum_a n_{ia}\, r^*_a
 </tbody>
 </table>
 <p><strong>Extreme ≠ necessarily high underlying risk.</strong> An area with E = 0.5 and Y = 2 has SMR = 4, and with Y = 0 has SMR = 0, both from essentially no information. The variance of the SMR is roughly θᵢ/Eᵢ: the smaller Eᵢ, the noisier.</p>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> SMRᵢ = Yᵢ/Eᵢ, the estimate of θᵢ without smoothing. Simple and transparent, but extreme values from small denominators need not mean high risk.</p>
+</div>
 </section>
 <section id="t4-5" class="level2 topic" data-flag="inferred">
 <h2 class="topic anchored" data-flag="inferred" data-anchor-id="t4-5">4.5 One Bayesian idea: combine data with a model for plausible risks</h2>
+<div class="core">
+<p><strong>In short.</strong> Bayesian disease mapping <strong>combines what each area’s data say with a model of how areas relate</strong>, giving an updated estimate with uncertainty.</p>
+</div>
 <p><span class="math display">\[
 \text{posterior} \;\propto\; \text{likelihood} \times \text{prior}
 \]</span></p>
@@ -2484,9 +2525,16 @@ E_i = \sum_a n_{ia}\, r^*_a
 </tbody>
 </table>
 <p><strong>The key modelling decision: how should information be shared across areas?</strong> Not at all (SMR), with all areas equally (unstructured), or more with neighbours (spatial).</p>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Posterior ∝ likelihood × prior. The key modelling decision is how areas share information.</p>
+</div>
 </section>
 <section id="t4-6" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t4-6">4.6 Partial pooling and shrinkage</h2>
+<div class="core">
+<p><strong>In short.</strong> Partial pooling: each area’s estimate is a <strong>compromise between its own data and the common pattern</strong>. Little data → pulled more (shrinkage).</p>
+<p><strong>Think of it as:</strong> Restaurant ratings again: few reviews → trust the typical rating more; many reviews → trust the restaurant’s own rating.</p>
+</div>
 <p>Extreme, noisy estimates move toward the common pattern.</p>
 <div class="worked">
 <table class="caption-top table">
@@ -2575,12 +2623,21 @@ Figure&nbsp;1: Shrinkage with the illustrative numbers from slide 15. Areas A an
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>The smoothed estimates for small-E areas collapse toward the overall level; large-E areas barely move. Plots side by side make the comparison direct.</p>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Shrinkage moves noisy estimates toward the common pattern: data-poor areas shrink more, data-rich areas keep their signal. It is weighting, not making areas equal.</p>
+</div>
 </section>
 <section id="t4-7" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t4-7">4.7 Unstructured heterogeneity: areas differ independently</h2>
+<div class="core">
+<p><strong>In short.</strong> An <strong>unstructured</strong> random effect lets each area differ from the average, regardless of where it lies. It shrinks toward the <strong>overall</strong> mean but ignores geography.</p>
+</div>
 <p><span class="math display">\[
 \log \theta_i = \alpha + v_i, \qquad v_i \sim \text{Normal}(0, \sigma_v^2)
 \]</span></p>
+<div class="in-words">
+<p><strong>In words:</strong> each area’s log relative risk = a common level + its own deviation, and all deviations come from <strong>one shared bell curve</strong>.</p>
+</div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -2602,9 +2659,16 @@ Figure&nbsp;1: Shrinkage with the illustrative numbers from slide 15. Areas A an
 </tbody>
 </table>
 <p>Every area is shrunk toward the <strong>same global level</strong>, regardless of where it is. This is the fully Bayesian version of Session 2’s Empirical Bayes idea.</p>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> log θᵢ = α + vᵢ, vᵢ ~ N(0, σᵥ²), independent: partial pooling (shrinkage) but no spatial smoothing.</p>
+</div>
 </section>
 <section id="t4-8" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t4-8">4.8 Spatial smoothing: the CAR / ICAR prior</h2>
+<div class="core">
+<p><strong>In short.</strong> The spatial (ICAR) prior says: an area’s hidden risk is probably <strong>close to the average of its neighbours’</strong>. Areas with many neighbours borrow more.</p>
+<p><strong>Think of it as:</strong> Guessing a house’s price from the houses on the same street.</p>
+</div>
 <p>Geography matters: neighbouring areas may share latent risk because they share</p>
 <ul>
 <li><strong>environment</strong> (air pollution, built environment, climate);</li>
@@ -2616,6 +2680,9 @@ Figure&nbsp;1: Shrinkage with the illustrative numbers from slide 15. Areas A an
 <p><span class="math display">\[
 u_i \mid u_{-i} \;\sim\; \text{Normal}\!\left(\frac{\sum_j w_{ij} u_j}{n_i},\; \frac{\sigma_u^2}{n_i}\right)
 \]</span></p>
+<div class="in-words">
+<p><strong>In words:</strong> given its neighbours, an area’s spatial effect is expected to be <strong>near their average</strong>, and the more neighbours it has, the closer.</p>
+</div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -2644,9 +2711,15 @@ u_i \mid u_{-i} \;\sim\; \text{Normal}\!\left(\frac{\sum_j w_{ij} u_j}{n_i},\; \
 </table>
 <p><strong>Intuition (slide 18).</strong> If A and C have similar spatial effects, the prior encourages B, between them, to be similar, <strong>unless B’s own data strongly disagree</strong>. This is <strong>borrowing strength through geography</strong>.</p>
 <p>For this course: understand the mechanism; you do not need to derive the joint distribution.</p>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> ICAR: uᵢ given the others is normal with mean = average of the neighbours’ u and variance σᵤ²/nᵢ. More neighbours, more conditional precision. Borrowing strength through geography.</p>
+</div>
 </section>
 <section id="t4-9" class="level2 topic" data-flag="keyq">
 <h2 class="topic anchored" data-flag="keyq" data-anchor-id="t4-9">4.9 Partial pooling vs spatial smoothing</h2>
+<div class="core">
+<p><strong>In short.</strong> Partial pooling borrows from <strong>all areas</strong>; spatial smoothing borrows from <strong>neighbours</strong>.</p>
+</div>
 <p><strong>Key question 2:</strong> <em>what is the difference between partial pooling and spatial smoothing?</em></p>
 <table class="caption-top table">
 <colgroup>
@@ -2699,9 +2772,15 @@ Figure&nbsp;2: Simulated map of 100 small areas (expected counts 0.5 to 15). The
 </div>
 </div>
 <p>Both shrink noisy small-area estimates. <strong>Spatial smoothing is a particular kind of partial pooling</strong> where the “group” an area borrows from is its neighbourhood.</p>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Unstructured pooling shrinks toward the global mean and ignores the map; spatial smoothing shrinks toward the neighbourhood mean using W. Spatial smoothing is a geographic form of partial pooling.</p>
+</div>
 </section>
 <section id="t4-10" class="level2 topic" data-flag="inferred">
 <h2 class="topic anchored" data-flag="inferred" data-anchor-id="t4-10">4.10 The neighbourhood graph returns, in a different role</h2>
+<div class="core">
+<p><strong>In short.</strong> The same neighbour list W returns, but now it says <strong>which areas’ hidden risks should be similar</strong>, not how observed values are linked.</p>
+</div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -2728,9 +2807,16 @@ Figure&nbsp;2: Simulated map of 100 small areas (expected counts 0.5 to 15). The
 </section>
 <section id="t4-11" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t4-11">4.11 The Besag–York–Mollié (BYM) model: why both uᵢ and vᵢ</h2>
+<div class="core">
+<p><strong>In short.</strong> BYM = <strong>overall level + a spatial part</strong> (neighbours similar) <strong>+ a non-spatial part</strong> (area-specific deviations).</p>
+<p><strong>Think of it as:</strong> Your height = what you share with your family + what is just you. Leave out either part and the explanation is wrong.</p>
+</div>
 <p><span class="math display">\[
 Y_i \sim \text{Poisson}(E_i \theta_i), \qquad \log \theta_i = \alpha + u_i + v_i
 \]</span></p>
+<div class="in-words">
+<p><strong>In words:</strong> log relative risk = common level + <strong>a part shared with neighbours</strong> + <strong>a part that is the area’s own</strong>.</p>
+</div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -2757,7 +2843,7 @@ Y_i \sim \text{Poisson}(E_i \theta_i), \qquad \log \theta_i = \alpha + u_i + v_i
 </tr>
 </tbody>
 </table>
-<p><strong>Two kinds of residual variation: spatial pattern + local noise.</strong> Not all between-area variation needs to be spatially structured.</p>
+<p><strong>Two kinds of residual variation: spatial pattern + local noise.</strong> The model is named after <a href="https://doi.org/10.1007/BF00116466" target="_blank">Besag, York &amp; Mollié (1991)</a> (original paper, not required). Not all between-area variation needs to be spatially structured.</p>
 <p><strong>Key question 3:</strong> <em>why include both structured and unstructured variation?</em></p>
 <ul>
 <li><strong>Structured uᵢ</strong> captures smooth or clustered geographic pattern: if one area is high, its neighbours are compatible with being high.</li>
@@ -2767,9 +2853,16 @@ Y_i \sim \text{Poisson}(E_i \theta_i), \qquad \log \theta_i = \alpha + u_i + v_i
 </ul>
 <p>Including both lets the <strong>data decide</strong> how much of the extra variation is spatial.</p>
 <p>Both components represent <strong>unexplained</strong> variation in underlying risk; the distinction between them is <strong>statistical</strong>, not a claim about causes.</p>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> log θᵢ = α + uᵢ + vᵢ: uᵢ structured (ICAR), vᵢ unstructured. Without vᵢ everything is forced into the spatial surface (over-smoothing); without uᵢ geography is ignored.</p>
+</div>
 </section>
 <section id="t4-12" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t4-12">4.12 BYM2: separating overall variability from the spatial fraction</h2>
+<div class="core">
+<p><strong>In short.</strong> BYM2 rewrites BYM with two easy dials: <strong>τ</strong>, how much unexplained variation there is overall, and <strong>ρ</strong>, how much of it is spatial (0 = none, 1 = all).</p>
+<p><strong>Think of it as:</strong> A volume knob (τ: how much variation) and a balance knob (ρ: spatial vs non-spatial).</p>
+</div>
 <p><strong>The problem with classic BYM</strong> (slide 23):</p>
 <ul>
 <li>the marginal variability of uᵢ depends on the <strong>entire neighbourhood graph</strong>;</li>
@@ -2780,6 +2873,9 @@ Y_i \sim \text{Poisson}(E_i \theta_i), \qquad \log \theta_i = \alpha + u_i + v_i
 <p><span class="math display">\[
 \log \theta_i = \alpha + \frac{1}{\sqrt{\tau}}\left(\sqrt{\rho}\; u_i^{*} + \sqrt{1 - \rho}\; v_i\right)
 \]</span></p>
+<div class="in-words">
+<p><strong>In words:</strong> the same two parts as BYM, but mixed with a <strong>balance dial</strong> ρ (how much is spatial) and scaled by one <strong>volume dial</strong> 1/√τ (how much unexplained variation in total).</p>
+</div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -2806,7 +2902,7 @@ Y_i \sim \text{Poisson}(E_i \theta_i), \qquad \log \theta_i = \alpha + u_i + v_i
 </tr>
 </tbody>
 </table>
-<p>This is the parameterization commonly used in modern Bayesian disease mapping.</p>
+<p>This is the parameterization commonly used in modern Bayesian disease mapping. Original paper (not required): <a href="https://doi.org/10.1177/0962280216660421" target="_blank">Riebler et al.&nbsp;(2016)</a>.</p>
 <p><strong>Interpreting ρ:</strong></p>
 <table class="caption-top table">
 <colgroup>
@@ -2853,9 +2949,15 @@ Figure&nbsp;3: What the BYM2 mixing parameter ρ does, simulated on a 12 × 12 g
   <div class="q-opt" data-correct="false">The covariates explain 85% of the variation between the areas</div>
   <div class="q-exp">τ is a precision, so a large τ means small residual variability. ρ near 1 means the residual variation that exists is mostly structured. ρ is not a causal share of cases and not an R².</div>
 </div>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> BYM2: log θᵢ = α + (1/√τ)(√ρ·uᵢ* + √(1−ρ)·vᵢ). Larger τ = less residual variation. ρ is the share of residual variation that is spatially structured, not the share of disease caused by space.</p>
+</div>
 </section>
 <section id="t4-13" class="level2 topic" data-flag="inferred">
 <h2 class="topic anchored" data-flag="inferred" data-anchor-id="t4-13">4.13 Priors: what are we putting priors on?</h2>
+<div class="core">
+<p><strong>In short.</strong> Priors go on the fixed effects, the overall variability and the spatial share. They decide <strong>how much</strong> and <strong>what kind</strong> of smoothing happens.</p>
+</div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -2887,18 +2989,30 @@ Figure&nbsp;3: What the BYM2 mixing parameter ρ does, simulated on a 12 × 12 g
 <li>A prior on the <strong>overall variability</strong> influences <strong>how much</strong> smoothing occurs.</li>
 <li>A prior on the <strong>spatial mixing</strong> influences the <strong>type</strong> of smoothing.</li>
 </ul>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> A prior on the overall variability affects how much smoothing occurs; a prior on the mixing parameter affects the type of smoothing. Priors regularize complexity; check sensitivity.</p>
+</div>
 </section>
 <section id="t4-14" class="level2 topic" data-flag="optional">
 <h2 class="topic anchored" data-flag="optional" data-anchor-id="t4-14">4.14 Penalized-complexity (PC) priors</h2>
+<div class="core">
+<p><strong>In short.</strong> PC priors prefer the <strong>simpler model</strong> unless the data clearly ask for more.</p>
+</div>
 <p>Marked <strong>optional depth</strong> on the slide.</p>
-<p><strong>Idea:</strong> start from a simpler <strong>base model</strong> (for BYM2: no residual variation, or no spatial structure) and <strong>penalise departures</strong> from it, so complexity is only used when the data support it.</p>
+<p><strong>Idea:</strong> start from a simpler <strong>base model</strong> (for BYM2: no residual variation, or no spatial structure) and <strong>penalise departures</strong> from it, so complexity is only used when the data support it. Original paper (not required): <a href="https://doi.org/10.1214/16-STS576" target="_blank">Simpson et al.&nbsp;(2017)</a>.</p>
 <p><strong>Why useful:</strong> hyperpriors can be stated as <strong>interpretable probability statements</strong> about plausible effect sizes, for example “P(residual SD &gt; 1) = 0.01” or “P(ρ &lt; 0.5) = 2/3”, rather than arbitrary values for a precision parameter. This is a common strategy with INLA and BYM2.</p>
 </section>
 <section id="t4-15" class="level2 topic" data-flag="inferred">
 <h2 class="topic anchored" data-flag="inferred" data-anchor-id="t4-15">4.15 Adding area-level covariates</h2>
+<div class="core">
+<p><strong>In short.</strong> Covariates can be added; <strong>exp(β)</strong> is the ratio of relative risks per unit of x. It is still an <strong>area-level</strong>, not causal, association.</p>
+</div>
 <p><span class="math display">\[
 \log \theta_i = \alpha + X_i\beta + u_i + v_i
 \]</span></p>
+<div class="in-words">
+<p><strong>In words:</strong> as BYM, plus a covariate; <strong>exp(β)</strong> is how many times higher the relative risk is per unit of x.</p>
+</div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -2924,9 +3038,15 @@ Figure&nbsp;3: What the BYM2 mixing parameter ρ does, simulated on a 12 × 12 g
 <div class="drill" data-drill="logrr">
 
 </div>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> exp(β) = relative-risk ratio for a one-unit difference in X, conditional on the model. Spatial random effects do not remove confounding or make β causal.</p>
+</div>
 </section>
 <section id="t4-16" class="level2 topic" data-flag="objective">
 <h2 class="topic anchored" data-flag="objective" data-anchor-id="t4-16">4.16 What the posterior gives: relative risks, credible intervals, exceedance</h2>
+<div class="core">
+<p><strong>In short.</strong> For every area the model gives a <strong>whole distribution</strong> of possible risks. Summarise it as a point estimate, a credible interval and the probability that risk exceeds a threshold.</p>
+</div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -3002,9 +3122,15 @@ Figure&nbsp;3: What the BYM2 mixing parameter ρ does, simulated on a 12 × 12 g
 </tbody>
 </table>
 <p>The choice of c should be tied to the <strong>scientific or decision context</strong>, not chosen to make a map look interesting. A map of exceedance probabilities can be more informative than thresholding a map of point estimates. A common convention flags areas with P(θᵢ &gt; 1) above 0.8 or 0.95.</p>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Posterior mean/median (smoothed RR), 95% credible interval (95% posterior probability given model and priors; not the confidence-interval statement), exceedance probability P(θᵢ &gt; c | data).</p>
+</div>
 </section>
 <section id="t4-17" class="level2 topic" data-flag="keyq">
 <h2 class="topic anchored" data-flag="keyq" data-anchor-id="t4-17">4.17 Higher posterior RR does not always mean stronger evidence</h2>
+<div class="core">
+<p><strong>In short.</strong> A bigger estimate is <strong>not</strong> stronger evidence. Look at the interval and the exceedance probability too.</p>
+</div>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -3050,9 +3176,15 @@ Figure&nbsp;4: Posterior distributions for the two areas on slide 32, approximat
 <div class="drill" data-drill="exceed">
 
 </div>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Magnitude and certainty are different: a small area can have a high posterior mean with a wide interval (weak evidence), a large area a modest but precise excess (strong evidence).</p>
+</div>
 </section>
 <section id="t4-18" class="level2 topic" data-flag="inferred">
 <h2 class="topic anchored" data-flag="inferred" data-anchor-id="t4-18">4.18 Raw SMR → non-spatial smoothing → spatial smoothing</h2>
+<div class="core">
+<p><strong>In short.</strong> Raw SMR: no borrowing. Unstructured model: borrow from all areas. BYM/BYM2: borrow from all areas <strong>and</strong> from neighbours.</p>
+</div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -3096,9 +3228,15 @@ Figure&nbsp;4: Posterior distributions for the two areas on slide 32, approximat
 </tbody>
 </table>
 <p><strong>The gain is not merely a prettier map: it is a model-based estimate of latent risk with uncertainty.</strong> Unstructured hierarchical models borrow through a shared distribution; BYM2 additionally uses spatial relationships.</p>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> The gain is a model-based estimate of latent risk with uncertainty, not just a prettier map.</p>
+</div>
 </section>
 <section id="t4-19" class="level2 topic" data-flag="inferred">
 <h2 class="topic anchored" data-flag="inferred" data-anchor-id="t4-19">4.19 Cautions: smoothing can hide real boundaries; islands</h2>
+<div class="core">
+<p><strong>In short.</strong> Smoothing assumes neighbours are alike. Where a <strong>real border</strong> separates them, or an area has <strong>no neighbours</strong>, it can mislead.</p>
+</div>
 <p><strong>Spatial smoothing can hide real boundaries</strong> (slide 34):</p>
 <ul>
 <li>administrative neighbours <strong>need not share the same underlying process</strong>;</li>
@@ -3108,9 +3246,15 @@ Figure&nbsp;4: Posterior distributions for the two areas on slide 32, approximat
 </ul>
 <p>Borrowing strength helps <strong>when the borrowing assumption is plausible</strong>.</p>
 <p><strong>Islands / areas with no neighbours</strong> (slide 35). An ICAR component is defined through the neighbourhood graph, so an isolated area has <strong>no adjacency information to borrow from</strong>. Handling: check the graph carefully; define meaningful connections when scientifically justified (for example a ferry link); otherwise rely on the unstructured component or the software’s handling. <strong>Always inspect the neighbourhood graph before fitting.</strong> (Compare isolates in <a href="./session2.html#t2-9">Session 2</a>.)</p>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Smoothing can hide real discontinuities (rivers, catchment borders) and attenuate sharp local signals; the adjacency definition is a substantive choice. Islands have no neighbours to borrow from.</p>
+</div>
 </section>
 <section id="t4-20" class="level2 topic" data-flag="inferred">
 <h2 class="topic anchored" data-flag="inferred" data-anchor-id="t4-20">4.20 Workflow and model checking</h2>
+<div class="core">
+<p><strong>In short.</strong> Define the outcome, build the neighbour graph, fit, <strong>check</strong>, and report risk <strong>with</strong> its uncertainty.</p>
+</div>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -3162,6 +3306,9 @@ Figure&nbsp;4: Posterior distributions for the two areas on slide 32, approximat
 </section>
 <section id="t4-21" class="level2 topic" data-flag="optional">
 <h2 class="topic anchored" data-flag="optional" data-anchor-id="t4-21">4.21 Why INLA is common</h2>
+<div class="core">
+<p><strong>In short.</strong> INLA is a <strong>fast way to compute</strong> the results of models like BYM2. The details are not part of the course.</p>
+</div>
 <p>You are <strong>not expected to understand the computational details</strong> of INLA (Canvas post).</p>
 <table class="caption-top table">
 <colgroup>
@@ -3183,11 +3330,14 @@ Figure&nbsp;4: Posterior distributions for the two areas on slide 32, approximat
 </tr>
 </tbody>
 </table>
-<p>INLA is a <strong>computational approach</strong>: it does not change the model, only how the posterior is approximated.</p>
+<p>INLA is a <strong>computational approach</strong>: it does not change the model, only how the posterior is approximated. Original paper (not required): <a href="https://doi.org/10.1111/j.1467-9868.2008.00700.x" target="_blank">Rue, Martino &amp; Chopin (2009)</a>.</p>
 <p>Optional reading (Canvas post): <a href="https://becarioprecario.bitbucket.io/inla-gitbook/" target="_blank">Gómez-Rubio, <em>Bayesian Inference with INLA</em></a>. Not required reading.</p>
 </section>
 <section id="t4-22" class="level2 topic" data-flag="inferred">
 <h2 class="topic anchored" data-flag="inferred" data-anchor-id="t4-22">4.22 A high-risk area is not a causal explanation</h2>
+<div class="core">
+<p><strong>In short.</strong> A high-risk area on a map is a <strong>description, not a cause</strong>.</p>
+</div>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -3235,6 +3385,9 @@ Figure&nbsp;4: Posterior distributions for the two areas on slide 32, approximat
 </tbody>
 </table>
 <p>Both require you to make the spatial mechanism explicit.</p>
+<div class="exam-say">
+<p><strong>On the exam, be able to say:</strong> Elevated posterior risk ≠ causal explanation: ecological inference, spatial confounding and the MAUP all limit interpretation.</p>
+</div>
 </section>
 <section id="t4-23" class="level2 topic" data-flag="keyq">
 <h2 class="topic anchored" data-flag="keyq" data-anchor-id="t4-23">4.23 Checkpoint: reconstruct the logic</h2>

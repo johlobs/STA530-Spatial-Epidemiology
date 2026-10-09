@@ -47,6 +47,10 @@ The session's emphasis is conceptual: what ρ and λ mean, why SAR coefficients 
 
 ## 3.1 OLS with spatial data: the assumption that can fail {#t3-1 .topic flag="objective"}
 
+::: {.core}
+**In short.** Ordinary regression assumes that what the model misses (the residuals) is **unrelated between observations**. With areas, neighbouring residuals are often alike, which makes standard errors too small and can bias the results.
+:::
+
 The familiar model:
 
 $$
@@ -83,7 +87,15 @@ Why it matters:
 "If I include enough covariates, spatial dependence goes away." Sometimes, if the covariates capture the spatial process. But clustered residuals can remain after adjustment, and the next step is to ask **why** ([3.2](#t3-2)), not to add variables blindly.
 :::
 
+::: {.exam-say}
+**On the exam, be able to say:** OLS assumes no remaining spatial dependence in the errors after accounting for X. Spatially autocorrelated residuals mean understated uncertainty and possibly biased coefficients.
+:::
+
 ## 3.2 After adjustment, neighbouring residuals are similar: what could it mean? {#t3-2 .topic flag="keyq"}
+
+::: {.core}
+**In short.** If residuals still cluster after adjustment, ask **why**: outcomes spreading between areas, a missing spatially patterned factor, or a wrongly specified model.
+:::
 
 The slide's example: area-level **cardiovascular mortality** modelled with age structure, income, smoking prevalence and urbanicity. After adjustment, neighbouring areas still have similar residuals. Possible explanations:
 
@@ -95,7 +107,15 @@ The slide's example: area-level **cardiovascular mortality** modelled with age s
 
 For cardiovascular mortality, A is hard to defend (deaths in one area do not cause deaths next door). B and C are more plausible.
 
+::: {.exam-say}
+**On the exam, be able to say:** Three explanations: a spatial process linking outcomes (SAR), an omitted spatially patterned determinant (SEM), or misspecification/heterogeneity.
+:::
+
 ## 3.3 The new ingredient: the spatially lagged outcome Wy {#t3-3 .topic flag="objective"}
+
+::: {.core}
+**In short.** **Wy** is simply "the average outcome of my neighbours".
+:::
 
 - **W** defines who is a neighbour and how much each counts (Session 2).
 - **y** is the outcome in every area.
@@ -116,9 +136,19 @@ Four areas in a row A – B – C – D, rook neighbours, row-standardized:
 
 ## 3.4 The spatial lag model (SAR) and ρ {#t3-4 .topic flag="objective"}
 
+::: {.core}
+**In short.** SAR adds the **neighbours' average outcome** as a predictor: y depends on the y next door. ρ says how strongly.
+
+**Think of it as:** Contagion: an area's rate rises when its neighbours' rates rise.
+:::
+
 $$
 y = \rho W y + X\beta + \varepsilon
 $$
+
+::: {.in-words}
+**In words:** an area's outcome = ρ times its **neighbours' average outcome** + the usual covariate part + noise.
+:::
 
 | Parameter | Meaning |
 |---|---|
@@ -137,8 +167,20 @@ $$
 Optional, from the Canvas post. Luc Anselin's lecture series *Applied Spatial Regression Analysis* goes beyond STA530 in places.
 :::
 
+::: {.exam-say}
+**On the exam, be able to say:** SAR: y = ρWy + Xβ + ε. ρ measures how strongly outcomes are linked through W; y is jointly determined across neighbours.
+:::
+
 ## 3.5 Why SAR creates feedback: direct, indirect and total impacts {#t3-5 .topic flag="objective"}
 
+::: {.core}
+**In short.** In SAR, changing x in one area **spreads to the neighbours and comes back**. So the total effect of x is larger than β and splits into a **direct** part (own area, including feedback) and an **indirect** spillover part (other areas).
+
+**Think of it as:** A stone dropped in a pond: ripples spread outward and bounce back.
+:::
+
+::: {.callout-note collapse="true"}
+## Deeper: where the feedback comes from (the Neumann series)
 Solve the SAR model for y:
 
 $$
@@ -155,6 +197,7 @@ The expansion (the **Neumann series**, the matrix version of a geometric series)
 | ρW | One step: to the neighbours |
 | ρ²W² | Two steps: neighbours of neighbours, **including feedback** back to the starting area |
 | ρ³W³, … | Continued propagation through the network |
+:::
 
 **Intuition.** Raise x in area B. That changes y in B, which (through ρW) changes y in A and C, which feeds back to B, and so on. So **β is not the complete impact of x**.
 
@@ -237,7 +280,15 @@ round(neumann * beta, 3)
 Optional, from the Canvas post. Luc Anselin's lecture series *Applied Spatial Regression Analysis* goes beyond STA530 in places.
 :::
 
+::: {.exam-say}
+**On the exam, be able to say:** Because of feedback, β is not the full effect. Report direct, indirect (spillover) and total impacts; with row-standardized W the total impact is β/(1 − ρ).
+:::
+
 ## 3.6 Is a SAR story plausible in epidemiology? {#t3-6 .topic flag="keyq"}
+
+::: {.core}
+**In short.** Choose SAR only if it is plausible that **outcomes truly affect each other** across borders: infections yes, cancer deaths hardly.
+:::
 
 The equation may fit the data; the **scientific mechanism still needs to make sense**.
 
@@ -247,11 +298,25 @@ The equation may fit the data; the **scientific mechanism still needs to make se
 | **Health behaviours** | **Plausible**: social interaction or diffusion can cross administrative boundaries |
 | **Cancer mortality** | **Hard to defend**: neighbouring mortality rates do not "cause" one another. Similar rates nearby more likely reflect shared, partly unmeasured exposures → SEM |
 
+::: {.exam-say}
+**On the exam, be able to say:** SAR fits a genuine cross-area outcome process (infectious disease, diffusion of behaviours). For outcomes such as cancer mortality the mechanism is implausible; correlated errors (SEM) are a better story.
+:::
+
 ## 3.7 The spatial error model (SEM) and λ {#t3-7 .topic flag="objective"}
+
+::: {.core}
+**In short.** SEM keeps ordinary regression but lets the **errors** of neighbouring areas be correlated: something unmeasured and spatially smooth is shared. λ says how strongly.
+
+**Think of it as:** Neighbours who share the same weather: their outcomes are alike, not because they affect each other, but because of a common cause nobody measured.
+:::
 
 $$
 y = X\beta + u, \qquad u = \lambda W u + \varepsilon
 $$
+
+::: {.in-words}
+**In words:** an ordinary regression, except that the **error** of each area = λ times its neighbours' errors + fresh noise.
+:::
 
 | Parameter | Meaning |
 |---|---|
@@ -276,7 +341,17 @@ SEM can be viewed as **modelling residual spatial structure that X did not expla
 "ρ and λ are the same thing in different models." Both measure spatial dependence, but in different places. ρ links **outcomes** (and so changes how β is interpreted, through feedback). λ links **errors** (β keeps its usual meaning; the dependence mainly affects efficiency and standard errors). Also note: ρ in SAR is unrelated to the ρ mixing parameter in BYM2 ([Session 4](session4.qmd#t4-12)), which shares only the letter.
 :::
 
+::: {.exam-say}
+**On the exam, be able to say:** SEM: y = Xβ + u, u = λWu + ε. λ measures spatial dependence in the unexplained part. β is read as in OLS (no spillovers).
+:::
+
 ## 3.8 SAR vs SEM: same symptom, different story {#t3-8 .topic flag="objective"}
+
+::: {.core}
+**In short.** Both models handle clustered residuals, but tell **different stories**: contagion between outcomes (SAR) or a shared hidden cause (SEM). The data alone rarely decide; the mechanism should.
+
+**Think of it as:** Contagion vs shared weather.
+:::
 
 **Observed symptom:** OLS residuals are spatially autocorrelated. Residual autocorrelation **alone does not tell you which story is true.**
 
@@ -351,7 +426,15 @@ In a SEM, λ is estimated at 0.6. What does this tell you?
 Optional, from the Canvas post. Luc Anselin's lecture series *Applied Spatial Regression Analysis* goes beyond STA530 in places.
 :::
 
+::: {.exam-say}
+**On the exam, be able to say:** SAR: dependence in the outcome, ρ, feedback and spillovers. SEM: dependence in the errors, λ, omitted spatially patterned processes. Residual autocorrelation alone does not tell which is true.
+:::
+
 ## 3.9 A practical workflow and residual Moran's I {#t3-9 .topic flag="objective"}
+
+::: {.core}
+**In short.** Fit OLS, **check whether the residuals cluster**, think about why, compare spatial models, then interpret carefully.
+:::
 
 ```{mermaid}
 %%| fig-cap: "Workflow: each arrow means \"then\". Not causal. From OLS to spatial regression (slide 19)."
@@ -372,7 +455,15 @@ flowchart LR
 
 An important diagnostic goal for the spatial model: **substantially reduce unexplained spatial structure** (residual Moran's I near zero after fitting SAR or SEM).
 
+::: {.exam-say}
+**On the exam, be able to say:** Residual Moran's I detects remaining spatial structure but does not distinguish SAR from SEM, and can reflect misspecification. Diagnostics support reasoning; they do not replace it.
+:::
+
 ## 3.10 Lagrange multiplier (LM) tests {#t3-10 .topic flag="objective"}
+
+::: {.core}
+**In short.** LM tests ask whether a **lag term** or an **error term** would improve the OLS model. The robust versions help when both look significant.
+:::
 
 LM tests start from the OLS fit and ask whether adding a spatial component is supported:
 
@@ -394,7 +485,15 @@ A common reading: if only one simple test is significant, consider that model; i
 Optional, from the Canvas post. Luc Anselin's lecture series *Applied Spatial Regression Analysis* goes beyond STA530 in places.
 :::
 
+::: {.exam-say}
+**On the exam, be able to say:** LM-lag tests for a spatially lagged outcome, LM-error for spatially dependent errors; robust versions are used when both are significant. Know what they ask; combine with theory.
+:::
+
 ## 3.11 Which model story fits better? {#t3-11 .topic flag="keyq"}
+
+::: {.core}
+**In short.** Pick the model whose story **matches the process**: a shared, poorly measured environment → SEM; an outcome that spreads → SAR.
+:::
 
 The slide's two scenarios:
 
@@ -418,7 +517,15 @@ Social diffusion of behaviour is an outcome-to-outcome process, which is what ρ
 :::
 ::::
 
+::: {.exam-say}
+**On the exam, be able to say:** Shared incompletely measured air quality → SEM; infectious diffusion between connected areas → SAR. The point is to state the assumed process.
+:::
+
 ## 3.12 Deliberately not covered in STA530 {#t3-12 .topic flag="optional"}
+
+::: {.core}
+**In short.** Estimation methods and more advanced spatial models are **outside the course**.
+:::
 
 The slides list what the session leaves out:
 

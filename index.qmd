@@ -30,7 +30,9 @@ One idea runs through the course: **a map is the beginning of the epidemiologic 
 
 ## How to study with it
 
-1. **Read a session.** Every topic has a status control under its heading: **Not reviewed / Reviewed / Confident**. Click as you go.
+0. **Start with [The big ideas](big-ideas.qmd)**: the whole course on one page, 18 ideas in one sentence each.
+1. **Read a session.** Every topic starts with a blue **In short** box (plain language, often with an everyday comparison) and ends with a yellow **On the exam, be able to say** box. Formulas have an **In words** line, and the heaviest derivations are folded away.
+    Every topic has a status control under its heading: **Not reviewed / Reviewed / Confident**. Click as you go.
 2. **Open "Before you start"** at the top of each session if a prerequisite feels rusty, and watch for the red **Common confusion** boxes.
 3. **Answer the quizzes** in each session and the **why-questions** at the bottom.
 4. **Practise on [Exam practice](exam-practice.qmd)**: drills that generate new numbers every time (SMR, indirect standardization, Empirical Bayes weights, box-map fences, counting neighbours, Moran's I by hand, SAR impacts, exp(β), choosing the likelihood, reading exceedance probabilities) and written exam-style questions with model answers.

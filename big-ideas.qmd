@@ -1,0 +1,62 @@
+---
+title: "The big ideas"
+subtitle: "The whole course so far on one page: 18 ideas, one sentence each"
+toc: false
+---
+
+Start here, or come back here before the exam. Each idea is one sentence in plain language; the link takes you to the section that explains it. If you can say all 18 in your own words, you have the core of Sessions 1–4.
+
+```{mermaid}
+%%| fig-cap: "Lecture map: each arrow means \"this leads to the next question\". Not causal. How the four sessions connect."
+flowchart LR
+  A["Spatial data<br/>information + location<br/>(S1)"] --> B["Map rates,<br/>not counts<br/>(S2)"]
+  B --> C["Small areas give<br/>unstable rates<br/>(S2)"]
+  C --> D["Smooth: borrow<br/>from other areas<br/>EB (S2)"]
+  D --> E["Bayesian disease mapping<br/>BYM / BYM2<br/>(S4)"]
+  B --> F["Are neighbours alike?<br/>define W, Moran's I, LISA<br/>(S2)"]
+  F --> G["Regression with<br/>spatial dependence<br/>SAR / SEM (S3)"]
+  F --> E
+```
+
+## Session 1 · What spatial epidemiology is
+
+| # | Idea | Section |
+|---|---|---|
+| 1 | **Spatial data = information + location**, stored as shapes (vector) or grid cells (raster). | [1.1](session1.qmd#t1-1) |
+| 2 | Coordinates only make sense with a **coordinate reference system**; layers must share one before they are combined. | [1.3](session1.qmd#t1-3) |
+| 3 | Studies can **describe, analyse or intervene**; the field mostly does the first two, and a map should start the question, not end it. | [1.7](session1.qmd#t1-7) |
+| 4 | **MAUP:** change the areas (size or borders) and the results can change, even with the same people. | [1.10](session1.qmd#t1-10) |
+| 5 | **Ecological fallacy:** a pattern between areas need not hold for the individuals in them. | [1.11](session1.qmd#t1-11) |
+| 6 | **Dependence** = neighbours are alike; **heterogeneity** = the relationships themselves differ by place. | [1.12](session1.qmd#t1-12) |
+
+## Session 2 · Maps and patterns
+
+| # | Idea | Section |
+|---|---|---|
+| 7 | Counts show where people live, rates show risk, and **rates from small populations are unstable**. | [2.4](session2.qmd#t2-4) |
+| 8 | **SMR = observed ÷ expected**: above 1 means more cases than the reference risk predicts. | [2.5](session2.qmd#t2-5) |
+| 9 | **Smoothing** pulls noisy small-area rates toward a reference; the less data, the stronger the pull. | [2.6](session2.qmd#t2-6) |
+| 10 | Before measuring similarity you must **define neighbours** (rook, queen, distance, k-nearest) in a weights matrix W. | [2.8](session2.qmd#t2-8) |
+| 11 | **Moran's I** says whether neighbours are more alike than chance, for the whole map, tested by shuffling the values. | [2.11](session2.qmd#t2-11) |
+| 12 | **LISA** says where: hot spots (HH), cold spots (LL) and outliers (HL, LH). | [2.13](session2.qmd#t2-13) |
+
+## Session 3 · Regression with spatial data
+
+| # | Idea | Section |
+|---|---|---|
+| 13 | If **residuals cluster** on the map, ordinary regression has missed something spatial and its standard errors are too small. | [3.1](session3.qmd#t3-1) |
+| 14 | **SAR** = outcomes spread between neighbours (contagion); **SEM** = errors share a hidden cause (shared weather). Choose by mechanism. | [3.8](session3.qmd#t3-8) |
+| 15 | In SAR a change **spreads and feeds back**, so report direct, indirect and total impacts, not just β. | [3.5](session3.qmd#t3-5) |
+
+## Session 4 · Bayesian disease mapping
+
+| # | Idea | Section |
+|---|---|---|
+| 16 | Pick the **likelihood from the outcome and denominator**: Binomial for prevalence, Poisson for incidence or observed vs expected. | [4.2](session4.qmd#t4-2) |
+| 17 | **BYM2** = a spatial part (borrow from neighbours) + a non-spatial part (area's own), with ρ as the spatial share and τ for the total amount. | [4.12](session4.qmd#t4-12) |
+| 18 | Report **risk and its uncertainty**: a higher estimate is not stronger evidence; look at credible intervals and exceedance probabilities, and remember that a high-risk area is not a cause. | [4.17](session4.qmd#t4-17) |
+
+::: {.callout-tip}
+## How to use this page
+Cover the "Idea" column and try to say each one from its number and section title. Then open the [dashboard](dashboard.qmd) to see which sections you have not yet marked as confident.
+:::
