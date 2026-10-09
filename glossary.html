@@ -1,0 +1,2955 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Glossary – STA530 — Spatial Epidemiology</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./session1.html" rel="next">
+<link href="./exam-practice.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a06d91ce84fd25668039cca5222332b2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STA530 — Spatial Epidemiology</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./dashboard.html"> 
+<span class="menu-text">Dashboard</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./exam-practice.html"> 
+<span class="menu-text">Exam practice</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./glossary.html"> 
+<span class="menu-text">Glossary</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About the content</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://johlobs.github.io/" target="_blank"> 
+<span class="menu-text">All courses</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./dashboard.html">Exam prep</a></li><li class="breadcrumb-item"><a href="./glossary.html">Glossary</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Exam prep</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dashboard.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exam-prep dashboard</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exam-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exam practice</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 1: Foundations and ESDA</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./session1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 1 — Introduction to Spatial Epidemiology</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./session2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 2 — Disease Mapping and Spatial Patterns</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 1: Spatial models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./session3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 3 — Introduction to Spatial Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./session4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 4 — Introduction to Bayesian Disease Mapping</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Reference</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the content</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./dashboard.html">Exam prep</a></li><li class="breadcrumb-item"><a href="./glossary.html">Glossary</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Glossary</h1>
+<p class="subtitle lead">Defined terms in the course, with links to where they are taught</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Type in the box to filter. Each entry links back to the session section where the term is defined or used. Quarto’s search (top right) also searches the full text of every session.</p>
+<input id="gl-filter" type="search" class="form-control" placeholder="Filter terms, e.g. MAUP, LISA, BYM2 …" style="max-width:420px;margin:0.5rem 0 1.5rem;">
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var input = document.getElementById('gl-filter');
+  input.addEventListener('input', function () {
+    var q = input.value.toLowerCase().trim();
+    document.querySelectorAll('.glossary dt').forEach(function (dt) {
+      var dd = dt.nextElementSibling;
+      var text = (dt.textContent + ' ' + (dd ? dd.textContent : '')).toLowerCase();
+      var show = !q || text.indexOf(q) !== -1;
+      dt.style.display = show ? '' : 'none';
+      if (dd) dd.style.display = show ? '' : 'none';
+    });
+    document.querySelectorAll('.glossary h2').forEach(function (h) {
+      var dl = h.parentNode.querySelector('dl');
+      if (!dl) return;
+      var any = Array.from(dl.querySelectorAll('dt')).some(function (dt) { return dt.style.display !== 'none'; });
+      h.style.display = any ? '' : 'none';
+    });
+  });
+});
+</script>
+<div class="glossary">
+<section id="ac" class="level2">
+<h2 class="anchored" data-anchor-id="ac">A–C</h2>
+<dl>
+<dt>BYM model (Besag–York–Mollié)</dt>
+<dd>
+Disease-mapping model log θᵢ = α + uᵢ + vᵢ with a spatially structured effect uᵢ (ICAR) and an unstructured effect vᵢ. <a href="./session4.html#t4-11">S4 §4.11</a>
+</dd>
+<dt>BYM2</dt>
+<dd>
+Reparameterization of BYM: log θᵢ = α + (1/√τ)(√ρ·uᵢ* + √(1−ρ)·vᵢ). τ is the overall precision, ρ the spatial fraction, uᵢ* the scaled spatial effect. <a href="./session4.html#t4-12">S4 §4.12</a>
+</dd>
+<dt>Box map</dt>
+<dd>
+Extreme value map using box-plot categories: lower outlier, &lt; 25%, 25–50%, 50–75%, &gt; 75%, upper outlier, with fences Q1 − hinge·IQR and Q3 + hinge·IQR (hinge 1.5 or 3). <a href="./session2.html#t2-2">S2 §2.2</a>
+</dd>
+<dt>CAR / ICAR prior</dt>
+<dd>
+(Intrinsic) conditional autoregressive prior: each area’s latent effect is normal around the mean of its neighbours’ effects, with variance σ²/nᵢ. More neighbours, more conditional precision. <a href="./session4.html#t4-8">S4 §4.8</a>
+</dd>
+<dt>Choropleth (thematic) map</dt>
+<dd>
+Map that shows values with colours or patterns inside areas. <a href="./session2.html#t2-1">S2 §2.1</a>
+</dd>
+<dt>Co-location map</dt>
+<dd>
+Extension of the unique value map that shows where several characteristics overlap. <a href="./session2.html#t2-3">S2 §2.3</a>
+</dd>
+<dt>Connectivity histogram / graph</dt>
+<dd>
+Diagnostics of a weights matrix: the distribution of the number of neighbours, and lines between neighbouring centroids. <a href="./session2.html#t2-10">S2 §2.10</a>
+</dd>
+<dt>Contiguity weights (rook, queen)</dt>
+<dd>
+Neighbours share a boundary (rook) or a boundary or corner (queen). Queen gives at least as many neighbours. Can be higher order. <a href="./session2.html#t2-8">S2 §2.8</a>
+</dd>
+<dt>Coordinate reference system (CRS)</dt>
+<dd>
+Specifies how coordinates relate to places on Earth and, if projected, how the surface is flattened. Identified by EPSG codes. <a href="./session1.html#t1-3">S1 §1.3</a>
+</dd>
+<dt>Credible interval (CrI)</dt>
+<dd>
+Interval containing a given posterior probability (e.g.&nbsp;95%) for a parameter, conditional on model, data and prior. Not the repeated-sampling statement of a confidence interval. <a href="./session4.html#t4-16">S4 §4.16</a>
+</dd>
+</dl>
+</section>
+<section id="di" class="level2">
+<h2 class="anchored" data-anchor-id="di">D–I</h2>
+<dl>
+<dt>DeSO (demographic statistical areas)</dt>
+<dd>
+Sweden’s small statistical areas, designed to hold roughly 700–2,700 inhabitants. <a href="./session1.html#t1-4">S1 §1.4</a>
+</dd>
+<dt>Direct, indirect and total impacts</dt>
+<dd>
+In SAR: the effect of x on the own area including feedback (direct), on other areas through the network (indirect, spillover), and their sum (total = β/(1−ρ) with row-standardized W). <a href="./session3.html#t3-5">S3 §3.5</a>
+</dd>
+<dt>Distance-band weights</dt>
+<dd>
+i and j are neighbours if within a critical distance. Symmetric; dense areas get many neighbours. <a href="./session2.html#t2-9">S2 §2.9</a>
+</dd>
+<dt>Ecological fallacy</dt>
+<dd>
+Incorrect inference about individuals from group-level data (Robinson 1950). <a href="./session1.html#t1-11">S1 §1.11</a>
+</dd>
+<dt>Empirical Bayes (EB) smoothing</dt>
+<dd>
+π̂ᵢ = wᵢrᵢ + (1 − wᵢ)θ with wᵢ = σ²/(σ² + μ/Pᵢ): crude rates shrunk toward a reference rate, more for small populations. The prior is estimated from the data. <a href="./session2.html#t2-6">S2 §2.6</a>
+</dd>
+<dt>EPSG code</dt>
+<dd>
+Standard number for a CRS. EPSG:4326 = WGS 84 (degrees); EPSG:3006 = SWEREF 99 TM (metres, Sweden). <a href="./session1.html#t1-3">S1 §1.3</a>
+</dd>
+<dt>Exceedance probability</dt>
+<dd>
+Posterior probability that a relative risk exceeds a threshold c, P(θᵢ &gt; c ∣ data). <a href="./session4.html#t4-16">S4 §4.16</a>
+</dd>
+<dt>Expected count Eᵢ</dt>
+<dd>
+Cases expected in area i at reference rates: Eᵢ = π̂·Pᵢ, or Σₐ nᵢₐ r*ₐ with strata (indirect standardization). <a href="./session2.html#t2-5">S2 §2.5</a>, <a href="./session4.html#t4-3">S4 §4.3</a>
+</dd>
+<dt>Extensive vs intensive variable</dt>
+<dd>
+Extensive depends on population size (counts); intensive is standardized by population (rates). <a href="./session2.html#t2-4">S2 §2.4</a>
+</dd>
+<dt>Geary’s C</dt>
+<dd>
+Alternative measure of spatial autocorrelation based on squared differences between neighbours. <a href="./session1.html#t1-12">S1 §1.12</a>
+</dd>
+<dt>Geocoding</dt>
+<dd>
+Converting addresses to coordinates (longitude, latitude). Can fail or be wrong. <a href="./session1.html#t1-4">S1 §1.4</a>
+</dd>
+<dt>GeoDa</dt>
+<dd>
+Free software for exploratory spatial data analysis. <a href="./session1.html#t1-14">S1 §1.14</a>
+</dd>
+<dt>GeoJSON</dt>
+<dd>
+Open standard text format for points, lines and polygons. <a href="./session1.html#t1-2">S1 §1.2</a>
+</dd>
+<dt>GIS</dt>
+<dd>
+Geographic information systems: tools for storing, linking, mapping and analysing data by location. <a href="./session1.html#t1-14">S1 §1.14</a>
+</dd>
+<dt>INLA</dt>
+<dd>
+Integrated nested Laplace approximation: fast approximation of posterior marginals for latent Gaussian models such as BYM2, without MCMC. <a href="./session4.html#t4-21">S4 §4.21</a>
+</dd>
+<dt>Isolate</dt>
+<dd>
+Area with no neighbours in a weights matrix; it drops out of spatial analyses. <a href="./session2.html#t2-9">S2 §2.9</a>, <a href="./session4.html#t4-19">S4 §4.19</a>
+</dd>
+</dl>
+</section>
+<section id="km" class="level2">
+<h2 class="anchored" data-anchor-id="km">K–M</h2>
+<dl>
+<dt>k-nearest-neighbour (KNN) weights</dt>
+<dd>
+Each area’s k nearest centroids are its neighbours. No isolates; not symmetric; ties possible. <a href="./session2.html#t2-9">S2 §2.9</a>
+</dd>
+<dt>LISA (local indicator of spatial association)</dt>
+<dd>
+Local statistic for each location with a significance assessment, whose sum is proportional to the global statistic. Local Moran’s I is one. <a href="./session2.html#t2-13">S2 §2.13</a>
+</dd>
+<dt>LM tests (LM-lag, LM-error, robust)</dt>
+<dd>
+Tests on an OLS fit of whether a spatial lag or spatial error term is supported. Robust versions help when both are significant. <a href="./session3.html#t3-10">S3 §3.10</a>
+</dd>
+<dt>Local Moran’s I</dt>
+<dd>
+Iᵢ = zᵢ Σⱼ wᵢⱼ zⱼ / Σ zᵢ². Tested by conditional permutation; classifies significant areas as High-High, Low-Low, High-Low, Low-High. <a href="./session2.html#t2-13">S2 §2.13</a>
+</dd>
+<dt>MAUP (modifiable areal unit problem)</dt>
+<dd>
+Results change when the spatial units change (scale or zoning), even with the same underlying data. <a href="./session1.html#t1-10">S1 §1.10</a>
+</dd>
+<dt>Moran scatter plot</dt>
+<dd>
+Each area’s value (x) against its spatial lag (y); the slope is Moran’s I with row-standardized weights. <a href="./session2.html#t2-12">S2 §2.12</a>
+</dd>
+<dt>Moran’s I (global)</dt>
+<dd>
+I = (n/S₀) ΣᵢΣⱼ wᵢⱼ zᵢzⱼ / Σ zᵢ². Positive: clustering; negative: dispersion; E[I] = −1/(n−1) under spatial randomness. <a href="./session2.html#t2-11">S2 §2.11</a>
+</dd>
+</dl>
+</section>
+<section id="nr" class="level2">
+<h2 class="anchored" data-anchor-id="nr">N–R</h2>
+<dl>
+<dt>Neumann series</dt>
+<dd>
+(I − ρW)⁻¹ = I + ρW + ρ²W² + …: how an effect propagates through the spatial network in SAR. <a href="./session3.html#t3-5">S3 §3.5</a>
+</dd>
+<dt>Offset</dt>
+<dd>
+A term with coefficient fixed at 1 in a Poisson model (log Eᵢ or log person-time), so the model describes a rate or relative risk. <a href="./session4.html#t4-2">S4 §4.2</a>
+</dd>
+<dt>Partial pooling</dt>
+<dd>
+Area estimates drawn from a shared distribution, so each is a compromise between its own data and the common pattern. <a href="./session4.html#t4-6">S4 §4.6</a>
+</dd>
+<dt>Penalized-complexity (PC) prior</dt>
+<dd>
+Prior that penalises departures from a simpler base model; hyperpriors stated as probabilities about interpretable quantities. <a href="./session4.html#t4-14">S4 §4.14</a>
+</dd>
+<dt>Percentile map</dt>
+<dd>
+Extreme value map with fixed classes &lt; 1%, 1–10%, 10–50%, 50–90%, 90–99%, &gt; 99%. <a href="./session2.html#t2-2">S2 §2.2</a>
+</dd>
+<dt>Permutation test (pseudo p-value)</dt>
+<dd>
+Reshuffle values over locations many times to get the distribution of a statistic under spatial randomness; pseudo p = (count ≥ observed + 1)/(R + 1). <a href="./session2.html#t2-11">S2 §2.11</a>
+</dd>
+<dt>Projected vs geographic CRS</dt>
+<dd>
+Geographic: longitude/latitude in degrees. Projected: flat coordinates, usually metres, needed for distances and areas. <a href="./session1.html#t1-3">S1 §1.3</a>
+</dd>
+<dt>Raster vs vector data</dt>
+<dd>
+Raster: a grid of cells with values. Vector: points, lines and polygons stored as coordinates. <a href="./session1.html#t1-1">S1 §1.1</a>
+</dd>
+<dt>Relative risk θᵢ</dt>
+<dd>
+Ratio of an area’s underlying risk to the reference: θᵢ = 1 as expected, &gt; 1 elevated. <a href="./session4.html#t4-3">S4 §4.3</a>
+</dd>
+<dt>Residual Moran’s I</dt>
+<dd>
+Moran’s I of regression residuals; detects remaining spatial structure but does not distinguish SAR from SEM. <a href="./session3.html#t3-9">S3 §3.9</a>
+</dd>
+<dt>Row standardization</dt>
+<dd>
+Dividing each row of W by its sum, so (Wy)ᵢ is the average of i’s neighbours. <a href="./session2.html#t2-8">S2 §2.8</a>
+</dd>
+</dl>
+</section>
+<section id="sz" class="level2">
+<h2 class="anchored" data-anchor-id="sz">S–Z</h2>
+<dl>
+<dt>Shapefile</dt>
+<dd>
+ESRI format of at least four files in the same folder: .shp (geometry), .shx (index), .dbf (attributes), .prj (projection). <a href="./session1.html#t1-2">S1 §1.2</a>
+</dd>
+<dt>Shrinkage</dt>
+<dd>
+Noisy area estimates moving toward a common pattern; more for less informative areas. <a href="./session4.html#t4-6">S4 §4.6</a>
+</dd>
+<dt>SMR (standardized mortality ratio)</dt>
+<dd>
+Observed / expected count. SMR &gt; 1: more events than expected. The crude (unsmoothed) estimate of θᵢ. <a href="./session2.html#t2-5">S2 §2.5</a>, <a href="./session4.html#t4-4">S4 §4.4</a>
+</dd>
+<dt>Spatial autocorrelation</dt>
+<dd>
+Correlation of a variable with itself across space; tested against the null of spatial randomness. <a href="./session2.html#t2-7">S2 §2.7</a>
+</dd>
+<dt>Spatial confounding</dt>
+<dd>
+Covariates and latent spatial effects sharing similar geographic patterns, so their effects are hard to separate. <a href="./session4.html#t4-15">S4 §4.15</a>
+</dd>
+<dt>Spatial data</dt>
+<dd>
+Information + location. <a href="./session1.html#t1-1">S1 §1.1</a>
+</dd>
+<dt>Spatial dependence</dt>
+<dd>
+Nearby observations are more similar (or related) than distant ones; Tobler’s first law. <a href="./session1.html#t1-12">S1 §1.12</a>
+</dd>
+<dt>Spatial epidemiology</dt>
+<dd>
+Description and analysis of geographic variation in disease with respect to demographic, environmental, behavioural, socioeconomic, genetic and infectious risk factors; more broadly, describing, analysing and intervening on spatial patterns of health. <a href="./session1.html#t1-6">S1 §1.6</a>
+</dd>
+<dt>Spatial error model (SEM)</dt>
+<dd>
+y = Xβ + u, u = λWu + ε: spatial dependence in the errors; λ measures it. <a href="./session3.html#t3-7">S3 §3.7</a>
+</dd>
+<dt>Spatial heterogeneity</dt>
+<dd>
+Processes or relationships that differ across locations. <a href="./session1.html#t1-12">S1 §1.12</a>
+</dd>
+<dt>Spatial lag Wy</dt>
+<dd>
+Weighted summary of the neighbours’ values; with row-standardized W, the neighbour average. <a href="./session3.html#t3-3">S3 §3.3</a>
+</dd>
+<dt>Spatial lag model (SAR)</dt>
+<dd>
+y = ρWy + Xβ + ε: an area’s outcome depends on neighbours’ outcomes; ρ measures it. <a href="./session3.html#t3-4">S3 §3.4</a>
+</dd>
+<dt>Spatial randomness</dt>
+<dd>
+The null hypothesis that values are not systematically associated with their locations. <a href="./session2.html#t2-7">S2 §2.7</a>
+</dd>
+<dt>Spatial smoothing</dt>
+<dd>
+Borrowing strength from neighbouring areas so each estimate is pulled toward its neighbours. <a href="./session4.html#t4-8">S4 §4.8</a>
+</dd>
+<dt>Spatial weights matrix W</dt>
+<dd>
+Matrix recording whether (or how strongly) each pair of areas are neighbours; wᵢᵢ = 0. <a href="./session2.html#t2-8">S2 §2.8</a>
+</dd>
+<dt>Tobler’s first law of geography</dt>
+<dd>
+“Things closer together are more similar than things further apart.” <a href="./session1.html#t1-12">S1 §1.12</a>
+</dd>
+<dt>Unstructured random effect vᵢ</dt>
+<dd>
+Independent area effect vᵢ ~ N(0, σ²): partial pooling toward the global mean without using geography. <a href="./session4.html#t4-7">S4 §4.7</a>
+</dd>
+<dt>Variance instability</dt>
+<dd>
+Crude rates from small populations have large variance, π(1−π)/P, and produce spurious extremes. <a href="./session2.html#t2-4">S2 §2.4</a>
+</dd>
+</dl>
+</section>
+</div>
+
+
+
+</main> <!-- /main -->
+<script>
+
+window.STA530_TOPICS = [
+
+ {
+
+  "id": "t1-1",
+
+  "title": "1.1 What is spatial data?",
+
+  "lecture": 1,
+
+  "label": "S1",
+
+  "page": "session1.html",
+
+  "flag": "notes"
+
+ },
+
+ {
+
+  "id": "t1-2",
+
+  "title": "1.2 Spatial file formats: CSV, shapefile, GeoJSON",
+
+  "lecture": 1,
+
+  "label": "S1",
+
+  "page": "session1.html",
+
+  "flag": "notes"
+
+ },
+
+ {
+
+  "id": "t1-3",
+
+  "title": "1.3 Coordinate reference systems and EPSG codes",
+
+  "lecture": 1,
+
+  "label": "S1",
+
+  "page": "session1.html",
+
+  "flag": "inferred"
+
+ },
+
+ {
+
+  "id": "t1-4",
+
+  "title": "1.4 Geocoding and Swedish small areas (DeSO)",
+
+  "lecture": 1,
+
+  "label": "S1",
+
+  "page": "session1.html",
+
+  "flag": "notes"
+
+ },
+
+ {
+
+  "id": "t1-5",
+
+  "title": "1.5 John Snow and the 1854 cholera outbreak",
+
+  "lecture": 1,
+
+  "label": "S1",
+
+  "page": "session1.html",
+
+  "flag": "inferred"
+
+ },
+
+ {
+
+  "id": "t1-6",
+
+  "title": "1.6 Definitions of spatial epidemiology",
+
+  "lecture": 1,
+
+  "label": "S1",
+
+  "page": "session1.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t1-7",
+
+  "title": "1.7 Describe → analyze → intervene (Morrison et al. 2024)",
+
+  "lecture": 1,
+
+  "label": "S1",
+
+  "page": "session1.html",
+
+  "flag": "inferred"
+
+ },
+
+ {
+
+  "id": "t1-8",
+
+  "title": "1.8 Why place matters for health",
+
+  "lecture": 1,
+
+  "label": "S1",
+
+  "page": "session1.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t1-9",
+
+  "title": "1.9 Theoretical frameworks: social-ecological model and life course",
+
+  "lecture": 1,
+
+  "label": "S1",
+
+  "page": "session1.html",
+
+  "flag": "notes"
+
+ },
+
+ {
+
+  "id": "t1-10",
+
+  "title": "1.10 Scale and the modifiable areal unit problem (MAUP)",
+
+  "lecture": 1,
+
+  "label": "S1",
+
+  "page": "session1.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t1-11",
+
+  "title": "1.11 The ecological fallacy",
+
+  "lecture": 1,
+
+  "label": "S1",
+
+  "page": "session1.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t1-12",
+
+  "title": "1.12 Spatial dependence and spatial heterogeneity",
+
+  "lecture": 1,
+
+  "label": "S1",
+
+  "page": "session1.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t1-13",
+
+  "title": "1.13 Other issues: reporting, geocoding, boundaries, sparse counts",
+
+  "lecture": 1,
+
+  "label": "S1",
+
+  "page": "session1.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t1-14",
+
+  "title": "1.14 Tools: GIS, R and GeoDa",
+
+  "lecture": 1,
+
+  "label": "S1",
+
+  "page": "session1.html",
+
+  "flag": "notes"
+
+ },
+
+ {
+
+  "id": "t1-15",
+
+  "title": "1.15 Session summary and key questions",
+
+  "lecture": 1,
+
+  "label": "S1",
+
+  "page": "session1.html",
+
+  "flag": null
+
+ },
+
+ {
+
+  "id": "t2-1",
+
+  "title": "2.1 Thematic (choropleth) maps and classification methods",
+
+  "lecture": 2,
+
+  "label": "S2",
+
+  "page": "session2.html",
+
+  "flag": "inferred"
+
+ },
+
+ {
+
+  "id": "t2-2",
+
+  "title": "2.2 Extreme value maps: percentile, box and standard deviation maps",
+
+  "lecture": 2,
+
+  "label": "S2",
+
+  "page": "session2.html",
+
+  "flag": "keyq"
+
+ },
+
+ {
+
+  "id": "t2-3",
+
+  "title": "2.3 Mapping categorical variables and co-location",
+
+  "lecture": 2,
+
+  "label": "S2",
+
+  "page": "session2.html",
+
+  "flag": null
+
+ },
+
+ {
+
+  "id": "t2-4",
+
+  "title": "2.4 Counts vs rates, and the problem of variance instability",
+
+  "lecture": 2,
+
+  "label": "S2",
+
+  "page": "session2.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t2-5",
+
+  "title": "2.5 Comparing areas with the SMR (excess risk)",
+
+  "lecture": 2,
+
+  "label": "S2",
+
+  "page": "session2.html",
+
+  "flag": "keyq"
+
+ },
+
+ {
+
+  "id": "t2-6",
+
+  "title": "2.6 Empirical Bayes smoothing",
+
+  "lecture": 2,
+
+  "label": "S2",
+
+  "page": "session2.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t2-7",
+
+  "title": "2.7 Spatial autocorrelation and the null of spatial randomness",
+
+  "lecture": 2,
+
+  "label": "S2",
+
+  "page": "session2.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t2-8",
+
+  "title": "2.8 Spatial weights: contiguity (rook and queen)",
+
+  "lecture": 2,
+
+  "label": "S2",
+
+  "page": "session2.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t2-9",
+
+  "title": "2.9 Spatial weights: distance bands and k-nearest neighbours",
+
+  "lecture": 2,
+
+  "label": "S2",
+
+  "page": "session2.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t2-10",
+
+  "title": "2.10 Describing a weights matrix: connectivity histogram and graph",
+
+  "lecture": 2,
+
+  "label": "S2",
+
+  "page": "session2.html",
+
+  "flag": "keyq"
+
+ },
+
+ {
+
+  "id": "t2-11",
+
+  "title": "2.11 Global Moran's I",
+
+  "lecture": 2,
+
+  "label": "S2",
+
+  "page": "session2.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t2-12",
+
+  "title": "2.12 The Moran scatter plot",
+
+  "lecture": 2,
+
+  "label": "S2",
+
+  "page": "session2.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t2-13",
+
+  "title": "2.13 Local spatial autocorrelation: LISA and local Moran's I",
+
+  "lecture": 2,
+
+  "label": "S2",
+
+  "page": "session2.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t2-14",
+
+  "title": "2.14 Session summary and key questions",
+
+  "lecture": 2,
+
+  "label": "S2",
+
+  "page": "session2.html",
+
+  "flag": null
+
+ },
+
+ {
+
+  "id": "t3-1",
+
+  "title": "3.1 OLS with spatial data: the assumption that can fail",
+
+  "lecture": 3,
+
+  "label": "S3",
+
+  "page": "session3.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t3-2",
+
+  "title": "3.2 After adjustment, neighbouring residuals are similar: what could it mean?",
+
+  "lecture": 3,
+
+  "label": "S3",
+
+  "page": "session3.html",
+
+  "flag": "keyq"
+
+ },
+
+ {
+
+  "id": "t3-3",
+
+  "title": "3.3 The new ingredient: the spatially lagged outcome Wy",
+
+  "lecture": 3,
+
+  "label": "S3",
+
+  "page": "session3.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t3-4",
+
+  "title": "3.4 The spatial lag model (SAR) and ρ",
+
+  "lecture": 3,
+
+  "label": "S3",
+
+  "page": "session3.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t3-5",
+
+  "title": "3.5 Why SAR creates feedback: direct, indirect and total impacts",
+
+  "lecture": 3,
+
+  "label": "S3",
+
+  "page": "session3.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t3-6",
+
+  "title": "3.6 Is a SAR story plausible in epidemiology?",
+
+  "lecture": 3,
+
+  "label": "S3",
+
+  "page": "session3.html",
+
+  "flag": "keyq"
+
+ },
+
+ {
+
+  "id": "t3-7",
+
+  "title": "3.7 The spatial error model (SEM) and λ",
+
+  "lecture": 3,
+
+  "label": "S3",
+
+  "page": "session3.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t3-8",
+
+  "title": "3.8 SAR vs SEM: same symptom, different story",
+
+  "lecture": 3,
+
+  "label": "S3",
+
+  "page": "session3.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t3-9",
+
+  "title": "3.9 A practical workflow and residual Moran's I",
+
+  "lecture": 3,
+
+  "label": "S3",
+
+  "page": "session3.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t3-10",
+
+  "title": "3.10 Lagrange multiplier (LM) tests",
+
+  "lecture": 3,
+
+  "label": "S3",
+
+  "page": "session3.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t3-11",
+
+  "title": "3.11 Which model story fits better?",
+
+  "lecture": 3,
+
+  "label": "S3",
+
+  "page": "session3.html",
+
+  "flag": "keyq"
+
+ },
+
+ {
+
+  "id": "t3-12",
+
+  "title": "3.12 Deliberately not covered in STA530",
+
+  "lecture": 3,
+
+  "label": "S3",
+
+  "page": "session3.html",
+
+  "flag": "optional"
+
+ },
+
+ {
+
+  "id": "t3-13",
+
+  "title": "3.13 Take-home messages and key questions",
+
+  "lecture": 3,
+
+  "label": "S3",
+
+  "page": "session3.html",
+
+  "flag": null
+
+ },
+
+ {
+
+  "id": "t4-1",
+
+  "title": "4.1 Same SMR, very different information",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "keyq"
+
+ },
+
+ {
+
+  "id": "t4-2",
+
+  "title": "4.2 Start with the estimand: which likelihood?",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t4-3",
+
+  "title": "4.3 Observed and expected counts; indirect standardization",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "inferred"
+
+ },
+
+ {
+
+  "id": "t4-4",
+
+  "title": "4.4 The SMR as the crude estimate",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t4-5",
+
+  "title": "4.5 One Bayesian idea: combine data with a model for plausible risks",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "inferred"
+
+ },
+
+ {
+
+  "id": "t4-6",
+
+  "title": "4.6 Partial pooling and shrinkage",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t4-7",
+
+  "title": "4.7 Unstructured heterogeneity: areas differ independently",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t4-8",
+
+  "title": "4.8 Spatial smoothing: the CAR / ICAR prior",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t4-9",
+
+  "title": "4.9 Partial pooling vs spatial smoothing",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "keyq"
+
+ },
+
+ {
+
+  "id": "t4-10",
+
+  "title": "4.10 The neighbourhood graph returns, in a different role",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "inferred"
+
+ },
+
+ {
+
+  "id": "t4-11",
+
+  "title": "4.11 The Besag–York–Mollié (BYM) model: why both uᵢ and vᵢ",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t4-12",
+
+  "title": "4.12 BYM2: separating overall variability from the spatial fraction",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t4-13",
+
+  "title": "4.13 Priors: what are we putting priors on?",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "inferred"
+
+ },
+
+ {
+
+  "id": "t4-14",
+
+  "title": "4.14 Penalized-complexity (PC) priors",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "optional"
+
+ },
+
+ {
+
+  "id": "t4-15",
+
+  "title": "4.15 Adding area-level covariates",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "inferred"
+
+ },
+
+ {
+
+  "id": "t4-16",
+
+  "title": "4.16 What the posterior gives: relative risks, credible intervals, exceedance",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "objective"
+
+ },
+
+ {
+
+  "id": "t4-17",
+
+  "title": "4.17 Higher posterior RR does not always mean stronger evidence",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "keyq"
+
+ },
+
+ {
+
+  "id": "t4-18",
+
+  "title": "4.18 Raw SMR → non-spatial smoothing → spatial smoothing",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "inferred"
+
+ },
+
+ {
+
+  "id": "t4-19",
+
+  "title": "4.19 Cautions: smoothing can hide real boundaries; islands",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "inferred"
+
+ },
+
+ {
+
+  "id": "t4-20",
+
+  "title": "4.20 Workflow and model checking",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "inferred"
+
+ },
+
+ {
+
+  "id": "t4-21",
+
+  "title": "4.21 Why INLA is common",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "optional"
+
+ },
+
+ {
+
+  "id": "t4-22",
+
+  "title": "4.22 A high-risk area is not a causal explanation",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "inferred"
+
+ },
+
+ {
+
+  "id": "t4-23",
+
+  "title": "4.23 Checkpoint: reconstruct the logic",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": "keyq"
+
+ },
+
+ {
+
+  "id": "t4-24",
+
+  "title": "4.24 Take-home messages and key questions",
+
+  "lecture": 4,
+
+  "label": "S4",
+
+  "page": "session4.html",
+
+  "flag": null
+
+ }
+
+];
+
+</script>
+
+<script>
+/* Topic status tracking for STA530.
+   Reads window.STA530_TOPICS (written by build_topics.py) and:
+   1. adds an exam-flag badge and a status control under every topic heading,
+   2. adds reviewed/total counters to the sidebar,
+   3. renders the dashboard when the page has <div id="sta530-dashboard">. */
+(function () {
+  'use strict';
+
+  var STORAGE_KEY = 'sta530_topic_status';
+  var TOPICS = window.STA530_TOPICS || [];
+
+  var STATUS_LABELS = {
+    '': 'Not reviewed',
+    'reviewed': 'Reviewed',
+    'confident': 'Confident'
+  };
+
+  var FLAG_BADGES = {
+    objective: {
+      text: '🎯 Instructor learning objective',
+      title: 'Matches a stated learning objective: the course syllabus, the instructor’s Canvas session post or a "Learning goals" slide.'
+    },
+    notes: {
+      text: '✏️ Emphasised in class',
+      title: 'Written down as important in the lecture notes taken in class.'
+    },
+    keyq: {
+      text: '❓ Instructor’s key question',
+      title: 'Answers a "key question to think about" or an in-class question the instructor posed.'
+    },
+    inferred: {
+      text: '📌 Likely exam-relevant (AI-inferred)',
+      title: 'Inferred from definitions, formulas and worked examples on the slides. Not confirmed by the instructor.'
+    },
+    optional: {
+      text: '📎 Optional depth (beyond course scope)',
+      title: 'The instructor marked this as optional depth or said it is not expected in STA530.'
+    },
+    seminar: {
+      text: '🗣️ Seminar topic',
+      title: 'Seminar content.'
+    }
+  };
+
+  var EXAM_FLAGS = ['objective', 'keyq', 'notes', 'seminar', 'inferred'];
+  var FLAG_ORDER = { objective: 0, keyq: 1, notes: 2, seminar: 3, inferred: 4 };
+  var FLAG_ICON = { objective: '🎯', keyq: '❓', notes: '✏️', inferred: '📌', optional: '📎', seminar: '🗣️' };
+  function isExam(t) { return EXAM_FLAGS.indexOf(t.flag) !== -1; }
+
+  var LECTURE_TITLES = {
+    1: 'Introduction to spatial epidemiology',
+    2: 'Disease mapping and spatial patterns',
+    3: 'Introduction to spatial regression',
+    4: 'Introduction to Bayesian disease mapping'
+  };
+  function labelOf(t) { return t.label || ('S' + t.lecture); }
+
+  /* ── storage ───────────────────────────────────────────────────────── */
+  function load() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+    catch (e) { return {}; }
+  }
+  function save(state) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    catch (e) { /* storage blocked: status still works for this page view */ }
+  }
+  var state = load();
+
+  function statusOf(id) { return state[id] || ''; }
+  function setStatus(id, value) {
+    if (value) { state[id] = value; } else { delete state[id]; }
+    save(state);
+    refreshAll();
+  }
+
+  /* ── helpers ───────────────────────────────────────────────────────── */
+  function currentPage() {
+    var last = window.location.pathname.split('/').pop();
+    return last === '' ? 'index.html' : last;
+  }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+  function summarise(list) {
+    var s = { total: list.length, reviewed: 0, confident: 0 };
+    list.forEach(function (t) {
+      var st = statusOf(t.id);
+      if (st === 'reviewed' || st === 'confident') s.reviewed++;
+      if (st === 'confident') s.confident++;
+    });
+    return s;
+  }
+  function pct(n, d) { return d === 0 ? 0 : Math.round(100 * n / d); }
+
+  /* ── 1. topic bars on lecture pages ────────────────────────────────── */
+  var controls = [];
+
+  function decorateTopics() {
+    var page = currentPage();
+    TOPICS.filter(function (t) { return t.page === page; }).forEach(function (t) {
+      var section = document.getElementById(t.id);
+      if (!section) return;
+      var heading = section.tagName === 'H2' ? section : section.querySelector('h2');
+      if (!heading) return;
+
+      var bar = el('div', 'topic-bar');
+
+      if (t.flag && FLAG_BADGES[t.flag]) {
+        var badge = el('span', 'flag-badge flag-' + t.flag, FLAG_BADGES[t.flag].text);
+        badge.title = FLAG_BADGES[t.flag].title;
+        bar.appendChild(badge);
+      }
+
+      var group = el('span', 'status-group');
+      group.setAttribute('role', 'group');
+      group.setAttribute('aria-label', 'Review status');
+      ['', 'reviewed', 'confident'].forEach(function (value) {
+        var btn = el('button', 'status-btn status-' + (value || 'none'), STATUS_LABELS[value]);
+        btn.type = 'button';
+        btn.addEventListener('click', function () { setStatus(t.id, value); });
+        group.appendChild(btn);
+        controls.push({ id: t.id, value: value, btn: btn });
+      });
+      bar.appendChild(group);
+
+      heading.parentNode.insertBefore(bar, heading.nextSibling);
+    });
+
+    /* Page summary under the title */
+    var pageTopics = TOPICS.filter(function (t) { return t.page === page; });
+    if (pageTopics.length) {
+      var header = document.querySelector('#title-block-header') ||
+                   document.querySelector('.quarto-title-block');
+      if (header) {
+        var summary = el('div', 'page-progress');
+        summary.id = 'page-progress';
+        header.appendChild(summary);
+      }
+    }
+  }
+
+  function refreshControls() {
+    controls.forEach(function (c) {
+      c.btn.classList.toggle('active', statusOf(c.id) === c.value);
+      c.btn.setAttribute('aria-pressed', statusOf(c.id) === c.value ? 'true' : 'false');
+    });
+    var summary = document.getElementById('page-progress');
+    if (summary) {
+      var page = currentPage();
+      var s = summarise(TOPICS.filter(function (t) { return t.page === page; }));
+      summary.innerHTML = '';
+      summary.appendChild(el('span', null,
+        'This session: ' + s.reviewed + '/' + s.total + ' topics reviewed · ' +
+        s.confident + ' confident'));
+      var bar = el('span', 'mini-bar');
+      var fillR = el('span', 'fill-reviewed'); fillR.style.width = pct(s.reviewed, s.total) + '%';
+      var fillC = el('span', 'fill-confident'); fillC.style.width = pct(s.confident, s.total) + '%';
+      bar.appendChild(fillR); bar.appendChild(fillC);
+      summary.appendChild(bar);
+    }
+  }
+
+  /* ── 2. sidebar counters ───────────────────────────────────────────── */
+  function refreshSidebar() {
+    document.querySelectorAll('#quarto-sidebar a').forEach(function (link) {
+      var href = (link.getAttribute('href') || '').split('#')[0].split('/').pop();
+      var list = TOPICS.filter(function (t) { return t.page === href; });
+      if (!list.length) return;
+      var s = summarise(list);
+      var tag = link.querySelector('.sidebar-count');
+      if (!tag) {
+        tag = el('span', 'sidebar-count');
+        link.appendChild(tag);
+      }
+      tag.textContent = s.reviewed + '/' + s.total;
+      tag.classList.toggle('done', s.reviewed === s.total);
+      tag.title = s.reviewed + ' of ' + s.total + ' topics reviewed, ' + s.confident + ' confident';
+    });
+  }
+
+  /* ── 3. dashboard ──────────────────────────────────────────────────── */
+  function statCard(label, s, cls) {
+    var card = el('div', 'dash-card ' + (cls || ''));
+    card.appendChild(el('div', 'dash-card-label', label));
+    card.appendChild(el('div', 'dash-card-value', pct(s.reviewed, s.total) + '%'));
+    card.appendChild(el('div', 'dash-card-sub',
+      s.reviewed + '/' + s.total + ' reviewed · ' + s.confident + ' confident (' +
+      pct(s.confident, s.total) + '%)'));
+    var bar = el('div', 'dash-bar');
+    var r = el('span', 'fill-reviewed'); r.style.width = pct(s.reviewed, s.total) + '%';
+    var c = el('span', 'fill-confident'); c.style.width = pct(s.confident, s.total) + '%';
+    bar.appendChild(r); bar.appendChild(c);
+    card.appendChild(bar);
+    return card;
+  }
+
+  function renderDashboard() {
+    var root = document.getElementById('sta530-dashboard');
+    if (!root) return;
+    root.innerHTML = '';
+
+    /* Rollup cards */
+    var cards = el('div', 'dash-cards');
+    cards.appendChild(statCard('All topics', summarise(TOPICS)));
+    cards.appendChild(statCard('✍️ Exam-relevant (🎯 ❓ ✏️ 📌)',
+      summarise(TOPICS.filter(isExam)), 'card-exam'));
+    cards.appendChild(statCard('🎯 Instructor learning objectives',
+      summarise(TOPICS.filter(function (t) { return t.flag === 'objective'; })), 'card-objective'));
+    cards.appendChild(statCard('❓ Instructor’s key questions',
+      summarise(TOPICS.filter(function (t) { return t.flag === 'keyq'; })), 'card-keyq'));
+    cards.appendChild(statCard('✏️ Emphasised in class',
+      summarise(TOPICS.filter(function (t) { return t.flag === 'notes'; })), 'card-notes'));
+    cards.appendChild(statCard('📌 Likely relevant (AI-inferred)',
+      summarise(TOPICS.filter(function (t) { return t.flag === 'inferred'; })), 'card-inferred'));
+    cards.appendChild(statCard('📎 Optional depth',
+      summarise(TOPICS.filter(function (t) { return t.flag === 'optional'; })), 'card-optional'));
+    cards.appendChild(statCard('Unflagged background',
+      summarise(TOPICS.filter(function (t) { return !t.flag; }))));
+    root.appendChild(cards);
+
+    var legend = el('p', 'dash-legend');
+    legend.innerHTML = '<span class="key key-reviewed"></span> reviewed (includes confident) &nbsp; ' +
+                       '<span class="key key-confident"></span> confident';
+    root.appendChild(legend);
+
+    /* Per-lecture table */
+    root.appendChild(el('h2', null, 'Progress per page'));
+    var table = el('table', 'dash-table table');
+    var thead = el('thead');
+    var hr = el('tr');
+    ['Page', 'Topics', '✍️ Exam', '📎', 'Reviewed', 'Confident'].forEach(function (h) { hr.appendChild(el('th', null, h)); });
+    thead.appendChild(hr); table.appendChild(thead);
+    var tbody = el('tbody');
+    for (var n = 1; n <= 30; n++) {
+      var list = TOPICS.filter(function (t) { return t.lecture === n; });
+      if (!list.length) continue;
+      var s = summarise(list);
+      var tr = el('tr');
+      var tdName = el('td');
+      var a = el('a', null, labelOf(list[0]) + ' · ' + (LECTURE_TITLES[n] || ''));
+      a.href = list[0].page;
+      tdName.appendChild(a);
+      tr.appendChild(tdName);
+      tr.appendChild(el('td', 'num', String(s.total)));
+      [list.filter(isExam).length,
+       list.filter(function (t) { return t.flag === 'optional'; }).length].forEach(function (k) {
+        tr.appendChild(el('td', 'num', k ? String(k) : '–'));
+      });
+      [['reviewed', s.reviewed], ['confident', s.confident]].forEach(function (pair) {
+        var td = el('td');
+        var bar = el('div', 'dash-bar small');
+        var f = el('span', 'fill-' + pair[0]); f.style.width = pct(pair[1], s.total) + '%';
+        bar.appendChild(f);
+        td.appendChild(bar);
+        td.appendChild(el('span', 'bar-label', pair[1] + '/' + s.total));
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+    root.appendChild(table);
+
+    /* To-do list: flagged topics that are not yet confident */
+    root.appendChild(el('h2', null, 'Exam topics not yet confident'));
+    root.appendChild(el('p', 'dash-note',
+      'In priority order: 🎯 learning objectives, ❓ instructor key questions, ✏️ emphasised in class, 📌 AI-inferred. Optional-depth topics (📎) are left out. ' +
+      'Click a topic to jump to it.'));
+    var todo = TOPICS.filter(function (t) {
+      return (t.flag in FLAG_ORDER) && statusOf(t.id) !== 'confident';
+    });
+    todo.sort(function (a, b) {
+      if (FLAG_ORDER[a.flag] !== FLAG_ORDER[b.flag]) return FLAG_ORDER[a.flag] - FLAG_ORDER[b.flag];
+      return a.lecture - b.lecture;
+    });
+    if (!todo.length) {
+      root.appendChild(el('p', 'dash-done', 'Every flagged topic is marked confident. 🎉'));
+    } else {
+      var ul = el('ul', 'dash-todo');
+      todo.forEach(function (t) {
+        var li = el('li');
+        li.appendChild(el('span', 'dot dot-' + (statusOf(t.id) || 'none')));
+        li.appendChild(el('span', 'todo-flag', FLAG_ICON[t.flag] || ''));
+        var link = el('a', null, labelOf(t) + ' · ' + t.title);
+        link.href = t.page + '#' + t.id;
+        li.appendChild(link);
+        li.appendChild(el('span', 'todo-status', STATUS_LABELS[statusOf(t.id)]));
+        ul.appendChild(li);
+      });
+      root.appendChild(ul);
+    }
+
+    /* Backup / reset */
+    root.appendChild(el('h2', null, 'Backup and reset'));
+    root.appendChild(el('p', 'dash-note',
+      'Status is saved in this browser only. Export a backup before clearing browser data or switching device.'));
+    var tools = el('div', 'dash-tools');
+
+    var exportBtn = el('button', 'btn btn-outline-secondary btn-sm', 'Export progress (.json)');
+    exportBtn.addEventListener('click', function () {
+      var blob = new Blob([JSON.stringify(state, null, 1)], { type: 'application/json' });
+      var link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'sta530-progress.json';
+      link.click();
+      URL.revokeObjectURL(link.href);
+    });
+    tools.appendChild(exportBtn);
+
+    var importLabel = el('label', 'btn btn-outline-secondary btn-sm', 'Import progress');
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'application/json';
+    input.style.display = 'none';
+    input.addEventListener('change', function () {
+      var file = input.files[0];
+      if (!file) return;
+      file.text().then(function (text) {
+        try {
+          state = JSON.parse(text);
+          save(state);
+          refreshAll();
+        } catch (e) { alert('That file is not a valid progress export.'); }
+      });
+    });
+    importLabel.appendChild(input);
+    tools.appendChild(importLabel);
+
+    var resetBtn = el('button', 'btn btn-outline-danger btn-sm', 'Reset all progress');
+    resetBtn.addEventListener('click', function () {
+      if (confirm('Reset the status of every topic to "Not reviewed"?')) {
+        state = {};
+        save(state);
+        refreshAll();
+      }
+    });
+    tools.appendChild(resetBtn);
+    root.appendChild(tools);
+  }
+
+  function refreshAll() {
+    refreshControls();
+    refreshSidebar();
+    renderDashboard();
+  }
+
+  function init() {
+    decorateTopics();
+    refreshAll();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+
+  function shuffle(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+    }
+    return arr;
+  }
+
+  function buildQuiz(src) {
+    var question = src.getAttribute('data-question') || '';
+    var opts     = shuffle(Array.from(src.querySelectorAll('.q-opt')));
+    var expText  = (src.querySelector('.q-exp') || {}).textContent || '';
+    var ctxEl    = src.querySelector('.q-ctx');
+
+    var wrap = document.createElement('div');
+    wrap.style.cssText = [
+      'border:1px solid #dee2e6;border-radius:8px;',
+      'padding:1rem 1.25rem;margin:1.2rem 0;background:#f8f9fa;'
+    ].join('');
+
+    if (ctxEl) {
+      var ctx = document.createElement('div');
+      ctx.style.cssText = [
+        'background:#e9ecef;border-radius:4px;',
+        'padding:0.5rem 0.85rem;margin-bottom:0.8rem;',
+        'overflow-x:auto;'
+      ].join('');
+      ctx.innerHTML = ctxEl.innerHTML;
+      wrap.appendChild(ctx);
+    }
+
+    var qEl = document.createElement('p');
+    qEl.style.cssText = 'font-weight:600;margin:0 0 0.7rem;font-size:0.93rem;';
+    qEl.textContent = '\u2753  ' + question;
+    wrap.appendChild(qEl);
+
+    var answered = false;
+    var btns = opts.map(function (opt) {
+      var correct = opt.getAttribute('data-correct') === 'true';
+      var btn = document.createElement('button');
+      btn.textContent = opt.textContent.trim();
+      btn.setAttribute('data-correct', String(correct));
+      btn.style.cssText = [
+        'display:block;width:100%;text-align:left;',
+        'padding:0.38rem 0.85rem;margin:0.28rem 0;',
+        'border:1px solid #ced4da;border-radius:5px;',
+        'background:#fff;cursor:pointer;font-size:0.87rem;',
+        'transition:background 0.12s,border-color 0.12s;'
+      ].join('');
+      btn.addEventListener('mouseover', function () {
+        if (!answered) btn.style.background = '#e9ecef';
+      });
+      btn.addEventListener('mouseout', function () {
+        if (!answered) btn.style.background = '#fff';
+      });
+      btn.addEventListener('click', function () {
+        if (answered) return;
+        answered = true;
+        btns.forEach(function (b) {
+          var c = b.getAttribute('data-correct') === 'true';
+          b.style.cursor = 'default';
+          b.style.fontWeight = c ? '600' : 'normal';
+          if (c) {
+            b.style.background  = '#d4edda';
+            b.style.borderColor = '#28a745';
+            b.style.color       = '#155724';
+            b.textContent       = '\u2713  ' + b.textContent;
+          } else {
+            b.style.background  = '#f8d7da';
+            b.style.borderColor = '#dc3545';
+            b.style.color       = '#721c24';
+          }
+        });
+        if (expText) {
+          var box = document.createElement('div');
+          box.style.cssText = [
+            'margin-top:0.7rem;padding:0.55rem 0.9rem;',
+            'background:#e8f4fd;border-left:3px solid #0d6efd;',
+            'border-radius:4px;font-size:0.85rem;color:#1a1a2e;'
+          ].join('');
+          box.textContent = expText;
+          wrap.appendChild(box);
+        }
+        var retry = document.createElement('button');
+        retry.textContent = 'Try again';
+        retry.style.cssText = [
+          'margin-top:0.5rem;padding:0.22rem 0.75rem;font-size:0.78rem;',
+          'border:1px solid #adb5bd;border-radius:4px;',
+          'background:#fff;cursor:pointer;color:#6c757d;'
+        ].join('');
+        retry.addEventListener('click', function () {
+          wrap.parentNode.replaceChild(buildQuiz(src), wrap);
+        });
+        wrap.appendChild(retry);
+      });
+      wrap.appendChild(btn);
+      return btn;
+    });
+
+    return wrap;
+  }
+
+  function init() {
+    document.querySelectorAll('.sta530-quiz').forEach(function (div) {
+      div.parentNode.replaceChild(buildQuiz(div), div);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+<script>
+/* Randomised calculation drills for STA530.
+   Place <div class="drill" data-drill="NAME"></div> in a page.
+   Each drill shows a fresh problem, lets you type answers, checks them,
+   and reveals a full worked solution. "New problem" draws new numbers. */
+(function () {
+  'use strict';
+
+  /* ── helpers ───────────────────────────────────────────────────────── */
+  function rnd(min, max, dp) {
+    var f = Math.pow(10, dp || 0);
+    return Math.round((min + Math.random() * (max - min)) * f) / f;
+  }
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  function fmt(x, dp) {
+    if (typeof dp !== 'number') dp = 3;
+    return Number(x).toFixed(dp);
+  }
+  function h(tag, attrs, html) {
+    var e = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(function (k) {
+      if (k === 'class') e.className = attrs[k]; else e.setAttribute(k, attrs[k]);
+    });
+    if (html !== undefined) e.innerHTML = html;
+    return e;
+  }
+  function table(header, rows) {
+    var s = '<' + 'table class="table table-sm drill-table"><thead><tr>';
+    header.forEach(function (c) { s += '<th>' + c + '</th>'; });
+    s += '</tr></thead><tbody>';
+    rows.forEach(function (r) {
+      s += '<tr>' + r.map(function (c) { return '<td>' + c + '</td>'; }).join('') + '</tr>';
+    });
+    return s + '</tbody></' + 'table>';
+  }
+  function close(a, b, tol) {
+    if (isNaN(a)) return false;
+    return Math.abs(a - b) <= (tol !== undefined ? tol : Math.max(0.005, Math.abs(b) * 0.02));
+  }
+  function typeset(el) {
+    if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise([el]);
+  }
+
+  /* ── drill definitions ─────────────────────────────────────────────
+     Each returns { title, question (html), inputs: [{label, answer, tol}], solution (html) } */
+  var DRILLS = {};
+
+  /* SMR from an overall reference risk (session 2, slide 15) */
+  DRILLS.smr = function () {
+    var refPct = pick([2, 4, 5, 8, 10, 12]);
+    var P = pick([400, 800, 1000, 1500, 2000, 2500, 5000]);
+    var E = P * refPct / 100;
+    var O = Math.max(1, Math.round(E * pick([0.3, 0.6, 0.8, 1.0, 1.25, 1.5, 2.2])));
+    var smr = O / E;
+    var crudePct = 100 * O / P;
+    var dir = smr > 1 ? 0 : (smr < 1 ? 1 : 2);
+    return {
+      title: 'Standardized mortality ratio (SMR) from a reference risk',
+      question: '<p>The overall risk of the disease in the country is <b>' + refPct + '%</b>. Area A has <b>' + P +
+        '</b> residents at risk, and <b>' + O + '</b> of them get the disease.</p>',
+      inputs: [
+        { label: 'Expected count E in area A', answer: E, tol: 0.01 },
+        { label: 'SMR for area A', answer: smr, tol: 0.005 },
+        { label: 'Interpretation', options: ['More cases than expected (SMR > 1)', 'Fewer cases than expected (SMR < 1)', 'Exactly as expected (SMR = 1)'], answer: dir }
+      ],
+      solution: '<p><b>Approach 1 (expected count).</b> E = P × reference risk = ' + P + ' × ' + refPct + '% = <b>' + fmt(E, 1) +
+        '</b>. SMR = O / E = ' + O + ' / ' + fmt(E, 1) + ' = <b>' + fmt(smr, 3) + '</b>.</p>' +
+        '<p><b>Approach 2 (rate ratio).</b> Crude risk in A = ' + O + ' / ' + P + ' = ' + fmt(crudePct, 2) + '%. SMR = crude risk / reference risk = ' +
+        fmt(crudePct, 2) + '% / ' + refPct + '% = <b>' + fmt(smr, 3) + '</b>. Both approaches give the same number, because O/(π̂·P) = (O/P)/π̂.</p>' +
+        '<p>An SMR of ' + fmt(smr, 2) + ' means area A had ' + (smr > 1 ? fmt(100 * (smr - 1), 0) + '% more' : (smr < 1 ? fmt(100 * (1 - smr), 0) + '% fewer' : 'exactly as many')) +
+        ' cases than expected from the reference risk. It says nothing yet about whether the difference is larger than chance: with E = ' + fmt(E, 1) +
+        (E < 20 ? ', a small expected count, the SMR is unstable.' : ', the estimate is fairly well informed.') + '</p>'
+    };
+  };
+
+  /* Expected counts by indirect standardization (session 4, slide 11) */
+  DRILLS.smrstd = function () {
+    var strata = ['0–39', '40–64', '65+'];
+    var rates = [pick([0.5, 1, 2]), pick([4, 5, 6, 8]), pick([15, 20, 25, 30])]; /* per 1,000 */
+    var pops = [rnd(2, 9, 0) * 1000, rnd(1, 6, 0) * 1000, rnd(0.3, 3, 1) * 1000];
+    var Es = pops.map(function (n, a) { return n * rates[a] / 1000; });
+    var E = Es.reduce(function (x, y) { return x + y; }, 0);
+    var O = Math.max(1, Math.round(E * pick([0.7, 0.9, 1.1, 1.3, 1.6])));
+    return {
+      title: 'Expected count by indirect standardization',
+      question: '<p>Reference (national) rates per 1,000 person-years and the person-years in area i, by age group. Area i had <b>' + O + '</b> observed cases.</p>' +
+        table(['Age group', 'Reference rate r*ₐ (per 1,000)', 'Person-years nᵢₐ in area i'],
+          strata.map(function (lab, a) { return [lab, rates[a], pops[a]]; })),
+      inputs: [
+        { label: 'Expected count Eᵢ', answer: E, tol: 0.05 },
+        { label: 'SMRᵢ = Oᵢ / Eᵢ', answer: O / E, tol: 0.005 }
+      ],
+      solution: '<p>Eᵢ = Σₐ nᵢₐ r*ₐ: apply the reference rates to the area’s own population structure.</p>' +
+        table(['Age group', 'nᵢₐ × r*ₐ', 'Expected'], strata.map(function (lab, a) {
+          return [lab, pops[a] + ' × ' + rates[a] + '/1,000', fmt(Es[a], 2)];
+        })) +
+        '<p>Eᵢ = <b>' + fmt(E, 2) + '</b>; SMRᵢ = ' + O + ' / ' + fmt(E, 2) + ' = <b>' + fmt(O / E, 3) + '</b>.</p>' +
+        '<p>Why not just divide crude rates? An area with many old residents would look high-risk only because of its age structure. ' +
+        'Indirect standardization compares the area with what <i>its own</i> population would produce at reference rates.</p>'
+    };
+  };
+
+  /* Empirical Bayes smoothing weight (session 2, slide 16) */
+  DRILLS.eb = function () {
+    var mu = pick([0.008, 0.010, 0.012, 0.015]);      /* reference risk θ = μ */
+    var sd = pick([0.002, 0.003, 0.004]);              /* SD of true risks between areas */
+    var s2 = sd * sd;
+    var P = pick([200, 500, 1000, 2500, 10000, 40000]);
+    var crude = Math.max(0, mu + pick([-1, 1]) * rnd(0.3, 1.0, 2) * mu);
+    var O = Math.round(crude * P);
+    crude = O / P;
+    var vterm = mu / P;
+    var w = s2 / (s2 + vterm);
+    var eb = w * crude + (1 - w) * mu;
+    return {
+      title: 'Empirical Bayes smoothed risk for one area',
+      question: '<p>Reference risk θ = μ = <b>' + fmt(1000 * mu, 1) + ' per 1,000</b> (= ' + mu + '). Between-area variance of the true risks σ² = <b>' +
+        fmt(s2 * 1e6, 0) + ' × 10⁻⁶</b> (SD ' + sd + '). Area i has Pᵢ = <b>' + P + '</b> people and Oᵢ = <b>' + O + '</b> cases.</p>' +
+        '<p>Use π̂ᵢ<sup>EB</sup> = wᵢ rᵢ + (1 − wᵢ) θ with wᵢ = σ² / (σ² + μ/Pᵢ). Give rates per 1,000.</p>',
+      inputs: [
+        { label: 'Crude rate rᵢ (per 1,000)', answer: 1000 * crude, tol: 0.05 },
+        { label: 'Weight wᵢ (0–1)', answer: w, tol: 0.01 },
+        { label: 'EB smoothed rate (per 1,000)', answer: 1000 * eb, tol: 0.08 }
+      ],
+      solution: '<p>rᵢ = ' + O + ' / ' + P + ' = ' + fmt(crude, 5) + ' = <b>' + fmt(1000 * crude, 2) + ' per 1,000</b>.</p>' +
+        '<p>μ/Pᵢ = ' + mu + ' / ' + P + ' = ' + vterm.toExponential(2) + ' (the sampling variance of rᵢ, roughly). ' +
+        'wᵢ = ' + s2.toExponential(2) + ' / (' + s2.toExponential(2) + ' + ' + vterm.toExponential(2) + ') = <b>' + fmt(w, 3) + '</b>.</p>' +
+        '<p>π̂ᵢ<sup>EB</sup> = ' + fmt(w, 3) + ' × ' + fmt(1000 * crude, 2) + ' + ' + fmt(1 - w, 3) + ' × ' + fmt(1000 * mu, 1) +
+        ' = <b>' + fmt(1000 * eb, 2) + ' per 1,000</b>.</p>' +
+        '<p>' + (w < 0.5 ? 'The population is small, so the crude rate is noisy and most of the weight goes to the reference rate: strong shrinkage.'
+                         : 'The population is large, so the crude rate is precise and keeps most of the weight: little shrinkage.') +
+        ' Try “New problem” a few times and watch wᵢ grow with Pᵢ.</p>'
+    };
+  };
+
+  /* Box map fences (session 2, slide 8) */
+  DRILLS.boxmap = function () {
+    var q1 = rnd(20, 80, 0) * 10;
+    var iqr = rnd(10, 60, 0) * 5;
+    var q3 = q1 + iqr;
+    var hinge = pick([1.5, 3]);
+    var lb = q1 - hinge * iqr, ub = q3 + hinge * iqr;
+    var x = pick([q3 + rnd(1.6, 3.4, 1) * iqr, q1 - rnd(1.6, 3.4, 1) * iqr, q3 + rnd(0.2, 1.2, 1) * iqr]);
+    x = Math.round(x);
+    var cls = x > ub ? 0 : (x < lb ? 1 : 2);
+    return {
+      title: 'Box map: outlier fences (hinge = ' + hinge + ')',
+      question: '<p>A rate variable has Q1 = <b>' + q1 + '</b> and Q3 = <b>' + q3 + '</b>. You make a box map with hinge = <b>' + hinge + '</b>. One area has the value <b>' + x + '</b>.</p>',
+      inputs: [
+        { label: 'IQR', answer: iqr, tol: 0.01 },
+        { label: 'Lower fence LB', answer: lb, tol: 0.01 },
+        { label: 'Upper fence UB', answer: ub, tol: 0.01 },
+        { label: 'Category of the area', options: ['Upper outlier', 'Lower outlier', 'Not an outlier'], answer: cls }
+      ],
+      solution: '<p>IQR = Q3 − Q1 = ' + q3 + ' − ' + q1 + ' = <b>' + iqr + '</b>.</p>' +
+        '<p>LB = Q1 − ' + hinge + ' × IQR = ' + q1 + ' − ' + fmt(hinge * iqr, 1) + ' = <b>' + fmt(lb, 1) + '</b>; ' +
+        'UB = Q3 + ' + hinge + ' × IQR = ' + q3 + ' + ' + fmt(hinge * iqr, 1) + ' = <b>' + fmt(ub, 1) + '</b>.</p>' +
+        '<p>The value ' + x + ' is ' + ['above UB: an <b>upper outlier</b>', 'below LB: a <b>lower outlier</b>', 'between the fences: <b>not an outlier</b>'][cls] + '.</p>' +
+        '<p>With hinge = 3 the fences are twice as far out, so fewer and more extreme outliers are flagged. A negative LB (as on the slide, −87.5) simply means no area can be a lower outlier for a non-negative rate.</p>'
+    };
+  };
+
+  /* Contiguity neighbours on a regular grid (session 2, slides 25–28) */
+  DRILLS.neighbours = function () {
+    var R = pick([4, 5, 6]), C = pick([4, 5, 6]);
+    var r = rnd(1, R, 0), c = rnd(1, C, 0);
+    function count(test) {
+      var k = 0;
+      for (var i = 1; i <= R; i++) for (var j = 1; j <= C; j++) {
+        if (i === r && j === c) continue;
+        if (test(Math.abs(i - r), Math.abs(j - c))) k++;
+      }
+      return k;
+    }
+    var rook = count(function (di, dj) { return di + dj === 1; });
+    var queen = count(function (di, dj) { return Math.max(di, dj) === 1; });
+    var queen2 = count(function (di, dj) { return Math.max(di, dj) === 2; });
+    var grid = '<' + 'table class="table table-sm drill-table" style="width:auto"><tbody>';
+    for (var i = 1; i <= R; i++) {
+      grid += '<tr>';
+      for (var j = 1; j <= C; j++) {
+        var here = (i === r && j === c);
+        grid += '<td style="width:2rem;height:2rem;text-align:center;border:1px solid #adb5bd;' + (here ? 'background:#d9480f;color:#fff;font-weight:700' : '') + '">' + (here ? '★' : '') + '</td>';
+      }
+      grid += '</tr>';
+    }
+    grid += '</tbody></' + 'table>';
+    return {
+      title: 'Counting contiguity neighbours',
+      question: '<p>A ' + R + ' × ' + C + ' grid of square areas. Count the neighbours of the starred area (row ' + r + ', column ' + c + ').</p>' + grid,
+      inputs: [
+        { label: '1st-order rook neighbours (shared edge)', answer: rook, tol: 0 },
+        { label: '1st-order queen neighbours (shared edge or corner)', answer: queen, tol: 0 },
+        { label: '2nd-order queen neighbours only (the ring two steps out)', answer: queen2, tol: 0 }
+      ],
+      solution: '<p>Rook: the cells directly above, below, left and right that exist → <b>' + rook + '</b>.</p>' +
+        '<p>Queen: rook neighbours plus the diagonal corners → <b>' + queen + '</b>. Queen always gives at least as many neighbours as rook.</p>' +
+        '<p>2nd-order queen: neighbours of neighbours that are not already 1st-order, i.e. the ring two steps away → <b>' + queen2 + '</b>. ' +
+        'Software can also include the lower orders, which would give ' + queen + ' + ' + queen2 + ' = ' + (queen + queen2) + '.</p>' +
+        '<p>Edge and corner cells have fewer neighbours. That is why the connectivity histogram of contiguity weights is spread out, while k-nearest-neighbour weights give everyone exactly k.</p>'
+    };
+  };
+
+  /* Global Moran's I by hand for four areas in a row (session 2, slides 36–38) */
+  DRILLS.moran = function () {
+    var pattern = pick(['cluster', 'alternate', 'mixed']);
+    var base = pattern === 'cluster' ? [2, 3, 7, 8] : (pattern === 'alternate' ? [2, 8, 3, 7] : [3, 7, 8, 2]);
+    var x = base.map(function (v) { return v + pick([-1, 0, 0, 1]); });
+    var n = 4;
+    var mean = x.reduce(function (a, b) { return a + b; }, 0) / n;
+    var z = x.map(function (v) { return v - mean; });
+    var sz2 = z.reduce(function (a, b) { return a + b * b; }, 0);
+    /* binary rook weights on a line A–B–C–D; each pair counted twice */
+    var cross = 2 * (z[0] * z[1] + z[1] * z[2] + z[2] * z[3]);
+    var S0 = 6;
+    var I = (n / S0) * cross / sz2;
+    return {
+      title: 'Global Moran’s I for four areas',
+      question: '<p>Four areas lie in a row: A – B – C – D. Neighbours share a border (binary rook weights, w<sub>ij</sub> = 1 for A–B, B–C, C–D in both directions, so S₀ = 6). Values:</p>' +
+        table(['', 'A', 'B', 'C', 'D'], [['x'].concat(x)]) +
+        '<p>Use I = (n / S₀) · Σᵢ Σⱼ wᵢⱼ zᵢ zⱼ / Σᵢ zᵢ², with zᵢ = xᵢ − x̄.</p>',
+      inputs: [
+        { label: 'Mean x̄', answer: mean, tol: 0.01 },
+        { label: 'Σ zᵢ²', answer: sz2, tol: 0.02 },
+        { label: 'Σᵢ Σⱼ wᵢⱼ zᵢ zⱼ (every pair counted twice)', answer: cross, tol: 0.05 },
+        { label: 'Moran’s I', answer: I, tol: 0.01 }
+      ],
+      solution: '<p>x̄ = ' + fmt(mean, 2) + '; z = (' + z.map(function (v) { return fmt(v, 2); }).join(', ') + ').</p>' +
+        '<p>Σ zᵢ² = ' + z.map(function (v) { return fmt(v, 2) + '²'; }).join(' + ') + ' = <b>' + fmt(sz2, 3) + '</b>.</p>' +
+        '<p>Neighbour pairs: z_A z_B = ' + fmt(z[0] * z[1], 3) + ', z_B z_C = ' + fmt(z[1] * z[2], 3) + ', z_C z_D = ' + fmt(z[2] * z[3], 3) +
+        '. Each pair appears twice in the double sum: 2 × (' + fmt(z[0] * z[1] + z[1] * z[2] + z[2] * z[3], 3) + ') = <b>' + fmt(cross, 3) + '</b>.</p>' +
+        '<p>I = (4 / 6) × ' + fmt(cross, 3) + ' / ' + fmt(sz2, 3) + ' = <b>' + fmt(I, 3) + '</b>.</p>' +
+        '<p>' + (I > 0.1 ? 'Positive: neighbours tend to be on the same side of the mean (low next to low, high next to high).'
+              : (I < -0.1 ? 'Negative: neighbours tend to be on opposite sides of the mean, like a checkerboard.'
+                          : 'Close to zero, but note that under spatial randomness E[I] = −1/(n−1) = −0.333 here, not 0. With only four areas no test would be meaningful.')) + '</p>'
+    };
+  };
+
+  /* SAR total and indirect impacts with row-standardized W (session 3, slides 11–13) */
+  DRILLS.sarimpact = function () {
+    var rho = pick([0.1, 0.2, 0.3, 0.4, 0.5, 0.6]);
+    var beta = pick([0.5, 1, 1.5, 2, 2.5]);
+    /* three areas, everyone neighbours, W row-standardized: exact inverse */
+    var total = beta / (1 - rho);
+    var direct = beta * ((1 / 3) / (1 - rho) + (2 / 3) / (1 + rho / 2));
+    var indirect = total - direct;
+    return {
+      title: 'Spatial lag (SAR) model: total and indirect impacts',
+      question: '<p>A spatial lag model y = ρWy + Xβ + ε is fitted with <b>ρ = ' + rho + '</b> and <b>β = ' + beta +
+        '</b>. W is row-standardized (every row sums to 1). For a one-unit increase in x in one area, the average <b>direct impact</b> is ' + fmt(direct, 3) + '.</p>' +
+        '<p>Hint: with a row-standardized W, the total impact of a one-unit change in x everywhere simplifies to β / (1 − ρ).</p>',
+      inputs: [
+        { label: 'Total impact', answer: total, tol: 0.005 },
+        { label: 'Indirect (spillover) impact, summed over all other areas', answer: indirect, tol: 0.005 },
+        { label: 'Is β alone the full effect of x?', options: ['No: β understates the total impact', 'Yes: β equals the total impact', 'No: β overstates the total impact'], answer: 0 }
+      ],
+      solution: '<p>(I − ρW)⁻¹ = I + ρW + ρ²W² + … (the Neumann series). Each row of W sums to 1, so each row of Wᵏ also sums to 1, and the row sums of the impact matrix are β(1 + ρ + ρ² + …) = β / (1 − ρ).</p>' +
+        '<p>Total = ' + beta + ' / (1 − ' + rho + ') = <b>' + fmt(total, 3) + '</b>.</p>' +
+        '<p>Indirect (summed over the other areas) = total − direct = ' + fmt(total, 3) + ' − ' + fmt(direct, 3) + ' = <b>' + fmt(indirect, 3) + '</b>.</p>' +
+        '<p>The direct impact (' + fmt(direct, 3) + ') is already larger than β = ' + beta + ', because part of the change travels to the neighbours and feeds back. ' +
+        'With positive ρ, reporting only β understates the effect of x. This is the session 3 message: for SAR, report direct, indirect and total impacts.</p>'
+    };
+  };
+
+  /* exp(beta) as a relative-risk ratio (session 4, slide 28) */
+  DRILLS.logrr = function () {
+    var beta = pick([-1, 1]) * rnd(0.02, 0.25, 3);
+    var unit = pick([['deprivation score', 'point', [1, 5, 10]], ['% unemployed', 'percentage point', [1, 5, 10]], ['PM2.5 (µg/m³)', 'µg/m³', [1, 5, 10]]]);
+    var k = pick(unit[2]);
+    var rr1 = Math.exp(beta), rrk = Math.exp(k * beta);
+    return {
+      title: 'Interpreting a covariate in a disease-mapping model',
+      question: '<p>A BYM2 model log θᵢ = α + β·xᵢ + spatial and unstructured effects is fitted with x = <b>' + unit[0] +
+        '</b>. The posterior mean of β is <b>' + fmt(beta, 3) + '</b>.</p>',
+      inputs: [
+        { label: 'Relative-risk ratio for a 1-' + unit[1] + ' difference, exp(β)', answer: rr1, tol: 0.005 },
+        { label: 'Relative-risk ratio for a ' + k + '-' + unit[1] + ' difference', answer: rrk, tol: 0.01 },
+        { label: 'Percent change in relative risk for the ' + k + '-unit difference', answer: 100 * (rrk - 1), tol: 0.6 }
+      ],
+      solution: '<p>exp(' + fmt(beta, 3) + ') = <b>' + fmt(rr1, 3) + '</b>. For ' + k + ' units: exp(' + k + ' × ' + fmt(beta, 3) + ') = exp(' + fmt(k * beta, 3) + ') = <b>' + fmt(rrk, 3) +
+        '</b>, a ' + fmt(Math.abs(100 * (rrk - 1)), 1) + '% ' + (rrk > 1 ? 'higher' : 'lower') + ' relative risk.</p>' +
+        '<p>Note that ' + k + ' × (exp(β) − 1) = ' + fmt(100 * k * (rr1 - 1), 1) + '% is only an approximation: effects multiply on the risk scale.</p>' +
+        '<p>Interpretation: areas that differ by ' + k + ' ' + unit[1] + (k > 1 ? 's' : '') + ' in ' + unit[0] + ' have this ratio of relative risks, conditional on the model. ' +
+        'It is an <b>area-level</b> association: not an individual-level effect (ecological fallacy), and spatial random effects do not make it causal.</p>'
+    };
+  };
+
+  /* Which likelihood? (session 4, slides 5–8) */
+  DRILLS.likelihood = function () {
+    var cases = [
+      ['In each municipality, the number of 4-year-olds with overweight among all 4-year-olds measured at child health centres.', 0, 'A fixed number Nᵢ of children was examined and each either has overweight or not: cases out of N binary observations → Binomial(Nᵢ, pᵢ); target = prevalence.'],
+      ['New stroke cases per DeSO over 2019–2023, with person-years at risk from the population register.', 1, 'New events over person-time → Poisson with log(person-time) as offset; target = incidence rate λᵢ.'],
+      ['Observed lung-cancer deaths per county, compared with the number expected from national age- and sex-specific rates.', 2, 'Observed vs expected counts → Poisson(Eᵢ θᵢ) with log(Eᵢ) as offset; target = relative risk θᵢ (SMR is the crude estimate).'],
+      ['Number of survey respondents reporting daily smoking, out of all respondents, in each region.', 0, 'Respondents out of a known number interviewed → Binomial; target = prevalence pᵢ.'],
+      ['Number of hip fractures per municipality in one year, with the mid-year population as denominator.', 1, 'Events over population-time → Poisson with offset log(population × 1 year); target = incidence rate.'],
+      ['Childhood leukaemia cases per area compared with the count expected from national age-specific rates.', 2, 'Observed vs expected → Poisson(Eᵢ θᵢ); target = relative risk. Counts are small, so smoothing (BYM2) is attractive.']
+    ];
+    var c = pick(cases);
+    return {
+      title: 'Choose the likelihood from the outcome and denominator',
+      question: '<p>' + c[0] + '</p>',
+      inputs: [
+        { label: 'Likelihood and target', options: ['Binomial(Nᵢ, pᵢ): prevalence', 'Poisson(PTᵢ λᵢ): incidence rate', 'Poisson(Eᵢ θᵢ): relative risk'], answer: c[1] }
+      ],
+      solution: '<p>' + c[2] + '</p><p>Both Binomial and Poisson data are counts. What decides is the denominator: a fixed number of people each with a yes/no outcome (Binomial), or events accumulating over exposure time or relative to an expected count (Poisson). BYM2 is a random-effect structure that can be used with either.</p>'
+    };
+  };
+
+  /* Magnitude vs certainty in posterior summaries (session 4, slide 32) */
+  DRILLS.exceed = function () {
+    var a = { m: rnd(1.25, 1.6, 2) }; a.lo = rnd(0.6, 0.9, 2); a.hi = rnd(2.0, 2.6, 2); a.p = rnd(0.62, 0.80, 2);
+    var b = { m: rnd(1.10, 1.22, 2) }; b.lo = rnd(1.03, 1.08, 2); b.hi = Math.round((2 * b.m - b.lo) * 100) / 100; b.p = rnd(0.985, 0.999, 3);
+    var swap = Math.random() < 0.5;
+    var X = swap ? b : a, Y = swap ? a : b;
+    var strongerIsX = (X === b);
+    return {
+      title: 'Which area shows stronger evidence of elevated risk?',
+      question: table(['', 'Posterior mean RR', '95% CrI', 'P(RR > 1 | data)'],
+        [['Area X', fmt(X.m, 2), fmt(X.lo, 2) + '–' + fmt(X.hi, 2), fmt(X.p, 3)],
+         ['Area Y', fmt(Y.m, 2), fmt(Y.lo, 2) + '–' + fmt(Y.hi, 2), fmt(Y.p, 3)]]),
+      inputs: [
+        { label: 'Higher estimated relative risk', options: ['Area X', 'Area Y'], answer: X.m > Y.m ? 0 : 1 },
+        { label: 'Stronger evidence that risk is above 1', options: ['Area X', 'Area Y'], answer: strongerIsX ? 0 : 1 }
+      ],
+      solution: '<p>Area ' + (X.m > Y.m ? 'X' : 'Y') + ' has the larger point estimate, but its credible interval includes 1 and P(RR > 1) is only about ' +
+        fmt(Math.min(X.p, Y.p), 2) + '. Area ' + (strongerIsX ? 'X' : 'Y') + ' has a smaller estimate but a narrow interval entirely above 1 and P(RR > 1) ≈ ' + fmt(Math.max(X.p, Y.p), 3) + '.</p>' +
+        '<p><b>Magnitude and certainty are different dimensions.</b> Typically the high-but-uncertain area has a small population (few expected cases). ' +
+        'A map of posterior means alone hides this; a map of exceedance probabilities shows it.</p>'
+    };
+  };
+
+  /* ── rendering ─────────────────────────────────────────────────────── */
+  function render(box) {
+    var name = box.getAttribute('data-drill');
+    if (!DRILLS[name]) { box.textContent = 'Unknown drill: ' + name; return; }
+    var d = DRILLS[name]();
+    box.innerHTML = '';
+    box.appendChild(h('div', { 'class': 'drill-title' }, '🧮 ' + d.title));
+    box.appendChild(h('div', { 'class': 'drill-question' }, d.question));
+
+    var form = h('div', { 'class': 'drill-inputs' });
+    var fields = d.inputs.map(function (inp) {
+      var row = h('label', { 'class': 'drill-row' });
+      row.appendChild(h('span', { 'class': 'drill-label' }, inp.label));
+      var field;
+      if (inp.options) {
+        field = h('select', { 'class': 'form-select form-select-sm drill-select' });
+        field.appendChild(h('option', { value: '' }, 'Choose …'));
+        inp.options.forEach(function (o, i) { field.appendChild(h('option', { value: String(i) }, o)); });
+      } else {
+        field = h('input', { type: 'text', inputmode: 'decimal', autocomplete: 'off' });
+      }
+      row.appendChild(field);
+      var mark = h('span', { 'class': 'drill-mark' });
+      row.appendChild(mark);
+      form.appendChild(row);
+      return { inp: inp, field: field, mark: mark };
+    });
+    box.appendChild(form);
+
+    var btns = h('div', { 'class': 'drill-buttons' });
+    var check = h('button', { type: 'button', 'class': 'btn btn-sm btn-primary' }, 'Check');
+    var show = h('button', { type: 'button', 'class': 'btn btn-sm btn-outline-secondary' }, 'Show solution');
+    var again = h('button', { type: 'button', 'class': 'btn btn-sm btn-outline-secondary' }, 'New problem ↻');
+    btns.appendChild(check); btns.appendChild(show); btns.appendChild(again);
+    box.appendChild(btns);
+
+    var sol = h('div', { 'class': 'drill-solution' }, d.solution);
+    sol.style.display = 'none';
+    box.appendChild(sol);
+
+    check.addEventListener('click', function () {
+      fields.forEach(function (f) {
+        var raw = f.field.value.replace(',', '.').replace('×10', 'e').trim();
+        if (raw === '') { f.mark.textContent = ''; return; }
+        var ok = f.inp.options ? parseInt(raw, 10) === f.inp.answer
+                               : close(parseFloat(raw), f.inp.answer, f.inp.tol);
+        f.mark.textContent = ok ? '✓' : '✗';
+        f.mark.className = 'drill-mark ' + (ok ? 'ok' : 'bad');
+      });
+    });
+    show.addEventListener('click', function () {
+      sol.style.display = sol.style.display === 'none' ? 'block' : 'none';
+      show.textContent = sol.style.display === 'none' ? 'Show solution' : 'Hide solution';
+      typeset(sol);
+    });
+    again.addEventListener('click', function () { render(box); });
+    typeset(box);
+  }
+
+  function init() {
+    document.querySelectorAll('.drill').forEach(render);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./exam-practice.html" class="pagination-link" aria-label="Exam practice">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exam practice</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./session1.html" class="pagination-link" aria-label="Session 1 — Introduction to Spatial Epidemiology">
+        <span class="nav-page-text">Session 1 — Introduction to Spatial Epidemiology</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>STA530 · University of Gothenburg · Built with Quarto + WebR</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
