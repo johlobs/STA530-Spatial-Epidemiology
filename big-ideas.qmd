@@ -1,13 +1,13 @@
 ---
 title: "The big ideas"
-subtitle: "The whole course so far on one page: 18 ideas, one sentence each"
+subtitle: "The whole course so far on one page: 25 ideas, one sentence each"
 toc: false
 ---
 
-Start here, or come back here before the exam. Each idea is one sentence in plain language; the link takes you to the section that explains it. If you can say all 18 in your own words, you have the core of Sessions 1–4.
+Start here, or come back here before the exam. Each idea is one sentence in plain language; the link takes you to the section that explains it. If you can say all 25 in your own words, you have the core of Sessions 1–6.
 
 ```{mermaid}
-%%| fig-cap: "Lecture map: each arrow means \"this leads to the next question\". Not causal. How the four sessions connect."
+%%| fig-cap: "Lecture map: each arrow means \"this leads to the next question\". Not causal. How the sessions connect."
 flowchart LR
   A["Spatial data<br/>information + location<br/>(S1)"] --> B["Map rates,<br/>not counts<br/>(S2)"]
   B --> C["Small areas give<br/>unstable rates<br/>(S2)"]
@@ -16,6 +16,9 @@ flowchart LR
   B --> F["Are neighbours alike?<br/>define W, Moran's I, LISA<br/>(S2)"]
   F --> G["Regression with<br/>spatial dependence<br/>SAR / SEM (S3)"]
   F --> E
+  G --> H["Association or effect?<br/>causal designs: DiD, RDD, IV<br/>(S6)"]
+  E --> H
+  I["Many neighbourhood variables<br/>PCA, clustering<br/>(S6)"] --> G
 ```
 
 ## Session 1 · What spatial epidemiology is
@@ -55,6 +58,23 @@ flowchart LR
 | 16 | Pick the **likelihood from the outcome and denominator**: Binomial for prevalence, Poisson for incidence or observed vs expected. | [4.2](session4.qmd#t4-2) |
 | 17 | **BYM2** = a spatial part (borrow from neighbours) + a non-spatial part (area's own), with ρ as the spatial share and τ for the total amount. | [4.12](session4.qmd#t4-12) |
 | 18 | Report **risk and its uncertainty**: a higher estimate is not stronger evidence; look at credible intervals and exceedance probabilities, and remember that a high-risk area is not a cause. | [4.17](session4.qmd#t4-17) |
+
+## Session 5 · The computer lab
+
+| # | Idea | Section |
+|---|---|---|
+| 19 | Map **how high** (posterior RR) and **how sure** (P(RR > 1)) side by side; a threshold such as 0.8 turns them into elevated / uncertain / lower. | [5.6](session5.qmd#t5-6) |
+
+## Session 6 · More methods, and the step to causal questions
+
+| # | Idea | Section |
+|---|---|---|
+| 20 | **ESDA** links graphs and maps to spot patterns and **heterogeneity** (different means or slopes by region); it generates hypotheses, not conclusions. | [6.7](session6.qmd#t6-7) |
+| 21 | **Access** has five dimensions, and spatial measures disagree: container counts depend on borders, distance ignores capacity, **2SFCA** adds supply and demand. | [6.14](session6.qmd#t6-14) |
+| 22 | **PCA** turns many correlated neighbourhood variables into a few uncorrelated indices that keep most of the variance. | [6.16](session6.qmd#t6-16) |
+| 23 | **K-means** groups areas by squared Euclidean distance; adding coordinates makes the clusters **spatially compact**; choose K at the elbow. | [6.20](session6.qmd#t6-20) |
+| 24 | **Association is not an effect**: keep apart dependence, spatially structured confounding and **interference**, and remember a SAR spillover is model-implied, not causal. | [6.24](session6.qmd#t6-24) |
+| 25 | For "what if we intervene?" use a **design** (matching, **DiD** with parallel trends, geographic RDD, IV), and beware of neighbouring controls that are exposed. | [6.27](session6.qmd#t6-27) |
 
 ::: {.callout-tip}
 ## How to use this page

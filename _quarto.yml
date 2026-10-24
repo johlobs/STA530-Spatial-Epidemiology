@@ -46,6 +46,16 @@ website:
         contents:
           - session3.qmd
           - session4.qmd
+      - section: "Week 2: Lab"
+        contents:
+          - session5.qmd
+      - section: "Week 3: Applications"
+        contents:
+          - session6.qmd
+          - session7.qmd
+      - section: "Mini-project"
+        contents:
+          - session8.qmd
       - section: "Reference"
         contents:
           - resources.qmd

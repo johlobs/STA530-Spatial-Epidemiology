@@ -51,7 +51,37 @@ Everything here is linked from the Canvas posts or the session slides. Optional 
 |---|---|---|
 | [Gómez-Rubio, *Bayesian Inference with INLA*](https://becarioprecario.bitbucket.io/inla-gitbook/){target="_blank"} | Free online book: latent Gaussian models, spatial models and their implementation in R. **Optional, not required reading**; the computational details of INLA are not expected | [4.21](session4.qmd#t4-21) |
 
-## Articles cited on the slides
+## Session 6 · Additional methods and applications
+
+**Optional (Canvas post):** *"For students interested in exploring these methods further."*
+
+| Resource | What it is | Where in the app |
+|---|---|---|
+| [GeoDa workbook: *Exploratory data analysis (1)*](https://geodacenter.github.io/workbook/2a_eda/lab2a.html){target="_blank"} | Univariate and bivariate ESDA: linking, LOWESS, averages chart, brushing the scatter plot (source of the slide figures) | [6.2](session6.qmd#t6-2)–[6.7](session6.qmd#t6-7) |
+| [GeoDa workbook: *Exploratory data analysis (2)*](https://geodacenter.github.io/workbook/2b_eda_multi/lab2b.html){target="_blank"} | Multivariate ESDA (mentioned on slide 12) | [6.8](session6.qmd#t6-8) |
+| [GeoDa workbook: *Space–time analysis*](https://geodacenter.github.io/workbook/3c_spacetime/lab3c.html){target="_blank"} | Space–time ESDA (mentioned on slide 12) | [6.8](session6.qmd#t6-8) |
+| [GeoDa workbook: *Spatial clustering (1)*](https://geodacenter.github.io/workbook/9a_spatial1/lab9a.html){target="_blank"} | Spatially constrained clustering methods | [6.20](session6.qmd#t6-20) |
+| [Kolak et al. (2020). Quantification of neighborhood-level social determinants of health in the continental United States. *JAMA Network Open* 3(1):e1919928](https://doi.org/10.1001/jamanetworkopen.2019.19928){target="_blank"} | The PCA and clustering example (open access) | [6.17](session6.qmd#t6-17), [6.20](session6.qmd#t6-20) |
+
+**Articles cited on the Session 6 slides:**
+
+| Reference | Cited for | Where in the app |
+|---|---|---|
+| [Penchansky & Thomas (1981). The concept of access. *Medical Care* 19(2):127–140](https://doi.org/10.1097/00005650-198102000-00001){target="_blank"} | The five dimensions of access | [6.9](session6.qmd#t6-9) |
+| [Talen & Anselin (1998). Assessing spatial equity: an evaluation of measures of accessibility to public playgrounds. *Environment and Planning A* 30(4):595–613](https://doi.org/10.1068/a300595){target="_blank"} | Different access measures, different conclusions | [6.10](session6.qmd#t6-10) |
+| [Bryant & Delamater (2019). Examination of spatial accessibility at micro- and macro-levels using the enhanced two-step floating catchment area (E2SFCA) method. *Annals of GIS* 25(3):219–229](https://doi.org/10.1080/19475683.2019.1641553){target="_blank"} | "More details on the basics" of FCA methods | [6.13](session6.qmd#t6-13) |
+| [Luo & Qi (2009). An enhanced two-step floating catchment area (E2SFCA) method. *Health & Place* 15(4):1100–1107](https://doi.org/10.1016/j.healthplace.2009.06.002){target="_blank"} | E2SFCA | [6.13](session6.qmd#t6-13) |
+| [Dai & Wang (2011). Geographic disparities in accessibility to food stores in southwest Mississippi. *Environment and Planning B* 38(4):659–677](https://doi.org/10.1068/b36149){target="_blank"} | Kernel density 2SFCA | [6.13](session6.qmd#t6-13) |
+| [Delamater (2013). Spatial accessibility in suboptimally configured health care systems: a modified two-step floating catchment area (M2SFCA) metric. *Health & Place* 24:30–43](https://doi.org/10.1016/j.healthplace.2013.07.012){target="_blank"} | M2SFCA | [6.13](session6.qmd#t6-13) |
+| [Wan, Zou & Sternberg (2012). A three-step floating catchment area method for analyzing spatial access to health services. *International Journal of Geographical Information Science* 26(6):1073–1089](https://doi.org/10.1080/13658816.2011.624987){target="_blank"} | 3SFCA | [6.13](session6.qmd#t6-13) |
+| [Saxon & Snow (2020). A rational agent model for the spatial accessibility of primary health care. *Annals of the American Association of Geographers* 110(1):205–222](https://doi.org/10.1080/24694452.2019.1629870){target="_blank"} | RAAM (the slide says 2019, the online-first year) | [6.13](session6.qmd#t6-13) |
+| [Lin, Paykin, Halpern, Martinez-Cardoso & Kolak (2022). Assessment of structural barriers and racial group disparities of COVID-19 mortality with spatial analysis. *JAMA Network Open* 5(3):e220984](https://doi.org/10.1001/jamanetworkopen.2022.0984){target="_blank"} | SDOH indices in a spatial error model with rural, suburban and urban regimes | [6.20](session6.qmd#t6-20) |
+
+Not linked: Bellman (1961), *Adaptive Control Processes* (book; the curse of dimensionality).
+
+**Used in the app but not on the slides:** [Richardson, Thomson, Best & Elliott (2004). Interpreting posterior relative risk estimates in disease-mapping studies. *Environmental Health Perspectives* 112(9):1016–1025](https://doi.org/10.1289/ehp.6740){target="_blank"}: the 0.8 rule for exceedance probabilities ([5.6](session5.qmd#t5-6)).
+
+## Articles cited on the Session 1–4 slides
 
 Links go to the publisher via the DOI; some need university access (log in through the GU library). None of these is listed as required reading.
 

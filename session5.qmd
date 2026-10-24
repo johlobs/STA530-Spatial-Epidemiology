@@ -1,0 +1,233 @@
+---
+title: "Session 5 — Computer Lab"
+subtitle: "One analysis, three parts: exploratory spatial data analysis in GeoDa · spatial regression (OLS, SAR, SEM) in R · Bayesian disease mapping (BYM2) in R-INLA"
+engine: knitr
+---
+
+```{r}
+#| include: false
+source("_helpers.R")
+```
+
+Session 5 was the computer lab. It started by finishing the remaining Bayesian disease-mapping lecture material ([Session 4](session4.qmd)) and then brought the main methods of the course together on one dataset: real geography and socioeconomic data from **Västra Götaland** with **simulated health outcomes**.
+
+This page does **not** reproduce the lab or its solutions (the site is public). It shows **what each part of the lab is for and how to read its results**, using made-up data. That is also what the written exam asks for: concepts and interpretation, not code.
+
+::: {.callout-note collapse="true"}
+## Sources and session
+**Canvas post:** "Session 5 – Computer lab" (13 October 2026, 9:15–12:00). Lab instructions, R Markdown file and the VGR student dataset (GeoPackage) were shared on Canvas; they are not used here.
+
+**Lecture notes:** recap slides from the lab on spatial dependence (*"Two basic ways to represent spatial dependence"*, the SAR and SEM equations, *"What is Wy?"*) and GeoDa maps.
+
+**Learning objectives (Canvas post):** by the end of the session you should be able to
+
+1. explore spatial patterns using maps and spatial autocorrelation statistics → [5.2](#t5-2);
+2. identify and model spatial dependence using SAR and SEM → [5.3](#t5-3), [5.4](#t5-4);
+3. explain why Bayesian smoothing is useful for small-area disease mapping → [5.5](#t5-5);
+4. interpret posterior relative risks and exceedance probabilities → [5.6](#t5-6).
+:::
+
+::: {.callout-tip collapse="true"}
+## Before you start: the earlier sections this page builds on
+Spatial weights ([2.8](session2.qmd#t2-8)), Moran's I and LISA ([2.11](session2.qmd#t2-11), [2.13](session2.qmd#t2-13)), SAR and SEM ([3.4](session3.qmd#t3-4), [3.7](session3.qmd#t3-7), [3.8](session3.qmd#t3-8)), BYM2 and exceedance probabilities ([4.12](session4.qmd#t4-12), [4.16](session4.qmd#t4-16)). If any of these feels rusty, read it first; this page connects them.
+:::
+
+## 5.1 The lab as one workflow {#t5-1 .topic flag="objective"}
+
+::: {.core}
+**In short.** The three parts of the lab are **three questions about the same map**: *is there a spatial pattern?* (ESDA), *can covariates explain it, and what about the dependence that remains?* (spatial regression), *what is each area's underlying risk, and how sure are we?* (Bayesian disease mapping).
+:::
+
+```{mermaid}
+%%| fig-cap: "Workflow: each arrow means \"then\". Not causal. The three parts of the computer lab."
+flowchart LR
+  A["Part I · ESDA (GeoDa)<br/>weights, raw vs smoothed rates,<br/>Moran's I, LISA"] --> B["Part II · Spatial regression (R)<br/>OLS → residual Moran's I<br/>→ SAR or SEM"]
+  B --> C["Part III · Bayesian disease mapping (R-INLA)<br/>BYM2 → posterior RR<br/>→ exceedance probabilities"]
+```
+
+| Part | Question | Main output to interpret |
+|---|---|---|
+| I · ESDA | Is the outcome spatially clustered, and where? | Rate maps, Moran's I with permutation p-value, LISA cluster map |
+| II · Spatial regression | How is the outcome associated with area characteristics, and is there dependence left over? | β from OLS, SAR and SEM; residual Moran's I; ρ or λ |
+| III · Bayesian disease mapping | What is the underlying relative risk in each area, accounting for small numbers? | Posterior RR map, credible intervals, P(RR > 1) map |
+
+::: {.exam-say}
+**On the exam, be able to say:** A typical spatial analysis explores patterns first (maps, Moran's I, LISA), then models associations while handling dependence (OLS → SAR/SEM), and estimates small-area risks with uncertainty (BYM2: posterior RR, credible intervals, exceedance probabilities).
+:::
+
+## 5.2 Part I: exploring patterns with maps and autocorrelation {#t5-2 .topic flag="objective"}
+
+::: {.core}
+**In short.** Before modelling: **define neighbours**, **compare raw and smoothed rates**, test the **whole map** with Moran's I, and find **where** the clusters are with LISA.
+:::
+
+The order of the steps matters, and each has its own interpretation:
+
+| Step | What to look at | How to read it |
+|---|---|---|
+| 1 · Spatial weights | Contiguity (queen/rook) or distance; connectivity histogram | Areas with 0 neighbours (islands) need attention; the choice of W affects everything after ([2.10](session2.qmd#t2-10)) |
+| 2 · Raw vs smoothed rates | A map of crude rates next to an Empirical Bayes smoothed map | Extreme values that disappear after smoothing were probably small-population noise ([2.6](session2.qmd#t2-6)) |
+| 3 · Global Moran's I | I, its expected value −1/(n−1), and the permutation p-value | I > 0 and small p: similar values cluster more than under spatial randomness ([2.11](session2.qmd#t2-11)) |
+| 4 · LISA | Significance map and cluster map (HH, LL, HL, LH) | Where the hot and cold spots and the outliers are; many local tests, so be careful with p-values ([2.13](session2.qmd#t2-13)) |
+
+::: {.misconception}
+**Common confusion:** "a significant global Moran's I tells you where the clusters are." No: global Moran's I is **one number for the whole map**. Where the clusters are is the question LISA answers.
+:::
+
+::: {.exam-say}
+**On the exam, be able to say:** Define W, compare raw and smoothed rates (unstable small areas), test for global clustering with Moran's I (permutation inference), and locate clusters and outliers with LISA (HH, LL, HL, LH).
+:::
+
+## 5.3 Part II: two basic ways to represent spatial dependence {#t5-3 .topic flag="objective"}
+
+::: {.core}
+**In short.** **SAR:** dependence enters through the **outcome**, an area's outcome is related to its neighbours' outcomes. **SEM:** dependence enters through the **error**, unmeasured influences are spatially correlated. **The same observed clustering can come from very different substantive stories.**
+:::
+
+This recap was shown in the lab (lecture notes):
+
+| Spatial lag model · SAR | Spatial error model · SEM |
+|---|---|
+| Dependence enters through the **outcome** | Dependence enters through the **error process** |
+| An area's outcome is related to outcomes in neighbouring areas | Unmeasured influences are spatially correlated |
+| Consider: **interaction, diffusion, feedback** | Consider: **omitted spatially patterned determinants** |
+
+**What is Wy?** (lecture notes)
+
+- **W** defines who is a neighbour, and how much they count.
+- **y** is the outcome in every area.
+- **Wy** is a **spatially lagged outcome**: a weighted summary of the neighbours' y. With a row-standardized W it is the average of the neighbours' values ([3.3](session3.qmd#t3-3)).
+
+::: {.worked}
+**Worked example.** Area 1 has three neighbours with rates 12, 15 and 18; row-standardized weights are 1/3 each. (Wy)₁ = (12 + 15 + 18)/3 = **15**. If area 1's own rate is 20, it is higher than its neighbourhood average: a candidate HL outlier in LISA terms.
+:::
+
+::: {.exam-say}
+**On the exam, be able to say:** SAR puts dependence in the outcome (y depends on Wy: interaction, diffusion, feedback); SEM puts it in the error (spatially patterned omitted variables). Wy is the weighted average of the neighbours' outcomes. The same clustering can fit either story, so choose by mechanism.
+:::
+
+## 5.4 Reading the SAR and SEM parameters {#t5-4 .topic flag="notes"}
+
+::: {.core}
+**In short.** In SAR, **ρ** says how strongly **outcomes** are linked through W; in SEM, **λ** says how strongly the **unobserved error** is spatially structured. β means something slightly different in each.
+:::
+
+**Spatial lag model (SAR):**
+
+$$
+y = \rho W y + X\beta + \varepsilon
+$$
+
+| Symbol | Meaning (lab recap) |
+|---|---|
+| ρ · spatial dependence | How strongly outcomes are linked through W |
+| β · covariates | Association with X, **conditional on the spatial process**. Not the full effect: report direct, indirect and total impacts ([3.5](session3.qmd#t3-5)) |
+| ε · remaining noise | The remaining error, assumed independent |
+
+**The key idea: y in one area is jointly determined with y in neighbouring areas.**
+
+**Spatial error model (SEM):**
+
+$$
+y = X\beta + u, \qquad u = \lambda W u + \varepsilon
+$$
+
+| Symbol | Meaning (lab recap) |
+|---|---|
+| λ · error dependence | How strongly the unobserved error process is spatially structured |
+| β · covariates | Regression associations after accounting for correlated errors; interpreted as in OLS |
+| ε · innovation | The remaining independent error |
+
+**Here, neighbouring y values are not directly placed on the right-hand side.**
+
+**What to compare across OLS, SAR and SEM** (concepts, made-up reasoning):
+
+- **Residual Moran's I.** Clearly positive after OLS, close to zero after a well-specified SAR or SEM: the dependence has been modelled.
+- **Coefficients.** In SEM, β is usually close to OLS, but with more honest (typically larger) standard errors. In SAR, β is not comparable to OLS directly; compare total impacts.
+- **Fit.** Log-likelihood or AIC can compare the models, and LM tests ([3.10](session3.qmd#t3-10)) point toward lag or error. **The mechanism still decides the interpretation** ([3.11](session3.qmd#t3-11)).
+
+::: {.exam-say}
+**On the exam, be able to say:** ρ (SAR) measures how strongly outcomes are linked through W; λ (SEM) measures how spatially structured the unobserved errors are. In SAR, β is conditional on the spatial process and impacts must be reported; in SEM, β is read as in OLS, with corrected standard errors.
+:::
+
+## 5.5 Part III: why Bayesian smoothing for small areas {#t5-5 .topic flag="objective"}
+
+::: {.core}
+**In short.** Crude SMRs in areas with few expected cases jump around by chance, so the most extreme areas on the map are often the smallest. BYM2 **borrows strength** from all areas and from neighbours, so the map shows **risk, not noise**, and every area gets an uncertainty.
+:::
+
+Comparing the crude SMR map with the posterior relative risk map is the central exercise of Part III (and of mini-project group 2, [8.3](session8.qmd#t8-3)). What to expect:
+
+- **Extremes shrink**, most in areas with small expected counts ([4.6](session4.qmd#t4-6)).
+- **Large areas barely change**: their data dominate the prior.
+- **The ranking changes**: an area that was "worst" on the crude map may be ordinary after smoothing; an area with a moderate but precise excess may now stand out.
+- **The spatial pattern becomes clearer**: the structured effect pulls areas toward their neighbours ([4.9](session4.qmd#t4-9)).
+
+::: {.exam-say}
+**On the exam, be able to say:** Crude SMRs from small expected counts are unstable and dominate the extremes of the map. Bayesian smoothing (BYM2) borrows strength from all areas and neighbours, shrinking unreliable estimates most, and gives each area a posterior distribution with uncertainty.
+:::
+
+## 5.6 Reading posterior RR and exceedance probabilities: risk classification {#t5-6 .topic flag="objective"}
+
+::: {.core}
+**In short.** Map **two things**: the posterior relative risk (**how high**) and the exceedance probability P(RR > 1) (**how sure**). A common rule classifies an area as elevated only when P(RR > 1) is high, for example above 0.8, and as low when it is below 0.2.
+:::
+
+The exceedance probability turns each area's posterior into one number for evidence ([4.16](session4.qmd#t4-16)). To classify areas, a threshold is needed. Richardson et al. (2004) (not on the course slides) recommend flagging an area as elevated when P(RR > 1) > 0.8; the symmetric cut-off 0.2 is often used for the lower end:
+
+| P(RR > 1) | Classification |
+|---|---|
+| > 0.8 | Evidence of **elevated** risk |
+| 0.2 – 0.8 | **Uncertain**: the data cannot tell |
+| < 0.2 | Evidence of **lower** risk |
+
+Richardson et al. showed by simulation that with the 0.8 rule, false alarms are rare, but **real excesses of moderate size (RR around 1.5) in areas with small expected counts are often missed**: smoothing makes the method conservative. Thresholds are choices; report the one you used and why.
+
+```{r}
+#| label: fig-exceed-classify
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.4
+#| fig-cap: "Simulated posterior summaries for 100 areas. Left: posterior mean RR against expected count. Right: the same areas classified by exceedance probability with the 0.8 / 0.2 rule. Areas with small expected counts are shrunk toward 1 and mostly stay 'uncertain', whatever their crude SMR; the 'elevated' and 'lower' classes are reached mainly by areas with larger expected counts, some with only a modest RR."
+set.seed(56)
+E <- exp(runif(100, log(0.5), log(60)))
+true_rr <- exp(rnorm(100, 0, 0.25))
+Y <- rpois(100, E * true_rr)
+# Poisson-gamma posterior with a gamma(a, a) prior around 1
+a <- 8
+post_a <- a + Y; post_b <- a + E
+post_mean <- post_a / post_b
+p_exc <- 1 - pgamma(1, post_a, post_b)
+cls <- ifelse(p_exc > 0.8, 3, ifelse(p_exc < 0.2, 1, 2))
+ccol <- c(col_blue, col_grey, col_orange)
+par(mfrow = c(1, 2), mar = c(4, 4, 2, 1))
+plot(E, post_mean, log = "x", pch = 19, col = adjustcolor(ccol[cls], 0.8), xlab = "expected count E (log scale)", ylab = "posterior mean RR", main = "Posterior RR")
+abline(h = 1, lty = 2)
+plot(post_mean, p_exc, pch = 19, col = adjustcolor(ccol[cls], 0.8), xlab = "posterior mean RR", ylab = "P(RR > 1)", main = "Classification", ylim = c(0, 1))
+abline(h = c(0.2, 0.8), lty = 2, col = "#495057")
+legend("topleft", c("elevated (> 0.8)", "uncertain", "lower (< 0.2)"), pch = 19, col = rev(ccol), bty = "n", cex = 0.8)
+```
+
+<div class="drill" data-drill="exceed"></div>
+
+::: {.misconception}
+**Common confusion:** "P(RR > 1) = 0.9 means the risk is 90% higher." No: it is the **posterior probability** that the area's relative risk exceeds 1, i.e. how sure we are that there is *some* excess. The size of the excess is read from the posterior RR and its credible interval.
+:::
+
+::: {.exam-say}
+**On the exam, be able to say:** The posterior RR shows how high the risk is; P(RR > 1) shows how sure we are that it exceeds 1. Areas can be classified with thresholds such as > 0.8 (elevated) and < 0.2 (lower); the rule is conservative and may miss moderate excesses in small areas.
+:::
+
+## 5.7 The lab data: real geography, simulated outcomes {#t5-7 .topic flag="inferred"}
+
+::: {.core}
+**In short.** The lab used real borders and socioeconomic data from Västra Götaland, but **simulated health outcomes**. The results teach methods; they say nothing about real disease patterns in the region.
+:::
+
+- **GeoPackage (.gpkg)** is a single-file format that holds geometry, attributes and the coordinate reference system together. Compare the shapefile, which needs several files in the same folder (.shp geometry, .dbf attributes, .shx index, .prj projection; [1.2](session1.qmd#t1-2)).
+- **Simulated outcomes** are common in teaching: the instructor knows the true risk surface, so you can check whether a method recovers it. The same idea is used in the figures of this app.
+- The mini-project datasets (A–D) follow the same principle ([Session 8](session8.qmd)).
+
+::: {.exam-say}
+**On the exam, be able to say:** A GeoPackage stores geometry, attributes and CRS in one file, unlike the multi-file shapefile. Simulated outcomes on real geography let you test whether a method recovers a known pattern, but cannot be interpreted as real disease patterns.
+:::

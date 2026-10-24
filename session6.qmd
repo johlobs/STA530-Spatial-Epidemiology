@@ -1,0 +1,977 @@
+---
+title: "Session 6 — Additional Methods and Applications"
+subtitle: "Exploratory spatial data analysis and spatial heterogeneity · measuring spatial accessibility · PCA and spatial clustering · from spatial association to causal questions"
+engine: knitr
+---
+
+```{r}
+#| include: false
+source("_helpers.R")
+```
+
+Sessions 1–4 built the core toolbox: maps and rates, spatial weights and Moran's I, spatial regression, Bayesian disease mapping. Session 6 **widens the toolbox** with four perspectives, each answering a different kind of question (slide 2):
+
+| Question | Methods | Part |
+|---|---|---|
+| What patterns and differences do we observe? | Exploratory spatial data analysis (ESDA) and spatial heterogeneity | [I](#t6-2) |
+| How accessible are health-related resources? | Spatial accessibility measures | [II](#t6-9) |
+| How can we summarize complex neighbourhood characteristics? | Principal components analysis (PCA) and spatial clustering | [III](#t6-15) |
+| What happens if we intervene? | Spatial causal inference | [IV](#t6-21) |
+
+The thread through all four: **from exploring spatial patterns to informing public health interventions.** The session ends where Session 1 started: spatial epidemiology should *describe → model → evaluate interventions*.
+
+::: {.callout-note collapse="true"}
+## Sources and session
+**Slides:** "Session_6_v0.pdf" (Qinyun Lin, 20 October 2026). Part II is adapted from work with Marynia Kolak.
+
+**Learning objectives (Canvas post):** by the end of this session you should be able to
+
+1. describe how ESDA can help identify spatial patterns and heterogeneity → [6.2](#t6-2)–[6.8](#t6-8);
+2. compare different approaches to measuring spatial accessibility and recognize their limitations → [6.9](#t6-9)–[6.14](#t6-14);
+3. explain how PCA and clustering can be used to characterize multidimensional neighbourhood conditions → [6.15](#t6-15)–[6.20](#t6-20);
+4. distinguish spatial association from causal inference and recognize key challenges in evaluating geographically targeted interventions → [6.21](#t6-21)–[6.29](#t6-29);
+5. identify appropriate spatial epidemiological methods for different types of research questions → [6.29](#t6-29).
+
+**Questions on the slides,** each answered in a section marked ❓: "what pattern do you see?" ([6.3](#t6-3)), "which one is the result of a larger bandwidth?" ([6.4](#t6-4)), "does a spatial lag represent a causal spillover?" ([6.24](#t6-24)), "can a neighbouring municipality serve as a control?" ([6.27](#t6-27)).
+
+**Optional resources (Canvas post):** GeoDa workbook chapters on univariate and bivariate ESDA and on spatial clustering, and Kolak et al. (2020). All are on [Resources](resources.qmd#session-6-additional-methods-and-applications).
+:::
+
+::: {.callout-tip collapse="true"}
+## Before you start: four ideas you need
+**Two-sample t-test.** Compares the means of two groups; t = (difference in means) / (its standard error). With only two groups, a one-way ANOVA F-test gives the same p-value, and F = t².
+
+**Variance and correlation.** Variance measures spread around the mean. Two variables are correlated when they move together; highly correlated variables carry overlapping information.
+
+**Linear combination.** A weighted sum, for example 0.6·poverty + 0.5·unemployment − 0.4·education. PCA builds its new variables this way.
+
+**Counterfactual.** The outcome a treated area *would have had* without the intervention. It is never observed, so every causal design is a way of estimating it from other areas or other time points.
+:::
+
+## 6.1 Four complementary perspectives {#t6-1 .topic}
+
+::: {.core}
+**In short.** Different questions need different methods: *where and what pattern?* (ESDA), *can people reach care?* (accessibility), *how do many neighbourhood variables fit together?* (PCA and clustering), and *what if we intervene?* (causal designs).
+:::
+
+The four parts are not a sequence of steps that every study must go through; they are four lenses. A single project can use several. The example running through Part III (Kolak et al. 2020; Lin et al. 2022) does: it summarizes 15 neighbourhood variables with PCA, groups areas with clustering, and then uses the summaries in spatial regression.
+
+## Part I · Exploratory spatial data analysis (ESDA)
+
+## 6.2 ESDA: link a non-spatial view and a map {#t6-2 .topic flag="objective"}
+
+::: {.core}
+**In short.** ESDA puts an ordinary chart (histogram, box plot, scatter plot) **next to a map and links them**: select bars or points in the chart and the matching areas light up on the map, and the other way round.
+
+**Think of it as:** Highlighting rows in a spreadsheet and seeing *where* those rows are.
+:::
+
+**Univariate ESDA (slide 4).** A histogram of, say, the share of children per neighbourhood says how values are distributed but not where. Linked to a map, selecting the highest bars shows whether the high values sit together (a cluster) or are scattered. This **linking** (selecting in one view, highlighting in another) is the key idea; **brushing** is the same with a selection box that you move around the map, so the linked views update as you move.
+
+**What ESDA adds to Session 2.** Moran's I and LISA ([2.11](session2.qmd#t2-11), [2.13](session2.qmd#t2-13)) test for spatial *dependence*. ESDA tools are broader and looser: they help you **see** patterns, outliers and differences between regions before you decide what to model.
+
+::: {.exam-say}
+**On the exam, be able to say:** ESDA links non-spatial graphs (histogram, box plot, scatter plot) with a map, so a selection in one view highlights the same observations in the other. It is used to detect patterns and generate hypotheses, not to test causal claims.
+:::
+
+## 6.3 Bivariate ESDA: linear and local regression fits {#t6-3 .topic flag="keyq"}
+
+::: {.core}
+**In short.** A scatter plot with a straight line shows the **average linear association**. A **local regression smoother (LOWESS)** follows the data more flexibly and can reveal **nonlinearity** or a **structural break**: a point where the relationship changes.
+:::
+
+**Linear fit (slide 5).** GeoDa adds the regression line and summary statistics (intercept, slope, R², p-values) to the scatter plot.
+
+**Local regression fit (slide 6).** LOWESS (locally weighted scatter plot smoother) computes a slope on a **small interval** of the x-axis, giving less weight to points further away, and combines these local fits across the full range into a smooth curve.
+
+**Slide 6 asks: what pattern do you see?** In the slide's example the LOWESS curve is fairly flat at low x and then rises steeply at high x: the relationship is not one straight line. A single linear slope averages two different regimes. This **may suggest a structural break**: the process behind the data could differ between groups of observations, and if those groups are spatially defined, that is spatial heterogeneity ([6.5](#t6-5)).
+
+```{r}
+#| label: fig-lowess-break
+#| echo: false
+#| fig-width: 8
+#| fig-height: 3.4
+#| fig-cap: "Simulated data with a structural break at x = 40: a gentle slope below, a steep one above. The straight line (grey) averages the two regimes and fits neither well. The LOWESS curve (purple) bends at the break."
+set.seed(6)
+x <- sort(runif(70, 5, 60))
+y <- ifelse(x < 40, 2 + 0.05 * x, 4 - 0.05 * 40 + 0.5 * (x - 40) + 0.05 * 40) + rnorm(70, 0, 1.3)
+par(mar = c(4, 4, 1, 1))
+plot(x, y, pch = 19, col = adjustcolor(col_blue, 0.6), xlab = "x (e.g. % children)", ylab = "y (e.g. % public assistance)")
+abline(lm(y ~ x), col = col_grey, lwd = 2)
+lines(lowess(x, y, f = 0.4), col = "#7048e8", lwd = 2.5)
+legend("topleft", c("linear fit", "LOWESS"), col = c(col_grey, "#7048e8"), lwd = 2, bty = "n")
+```
+
+::: {.exam-say}
+**On the exam, be able to say:** A linear fit gives one average slope; LOWESS fits local slopes on small intervals (nearby points weighted more) and joins them into a smooth curve. A bend in the LOWESS curve suggests nonlinearity or a structural break, which can hint at spatial heterogeneity.
+:::
+
+## 6.4 The bandwidth controls the smoothness {#t6-4 .topic flag="keyq"}
+
+::: {.core}
+**In short.** The **bandwidth** is the share of the x-range used for each local fit. **Small bandwidth → wiggly curve** that chases noise; **large bandwidth → smooth curve** that can hide real bends.
+
+**Think of it as:** Averaging over a few neighbours or over the whole street.
+:::
+
+The bandwidth is given as a **fraction of the total range in x** (slide 7). There is literature and debate about the optimal bandwidth; there is no single right answer.
+
+**Slide 7 asks: which one is the result of a larger bandwidth?** The **smoother curve**. A larger bandwidth uses more of the data for each local fit, so each local slope averages over more points and the curve changes slowly. The jagged curve comes from a small bandwidth.
+
+```{r}
+#| label: fig-lowess-bandwidth
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.2
+#| fig-cap: "The same simulated data smoothed with LOWESS at two bandwidths. Left: bandwidth 0.15 (each local fit uses 15% of the data) gives a jagged curve that follows noise. Right: bandwidth 0.7 gives a smooth curve. The straight line is the linear fit."
+par(mfrow = c(1, 2), mar = c(4, 4, 2, 1))
+for (f in c(0.15, 0.7)) {
+  plot(x, y, pch = 19, col = adjustcolor(col_blue, 0.5), xlab = "x", ylab = "y",
+       main = paste0("bandwidth = ", f, if (f < 0.5) " (small)" else " (large)"))
+  abline(lm(y ~ x), col = col_grey, lwd = 2)
+  lines(lowess(x, y, f = f), col = "#7048e8", lwd = 2.5)
+}
+```
+
+::: {.misconception}
+**Common confusion:** "the bandwidth is a number of neighbours on the map". No: in a LOWESS scatter plot the bandwidth is about the **x-axis** (attribute space), not geographic distance. It decides how many observations with similar x-values enter each local fit.
+:::
+
+::: {.exam-say}
+**On the exam, be able to say:** The bandwidth is the fraction of the x-range used in each local fit. Larger bandwidth gives a smoother curve (risk: hiding real structure); smaller gives a wigglier curve (risk: fitting noise).
+:::
+
+## 6.5 Spatial heterogeneity, revisited {#t6-5 .topic flag="objective"}
+
+::: {.core}
+**In short.** Spatial heterogeneity means **different spatial processes in different places**: rural and urban, east and west. It can show up as different **means**, **medians** or **regression slopes** between regions.
+:::
+
+Session 1 introduced the idea ([1.12](session1.qmd#t1-12)): heterogeneity is about the process or relationship differing by location; dependence is about neighbours resembling each other. Slide 8 lists three forms heterogeneity can take:
+
+| Form | Example | ESDA tool |
+|---|---|---|
+| Different **means** (or medians) | Average income higher in the urban core than in the suburbs | Averages chart ([6.6](#t6-6)) |
+| Different **slopes** | Deprivation predicts mortality strongly in rural areas, weakly in urban | Brushing the scatter plot ([6.7](#t6-7)) |
+| Different processes in general | Different drivers of disease in different regions | Spatial regime models ([6.8](#t6-8)), Lin et al. 2022 ([6.20](#t6-20)) |
+
+::: {.exam-say}
+**On the exam, be able to say:** Spatial heterogeneity is the existence of different spatial processes in spatially defined subregions (rural/urban, east/west). It can appear as different means or medians, or as different slopes in a regression.
+:::
+
+## 6.6 Averages chart: is the mean different inside the selection? {#t6-6 .topic flag="inferred"}
+
+::: {.core}
+**In short.** Select a region on the map (for example the urban core), and the **averages chart** tests whether the mean of a variable differs **between selected and unselected areas**. The selection is spatial, so a significant difference is evidence of heterogeneity in means.
+:::
+
+GeoDa's averages chart (slides 9–10) is a **difference-in-means test** between two groups. With two groups the F-test it reports is **equivalent to a t-test** (F = t², same p-value). Combined with **map brushing**, you can move the selection and watch whether the difference holds up.
+
+```{r}
+#| label: fig-averages-chart
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.4
+#| fig-cap: "Averages chart on simulated data. Left: a 10 × 10 grid of areas with a spatially selected block (outlined, the 'urban core'). Right: values in selected and unselected areas with their means. The t-test compares the two means; with two groups F = t²."
+set.seed(61)
+side <- 10
+rc <- grid_rc(side)
+sel <- rc$row %in% 3:6 & rc$col %in% 4:7
+val <- 30 + 8 * sel + rnorm(side^2, 0, 4)
+br <- quantile(val, 0:5 / 5)
+tt <- t.test(val[sel], val[!sel], var.equal = TRUE)
+par(mfrow = c(1, 2), mar = c(2, 2, 2, 1))
+draw_grid(val, side, seq_cols(5), breaks = br, main = "Map: selected block outlined", highlight = which(sel))
+par(mar = c(4, 4, 2, 1))
+stripchart(list(Selected = val[sel], Unselected = val[!sel]), vertical = TRUE, method = "jitter",
+           pch = 19, col = adjustcolor(c(col_orange, col_blue), 0.6), ylab = "value", main = "Averages chart")
+points(1:2, c(mean(val[sel]), mean(val[!sel])), pch = "—", cex = 3)
+mtext(sprintf("t = %.2f, F = t² = %.1f, p < 0.001", tt$statistic, tt$statistic^2), side = 1, line = 2.5, cex = 0.8)
+```
+
+::: {.exam-say}
+**On the exam, be able to say:** The averages chart tests the difference in means between a spatially selected group of areas and the rest. With two groups the F-test equals a t-test. A difference suggests spatial heterogeneity in the mean.
+:::
+
+## 6.7 Brushing the scatter plot: are the slopes different? {#t6-7 .topic flag="inferred"}
+
+::: {.core}
+**In short.** Select areas on the map and the scatter plot shows **two regression lines**: one for the selected areas, one for the rest. Different slopes mean **the relationship itself differs by place**: heterogeneity in slopes.
+:::
+
+On slide 11, selecting part of New York on the map splits the scatter plot into a red line (selected) and a blue line (unselected). GeoDa reports both fits and a **Chow test** of whether the coefficients are equal in the two subsets. A significant Chow test is evidence of a **structural break** between the regions.
+
+```{r}
+#| label: fig-brush-slopes
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.4
+#| fig-cap: "Brushing the scatter plot, simulated. The same x–y relationship has a steep slope in the selected areas (orange) and a flat one in the rest (blue). A single pooled line (grey) would describe neither group."
+set.seed(62)
+x2 <- runif(100, 0, 10)
+y2 <- ifelse(sel, 5 + 1.6 * x2, 9 + 0.3 * x2) + rnorm(100, 0, 1.5)
+par(mfrow = c(1, 2), mar = c(2, 2, 2, 1))
+draw_grid(as.numeric(sel) + 1, side, c("#dee2e6", col_orange), main = "Selection on the map")
+par(mar = c(4, 4, 2, 1))
+plot(x2, y2, pch = 19, col = ifelse(sel, adjustcolor(col_orange, 0.7), adjustcolor(col_blue, 0.6)),
+     xlab = "x", ylab = "y", main = "Linked scatter plot")
+abline(lm(y2[sel] ~ x2[sel]), col = col_orange, lwd = 2.5)
+abline(lm(y2[!sel] ~ x2[!sel]), col = col_blue, lwd = 2.5)
+abline(lm(y2 ~ x2), col = col_grey, lwd = 2, lty = 2)
+legend("topleft", c("selected", "unselected", "pooled"), col = c(col_orange, col_blue, col_grey), lwd = 2, lty = c(1, 1, 2), bty = "n", cex = 0.8)
+```
+
+::: {.exam-say}
+**On the exam, be able to say:** Brushing the scatter plot fits separate regression lines to the selected and unselected areas. Different slopes (tested with a Chow test) indicate that the relationship varies by place: spatial heterogeneity.
+:::
+
+## 6.8 What ESDA cannot do {#t6-8 .topic flag="inferred"}
+
+::: {.core}
+**In short.** ESDA is for **generating hypotheses and detecting patterns**, not for drawing conclusions. Its simple tests ignore spatial autocorrelation and unequal variances, and say nothing about causes.
+:::
+
+Slide 12 lists the limits:
+
+- The tests in the averages chart and the brushed scatter plot **do not account for heteroskedasticity or spatial autocorrelation**. With positively autocorrelated data the effective sample size is smaller than the number of areas, so p-values are too optimistic (the same problem as OLS in [3.1](session3.qmd#t3-1)).
+- A more advanced approach is a **spatial regime regression model**: separate coefficients for each region (regime), estimated jointly, optionally with SAR or SEM dependence. This is what Lin et al. (2022) do for rural, suburban and urban counties ([6.20](#t6-20)).
+- **Exploratory means exploratory**: the selection was often chosen *after* looking at the map, so a "significant" difference is a hypothesis to test in new data, not a finding.
+
+Other GeoDa ESDA tools extend the same idea to many variables (multivariate) and to space–time data; see [Resources](resources.qmd#session-6-additional-methods-and-applications).
+
+::: {.callout-tip}
+## When to use ESDA
+At the start of an analysis: to understand distributions, spot outliers and data errors, see whether patterns cluster, and form hypotheses about regions where processes might differ.
+:::
+
+::: {.exam-say}
+**On the exam, be able to say:** ESDA generates hypotheses and detects patterns; it does not draw causal conclusions. Its simple tests ignore heteroskedasticity and spatial autocorrelation; spatial regime models are the more advanced alternative.
+:::
+
+## Part II · Measuring spatial accessibility
+
+## 6.9 Access is multidimensional {#t6-9 .topic flag="objective"}
+
+::: {.core}
+**In short.** "Access" to care is more than distance. The classical model has **five dimensions** (the five A's), and **spatial distance is only one of them**: geographic accessibility.
+:::
+
+Penchansky & Thomas (1981) define access as **the degree of "fit" between clients and the health care system**, along five dimensions:
+
+| Dimension | Question | Example |
+|---|---|---|
+| **Availability** | Are there enough services for the need? | Number of GPs relative to the population |
+| **Accessibility** | Can people physically reach them? | Distance, travel time, transport |
+| **Affordability** | Can people pay? | Fees, insurance, lost income |
+| **Acceptability** | Do people find them acceptable, and does the provider accept them? | Language, gender of staff, trust |
+| **Accommodation** | Is the service organised so people can use it? | Opening hours, appointment system, walk-ins |
+
+Spatial accessibility measures mainly capture **availability and accessibility**, the two dimensions with a geography. A short drive to a clinic that is closed in the evenings, unaffordable or culturally unacceptable is not good access.
+
+::: {.exam-say}
+**On the exam, be able to say:** Access is the fit between clients and the system, with five dimensions: availability, accessibility, affordability, acceptability and accommodation (Penchansky & Thomas 1981). Spatial measures capture mainly availability and geographic accessibility.
+:::
+
+## 6.10 Why the choice of accessibility measure matters {#t6-10 .topic flag="objective"}
+
+::: {.core}
+**In short.** Different access measures can lead to **different conclusions** about whether there is a spatial mismatch or inequity (Talen & Anselin 1998). So the measure must fit the problem.
+:::
+
+Accessibility is also part of **location optimization** (slide 15), which considers:
+
+- **supply and demand** at the destinations (facilities) and origins (where people live);
+- the **coverage problem**: where to place facilities so that as many people as possible are within reach;
+- the **location–allocation problem**: which facility each person's demand is assigned to.
+
+Two questions make choosing the "right" measure complicated (slide 16):
+
+1. **How should the distance between patient and facility be characterized?** Straight line, road network, travel time by car or by public transport?
+2. **What assumptions about travel behaviour are appropriate?** Do people go to the nearest facility? Do they cross administrative borders? Do they travel from home or from work?
+
+Talen & Anselin (1998) compared several measures of access to public playgrounds and found that **which neighbourhoods looked under-served depended on the measure**. The same can happen with clinics or pharmacies.
+
+::: {.exam-say}
+**On the exam, be able to say:** Different access measures can give different conclusions about spatial mismatch and inequity (Talen & Anselin 1998). The choice depends on how distance is characterized and what is assumed about travel behaviour, so the measure should match the problem.
+:::
+
+## 6.11 Container methods: counts inside areas or buffers {#t6-11 .topic flag="objective"}
+
+::: {.core}
+**In short.** A container measure **counts facilities inside a unit**: an administrative area (point-in-polygon) or a buffer around it. Simple, but it depends on where the borders are and ignores what lies just outside.
+
+**Think of it as:** Counting the shops on your own postcode and ignoring the one across the street in the next postcode.
+:::
+
+| Technique | What is counted | Example (slide 18) |
+|---|---|---|
+| **Point-in-polygon** | Facilities inside each area | How many methadone providers are in each zip code? |
+| **Buffer analysis** | Facilities near the area, as well as within it | How many providers are within a 1-mile buffer? |
+| Buffer coverage | Share of the area covered by facility buffers | What percentage of the area is within a threshold of a provider's service? |
+
+Slide 19's example: an area with one provider inside it counts **N = 1** with point-in-polygon; adding 1-mile buffers around providers, a provider just outside the border also reaches it, so the buffer count is **N = 2**.
+
+```{r}
+#| label: fig-container
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.2
+#| fig-cap: "Container methods, schematic. Left: point-in-polygon counts the one provider inside the area (N = 1). Right: with buffers around providers, the provider just outside the border also reaches the area (N = 2). The provider far away counts in neither."
+draw_container <- function(buffers, main) {
+  plot(NA, xlim = c(0, 11), ylim = c(-0.8, 6), asp = 1, axes = FALSE, xlab = "", ylab = "", main = main)
+  polygon(c(2, 7, 7.5, 1.5), c(1.5, 1.5, 4.5, 4.5), col = "#b2f2bb", border = "#2b8a3e", lwd = 2)
+  pts <- cbind(c(4, 8.1, 9.5), c(3.2, 3.6, 0.6))
+  if (buffers) symbols(pts[, 1], pts[, 2], circles = rep(1.2, 3), inches = FALSE, add = TRUE,
+                       fg = col_blue, bg = adjustcolor(col_blue, 0.12), lwd = 1.5)
+  points(pts, pch = 19, cex = 1.6)
+  text(4.5, 0.7, if (buffers) "N = 2" else "N = 1", cex = 1.2, font = 2)
+}
+par(mfrow = c(1, 2), mar = c(0.5, 0.5, 2, 0.5))
+draw_container(FALSE, "Point-in-polygon")
+draw_container(TRUE, "Buffers around providers")
+```
+
+**But what about…** (slide 19): the **sensitivity to tract or buffer boundaries** (a MAUP problem, [1.10](session1.qmd#t1-10)); **how certain we are that the buffer size is right** (why 1 mile?); **street networks** (a straight-line buffer ignores rivers and roads); and **other modes of transport** (walking, driving, transit).
+
+Slide 20's advice: **think about the spatial process of your phenomenon, and whether it cares about existing borders.** People cross zip-code borders to get care; a container measure assumes they do not.
+
+::: {.exam-say}
+**On the exam, be able to say:** Container methods count facilities within an area (point-in-polygon) or within buffers. Limitations: results depend on boundaries and buffer size, straight-line buffers ignore networks and transport modes, and access across borders is ignored.
+:::
+
+## 6.12 Proximity methods: minimum distance, travel cost, gravity {#t6-12 .topic flag="objective"}
+
+::: {.core}
+**In short.** Proximity measures use **distance or travel time** instead of borders: distance to the **nearest** facility, the **average** distance to all, or a **gravity** score where big, close facilities count most.
+:::
+
+| Measure | Definition (slide 21) | Captures | Ignores |
+|---|---|---|---|
+| **Minimum distance** | Distance from the origin to the **nearest** destination | How far the closest option is | How many options; whether the nearest is overloaded |
+| **Travel cost** | **Total or average** distance (or travel time) between the origin and the destinations | Overall remoteness | Size and capacity of facilities |
+| **Travel time** | Minutes along the network by a given mode | Realistic travel burden | Depends on mode; data hungry |
+| **Gravity potential** | Resources **weighted by size** and adjusted for the **"friction of distance"** | Several facilities, their size, and decay with distance | Competition between people for the same facility |
+
+A common form of the gravity potential (not on the slides) is
+
+$$
+A_i = \sum_j \frac{S_j}{d_{ij}^{\,\beta}}
+$$
+
+::: {.in-words}
+**In words:** the accessibility of place i adds up every facility j's size Sⱼ (for example number of doctors), discounted by the distance dᵢⱼ to the power β. Large, close facilities contribute most; β sets how fast the pull fades with distance.
+:::
+
+Slide 17 maps four measures for the same state side by side (time to nearest resource, number within 30 minutes, an access score, minimum distance): **the maps do not look the same**, which is the point of [6.10](#t6-10).
+
+::: {.exam-say}
+**On the exam, be able to say:** Minimum distance = distance to the nearest facility; travel cost = total or average distance to facilities; gravity potential = facility size weighted by a distance-decay function. Proximity measures avoid border problems but, except gravity, ignore facility size, and none of them handles competition (demand).
+:::
+
+## 6.13 Floating catchment area (2SFCA) models: supply and demand {#t6-13 .topic flag="objective"}
+
+::: {.core}
+**In short.** Floating catchment area (FCA) methods take **both supply and demand** into account: a clinic with 10 doctors serving 30,000 people offers less per person than one serving 5,000. The two-step version (2SFCA) computes a **provider-to-population ratio** for each facility and then adds up the ratios each place can reach.
+:::
+
+FCA models address the limitations of the simpler measures (slide 22):
+
+- **Distance-based measures** cannot incorporate differences in **availability** between facilities (size, capacity, how many people compete for them).
+- **Container-based measures** ignore distance **within** the container and the possibility of using services **outside** it.
+
+**The two steps** (the standard 2SFCA; the formulas are not on the slides, see Bryant & Delamater 2019 and Luo & Qi 2009 on [Resources](resources.qmd)):
+
+1. **For each facility j:** find all population locations within its catchment (for example 30 minutes), and compute the supply-to-demand ratio Rⱼ = Sⱼ / Σ Pₖ (doctors per person in reach).
+2. **For each population location i:** add up the ratios Rⱼ of all facilities within the catchment of i. Aᵢ = Σ Rⱼ.
+
+::: {.worked}
+**Worked example (made-up numbers).** Two clinics, three neighbourhoods. Clinic F1 has 10 doctors and reaches neighbourhoods 1 and 2; clinic F2 has 4 doctors and reaches neighbourhoods 2 and 3.
+
+| | Population | Clinics in reach |
+|---|---|---|
+| Neighbourhood 1 | 20,000 | F1 |
+| Neighbourhood 2 | 10,000 | F1, F2 |
+| Neighbourhood 3 | 15,000 | F2 |
+
+**Step 1.** R₁ = 10 / (20,000 + 10,000) = 0.333 per 1,000; R₂ = 4 / (10,000 + 15,000) = 0.160 per 1,000.
+
+**Step 2.** A₁ = 0.333; A₂ = 0.333 + 0.160 = **0.493**; A₃ = 0.160 doctors per 1,000 residents.
+
+If F1 lies inside neighbourhood 1 and F2 inside neighbourhood 3, a point-in-polygon count gives neighbourhood 2 **zero** clinics, yet by 2SFCA it has the **best** access, because it can reach both.
+:::
+
+<div class="drill" data-drill="fca"></div>
+
+::: {.callout-note collapse="true"}
+## Deeper: FCA extensions (slide 23)
+The basic 2SFCA treats everyone inside the catchment as equally close and everyone outside as unable to reach. Extensions relax this:
+
+- **Enhanced 2SFCA (E2SFCA)**, Luo & Qi (2009): distance-decay weights within sub-zones of the catchment.
+- **Kernel density 2SFCA (KD2SFCA)**, Dai & Wang (2011): a continuous kernel distance-decay function.
+- **Modified 2SFCA (M2SFCA)**, Delamater (2013): accounts for suboptimal configuration (facilities placed far from people).
+- **Three-step FCA (3SFCA)**, Wan, Zou & Sternberg (2012): adds a selection weight for competition between nearby facilities.
+- **Rational agent access model (RAAM)**, Saxon & Snow (2019): people choose facilities by balancing travel time and congestion.
+:::
+
+::: {.callout-warning}
+## Limitations
+The catchment size and distance-decay function are choices that change the results. FCA still measures *potential* spatial access (availability + accessibility), not affordability, acceptability or accommodation ([6.9](#t6-9)), and not whether people actually use the services.
+:::
+
+::: {.exam-say}
+**On the exam, be able to say:** 2SFCA: (1) for each facility, supply divided by the population within its catchment; (2) for each location, the sum of these ratios over facilities in reach. It combines supply, demand and distance, unlike container measures (borders) and minimum distance (no capacity or competition).
+:::
+
+## 6.14 Comparing access measures on the same map {#t6-14 .topic flag="objective"}
+
+::: {.core}
+**In short.** The same facilities and population can give **three different maps** of who is under-served, depending on the measure.
+:::
+
+```{r}
+#| label: fig-access-compare
+#| echo: false
+#| fig-width: 10
+#| fig-height: 3.6
+#| fig-cap: "Three access measures on the same simulated region (12 × 12 cells, population concentrated in a city in the upper left; five clinics, black dots, with 2–12 doctors each). Left: container count of clinics per 4 × 4 district. Middle: distance to the nearest clinic (darker = closer). Right: 2SFCA doctors per 1,000 residents within a 4-cell catchment. The city cells are close to clinics, yet 2SFCA shows them as relatively under-served because many people compete for the same doctors."
+set.seed(66)
+side <- 12
+rc <- grid_rc(side)
+popc <- round(200 + 3000 * exp(-((rc$row - 3)^2 + (rc$col - 3)^2) / 10) + runif(side^2, 0, 150))
+fac <- data.frame(row = c(3, 4, 9, 10, 6), col = c(3, 6, 10, 3, 9), docs = c(6, 4, 12, 2, 5))
+dmat <- sqrt(outer(rc$row, fac$row, "-")^2 + outer(rc$col, fac$col, "-")^2)
+# container: clinics per 4x4 district
+district <- ((rc$row - 1) %/% 4) * 3 + (rc$col - 1) %/% 4
+fac_d <- ((fac$row - 1) %/% 4) * 3 + (fac$col - 1) %/% 4
+cont <- sapply(district, function(d) sum(fac_d == d))
+mind <- apply(dmat, 1, min)
+catch <- dmat <= 4
+Rj <- fac$docs / colSums(popc * catch)
+A <- as.vector(catch %*% Rj) * 1000
+fac_cell <- (fac$row - 1) * side + fac$col
+plot_measure <- function(v, cols, main) {
+  br <- unique(quantile(v, 0:5 / 5))
+  draw_grid(v, side, cols[seq_len(length(br) - 1)], breaks = br, main = main, border = NA)
+  points(fac$col - 0.5, side - fac$row + 0.5, pch = 19, cex = 1.3)
+}
+par(mfrow = c(1, 3), mar = c(0.5, 0.5, 2.5, 0.5))
+draw_grid(cont, side, seq_cols(3), breaks = c(-0.5, 0.5, 1.5, 2.5), main = "Container: clinics per district", border = NA)
+abline(h = c(4, 8), v = c(4, 8), col = "white", lwd = 2)
+points(fac$col - 0.5, side - fac$row + 0.5, pch = 19, cex = 1.3)
+plot_measure(-mind, seq_cols(5), "Minimum distance (darker = closer)")
+plot_measure(A, seq_cols(5), "2SFCA (darker = more doctors per 1,000)")
+```
+
+| Measure | Uses supply size? | Uses demand (competition)? | Uses distance? | Border-dependent? |
+|---|---|---|---|---|
+| Container (point-in-polygon) | Can (count doctors instead of clinics) | No | No (inside or outside) | **Yes** |
+| Container (buffer) | Can | No | Threshold only | Partly |
+| Minimum distance | No | No | **Yes** | No |
+| Gravity potential | **Yes** | No | **Yes**, with decay | No |
+| 2SFCA and extensions | **Yes** | **Yes** | **Yes**, threshold or decay | No |
+
+::: {.exam-say}
+**On the exam, be able to say:** Container measures depend on borders; minimum distance ignores capacity and competition; gravity adds size and distance decay; 2SFCA adds demand. The measures can disagree on which areas are under-served, so choose the one that matches the question.
+:::
+
+## Part III · Multivariate spatial analysis: PCA and clustering
+
+## 6.15 Why reduce dimensions? The curse of dimensionality {#t6-15 .topic flag="inferred"}
+
+::: {.core}
+**In short.** With many variables, data become **sparse**: methods that work in a few dimensions break down. Many neighbourhood indicators are also **highly correlated**, so they repeat the same information. Dimension reduction summarizes them in a few new variables.
+:::
+
+The **curse of dimensionality** (Bellman 1961): methods that work in a small number of dimensions may not work in high-dimensional spaces (many variables or features). Problems include (slide 25):
+
+- **Increased sparsity.** Imagine 10 points on a line, then in a square, then in a cube: the same 10 points fill less and less of the space. To keep the same density in 3 dimensions you need 10³ = 1,000 points.
+- **More data needed** to keep the same accuracy.
+- **Computational complexity.**
+
+In spatial epidemiology: social determinants of health (SDOH) are measured by many indicators (poverty, education, unemployment, crowding, car ownership …) for each area. Putting all of them in one regression gives unstable, hard-to-interpret coefficients because they are collinear. **One solution: principal components analysis.**
+
+::: {.exam-say}
+**On the exam, be able to say:** The curse of dimensionality: with many variables data become sparse, more data are needed and computation grows; methods that work in few dimensions may fail. Correlated neighbourhood indicators can be summarized with PCA.
+:::
+
+## 6.16 Principal components analysis (PCA) {#t6-16 .topic flag="objective"}
+
+::: {.core}
+**In short.** PCA replaces many correlated variables with **a few new variables (components)** that keep **as much of the variance as possible**. Each component is a **weighted sum** of the original variables, and the components are **uncorrelated (orthogonal)** with each other.
+
+**Think of it as:** Describing a cloud of points shaped like a cigar: the first direction is along the cigar (most spread), the second across it.
+:::
+
+PCA (slide 26):
+
+- simplifies complex datasets by reducing the number of dimensions while **preserving as much important information as possible**;
+- finds new variables (components) that **maximize the explained variance** in the original variables;
+- the new variables are **linear combinations** of the original variables and **orthogonal** to each other;
+- gives the **"best linear approximation"** of the data in fewer dimensions;
+- is **especially helpful when the original variables are highly correlated** (they share a common direction that one component can capture).
+
+```{r}
+#| label: fig-pca
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.6
+#| fig-cap: "PCA on two simulated, standardized neighbourhood indicators that are strongly correlated (r ≈ 0.85). Left: PC1 (orange) runs along the main direction of the cloud, PC2 (blue) perpendicular to it. Right: share of the variance carried by each component: PC1 alone keeps more than 90%, so one index summarizes both variables well."
+set.seed(616)
+pov <- rnorm(150)
+unemp <- 0.85 * pov + sqrt(1 - 0.85^2) * rnorm(150)
+X <- scale(cbind(poverty = pov, unemployment = unemp))
+pc <- prcomp(X)
+ve <- pc$sdev^2 / sum(pc$sdev^2)
+par(mfrow = c(1, 2), mar = c(4, 4, 2, 1))
+plot(X, pch = 19, col = adjustcolor(col_grey, 0.8), asp = 1, xlab = "poverty (standardized)", ylab = "unemployment (standardized)", main = "Two correlated indicators")
+arrows(0, 0, 2.2 * pc$rotation[1, 1] * sign(pc$rotation[1, 1]), 2.2 * pc$rotation[2, 1] * sign(pc$rotation[1, 1]), col = col_orange, lwd = 3, length = 0.1)
+arrows(0, 0, 1 * pc$rotation[1, 2], 1 * pc$rotation[2, 2], col = col_blue, lwd = 3, length = 0.1)
+text(2.3, 2.1, "PC1", col = col_orange, font = 2)
+text(1.1 * pc$rotation[1, 2], 1.25 * pc$rotation[2, 2], "PC2", col = col_blue, font = 2)
+barplot(ve, names.arg = c("PC1", "PC2"), col = c(col_orange, col_blue), ylim = c(0, 1), ylab = "share of variance", main = "Variance explained", border = NA)
+text(c(0.7, 1.9), ve + 0.06, sprintf("%.0f%%", 100 * ve))
+```
+
+Practical points (not on the slides, but standard): variables are usually **standardized** first, otherwise variables with large units dominate; and the analyst **interprets** each component from its loadings (which variables have large weights), which is a judgement, not a result of the method.
+
+::: {.misconception}
+**Common confusion:** "PCA finds the variables that matter most for the outcome." No: PCA only looks at the **predictors' own variance and correlation**; the health outcome is not used. A component with much variance need not be related to disease.
+:::
+
+::: {.exam-say}
+**On the exam, be able to say:** PCA finds a few new variables (principal components) that are linear combinations of the original variables, orthogonal to each other, and capture as much of the variance as possible. It is most useful when the original variables are highly correlated.
+:::
+
+## 6.17 Example: an SDOH index from 15 variables (Kolak et al. 2020) {#t6-17 .topic flag="objective"}
+
+::: {.core}
+**In short.** Kolak et al. reduced **15 neighbourhood indicators** of social determinants of health in US census tracts to **4 components** that keep **71% of the variance**, then named and mapped them.
+:::
+
+**Input (slide 27).** Fifteen variables chosen to capture small-area variation in economic status, social and neighbourhood characteristics, housing and transportation, and demographic characteristics of vulnerable groups; stratified across **social, economic and physical environments**. Many are highly correlated (poverty, income, unemployment, education …).
+
+**Output (slide 28).** Four orthogonal components, interpreted as indices:
+
+| SDOH index | Captures |
+|---|---|
+| **Socioeconomic advantage index (SES)** | Poverty and education level; strongly correlated with an area deprivation index |
+| **Limited mobility index (MOB)** | Share of older adults and persons with disabilities |
+| **Urban core opportunity index (URB)** | Highly urbanized populations with more opportunities and high living costs |
+| **Mixed immigrant cohesion and accessibility index (MICA)** | Immigrant populations with traditional family structures and multiple accessibility stressors |
+
+**Mapping (slide 29).** Each index is mapped with a **standard deviation map** ([2.2](session2.qmd#t2-2)): classes in standard deviations above and below the mean, which suits a standardized component score.
+
+**After PCA you can** (slide 30): **interpret** the index, **spatialize** it (map it), and **cluster** it using LISA ([2.13](session2.qmd#t2-13)) to find hot and cold spots of, for example, socioeconomic disadvantage.
+
+::: {.exam-say}
+**On the exam, be able to say:** Kolak et al. (2020) used PCA to reduce 15 correlated SDOH variables to 4 orthogonal indices (SES, MOB, URB, MICA) explaining 71% of the variance. The indices can be interpreted, mapped (standard deviation maps) and clustered with LISA.
+:::
+
+## 6.18 Cluster analysis and K-means {#t6-18 .topic flag="objective"}
+
+::: {.core}
+**In short.** Clustering **groups areas so that similar areas end up together**: high similarity within clusters, low similarity between them. K-means puts each area in **exactly one** of K clusters, using **squared Euclidean distance**, and moves areas between clusters until the within-cluster spread is smallest.
+:::
+
+**Cluster analysis (slide 31).** Goal: group n observations into k clusters so that **intra-cluster similarity is maximized** and **between-cluster similarity is minimized**. It is **unsupervised learning**: there is no outcome variable. Many methods exist: hierarchical, density-based, grid-based, model-based …
+
+**K-means (slide 32):**
+
+- **Exact clustering:** every observation belongs to one cluster, and only one.
+- **Dissimilarity** is the **squared Euclidean distance**:
+
+$$
+d_{ij}^2 = \sum_{v=1}^{p} (x_{iv} - x_{jv})^2
+$$
+
+::: {.in-words}
+**In words:** for areas i and j, take the difference on every variable v (p variables in all), square it, and add up. Large when the areas differ on many variables.
+:::
+
+- **Iterative relocation** minimizes the dissimilarity within clusters: start with K centres, assign each area to its nearest centre, recompute the centres as cluster means, reassign, and repeat until nothing changes.
+
+<div class="drill" data-drill="kmeans"></div>
+
+::: {.exam-say}
+**On the exam, be able to say:** Cluster analysis is unsupervised: it groups observations to maximize similarity within and minimize similarity between clusters. K-means is exact (each observation in one cluster), uses squared Euclidean distance, and iteratively relocates observations to minimize within-cluster dissimilarity.
+:::
+
+## 6.19 How many clusters? The elbow plot {#t6-19 .topic flag="inferred"}
+
+::: {.core}
+**In short.** The within-cluster sum of squares (WCSS) **always falls** as K grows (with K = n it is zero), so you cannot just minimize it. Plot WCSS against K and look for the **elbow**: the point after which adding clusters helps much less.
+:::
+
+```{r}
+#| label: fig-elbow
+#| echo: false
+#| fig-width: 8
+#| fig-height: 3.2
+#| fig-cap: "Elbow plot for simulated areas that truly form four groups. The within-cluster sum of squares drops steeply up to K = 4 and slowly after: the kink suggests K = 4."
+set.seed(619)
+centres <- cbind(c(-2, 2, -2, 2), c(-2, -2, 2, 2))
+Z <- centres[rep(1:4, each = 40), ] + matrix(rnorm(320, 0, 0.7), ncol = 2)
+wcss <- sapply(1:10, function(k) kmeans(Z, k, nstart = 20)$tot.withinss)
+par(mar = c(4, 5, 1, 1))
+plot(1:10, wcss, type = "b", pch = 19, col = col_blue, lwd = 2, xlab = "number of clusters K", ylab = "WCSS", xaxt = "n")
+axis(1, at = 1:10)
+points(4, wcss[4], pch = 21, cex = 3, col = col_orange, lwd = 2)
+text(4.3, wcss[4] + 0.12 * max(wcss), "elbow", col = col_orange, adj = 0)
+```
+
+Within-cluster sum of squares: smaller is better **for a given K**. The **kink** is where WCSS starts to decrease at a much slower rate (slide 34). The elbow is a heuristic: in real data it can be unclear, and **interpretability** of the clusters also matters. Kolak et al. ended with **seven** neighbourhood types.
+
+::: {.exam-say}
+**On the exam, be able to say:** WCSS always decreases with K, so choose K at the elbow of the WCSS-versus-K plot, where adding clusters stops reducing WCSS much. It is a heuristic; interpretability also matters.
+:::
+
+## 6.20 Spatial clustering and the full workflow (PCA → clusters → spatial regression) {#t6-20 .topic flag="objective"}
+
+::: {.core}
+**In short.** Ordinary K-means ignores location, so one "cluster" can be scattered over the whole country. **Spatial clustering** also rewards **closeness on the map**, giving compact neighbourhood types. In a full study the PCA indices are then used as predictors in spatial regression.
+:::
+
+**Adding the spatial aspect (slide 33).** Consider both **attribute similarity** and **locational similarity**. Two ways:
+
+1. **Add the coordinates** of each area (for example the centroid of each census tract) as **extra variables** in K-means.
+2. **Multi-objective optimization:** weight the objective of attribute similarity against the objective of geographic co-location.
+
+```{r}
+#| label: fig-spatial-kmeans
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3.6
+#| fig-cap: "K-means with K = 3 on simulated areas (a 12 × 12 grid) with two noisy attributes that vary smoothly across the region. Left: attributes only; clusters are fragmented, with isolated cells far from the rest of their cluster. Right: attributes plus standardized centroid coordinates as extra variables; clusters become compact regions."
+set.seed(620)
+side <- 12
+rc <- grid_rc(side)
+a1 <- smooth_surface(side, steps = 4, seed = 3) + rnorm(side^2, 0, 0.6)
+a2 <- smooth_surface(side, steps = 4, seed = 9) + rnorm(side^2, 0, 0.6)
+attr_only <- kmeans(scale(cbind(a1, a2)), 3, nstart = 30)$cluster
+with_xy <- kmeans(cbind(scale(cbind(a1, a2)), 1.2 * scale(cbind(rc$row, rc$col))), 3, nstart = 30)$cluster
+kcols <- c(col_blue, col_orange, col_green)
+par(mfrow = c(1, 2), mar = c(0.5, 0.5, 2.5, 0.5))
+draw_grid(attr_only, side, kcols, main = "Attributes only", border = "white")
+draw_grid(with_xy, side, kcols, main = "Attributes + coordinates", border = "white")
+```
+
+**Back to Kolak et al. (slides 35–36).** The 4 PCA indices plus the census tract centroids went into K-means: **seven clusters**, a **neighbourhood typology** for the whole continental US (for example rural affordable, suburban affluent, urban core).
+
+**The full workflow (slide 37):**
+
+```{mermaid}
+%%| fig-cap: "Workflow: each arrow means \"then\". Not causal. PCA followed by cluster analysis and spatial regression (slide 37)."
+flowchart LR
+  A["1 · Gather many SDOH<br/>variables, guided by<br/>a theoretical framework"] --> B["2 · PCA<br/>a few orthogonal<br/>indices"]
+  B --> C["3 · Cluster analysis<br/>neighbourhood<br/>typologies"]
+  B --> D["4 · Spatial regression<br/>indices → health outcome"]
+  D --> E["SAR / SEM<br/>for dependence"]
+  D --> F["Spatial regime model<br/>for heterogeneity"]
+```
+
+**Lin et al. (2022), slide 38.** The four indices were used in a **spatial error model** of COVID-19 mortality, estimated **separately for rural, suburban and urban counties** (a spatial regime model). Reading the table:
+
+- SEM handles **spatial dependence**: the virus is highly transmissible, so neighbouring counties' errors are correlated.
+- Regimes handle **spatial heterogeneity**: the virus spread unevenly across places and populations.
+- The **same index has different associations in different regimes**. The socioeconomic advantage index: −1.88 (p = 0.56) in rural, **−21.60 (p < 0.001) in suburban**, −4.24 (p = 0.13) in urban counties. The **Chow test** (23.10, p < 0.001) rejects equal coefficients across the regimes.
+
+::: {.exam-say}
+**On the exam, be able to say:** Spatial clustering adds locational similarity, either by including centroid coordinates as extra variables or by weighting attribute and geographic objectives. Typical workflow: SDOH variables → PCA indices → clusters (typologies) → spatial regression with SAR/SEM for dependence and regimes for heterogeneity.
+:::
+
+## Part IV · From spatial association to causal questions
+
+## 6.21 Describe, associate, intervene {#t6-21 .topic flag="objective"}
+
+::: {.core}
+**In short.** "Areas with better healthcare access have lower mortality" is an **association**. Whether **improving access would reduce mortality** is a **causal** question, and needs more than a spatial model.
+:::
+
+Slide 39 uses one statement to separate three kinds of question:
+
+| Describe | Associate | Intervene |
+|---|---|---|
+| Where are risks and services located? | How do spatial characteristics relate to health? | Would improving access actually reduce mortality? |
+| ESDA, disease maps | Spatial regression | Causal designs |
+
+**A spatial association is not, by itself, a causal effect.** Areas with good access may also be richer, more urban and healthier for many other reasons. This echoes Session 1's call to move from description to intervention ([1.7](session1.qmd#t1-7)) and Session 4's warning that a high-risk area is not a causal explanation ([4.22](session4.qmd#t4-22)).
+
+::: {.exam-say}
+**On the exam, be able to say:** Describe (where?), associate (how is it related?) and intervene (what if we change it?) are different questions. A spatial association, even from a spatial regression, is not by itself a causal effect.
+:::
+
+## 6.22 Three distinct challenges: dependence, confounding, interference {#t6-22 .topic flag="objective"}
+
+::: {.core}
+**In short.** Spatial data raise three **different** problems for causal questions: outcomes of neighbours are **correlated** (dependence), geography can drive **both exposure and outcome** (spatially structured confounding), and an intervention in one area can **change outcomes in another** (interference).
+:::
+
+| Challenge | What it is (slide 40) | Example |
+|---|---|---|
+| **Spatial dependence** | Nearby outcomes or errors are correlated | Neighbouring areas have similar mortality rates |
+| **Spatially structured confounding** | Geographic factors influence both exposure and outcome | Deprivation affects both access to care and health |
+| **Spatial interference** | An intervention in one area changes outcomes in another | Residents cross municipal borders to use a new clinic |
+
+```{r}
+#| label: fig-three-challenges
+#| echo: false
+#| fig-width: 10
+#| fig-height: 2.8
+#| fig-cap: "Causal diagram: each arrow means \"directly affects\". Left: spatially structured confounding, where deprivation (a geographic factor) affects both access and health, so access and health are associated even without a causal effect. Right: interference, where the treatment of area A affects the outcome in neighbouring area B."
+par(mfrow = c(1, 2), mar = c(0, 0, 2, 0))
+plot(NA, xlim = c(0, 10), ylim = c(0, 4), axes = FALSE, xlab = "", ylab = "", main = "Spatially structured confounding")
+box_node(5, 3.2, "Deprivation\n(geographic)", w = 2.6, h = 0.9, fill = "#fff4e6")
+box_node(2, 0.9, "Access to care", w = 2.6, h = 0.7, fill = "#e7f5ff")
+box_node(8, 0.9, "Health", w = 2.6, h = 0.7, fill = "#e7f5ff")
+arrows(4.2, 2.7, 2.6, 1.3, lwd = 2, length = 0.1)
+arrows(5.8, 2.7, 7.4, 1.3, lwd = 2, length = 0.1)
+arrows(3.4, 0.9, 6.6, 0.9, lwd = 2, length = 0.1, lty = 2, col = col_grey)
+text(5, 0.45, "effect of interest?", col = "#495057", cex = 0.85)
+plot(NA, xlim = c(0, 10), ylim = c(0, 4), axes = FALSE, xlab = "", ylab = "", main = "Spatial interference")
+box_node(2, 3.1, "Treatment\nin area A", w = 2.6, h = 0.9, fill = "#fff4e6")
+box_node(2, 0.9, "Outcome\nin area A", w = 2.6, h = 0.9, fill = "#e7f5ff")
+box_node(8, 0.9, "Outcome\nin area B", w = 2.6, h = 0.9, fill = "#e7f5ff")
+arrows(2, 2.6, 2, 1.4, lwd = 2, length = 0.1)
+arrows(3.3, 2.8, 7, 1.4, lwd = 2, length = 0.1, col = col_orange)
+text(6.2, 2.6, "spillover", col = col_orange, cex = 0.9)
+```
+
+**Spatial dependence ≠ spatial interference** (slide 40). Dependence is a statement about correlated outcomes or errors; it can arise from shared unmeasured causes with no intervention at all. Interference is a **causal** statement: treating one unit changes another unit's outcome. A SAR or SEM model handles dependence; it does not by itself identify interference.
+
+::: {.exam-say}
+**On the exam, be able to say:** Spatial dependence: nearby outcomes or errors are correlated. Spatially structured confounding: geographic factors affect both exposure and outcome. Spatial interference: treatment in one area changes outcomes in another. Dependence is not the same as interference.
+:::
+
+## 6.23 Spatially structured confounding in practice {#t6-23 .topic flag="inferred"}
+
+::: {.core}
+**In short.** Interventions are rarely placed at random: a new clinic goes where **need, resources or political will** are. Whatever drove the placement may also drive health, so treated and untreated areas differ before the intervention starts.
+:::
+
+Slide 46 lists **confounding** as the first practical caution: **policy placement may follow local need, resources, or changing health trends.**
+
+- **Need:** screening vans are sent to areas with low participation → treated areas start out worse.
+- **Resources:** richer municipalities adopt new programmes first → treated areas start out better.
+- **Changing trends:** a programme is launched where mortality is *already* rising (or falling) → before–after comparisons confuse the trend with the effect.
+
+Because these factors are spatially patterned (deprivation clusters), the confounding is **spatially structured**. Adding a spatial random effect or a SAR term does not automatically remove it, and can even change the exposure coefficient in unexpected ways when the exposure itself is spatially smooth. That is why Part IV turns to **study design** ([6.25](#t6-25)).
+
+::: {.exam-say}
+**On the exam, be able to say:** Interventions are placed according to need, resources or trends, which also affect health and are spatially patterned. This spatially structured confounding means treated and untreated areas are not comparable; study design, not only a spatial model, is needed.
+:::
+
+## 6.24 Does a spatial lag represent a causal spillover? {#t6-24 .topic flag="keyq"}
+
+::: {.core}
+**In short.** **Not automatically.** In a SAR model, a change in x "spreads" through (I − ρW)⁻¹: that is a **model-implied** indirect effect. A **causal spillover** asks what would happen in area i if we intervened in area j, and that needs a credible design and assumptions.
+:::
+
+The SAR model from Session 3:
+
+$$
+Y = \rho W Y + X\beta + \varepsilon
+$$
+
+| Model-implied indirect effect | Causal spillover effect |
+|---|---|
+| In a SAR model, changes propagate through (I − ρW)⁻¹ ([3.5](session3.qmd#t3-5)) | How would an intervention in area j change the outcome in area i? |
+| A property of the fitted model and the chosen W | A property of the real world |
+| Follows from the model's assumptions | Needs identification: a design that rules out confounding |
+
+**Slide 41 asks: does a spatial lag represent a causal spillover?** The indirect impacts computed from a SAR model are **what the model implies if it is correct**. They become a causal spillover estimate only if the model is causally right: the right W, no spatially structured confounding, the dependence really runs through the outcomes and not through omitted variables (the SEM story, [3.8](session3.qmd#t3-8)). The data alone cannot establish this. **A causal interpretation needs a credible design and assumptions.**
+
+::: {.exam-say}
+**On the exam, be able to say:** No, not by itself. SAR indirect impacts are model-implied (they follow from (I − ρW)⁻¹ and the chosen W). A causal spillover is what an intervention in area j would do to area i, and estimating it needs a credible design and assumptions.
+:::
+
+## 6.25 Causal designs with geographical data {#t6-25 .topic flag="objective"}
+
+::: {.core}
+**In short.** Four established designs: **matching** (compare similar areas), **difference-in-differences** (compare changes over time), **geographic regression discontinuity** (compare places just on either side of a border), and **instrumental variables** (use variation in exposure that is as good as random).
+:::
+
+| Design (slide 42) | Idea | Key assumption | Spatial twist |
+|---|---|---|---|
+| **Matching** | Compare areas with similar measured characteristics | No unmeasured confounding | Matched areas may be far apart and differ in unmeasured local context; or close together and exposed to spillover |
+| **Difference-in-differences (DiD)** | Compare changes over time in treated and control areas | Parallel trends ([6.26](#t6-26)) | Neighbouring controls may be exposed ([6.27](#t6-27)) |
+| **Geographic regression discontinuity (RDD)** | Compare locations close to opposite sides of a policy boundary | Nothing else changes sharply at the border | People may move or cross the border; other policies may share the same border |
+| **Instrumental variables (IV)** | Use plausibly exogenous variation in exposure or treatment (for example distance to a facility) | The instrument affects the outcome only through the exposure | Distance often correlates with urbanicity and deprivation, which threatens the assumption |
+
+**Geography can help design comparisons, and it introduces new threats** (slide 42). A border creates a natural experiment (RDD); the same border can also be crossed (interference).
+
+::: {.exam-say}
+**On the exam, be able to say:** Matching (similar measured characteristics), difference-in-differences (changes over time, parallel trends), geographic regression discontinuity (locations close to opposite sides of a policy boundary), instrumental variables (plausibly exogenous variation in exposure). Geography helps design comparisons but adds threats such as spillovers.
+:::
+
+## 6.26 Difference-in-differences and parallel trends {#t6-26 .topic flag="objective"}
+
+::: {.core}
+**In short.** Compare the **change** in the treated area with the **change** in a control area. Differencing removes fixed differences between the areas and shocks common to both. The key assumption: **without the intervention, both would have followed parallel trends**.
+:::
+
+$$
+\text{Effect} = (\text{Treated}_{\text{post}} - \text{Treated}_{\text{pre}}) - (\text{Control}_{\text{post}} - \text{Control}_{\text{pre}})
+$$
+
+::: {.in-words}
+**In words:** how much the treated area changed, minus how much it would have changed anyway, where "anyway" is borrowed from the control area's change.
+:::
+
+| | Idea | Key assumption |
+|---|---|---|
+| Slide 43 | Remove **time-invariant differences** (one area is always poorer) and **common time shocks** (a national trend, a pandemic year) | Without intervention, treated and control groups would have followed **parallel trends** |
+
+**Parallel trends concerns untreated counterfactual changes, not equal baseline levels** (slide 43). The treated area may start at a much higher mortality; that is fine. What must hold is that its *change* without the intervention would have equalled the control's change.
+
+```{r}
+#| label: fig-did
+#| echo: false
+#| fig-width: 8
+#| fig-height: 3.4
+#| fig-cap: "Difference-in-differences with made-up numbers. The treated area starts higher than the control (different levels are allowed). The dashed line is the counterfactual: the treated area's path had it followed the control's trend. The effect is the gap between the observed and counterfactual post values: (42 − 50) − (37 − 40) = −5."
+par(mar = c(4, 4, 1, 6), xpd = TRUE)
+plot(c(0, 1), c(50, 42), type = "b", pch = 19, lwd = 2.5, col = col_orange, ylim = c(34, 52), xlim = c(-0.1, 1.1),
+     xaxt = "n", xlab = "", ylab = "deaths per 100,000")
+axis(1, at = c(0, 1), labels = c("pre", "post"))
+lines(c(0, 1), c(40, 37), type = "b", pch = 19, lwd = 2.5, col = col_blue)
+lines(c(0, 1), c(50, 47), lty = 2, lwd = 2, col = col_orange)
+arrows(1.03, 47, 1.03, 42.3, length = 0.08, lwd = 2)
+text(1.06, 44.5, "effect = −5", adj = 0, cex = 0.9)
+legend("bottomleft", c("treated", "control", "counterfactual (treated without intervention)"), col = c(col_orange, col_blue, col_orange),
+       lty = c(1, 1, 2), lwd = 2, bty = "n", cex = 0.85)
+```
+
+<div class="drill" data-drill="did"></div>
+
+::: {.misconception}
+**Common confusion:** "DiD needs treated and control areas with the same mortality before the intervention." No: DiD needs **parallel trends** (the same *change* without treatment), not equal levels. Equal pre-period levels are neither necessary nor sufficient.
+:::
+
+::: {.exam-say}
+**On the exam, be able to say:** DiD effect = (treated post − treated pre) − (control post − control pre). It removes time-invariant differences and common shocks. Key assumption: parallel trends in the untreated counterfactual changes, not equal baseline levels.
+:::
+
+## 6.27 Can a neighbouring municipality serve as a control? {#t6-27 .topic flag="keyq"}
+
+::: {.core}
+**In short.** Often **not safely**. If residents of neighbour B benefit from A's intervention (they use A's new clinic), B is **partly treated**, and using it as a control **biases the DiD**, usually toward zero.
+:::
+
+Slide 44 sets up three municipalities:
+
+| A · Treated | B · Neighbour | C · Distant |
+|---|---|---|
+| Intervention introduced | Untreated, **possibly exposed** | Untreated, **plausibly unexposed** |
+
+**If B benefits from A's intervention (A → B), using B as a control may bias DiD.**
+
+::: {.worked}
+**Worked example (made-up numbers, deaths per 100,000).** True effect of the intervention in A: −5. A: 50 → 42. Distant C: 40 → 37 (common trend −3). Neighbour B would also have followed −3, but because some residents use A's programme it falls by an extra 2: 45 → 40.
+
+- DiD with **C** as control: (42 − 50) − (37 − 40) = −8 + 3 = **−5** ✔
+- DiD with **B** as control: (42 − 50) − (40 − 45) = −8 + 5 = **−3**: the effect is **underestimated**, because part of the benefit shows up in the control too.
+:::
+
+**The trade-off** (slide 46, spillovers): **nearby controls may be exposed; distant controls may be less comparable.** C is unexposed but may differ in trends (another region, another labour market). Designs that handle this explicitly define a **spatial exposure** for each area ([6.28](#t6-28)) or use a buffer: exclude areas close to the treated ones from the control group.
+
+::: {.exam-say}
+**On the exam, be able to say:** A neighbouring municipality may be exposed to the intervention through spillover (residents cross borders). Then it is not a clean control and DiD is biased, typically toward zero. Nearby controls risk exposure; distant controls risk being less comparable.
+:::
+
+## 6.28 Exposure lags (WD) versus outcome lags (WY) {#t6-28 .topic flag="inferred"}
+
+::: {.core}
+**In short.** **WY** (Session 3) averages the **neighbours' outcomes**. **WD** averages the **neighbours' treatment**: how much intervention is going on around an area. They are different concepts, and defining WD still does not make an estimate causal.
+:::
+
+A **spatial treatment exposure** for area i (slide 45):
+
+$$
+G_i = \sum_j w_{ij} D_j
+$$
+
+::: {.in-words}
+**In words:** Dⱼ = 1 if area j is treated, 0 if not; with row-standardized weights, Gᵢ is the **share of i's neighbours that are treated**.
+:::
+
+| WY · neighbouring outcomes | WD · neighbouring treatment |
+|---|---|
+| A spatial lag in an **outcome model**: describes relationships among outcomes | An **exposure measure**: summarizes treatment assigned to nearby areas |
+| Used in SAR ([3.3](session3.qmd#t3-3)) | Used to define who is "exposed" to spillover, for example to choose controls with Gᵢ = 0 or to estimate a spillover effect |
+
+::: {.worked}
+**Worked example.** Area B has four neighbours (row-standardized weights 0.25 each); one of them, A, is treated. G_B = 0.25·1 + 0.25·0 + 0.25·0 + 0.25·0 = **0.25**. Distant area C has no treated neighbours: G_C = 0.
+:::
+
+**Defining exposure is not enough: causal interpretation still needs identification** (slide 45). The W used for G must match the real exposure pathway (where people actually travel), and the usual assumptions (no confounding, parallel trends …) still apply.
+
+::: {.exam-say}
+**On the exam, be able to say:** WY is the spatial lag of the outcome (neighbours' outcomes, used in SAR). WD, Gᵢ = Σⱼ wᵢⱼDⱼ, is a spatial treatment exposure: the weighted share of treated neighbours. Defining exposure is not enough for causal interpretation; identification is still needed.
+:::
+
+## 6.29 Why geography complicates causal interpretation, and choosing a method {#t6-29 .topic flag="objective"}
+
+::: {.core}
+**In short.** Three cautions: **confounding** (placement follows need), **boundaries and scale** (borders and W may not match real exposure), and **spillovers** (controls may be exposed). And one rule: **choose the method that matches the question**.
+:::
+
+**Practical caution (slide 46):**
+
+| Confounding | Boundaries and scale | Spillovers |
+|---|---|---|
+| Policy placement may follow local need, resources or changing health trends | Administrative borders and spatial weights may not match real exposure pathways (the MAUP again, [1.10](session1.qmd#t1-10)) | Nearby controls may be exposed; distant controls may be less comparable |
+
+**Spatial modelling helps with dependence; study design supports causality.**
+
+**Wrap-up: choose methods to match the research question (slide 47):**
+
+| Where? | Associated with what? | What if we intervene? |
+|---|---|---|
+| ESDA, LISA, Bayesian disease mapping | Spatial regression and econometrics | Matching, DiD, geographic RDD, IV |
+| Describe spatial patterns, estimate risks and quantify uncertainty | Model relationships and dependence | Identify effects under assumptions |
+
+**Spatial epidemiology: describe → model → evaluate interventions.**
+
+:::: {.quiz}
+A region wants to know whether opening three new primary care centres in deprived areas in 2022 reduced avoidable hospitalizations. Which approach fits the question best?
+
+- A Bayesian disease map of hospitalization rates for 2024
+- A spatial lag model of hospitalization on distance to care
+- **Difference-in-differences with carefully chosen control areas**
+- K-means clustering of areas on deprivation indicators
+
+::: {.exp}
+The question is "what happened because we intervened?", so it needs a causal design. DiD compares the change in areas that got a centre with the change in comparable areas that did not, under parallel trends; controls should be chosen so that they are not exposed to the new centres. The other methods describe patterns or associations.
+:::
+::::
+
+::: {.exam-say}
+**On the exam, be able to say:** Where? → ESDA, LISA, Bayesian disease mapping. Associated with what? → spatial regression. What if we intervene? → matching, DiD, geographic RDD, IV. Spatial models help with dependence; study design supports causality, with cautions about confounding, borders and scale, and spillovers.
+:::
+
+## 6.30 Take-home messages and key questions {#t6-30 .topic}
+
+- **ESDA** links maps and graphs to find patterns and heterogeneity; it generates hypotheses, it does not test causes.
+- **Access** has five dimensions; spatial measures (container, proximity, gravity, 2SFCA) can disagree, so match the measure to the problem.
+- **PCA** turns many correlated SDOH indicators into a few orthogonal indices; **clustering** groups areas into typologies; adding location gives compact spatial clusters.
+- **Association is not causation**: separate dependence, spatially structured confounding and interference, and use a design (DiD, RDD, IV, matching) for causal questions.
+
+::: {.callout-note collapse="true"}
+## Why might a container measure and a 2SFCA measure disagree about which areas are under-served?
+A container measure counts facilities inside the area's borders, ignoring both distance to facilities just outside and how many people share each facility. 2SFCA uses a catchment that crosses borders and divides supply by the population in reach. An area with no clinic inside but two nearby (zero by container) can have good 2SFCA access; a dense city area with a clinic inside can have poor 2SFCA access because many people compete for it.
+:::
+
+::: {.callout-note collapse="true"}
+## Why is PCA especially useful when the SDOH variables are highly correlated?
+Correlated variables share a common direction of variation. PCA puts that shared direction into one component, so a few components keep most of the variance (Kolak et al.: 4 components, 71% of 15 variables). If the variables were uncorrelated, each component would carry about the same small share and little would be gained.
+:::
+
+::: {.callout-note collapse="true"}
+## A SAR model shows large indirect impacts of clinic density on mortality. Can you conclude that opening a clinic in one municipality reduces mortality in its neighbours?
+No. The indirect impacts are model-implied: they follow from the SAR structure and the chosen W. They would equal a causal spillover only if the model were causally correct (right W, no spatially structured confounding, the dependence really running through outcomes). A causal claim needs a design such as DiD with an exposure definition, and assumptions that can be defended.
+:::
+
+::: {.callout-note collapse="true"}
+## What is the difference between spatial dependence and spatial interference?
+Spatial dependence: outcomes or errors in nearby areas are correlated, for whatever reason (shared environment, contagion, omitted variables). Spatial interference: the treatment of one area causally changes the outcome in another. Dependence can exist without any intervention; interference is about the effect of an intervention crossing borders.
+:::

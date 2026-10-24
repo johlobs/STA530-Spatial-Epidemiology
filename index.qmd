@@ -6,7 +6,7 @@ toc: false
 
 ## Welcome
 
-This app follows the sessions of STA530 Spatial Epidemiology (University of Gothenburg, autumn 2026): from what makes data spatial, through disease maps and spatial autocorrelation, to spatial regression and Bayesian disease mapping. New sessions are added as the course goes on.
+This app follows the sessions of STA530 Spatial Epidemiology (University of Gothenburg, autumn 2026): from what makes data spatial, through disease maps and spatial autocorrelation, to spatial regression and Bayesian disease mapping, and on to accessibility, neighbourhood indices and causal questions. New sessions are added as the course goes on.
 
 One idea runs through the course: **a map is the beginning of the epidemiologic question, not the end**. *Where* is disease high → *why* is it high there → *what* can be done?
 
@@ -24,18 +24,30 @@ One idea runs through the course: **a map is the beginning of the epidemiologic 
 - [S4 · Introduction to Bayesian disease mapping](session4.qmd)
 :::
 
+::: {.g-col-12 .g-col-md-6}
+### Lab and applications
+- [S5 · Computer lab](session5.qmd)
+- [S6 · Additional methods and applications](session6.qmd)
+- [S7 · Guest lecture: equity in cancer detection](session7.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6}
+### Mini-project
+- [S8 · Mini-project: the six questions](session8.qmd)
+:::
+
 :::
 
 ---
 
 ## How to study with it
 
-0. **Start with [The big ideas](big-ideas.qmd)**: the whole course on one page, 18 ideas in one sentence each.
+0. **Start with [The big ideas](big-ideas.qmd)**: the whole course on one page, 25 ideas in one sentence each.
 1. **Read a session.** Every topic starts with a blue **In short** box (plain language, often with an everyday comparison) and ends with a yellow **On the exam, be able to say** box. Formulas have an **In words** line, and the heaviest derivations are folded away.
     Every topic has a status control under its heading: **Not reviewed / Reviewed / Confident**. Click as you go.
 2. **Open "Before you start"** at the top of each session if a prerequisite feels rusty, and watch for the red **Common confusion** boxes.
 3. **Answer the quizzes** in each session and the **why-questions** at the bottom.
-4. **Practise on [Exam practice](exam-practice.qmd)**: drills that generate new numbers every time (SMR, indirect standardization, Empirical Bayes weights, box-map fences, counting neighbours, Moran's I by hand, SAR impacts, exp(β), choosing the likelihood, reading exceedance probabilities) and written exam-style questions with model answers.
+4. **Practise on [Exam practice](exam-practice.qmd)**: drills that generate new numbers every time (SMR, indirect standardization, Empirical Bayes weights, box-map fences, counting neighbours, Moran's I by hand, SAR impacts, exp(β), choosing the likelihood, reading exceedance probabilities, 2SFCA access, K-means distances, difference-in-differences) and written exam-style questions with model answers.
 5. **Check the [dashboard](dashboard.qmd)** to see what is left, in priority order.
 6. Look up terms in the [glossary](glossary.qmd), or use **search** (top right).
 7. **Go further** with [Resources](resources.qmd): the instructor's optional videos (Luc Anselin's spatial regression lectures), books and web pages, each linked to the section it supports.
@@ -55,6 +67,7 @@ No exam questions have been released yet. The badges show *why* a topic is likel
 | <span class="flag-badge flag-notes">✏️ Emphasised in class</span> | Written down as important in the **lecture notes** taken in class. |
 | <span class="flag-badge flag-inferred">📌 Likely exam-relevant (AI-inferred)</span> | Inferred from definitions, formulas and worked examples on the slides. **Not confirmed by the instructor.** |
 | <span class="flag-badge flag-optional">📎 Optional depth (beyond course scope)</span> | The instructor marked it as optional, or said it is not expected in STA530. |
+| <span class="flag-badge flag-seminar">🗣️ Mini-project</span> | The compulsory group mini-project (Session 8): what each group's question tests. |
 | (no badge) | Background, examples or summaries. Still course content. |
 
 ## How to read the diagrams

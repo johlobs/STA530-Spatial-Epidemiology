@@ -1,0 +1,82 @@
+---
+title: "Session 7 — Guest Lecture: Equity in Cancer Detection"
+subtitle: "Ulf Strömberg · small-area inequalities in cancer incidence, stage at diagnosis and screening participation · from maps to geographically targeted interventions"
+engine: knitr
+---
+
+```{r}
+#| include: false
+source("_helpers.R")
+```
+
+A guest lecture by **Ulf Strömberg** (University of Gothenburg; Professor of Epidemiologic Methods for over 20 years; leader of the Forte-funded **GeoTIME** programme, *Geomapping for Targeted Interventions and Methods for Evaluation*). It shows the methods of the course **applied to a real public health question**: geographic and socioeconomic inequalities in how and when cancer is detected in Sweden.
+
+::: {.callout-warning}
+## Built from the Canvas post only
+The lecture slides and handout were shared on Canvas but are **not yet in the course folder**, so this page is built from the Canvas description and connects it to the course. No content from the lecture itself is reproduced, and nothing here should be read as what the lecturer said. Add the PDF to the folder to have the page completed.
+:::
+
+::: {.callout-note collapse="true"}
+## Sources and session
+**Canvas post:** "Session 7 – Guest lecture: Equity in Cancer Detection – An Epidemiologic Perspective" (20 October 2026, 13:15–14:00). Materials on Canvas: lecture slides (PDF) and a handout version.
+
+**Connection to STA530 (Canvas post):** *"consider how spatial disease mapping can help identify geographic inequalities, inform targeted interventions, and support the evaluation of public health strategies."* The three sections below follow those three verbs.
+:::
+
+::: {.callout-tip collapse="true"}
+## Before you start
+Bayesian disease mapping and exceedance probabilities ([4.16](session4.qmd#t4-16)), and the step from association to intervention ([6.21](session6.qmd#t6-21)–[6.29](session6.qmd#t6-29)).
+:::
+
+## 7.1 Identify: which outcomes show inequality in cancer detection? {#t7-1 .topic flag="inferred"}
+
+::: {.core}
+**In short.** The Canvas post names three outcomes whose geography can reveal inequity: **cancer incidence**, **stage at diagnosis** and **screening participation**. Each needs its own likelihood and denominator.
+:::
+
+| Outcome | What a geographic pattern can mean | Data structure → likelihood ([4.2](session4.qmd#t4-2)) |
+|---|---|---|
+| **Incidence** | Differences in risk factors, or in how much is detected | New cases over person-time or vs expected (age-standardized) → Poisson |
+| **Stage at diagnosis** | Late detection: barriers to care, low awareness, low screening uptake | Advanced-stage cases among all diagnosed cases → Binomial |
+| **Screening participation** | Unequal use of a free, organised programme | Participants among those invited → Binomial |
+
+A key point for interpretation: **higher incidence is not always worse.** Where more people are screened, more early cancers are found, so incidence can be *higher* in areas with *better* detection. Stage at diagnosis and participation are closer measures of equity in **detection**.
+
+::: {.exam-say}
+**On the exam, be able to say:** Inequity in cancer detection can be studied through incidence, stage at diagnosis and screening participation. Stage and participation are proportions (Binomial); incidence is a rate or an observed-vs-expected count (Poisson). Higher incidence can reflect better detection.
+:::
+
+## 7.2 Small-area data: geographic and socioeconomic inequalities together {#t7-2 .topic flag="inferred"}
+
+::: {.core}
+**In short.** Small-area data (for example DeSO, [1.4](session1.qmd#t1-4)) can show **where** detection is worse and whether that follows **socioeconomic** gradients. The course's small-area issues all apply.
+:::
+
+- **Small numbers.** Late-stage cancers per small area are few, so crude proportions are unstable; smoothing ([2.6](session2.qmd#t2-6), [4.12](session4.qmd#t4-12)) and exceedance probabilities ([5.6](session5.qmd#t5-6)) separate signal from noise.
+- **Area-level socioeconomic data** (income, education, country of birth) can be added as covariates or summarized with an index ([6.17](session6.qmd#t6-17)).
+- **Ecological fallacy** ([1.11](session1.qmd#t1-11)): an area-level association between deprivation and low participation does not show that the deprived individuals are the ones not participating.
+- **MAUP** ([1.10](session1.qmd#t1-10)): the inequality found can depend on the size and borders of the areas.
+
+::: {.exam-say}
+**On the exam, be able to say:** Small-area data can link geographic and socioeconomic inequalities in cancer detection, but bring the familiar problems: unstable small counts (use smoothing and exceedance probabilities), the ecological fallacy, and the MAUP.
+:::
+
+## 7.3 Inform and evaluate: geographically targeted interventions {#t7-3 .topic flag="inferred"}
+
+::: {.core}
+**In short.** Maps can **target** an intervention (for example extra screening invitations or outreach in areas with low participation). Whether it **worked** is a causal question: it needs the designs and cautions from [Session 6](session6.qmd#t6-21).
+:::
+
+The GeoTIME name says it: *geomapping for targeted interventions* **and** *methods for evaluation*.
+
+| Step | Course tools | Caution |
+|---|---|---|
+| **Target**: choose areas | Disease mapping, exceedance probabilities, LISA hot spots | Use posterior probabilities, not crude extremes, so random noise does not decide where resources go |
+| **Intervene** | | Targeted areas were chosen *because* they were worse: spatially structured confounding ([6.23](session6.qmd#t6-23)) and regression to the mean |
+| **Evaluate** | Difference-in-differences, matching, comparison with untargeted areas ([6.25](session6.qmd#t6-25)) | Parallel trends; spillover to neighbouring areas ([6.27](session6.qmd#t6-27)) |
+
+**Regression to the mean** (not on the slides): an area selected for an extreme value in one period tends to be less extreme in the next, even without intervention. A before–after comparison in the targeted areas alone would mistake this for an effect; a control group is needed.
+
+::: {.exam-say}
+**On the exam, be able to say:** Disease mapping can identify areas for targeted interventions (using posterior risks and exceedance probabilities), but evaluating the intervention is a causal question: the targeted areas were selected for being worse, so a design with comparable controls (for example DiD) is needed, with attention to spillovers and regression to the mean.
+:::

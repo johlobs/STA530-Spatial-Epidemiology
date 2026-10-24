@@ -43,6 +43,14 @@ No example exam has been released for STA530. The written questions below are **
 
 <div class="drill" data-drill="exceed"></div>
 
+### Accessibility, clustering and causal designs (Session 6)
+
+<div class="drill" data-drill="fca"></div>
+
+<div class="drill" data-drill="kmeans"></div>
+
+<div class="drill" data-drill="did"></div>
+
 ## Written questions
 
 ### Session 1: spatial data and key issues
@@ -191,4 +199,75 @@ Magnitude and certainty differ. An area with few expected cases has a wide poste
 ::: {.callout-note collapse="true"}
 ## W28. Give two reasons to be cautious when interpreting a smoothed disease map.
 Smoothing can hide real boundaries (a river, catchment or policy border) and attenuate sharp local signals, so the adjacency definition is a substantive choice. And a high posterior risk is not a causal explanation: ecological inference, spatial confounding between covariates and the spatial effect, and the MAUP all limit what can be concluded.
+:::
+
+### Session 5: the computer lab
+
+::: {.callout-note collapse="true"}
+## W29. An area has posterior mean RR = 1.6 and P(RR > 1) = 0.70; another has RR = 1.15 and P(RR > 1) = 0.97. Classify both with the 0.8 rule and explain.
+The first is "uncertain" (0.70 is between 0.2 and 0.8): its estimated excess is large, but its posterior is wide, typically because the expected count is small. The second is "elevated" (0.97 > 0.8): a modest excess estimated precisely. The rule classifies by certainty, not size; the posterior RR and its credible interval give the size. The rule is conservative: moderate real excesses in small areas are often left as "uncertain".
+:::
+
+::: {.callout-note collapse="true"}
+## W30. OLS residuals had a significant Moran's I. After fitting a spatial error model, residual Moran's I was close to zero. What does this show, and what does it not show?
+It shows that the spatial dependence in the residuals has been absorbed by the error process u = λWu + ε, so inference on β is no longer based on falsely independent errors. It does not show that SEM is the true mechanism: a SAR model might remove the residual autocorrelation too. The choice between lag and error should rest on the substantive story (diffusion and feedback vs omitted spatially patterned determinants), supported by LM tests.
+:::
+
+### Session 6: additional methods and applications
+
+::: {.callout-note collapse="true"}
+## W31. [instructor] Describe how ESDA can help identify spatial patterns and spatial heterogeneity.
+ESDA links non-spatial graphs with a map: selecting in a histogram, box plot or scatter plot highlights the same areas on the map, and brushing the map updates the graphs. This shows whether extreme values cluster and where. Heterogeneity is examined by comparing spatially selected areas with the rest: the averages chart tests for a difference in means (F = t² with two groups), and brushing a scatter plot fits separate regression lines whose slopes can be compared with a Chow test. LOWESS fits can reveal nonlinearity or a structural break. ESDA generates hypotheses; its simple tests ignore heteroskedasticity and spatial autocorrelation, so confirmatory analysis needs, for example, spatial regime models.
+:::
+
+::: {.callout-note collapse="true"}
+## W32. [instructor] Which of two LOWESS curves comes from the larger bandwidth, and why?
+The smoother one. The bandwidth is the fraction of the x-range used in each local fit; a larger bandwidth averages over more observations, so local slopes change slowly. A small bandwidth gives a jagged curve that follows noise; a too-large one can hide a real bend.
+:::
+
+::: {.callout-note collapse="true"}
+## W33. [instructor] Compare container, minimum-distance and floating catchment area measures of spatial accessibility, and give one limitation of each.
+Container: counts facilities inside an area (point-in-polygon) or within buffers. Limitation: depends on the boundaries and buffer size and ignores services just across the border. Minimum distance: distance to the nearest facility. Limitation: ignores facility size and how many people compete for it. 2SFCA: for each facility the supply-to-population ratio in its catchment, summed over the facilities reachable from each location. It combines supply, demand and distance, but the catchment size and distance decay are choices that change the result, and it measures potential, not realized, access. All capture only the spatial dimensions of access (availability and accessibility), not affordability, acceptability or accommodation. Different measures can lead to different conclusions about inequity (Talen & Anselin 1998).
+:::
+
+::: {.callout-note collapse="true"}
+## W34. [instructor] Explain how PCA and clustering can be used to characterize multidimensional neighbourhood conditions. Use Kolak et al. (2020) as the example.
+Neighbourhood conditions are measured by many correlated indicators. PCA replaces them with a few orthogonal components, linear combinations that keep as much variance as possible; Kolak et al. reduced 15 SDOH variables to 4 indices (socioeconomic advantage, limited mobility, urban core opportunity, mixed immigrant cohesion and accessibility) explaining 71% of the variance. The indices can be interpreted, mapped and tested for clusters with LISA. K-means on the indices, with tract centroids added for spatial proximity, grouped tracts into seven neighbourhood typologies. The indices can then be used in spatial regression (Lin et al. 2022), avoiding collinearity among the original variables.
+:::
+
+::: {.callout-note collapse="true"}
+## W35. How does K-means work, and how can it be made spatial? How do you choose K?
+K-means assigns every observation to exactly one of K clusters, measures dissimilarity by squared Euclidean distance over the variables, and iteratively relocates observations (assign to the nearest centre, recompute the centres) to minimize within-cluster dissimilarity. It ignores location, so clusters can be scattered; it is made spatial by adding centroid coordinates as extra variables or by weighting attribute similarity against geographic co-location. K is chosen with an elbow plot of the within-cluster sum of squares against K: WCSS always falls, so pick the K after which it falls much more slowly, also considering interpretability.
+:::
+
+::: {.callout-note collapse="true"}
+## W36. [instructor] Distinguish spatial association from causal inference. Name three challenges specific to spatial data.
+A spatial association (from a map or a spatial regression) says that health and an area characteristic go together; a causal question asks what would happen if we intervened. Three challenges: spatial dependence (nearby outcomes or errors are correlated), spatially structured confounding (geographic factors such as deprivation affect both exposure and outcome), and spatial interference (an intervention in one area changes outcomes in another). Spatial dependence is not the same as interference. Spatial models help with dependence; study design supports causality.
+:::
+
+::: {.callout-note collapse="true"}
+## W37. [instructor] Does a spatial lag represent a causal spillover?
+Not by itself. In SAR, a change in x propagates through (I − ρW)⁻¹, giving model-implied indirect impacts. A causal spillover is how an intervention in area j would change the outcome in area i. The two coincide only if the model is causally correct: the right W, no spatially structured confounding, and dependence that truly runs through the outcomes rather than omitted variables. A causal interpretation needs a credible design and assumptions.
+:::
+
+::: {.callout-note collapse="true"}
+## W38. Explain difference-in-differences and its key assumption. Treated: 60 → 51; control: 45 → 42. Estimate the effect.
+DiD compares the change in the treated group with the change in the control group, which removes time-invariant differences between the groups and shocks common to both. Effect = (51 − 60) − (42 − 45) = −9 − (−3) = −6. Key assumption: parallel trends, meaning that without the intervention the treated group would have changed as much as the control. This concerns the untreated counterfactual changes, not equal baseline levels; here the groups start at different levels, which is allowed.
+:::
+
+::: {.callout-note collapse="true"}
+## W39. [instructor] Can a neighbouring municipality serve as a control when evaluating a geographically targeted intervention?
+It is risky. Residents of a neighbouring municipality may cross the border and use the intervention (spatial interference), so the neighbour is partly treated. Its change then includes some of the benefit, and DiD underestimates the effect (biased toward zero). A distant municipality is plausibly unexposed but may be less comparable (different trends). Options: define a spatial treatment exposure Gᵢ = Σⱼ wᵢⱼDⱼ and select controls with no exposure, exclude a buffer zone around treated areas, or model the spillover explicitly.
+:::
+
+::: {.callout-note collapse="true"}
+## W40. [instructor] Match each research question to a method. (a) Where are the hot spots of childhood asthma? (b) Is neighbourhood deprivation associated with asthma, accounting for spatial dependence? (c) Did a low-emission zone introduced in one city reduce asthma admissions?
+(a) Where? Describe: LISA, or Bayesian disease mapping with exceedance probabilities for unstable small-area rates. (b) Associated with what? Spatial regression (SAR or SEM, chosen by mechanism), possibly with regimes for heterogeneity. (c) What if we intervene? A causal design: DiD comparing the city's change with comparable cities without a zone (parallel trends), or geographic RDD at the zone boundary, with attention to spillover to neighbouring areas and to why the city introduced the zone.
+:::
+
+### Session 7: guest lecture
+
+::: {.callout-note collapse="true"}
+## W41. How can disease mapping help identify geographic inequalities in cancer detection, and why is evaluating a targeted intervention harder than identifying target areas?
+Mapping stage at diagnosis or screening participation by small area, with Bayesian smoothing and exceedance probabilities, shows where detection is reliably worse rather than where small counts happen to be extreme; socioeconomic covariates or indices show whether the gaps follow deprivation. Evaluation is harder because it is causal: target areas were chosen for being worse (confounding, regression to the mean), so a before–after look is not enough. A design with comparable control areas, such as DiD, is needed, with parallel trends and possible spillover to neighbouring areas in mind.
 :::

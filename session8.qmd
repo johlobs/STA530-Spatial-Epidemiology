@@ -1,0 +1,129 @@
+---
+title: "Session 8 — Mini-Project"
+subtitle: "Compulsory group project with presentations · six research questions · what each one asks you to explain"
+engine: knitr
+---
+
+```{r}
+#| include: false
+source("_helpers.R")
+```
+
+The mini-project is the **compulsory group activity** of the course: six groups each investigate a research question with geographic data and simulated health outcomes from Västra Götaland, and present their findings in 10 minutes. It is assessed **Pass/Fail**.
+
+This page is **not** a solution to any project. For each group's question it lists **which concepts the question tests, which app sections explain them, and what a good interpretation must address**. Because every group's question is also a classic exam question, all six are worth reviewing, not only your own.
+
+::: {.callout-note collapse="true"}
+## Sources and session
+**Canvas post:** "Session 8 – Compulsory mini-project: group preparation and presentations". The assignment document (STA530_mini_project_assignments_final.pdf), datasets A–D and the starter R script are on Canvas and are not used here.
+
+**Important (Canvas):** the health outcomes in the datasets are **simulated for teaching purposes** and should not be interpreted as actual disease patterns in Västra Götaland.
+:::
+
+## 8.1 What is assessed and what to present {#t8-1 .topic flag="seminar"}
+
+::: {.core}
+**In short.** **Apply the methods, interpret the results, communicate the findings**, not reproduce R output. 4–6 slides, 10 minutes, then 20–30 seconds per person on your contribution and your key takeaway.
+:::
+
+**Slides (about 4–6):**
+
+1. The research question and analytical approach.
+2. Key results, supported by about 2–3 figures or tables.
+3. Interpretation of the findings.
+4. Important limitations or considerations.
+
+**Focus on what the results mean, not on R code.** There is no written report.
+
+**Each member at the end (about 20–30 seconds):** your **contribution** (for example analysis, visualization, interpretation, slides) and your **key takeaway** (the most important thing you learned).
+
+**Assessed (Pass/Fail) on:** appropriate application of the methods, correct interpretation of the results, clear communication, and active participation in the group work and discussions.
+
+::: {.callout-tip}
+## A limitations slide that works for every group
+Simulated outcomes (results are not real VGR patterns) · choice of spatial weights · the MAUP (results depend on the area units) · the ecological fallacy (area-level, not individual-level conclusions) · association, not causation.
+:::
+
+## 8.2 Group 1: crude SMR mapping and global spatial autocorrelation {#t8-2 .topic flag="seminar"}
+
+::: {.core}
+**In short.** Map the crude SMR, then ask whether high and low values **cluster more than by chance** with global Moran's I.
+:::
+
+| Concepts | App sections |
+|---|---|
+| Expected counts, SMR = O/E, instability with small E | [2.5](session2.qmd#t2-5), [4.3](session4.qmd#t4-3), [4.4](session4.qmd#t4-4) |
+| Classification choices change the map | [2.1](session2.qmd#t2-1), [2.2](session2.qmd#t2-2) |
+| Spatial weights; Moran's I and its permutation test | [2.8](session2.qmd#t2-8), [2.11](session2.qmd#t2-11), [2.12](session2.qmd#t2-12) |
+
+**A good interpretation addresses:** what SMR > 1 means; which extreme areas have small expected counts; what I > 0 with a small pseudo p-value means (and that it says nothing about *where*); how the choice of W could matter.
+
+## 8.3 Group 2: Bayesian smoothing, crude SMR versus posterior relative risk {#t8-3 .topic flag="seminar"}
+
+::: {.core}
+**In short.** Compare the crude SMR map with the **BYM2 posterior RR** map: which areas change most, and why?
+:::
+
+| Concepts | App sections |
+|---|---|
+| Shrinkage and partial pooling; more shrinkage with less information | [4.6](session4.qmd#t4-6), [4.9](session4.qmd#t4-9) |
+| BYM2: structured and unstructured parts, ρ and τ | [4.11](session4.qmd#t4-11), [4.12](session4.qmd#t4-12) |
+| Why smoothing helps in small areas | [5.5](session5.qmd#t5-5) |
+
+**A good interpretation addresses:** extremes in small-E areas shrink most, large areas barely move; the posterior map shows a clearer spatial pattern; what ρ says about the share of spatially structured variation; a caution that smoothing can hide real sharp boundaries ([4.19](session4.qmd#t4-19)).
+
+## 8.4 Group 3: local spatial autocorrelation and LISA cluster detection {#t8-4 .topic flag="seminar"}
+
+::: {.core}
+**In short.** Find **where** the clusters and outliers are with local Moran's I: hot spots (HH), cold spots (LL) and spatial outliers (HL, LH).
+:::
+
+| Concepts | App sections |
+|---|---|
+| Moran scatter plot quadrants | [2.12](session2.qmd#t2-12) |
+| LISA significance and cluster maps; multiple testing | [2.13](session2.qmd#t2-13) |
+| Global vs local statistics | [2.13](session2.qmd#t2-13) |
+
+**A good interpretation addresses:** what HH, LL, HL and LH mean; that the cluster *core* is the area plus its neighbours; that many local tests mean some "significant" areas arise by chance (and how the significance level or a stricter cut-off changes the map); that crude rates in small areas can create spurious clusters.
+
+## 8.5 Group 4: Bayesian exceedance probabilities and risk classification {#t8-5 .topic flag="seminar"}
+
+::: {.core}
+**In short.** Use **P(RR > 1)** to classify areas as elevated, uncertain or lower, and contrast **magnitude** (posterior RR) with **certainty** (exceedance probability).
+:::
+
+| Concepts | App sections |
+|---|---|
+| Posterior RR, credible intervals, exceedance probabilities | [4.16](session4.qmd#t4-16) |
+| Higher RR is not stronger evidence | [4.17](session4.qmd#t4-17) |
+| Classification thresholds (0.8 / 0.2) and their trade-off | [5.6](session5.qmd#t5-6) |
+
+**A good interpretation addresses:** the threshold chosen and why; areas with high RR but low certainty (small E) and the reverse; that a conservative rule misses moderate excesses in small areas; what P(RR > 1) does *not* mean (not "90% higher risk").
+
+## 8.6 Group 5: spatial regression, OLS versus SAR {#t8-6 .topic flag="seminar"}
+
+::: {.core}
+**In short.** Fit OLS, check the residuals for spatial autocorrelation, fit a **spatial lag (SAR)** model, and interpret ρ and the **impacts**.
+:::
+
+| Concepts | App sections |
+|---|---|
+| Residual Moran's I; why OLS standard errors are too small | [3.1](session3.qmd#t3-1), [3.9](session3.qmd#t3-9) |
+| SAR and ρ; direct, indirect and total impacts | [3.4](session3.qmd#t3-4), [3.5](session3.qmd#t3-5) |
+| Is a lag story plausible for this outcome? LM tests | [3.6](session3.qmd#t3-6), [3.10](session3.qmd#t3-10) |
+
+**A good interpretation addresses:** that β in SAR is not comparable to OLS β (report impacts); whether residual autocorrelation is gone after SAR; whether contagion or diffusion is plausible for the outcome, or SEM would be the better story ([3.8](session3.qmd#t3-8)); that indirect impacts are model-implied, not causal spillovers ([6.24](session6.qmd#t6-24)).
+
+## 8.7 Group 6: socioeconomic adjustment in Bayesian disease mapping {#t8-7 .topic flag="seminar"}
+
+::: {.core}
+**In short.** Fit BYM2 **with and without** a socioeconomic covariate and compare: how much of the spatial pattern does deprivation explain?
+:::
+
+| Concepts | App sections |
+|---|---|
+| Covariates in the linear predictor; exp(β) as a relative risk | [4.15](session4.qmd#t4-15) |
+| What the random effects capture after adjustment | [4.11](session4.qmd#t4-11), [4.12](session4.qmd#t4-12) |
+| Spatial confounding; ecological inference | [4.22](session4.qmd#t4-22), [1.11](session1.qmd#t1-11), [6.22](session6.qmd#t6-22) |
+
+**A good interpretation addresses:** exp(β) per unit of the covariate; whether the residual spatial variation (τ, ρ, the map of the random effects) shrinks after adjustment, which means part of the pattern was socioeconomic; that the adjusted map shows risk *beyond* what deprivation explains (a different question from the unadjusted one); that the coefficient is ecological and not causal, and can change when a spatial effect is added (spatial confounding).
