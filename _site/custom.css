@@ -358,3 +358,33 @@ svg marker path, svg .arrowheadPath { fill: #343a40; stroke: #343a40; }
   font-size: 0.93rem;
 }
 .in-words p:last-child { margin-bottom: 0; }
+
+/* ---------- Practice exam (practice-exam.qmd + practice-exam.js) ---------- */
+.pexam-bar { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; position: sticky; top: 56px; z-index: 5;
+  background: #fff; padding: 0.5rem 0; border-bottom: 1px solid #dee2e6; margin: 1rem 0; }
+.pexam-bar-label { font-weight: 600; font-size: 0.9rem; }
+.pexam-bar button, .pexam-check, .pexam-submit { border: 1px solid #2f5d8a; background: #fff; color: #2f5d8a;
+  border-radius: 5px; padding: 0.3rem 0.75rem; font-size: 0.87rem; cursor: pointer; }
+.pexam-bar button.active, .pexam-submit { background: #2f5d8a; color: #fff; }
+.pexam-bar .pexam-reset { margin-left: auto; border-color: #adb5bd; color: #6c757d; }
+.pexam-sec { margin-top: 2rem; }
+.pexam-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 0.9rem 1.15rem; margin: 1rem 0; background: #f8f9fa; }
+.pexam-qn { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #2f5d8a; }
+.pexam-stem { font-weight: 600; margin: 0.3rem 0 0.6rem; }
+.pexam-opt { display: flex; gap: 0.5rem; align-items: flex-start; background: #fff; border: 1px solid #ced4da;
+  border-radius: 5px; padding: 0.4rem 0.7rem; margin: 0.3rem 0 0; cursor: pointer; font-size: 0.92rem; }
+.pexam-opt input { margin-top: 0.25rem; flex: none; }
+.pexam-letter { font-weight: 700; flex: none; }
+.pexam-opt.is-correct { background: #d4edda; border-color: #28a745; }
+.pexam-opt.is-wrong { background: #f8d7da; border-color: #dc3545; }
+.pexam-exp { font-size: 0.86rem; padding: 0.3rem 0.7rem 0.45rem 2.2rem; color: #343a40; }
+.pexam-exp.ok strong { color: #155724; }
+.pexam-exp.no strong { color: #721c24; }
+.pexam-foot { font-size: 0.86rem; margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px dashed #ced4da; }
+.pexam-confirm { font-size: 0.86rem; background: #fff8e6; border-left: 4px solid #e8a317; padding: 0.35rem 0.7rem; margin-top: 0.5rem; }
+.pexam-check { margin-top: 0.7rem; }
+.pexam-submit { display: block; margin: 1.5rem auto; padding: 0.55rem 1.4rem; font-size: 1rem; }
+.pexam-table { border-collapse: collapse; margin: 0.4rem 0 0.7rem; font-size: 0.9rem; background: #fff; }
+.pexam-table th, .pexam-table td { border: 1px solid #ced4da; padding: 0.25rem 0.7rem; }
+.pexam-summary { border: 2px solid #2f5d8a; border-radius: 8px; padding: 0.9rem 1.15rem; background: #f1f6fb; margin: 1rem 0; }
+.pexam-summary h3 { margin-top: 0; }
