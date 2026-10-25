@@ -2,6 +2,8 @@ project:
   type: website
   output-dir: _site
   pre-render: build_topics.py
+  resources:
+    - practice-exam.js
 
 website:
   title: "STA530 — Spatial Epidemiology"
@@ -17,6 +19,8 @@ website:
         href: dashboard.qmd
       - text: "Exam practice"
         href: exam-practice.qmd
+      - text: "Practice exam"
+        href: practice-exam.qmd
       - text: "Glossary"
         href: glossary.qmd
       - text: "Resources"
@@ -37,6 +41,7 @@ website:
           - big-ideas.qmd
           - dashboard.qmd
           - exam-practice.qmd
+          - practice-exam.qmd
           - glossary.qmd
       - section: "Week 1: Foundations and ESDA"
         contents:

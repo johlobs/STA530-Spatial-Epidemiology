@@ -10,7 +10,7 @@ Quarto + WebR study reference and exam-prep tracker for STA530 Spatial Epidemiol
 
 ## Pages
 - `session1.qmd` … `session8.qmd`: one page per session (scanned by `build_topics.py`). S5 = computer lab and S8 = mini-project (concepts only, never solutions); S7 = guest lecture, built from the Canvas post until its slides are added
-- `big-ideas.qmd`, `resources.qmd`, `dashboard.qmd`, `exam-practice.qmd` (drills + written questions W1…, instructor questions marked [instructor]), `glossary.qmd`, `about.qmd`, `index.qmd`
+- `big-ideas.qmd`, `resources.qmd`, `dashboard.qmd`, `exam-practice.qmd` (drills + written questions W1…, instructor questions marked [instructor]), `practice-exam.qmd` (instructor's 40 Session 9 practice questions verbatim; data, UNOFFICIAL key and per-option explanations in `practice-exam.js`; correct the key after the Oct 27 review and remove `confirm` notes that are settled), `glossary.qmd`, `about.qmd`, `index.qmd`
 
 ## Topic sections (drive the checklist and dashboard)
 Every checklist item is a level-2 heading in a session file:

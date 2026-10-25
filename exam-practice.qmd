@@ -9,8 +9,8 @@ The written exam tests **concepts, not programming** (lecture notes). This page 
 2. **Written questions**: the kind of "explain", "compare" and "interpret" questions a concept exam asks. Write your answer first (a few sentences), then open the model answer.
 
 ::: {.callout-important}
-## No official exam questions yet
-No example exam has been released for STA530. The written questions below are **written for this app** from the slides, the learning objectives and the instructor's key questions. Questions taken directly from the instructor (Canvas key questions or questions on slides) are marked **[instructor]**. The model answers are the app's, not an official key.
+## Instructor practice questions: see the Practice exam page
+The instructor's 40 practice questions (Canvas, Session 9) are on the [Practice exam](practice-exam.qmd) page, in the real exam format (select all correct, penalties for wrong selections). The written questions below are **written for this app** from the slides, the learning objectives and the instructor's key questions. Questions taken directly from the instructor (Canvas key questions or questions on slides) are marked **[instructor]**. The model answers are the app's, not an official key.
 :::
 
 ## Drills

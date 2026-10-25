@@ -1,0 +1,26 @@
+---
+title: "Practice exam"
+subtitle: "The instructor's 40 practice questions in the real exam format, with an unofficial answer key"
+toc: false
+---
+
+These are the **40 practice questions** that Qinyun Lin posted on Canvas for Session 9 (Review, Oct 27), copied as written. According to the instructor, the real written exam has **exactly the same format**:
+
+- Every question has four options (A–D). **Select all correct answers.**
+- A question can have one or several correct answers, and the number is not given.
+- **Wrong selections are penalised**, so don't tick an option you are unsure of just to be safe.
+
+::: {.callout-warning}
+## The answer key is unofficial
+The instructor does **not** publish a key. The answers are discussed in the review session on **Oct 27**. The key and explanations below were written for this app from the course slides. Questions where the wording or notation is worth confirming at the review have a yellow **Confirm** note. The key will be corrected after the review.
+:::
+
+::: {.callout-note collapse="true"}
+## How the score is computed (assumed rule)
+The penalty rule for the real exam has not been published. The app uses a common rule for select-all questions. If a question has *k* correct options, each correct option you tick gives **+1/k** and each incorrect option you tick gives **−1/(4−k)**. A question's score never goes below 0, so the maximum is 1 point per question and 40 in total. Leaving a question blank gives 0.
+:::
+
+**Two modes.** *Practice* lets you check each question as you go and read the explanation for every option. *Exam simulation* hides everything until you submit all 40, then shows your score by section. Your selections are saved in this browser. Each explanation links to the topic sections to review.
+
+<div id="pexam"></div>
+<script src="practice-exam.js"></script>
